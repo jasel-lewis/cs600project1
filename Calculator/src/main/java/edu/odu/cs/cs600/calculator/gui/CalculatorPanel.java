@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class ButtonPanel extends JPanel {
+public class CalculatorPanel extends JPanel {
 
 	private static final long serialVersionUID = -2691106243294969972L;
 	
@@ -19,7 +19,7 @@ public class ButtonPanel extends JPanel {
 	private JButton jbNegate, jbReciprocal, jbSquareRoot, jbCeiling, jbFloor;
 	private JButton jbPower, jbClearEntry, jbClearAll;
 
-	public ButtonPanel() {
+	public CalculatorPanel() {
 		GridBagLayout gbLayout = new GridBagLayout();
 		this.setLayout(gbLayout);
 		

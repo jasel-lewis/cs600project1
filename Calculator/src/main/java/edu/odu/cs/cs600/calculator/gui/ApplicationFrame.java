@@ -17,7 +17,7 @@ public class ApplicationFrame extends JFrame
 		//Add the ubiquitous "Hello World" label.       
 		//JLabel label = new JLabel("Hello World");
 		
-		this.setContentPane(new ButtonPanel());
+		this.setContentPane(new CalculatorPanel());
 		
 		//this.getContentPane().add(label);
 		//this.getContentPane().add(jb);
