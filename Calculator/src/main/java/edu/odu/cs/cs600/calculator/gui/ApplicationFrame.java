@@ -1,8 +1,6 @@
 package edu.odu.cs.cs600.calculator.gui;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class ApplicationFrame extends JFrame 
 {
