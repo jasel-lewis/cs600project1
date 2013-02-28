@@ -1,5 +1,6 @@
 package edu.odu.cs.cs600.calculator.gui;
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -7,11 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import edu.odu.cs.cs600.calculator.Phrase;
+
 public class CalculatorPanel extends JPanel {
 
 	private static final long serialVersionUID = -2691106243294969972L;
 	
-	private static final JLabel display = new JLabel();
+	private Phrase phrase;
 	
 	private JButton jb0, jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jbDecimal;
 	private JButton jbOpenParen, jbCloseParen;
@@ -19,130 +22,158 @@ public class CalculatorPanel extends JPanel {
 	private JButton jbNegate, jbReciprocal, jbSquareRoot, jbCeiling, jbFloor;
 	private JButton jbPower, jbClearEntry, jbClearAll;
 
-	public CalculatorPanel() {
+	public CalculatorPanel(Phrase phrase) {
 		GridBagLayout gbLayout = new GridBagLayout();
+		JLabel display = new JLabel();
+		
 		this.setLayout(gbLayout);
 		
+		this.phrase = phrase;
+		phrase.setDisplay(display);
+		
+		generateDisplay(gbLayout, display);
 		generateButtons(gbLayout);
-	}
+	}  // end constructor CalculatorPanel()
+	
+	
+	
+	private void generateDisplay(GridBagLayout gbLayout, JLabel display) {
+		GridBagConstraints gbConstraints = new GridBagConstraints();
+		
+		gbConstraints.fill = GridBagConstraints.BOTH;
+		gbConstraints.gridheight = 1;
+		gbConstraints.gridwidth = 5;
+		gbConstraints.weightx = 1.0;
+		gbConstraints.gridx = 0; gbConstraints.gridy = 0;
+		
+		gbLayout.setConstraints(display, gbConstraints);
+		
+        display.setFont(new Font("Courier New", Font.BOLD, 36));
+        display.setText("0");
+        display.setHorizontalAlignment(JLabel.RIGHT);
+        
+        this.add(display);
+	}  // end generateDisplay(GridBagLayout)
 
 	
 	
 	private void generateButtons(GridBagLayout gbLayout) {
         GridBagConstraints gbConstraints = new GridBagConstraints();
+        ButtonFactory bf = new ButtonFactory(gbLayout, gbConstraints, phrase);
         
         gbConstraints.fill = GridBagConstraints.BOTH;
-        gbConstraints.weightx = 1.0;
+        gbConstraints.gridheight = 1;
         gbConstraints.gridwidth = 1;
+        gbConstraints.weightx = 1.0;
         
         // Annoying, but in order to get the "=" button to span two rows on the far right, we have
         // to set the gridx and gridy for each component (this is listed as a best practice, anyway,
         // in the Swing tutorial (http://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html)
         
-        gbConstraints.gridx = 0; gbConstraints.gridy = 0;
-		jbOpenParen = (new ButtonFactory(new ButtonAction(), "(", gbLayout, gbConstraints)).getButton();
+        gbConstraints.gridx = 0; gbConstraints.gridy = 1;
+		jbOpenParen = bf.createButton(ButtonFactory.MORPHEME, "(");
 		this.add(jbOpenParen);
 		
-        gbConstraints.gridx = 1; gbConstraints.gridy = 0;
-        jbCloseParen = (new ButtonFactory(new ButtonAction(), ")", gbLayout, gbConstraints)).getButton();
+        gbConstraints.gridx = 1; gbConstraints.gridy = 1;
+        jbCloseParen = bf.createButton(ButtonFactory.MORPHEME, ")");
         this.add(jbCloseParen);
 		
-		gbConstraints.gridx = 2; gbConstraints.gridy = 0;
-		jbSquareRoot = (new ButtonFactory(new ButtonAction(), "<html>&radic;</html>", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 2; gbConstraints.gridy = 1;
+		jbSquareRoot = bf.createButton(ButtonFactory.UNARY_OPERATOR, "<html>&radic;</html>");
 		this.add(jbSquareRoot);
 		
-		gbConstraints.gridx = 3; gbConstraints.gridy = 0;
-		jbReciprocal = (new ButtonFactory(new ButtonAction(), "<html>1/x</html>", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 3; gbConstraints.gridy = 1;
+		jbReciprocal = bf.createButton(ButtonFactory.UNARY_OPERATOR, "<html>1/x</html>");
 		this.add(jbReciprocal);
 		
-		gbConstraints.gridx = 4; gbConstraints.gridy = 0;
-		jbPower = (new ButtonFactory(new ButtonAction(), "On", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 4; gbConstraints.gridy = 1;
+		jbPower = bf.createButton(ButtonFactory.POWER, "On");
 		this.add(jbPower);
 		
-        gbConstraints.gridx = 0; gbConstraints.gridy = 1;
-		jb7 = (new ButtonFactory(new ButtonAction(), "7", gbLayout, gbConstraints)).getButton();
+        gbConstraints.gridx = 0; gbConstraints.gridy = 2;
+		jb7 = bf.createButton(ButtonFactory.MORPHEME, "7");
 		this.add(jb7);
 		
-		gbConstraints.gridx = 1; gbConstraints.gridy = 1;
-		jb8 = (new ButtonFactory(new ButtonAction(), "8", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 1; gbConstraints.gridy = 2;
+		jb8 = bf.createButton(ButtonFactory.MORPHEME, "8");
 		this.add(jb8);
 		
-		gbConstraints.gridx = 2; gbConstraints.gridy = 1;
-		jb9 = (new ButtonFactory(new ButtonAction(), "9", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 2; gbConstraints.gridy = 2;
+		jb9 = bf.createButton(ButtonFactory.MORPHEME, "9");
 		this.add(jb9);
 		
-		gbConstraints.gridx = 3; gbConstraints.gridy = 1;
-		jbDivide = (new ButtonFactory(new ButtonAction(), "<html>&divide;</html>", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 3; gbConstraints.gridy = 2;
+		jbDivide = bf.createButton(ButtonFactory.BINARY_OPERATOR, "<html>&divide;</html>");
 		this.add(jbDivide);
 		
-		gbConstraints.gridx = 4; gbConstraints.gridy = 1;
-		jbClearEntry = (new ButtonFactory(new ButtonAction(), "CE", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 4; gbConstraints.gridy = 2;
+		jbClearEntry = bf.createButton(ButtonFactory.CLEAR_ENTRY, "CE");
 		this.add(jbClearEntry);
 		
-		gbConstraints.gridx = 0; gbConstraints.gridy = 2;
-		jb4 = (new ButtonFactory(new ButtonAction(), "4", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 0; gbConstraints.gridy = 3;
+		jb4 = bf.createButton(ButtonFactory.MORPHEME, "4");
 		this.add(jb4);
 		
-		gbConstraints.gridx = 1; gbConstraints.gridy = 2;
-		jb5 = (new ButtonFactory(new ButtonAction(), "5", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 1; gbConstraints.gridy = 3;
+		jb5 = bf.createButton(ButtonFactory.MORPHEME, "5");
 		this.add(jb5);
 		
-		gbConstraints.gridx = 2; gbConstraints.gridy = 2;
-		jb6 = (new ButtonFactory(new ButtonAction(), "6", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 2; gbConstraints.gridy = 3;
+		jb6 = bf.createButton(ButtonFactory.MORPHEME, "6");
 		this.add(jb6);
 		
-		gbConstraints.gridx = 3; gbConstraints.gridy = 2;
-		jbMultiply = (new ButtonFactory(new ButtonAction(), "<html>&times;</html>", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 3; gbConstraints.gridy = 3;
+		jbMultiply = bf.createButton(ButtonFactory.BINARY_OPERATOR, "<html>&times;</html>");
 		this.add(jbMultiply);
 		
-		gbConstraints.gridx = 4; gbConstraints.gridy = 2;
-		jbClearAll = (new ButtonFactory(new ButtonAction(), "C", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 4; gbConstraints.gridy = 3;
+		jbClearAll = bf.createButton(ButtonFactory.CLEAR_ALL, "C");
 		this.add(jbClearAll);
 		
-		gbConstraints.gridx = 0; gbConstraints.gridy = 3;
-		jb1 = (new ButtonFactory(new ButtonAction(), "1", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 0; gbConstraints.gridy = 4;
+		jb1 = bf.createButton(ButtonFactory.MORPHEME, "1");
 		this.add(jb1);
 		
-		gbConstraints.gridx = 1; gbConstraints.gridy = 3;
-		jb2 = (new ButtonFactory(new ButtonAction(), "2", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 1; gbConstraints.gridy = 4;
+		jb2 = bf.createButton(ButtonFactory.MORPHEME, "2");
 		this.add(jb2);
 		
-		gbConstraints.gridx = 2; gbConstraints.gridy = 3;
-		jb3 = (new ButtonFactory(new ButtonAction(), "3", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 2; gbConstraints.gridy = 4;
+		jb3 = bf.createButton(ButtonFactory.MORPHEME, "3");
 		this.add(jb3);
 		
-		gbConstraints.gridx = 3; gbConstraints.gridy = 3;
-		jbSubtract = (new ButtonFactory(new ButtonAction(), "<html>&minus;</html>", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 3; gbConstraints.gridy = 4;
+		jbSubtract = bf.createButton(ButtonFactory.BINARY_OPERATOR, "<html>&minus;</html>");
 		this.add(jbSubtract);
 		
-		gbConstraints.gridx = 4; gbConstraints.gridy = 3;
+		gbConstraints.gridx = 4; gbConstraints.gridy = 4;
 		gbConstraints.gridheight = 2;
-		jbEquals = (new ButtonFactory(new ButtonAction(), "=", gbLayout, gbConstraints)).getButton();
+		jbEquals = bf.createButton(ButtonFactory.UNARY_OPERATOR, "=");
 		this.add(jbEquals);
 		
 		gbConstraints.gridheight = 1;  // reset
 		
-		gbConstraints.gridx = 0; gbConstraints.gridy = 4;
-		jb0 = (new ButtonFactory(new ButtonAction(), "0", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 0; gbConstraints.gridy = 5;
+		jb0 = bf.createButton(ButtonFactory.MORPHEME, "0");
 		this.add(jb0);
 		
-		gbConstraints.gridx = 1; gbConstraints.gridy = 4;
-		jbDecimal = (new ButtonFactory(new ButtonAction(), ".", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 1; gbConstraints.gridy = 5;
+		jbDecimal = bf.createButton(ButtonFactory.MORPHEME, ".");
 		this.add(jbDecimal);
 		
-		gbConstraints.gridx = 2; gbConstraints.gridy = 4;
-		jbNegate = (new ButtonFactory(new ButtonAction(), "<html>&plusmn;</html>", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 2; gbConstraints.gridy = 5;
+		jbNegate = bf.createButton(ButtonFactory.UNARY_OPERATOR, "<html>&plusmn;</html>");
 		this.add(jbNegate);
 		
-		gbConstraints.gridx = 3; gbConstraints.gridy = 4;
-		jbAdd = (new ButtonFactory(new ButtonAction(), "<html>+</html>", gbLayout, gbConstraints)).getButton();
+		gbConstraints.gridx = 3; gbConstraints.gridy = 5;
+		jbAdd = bf.createButton(ButtonFactory.BINARY_OPERATOR, "<html>+</html>");
 		this.add(jbAdd);
 		
 		// Reset values
 		gbConstraints.gridwidth = 1;
 		gbConstraints.gridheight = 1;
 		
-		//jbCeiling = (new ButtonFactory(new ButtonAction(), "<html>&lceil;x&rceil;</html>", gbLayout, gbConstraints)).getButton();
-		//jbFloor = (new ButtonFactory(new ButtonAction(), "<html>&lfloor;x&rfloor;</html>", gbLayout, gbConstraints)).getButton();
-	}
+		//jbCeiling = bf.createButton(new ButtonAction(), "<html>&lceil;x&rceil;</html>");
+		//jbFloor = bf.createButton(new ButtonAction(), "<html>&lfloor;x&rfloor;</html>");
+	}  // end GenerateButtons(GridBagLayout)
 }  // end class ButtonPanel

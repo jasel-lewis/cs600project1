@@ -2,27 +2,22 @@ package edu.odu.cs.cs600.calculator.gui;
 
 import javax.swing.JFrame;
 
+import edu.odu.cs.cs600.calculator.Phrase;
+
 public class ApplicationFrame extends JFrame 
 {
 
 	private static final long serialVersionUID = 1L;
 
-	public ApplicationFrame()
+	public ApplicationFrame(Phrase phrase)
 	{
 		super("Calculator");
 		
 		// Set defaults
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);         
 		
-		//Add the ubiquitous "Hello World" label.       
-		//JLabel label = new JLabel("Hello World");
-		
-		this.setContentPane(new CalculatorPanel());
-		
-		//this.getContentPane().add(label);
-		//this.getContentPane().add(jb);
+		this.setContentPane(new CalculatorPanel(phrase));
 		
 		this.setResizable(false);
 	}
-
 }
