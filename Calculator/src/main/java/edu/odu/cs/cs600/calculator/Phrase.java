@@ -1,23 +1,31 @@
-/**
- * 
- */
 package edu.odu.cs.cs600.calculator;
 
 import javax.swing.JLabel;
 
 /**
- *
+ * The Phrase class is the underlying string of characters which is parsed and evaluated
+ * whenever a mathematical function button is clicked.  Characters, or morphemes, are
+ * added to the Phrase as morpheme related buttons are clicked and according to specific
+ * logic.
  */
 public final class Phrase {
 	String phrase = "0";
 	JLabel display = null;
 	
+	/**
+	 * Obtain the String representation of this Phrase
+	 * @return
+	 */
 	public String getPhrase() {
 		return phrase;
 	}  // end default constructor
 	
 	
 	
+	/**
+	 * Add a morpheme to this Phrase
+	 * @param string
+	 */
 	public void push(String string) {
 		int length = phrase.length() + string.length();
 		
@@ -42,6 +50,9 @@ public final class Phrase {
 	
 	
 	
+	/**
+	 * Remove a morpheme from this Phrase
+	 */
 	public void pop() {
 		int length = phrase.length();
 		
@@ -55,6 +66,10 @@ public final class Phrase {
 	
 	
 	
+	/**
+	 * Reset this Phrase according to simple calculator standards (represent the
+	 * number 0)
+	 */
 	public void clear() {
 		phrase = "0";
 		updateLabel();
@@ -62,12 +77,20 @@ public final class Phrase {
 	
 	
 	
+	/**
+	 * Assign the passed {@link swing.javax.JLabel JLabel} to display
+	 * @param display
+	 */
 	public void setDisplay(JLabel display) {
 		this.display = display;
 	}  // end setDisplay(JLabel)
 	
 	
 	
+	/**
+	 * Update the display of the calculator to reflect the current state of this
+	 * Phrase
+	 */
 	public void updateLabel() {
 		if (display != null) {
 			display.setText(phrase);

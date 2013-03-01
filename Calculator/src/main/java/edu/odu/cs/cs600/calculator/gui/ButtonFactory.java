@@ -34,6 +34,19 @@ public class ButtonFactory {
 	
 	
 	
+	/**
+	 * Create a {@link javax.swing.JButton JButton} of the passed type and labeled with the
+	 * passed String.  Valid types are
+	 * {@link ButtonFactory#MORPHEME MORPHEME},
+	 * {@link ButtonFactory#CLEAR_ENTRY CLEAR_ENTRY},
+	 * {@link ButtonFactory#CLEAR_ALL CLEAR_ALL},
+	 * {@link ButtonFactory#UNARY_OPERATOR UNARY_OPERATOR},
+	 * {@link ButtonFactory#BINARY_OPERATOR BINARY_OPERATOR} and
+	 * {@link ButtonFactory#POWER POWER}.
+	 * @param type
+	 * @param text
+	 * @return
+	 */
 	public JButton createButton(int type, String text) {
 		JButton jb = new JButton(text);
 		
@@ -42,10 +55,10 @@ public class ButtonFactory {
 		
 		switch(type) {
 			case MORPHEME:
-				morphemeButton(jb, phrase);
+				morphemeButton(jb);
 				break;
 			case CLEAR_ENTRY:
-				clearEntryButton(jb, phrase);
+				clearEntryButton(jb);
 				break;
 			case CLEAR_ALL:
 				clearAllButton(jb);
@@ -67,8 +80,13 @@ public class ButtonFactory {
 	}
 	
 	
-	
-	private void morphemeButton(JButton jb, final Phrase phrase) {
+	/**
+	 * Creates the listener for a morpheme button which calls {@link Phrase#push() push()}
+	 * to add the morpheme to the phrase 
+	 * @param jb
+	 * @param phrase
+	 */
+	private void morphemeButton(JButton jb) {
 		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				phrase.push(((JButton)ae.getSource()).getText());
@@ -78,7 +96,13 @@ public class ButtonFactory {
 	
 	
 	
-	private void clearEntryButton(JButton jb, final Phrase phrase) {
+	/**
+	 * Creates the listener for the Clear Entry button which calls
+	 * {@link Phrase#pop() pop()} to remove the last morpheme in the phrase
+	 * @param jb
+	 * @param phrase
+	 */
+	private void clearEntryButton(JButton jb) {
 		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				phrase.pop();
@@ -88,6 +112,11 @@ public class ButtonFactory {
 	
 	
 	
+	/**
+	 * Creates the listener for the Clear (All) button which calls
+	 * {@link Phrase#clear() clear()} to reset the phrase
+	 * @param jb
+	 */
 	private void clearAllButton(JButton jb) {
 		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
