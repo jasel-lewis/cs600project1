@@ -21,7 +21,7 @@ public class ButtonFactory {
 	
 	private GridBagLayout gbLayout;
 	private GridBagConstraints gbConstraints;
-	private Phrase phrase;
+	private final Phrase phrase;
 	
 	// Move this into some kind of properties file later
 	private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 26);
@@ -45,7 +45,7 @@ public class ButtonFactory {
 				morphemeButton(jb, phrase);
 				break;
 			case CLEAR_ENTRY:
-				clearEntryButton(jb);
+				clearEntryButton(jb, phrase);
 				break;
 			case CLEAR_ALL:
 				clearAllButton(jb);
@@ -69,19 +69,16 @@ public class ButtonFactory {
 	
 	
 	private void morphemeButton(JButton jb, final Phrase phrase) {
-		final String text = jb.getText();
-		
 		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				Phrase ph = phrase;
-				ph.push(text);
+				phrase.push(((JButton)ae.getSource()).getText());
 			}
 		});
 	}  // end morphemeButton(JButton)
 	
 	
 	
-	private void clearEntryButton(JButton jb) {
+	private void clearEntryButton(JButton jb, final Phrase phrase) {
 		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				phrase.pop();

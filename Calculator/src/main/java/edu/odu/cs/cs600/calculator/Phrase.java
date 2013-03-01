@@ -9,7 +9,7 @@ import javax.swing.JLabel;
  *
  */
 public final class Phrase {
-	String phrase = "";
+	String phrase = "0";
 	JLabel display = null;
 	
 	public String getPhrase() {
@@ -19,24 +19,44 @@ public final class Phrase {
 	
 	
 	public void push(String string) {
-		if ((phrase.length() + string.length()) <= 10) {
-			phrase.concat(string);
-			updateLabel();
+		int length = phrase.length() + string.length();
+		
+		if (!string.equals(".")) {
+			if (length <= 10) {
+				if (phrase.equals("0")) {
+					phrase = string;
+				} else {
+					phrase = phrase.concat(string);
+				}
+				
+				updateLabel();
+			}
+		} else {
+			// <= 9 because it's senseless to make the tenth character a decimal point
+			if ((length <= 9) && (!phrase.contains("."))) {
+				phrase = phrase.concat(string);
+				updateLabel();
+			}
 		}
 	}  // end push(String)
 	
 	
 	
 	public void pop() {
-		if ((phrase.length() > 0)) {
-			phrase = phrase.substring(0, phrase.length());
+		int length = phrase.length();
+		
+		if ((length > 1)) {
+			phrase = phrase.substring(0, (length - 1));
+			updateLabel();
+		} else {
+			clear();
 		}
 	}  // end pop()
 	
 	
 	
 	public void clear() {
-		phrase = "";
+		phrase = "0";
 		updateLabel();
 	}  // end clear()
 	
