@@ -9,6 +9,7 @@
 	<property name="dist.dir" location="dist" />
 	<property name="docs.dir" location="docs" />
 	<property name="libs.dir" location="lib" />
+	<property name="resource.dir" location="resource" />
 	<property name="test.report.dir" location="testreport" />
   	
   	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
