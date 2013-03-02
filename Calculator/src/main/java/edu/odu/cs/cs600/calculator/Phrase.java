@@ -96,4 +96,26 @@ public final class Phrase {
 			display.setText(phrase);
 		}
 	}  // end updateLabel()
+
+
+
+	/**
+	 * Place this Phrase into the "on" state for the calculator.  Functionality
+	 * is the same as what {@link #clear() clear()} performs.
+	 */
+	public void onState() {
+		clear();
+	}  // end onState()
+	
+	
+	
+	/**
+	 * Place this Phrase into the "off" state for the calculator.  The Phrase
+	 * is emptied of all characters and the display is updated with such
+	 * (presenting the user with a blank display).
+	 */
+	public void offState() {
+		phrase = "";
+		updateLabel();
+	}  // end offState()
 }  // end class Phrase

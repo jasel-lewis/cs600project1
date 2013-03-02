@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import edu.odu.cs.cs600.calculator.Application;
 import edu.odu.cs.cs600.calculator.Phrase;
 
 public class ButtonFactory {
@@ -17,7 +18,8 @@ public class ButtonFactory {
 	public static final int CLEAR_ALL = 9003;
 	public static final int UNARY_OPERATOR = 8001;
 	public static final int BINARY_OPERATOR = 8002;
-	public static final int POWER = 7001;
+	public static final int ON = 7001;
+	public static final int OFF = 7002;
 	
 	private GridBagLayout gbLayout;
 	private GridBagConstraints gbConstraints;
@@ -37,12 +39,10 @@ public class ButtonFactory {
 	/**
 	 * Create a {@link javax.swing.JButton JButton} of the passed type and labeled with the
 	 * passed String.  Valid types are
-	 * {@link ButtonFactory#MORPHEME MORPHEME},
-	 * {@link ButtonFactory#CLEAR_ENTRY CLEAR_ENTRY},
-	 * {@link ButtonFactory#CLEAR_ALL CLEAR_ALL},
-	 * {@link ButtonFactory#UNARY_OPERATOR UNARY_OPERATOR},
-	 * {@link ButtonFactory#BINARY_OPERATOR BINARY_OPERATOR} and
-	 * {@link ButtonFactory#POWER POWER}.
+	 * {@link #MORPHEME MORPHEME}, {@link #CLEAR_ENTRY CLEAR_ENTRY},
+	 * {@link #CLEAR_ALL CLEAR_ALL}, {@link #UNARY_OPERATOR UNARY_OPERATOR},
+	 * {@link #BINARY_OPERATOR BINARY_OPERATOR}, {@link #ON ON} and
+	 * {@link #OFF OFF}.
 	 * @param type
 	 * @param text
 	 * @return
@@ -69,8 +69,11 @@ public class ButtonFactory {
 			case BINARY_OPERATOR:
 				binaryButton(jb);
 				break;
-			case POWER:
-				powerButton(jb);
+			case ON:
+				onButton(jb);
+				break;
+			case OFF:
+				offButton(jb);
 				break;
 			default:
 				break;
@@ -89,7 +92,9 @@ public class ButtonFactory {
 	private void morphemeButton(JButton jb) {
 		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				phrase.push(((JButton)ae.getSource()).getText());
+				if (Application.isOn()) {
+					phrase.push(((JButton)ae.getSource()).getText());
+				}
 			}
 		});
 	}  // end morphemeButton(JButton)
@@ -105,7 +110,9 @@ public class ButtonFactory {
 	private void clearEntryButton(JButton jb) {
 		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				phrase.pop();
+				if (Application.isOn()) {
+					phrase.pop();
+				}
 			}
 		});
 	}  // end clearEntryButton(JButton)
@@ -120,7 +127,9 @@ public class ButtonFactory {
 	private void clearAllButton(JButton jb) {
 		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				phrase.clear();
+				if (Application.isOn()) {
+					phrase.clear();
+				}
 			}
 		});
 	}  // end clearAllButton(JButton)
@@ -139,7 +148,27 @@ public class ButtonFactory {
 	
 	
 	
-	private void powerButton(JButton jb) {
-		;
-	}  // end powerButton(JButton)
+	private void onButton(JButton jb) {
+		jb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				if (!Application.isOn()) {
+					phrase.clear();
+					Application.on();
+				}
+			}
+		});		
+	}  // end onButton(JButton)
+	
+	
+	
+	private void offButton(JButton jb) {
+		jb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				if (Application.isOn()) {
+					phrase.offState();
+					Application.off();
+				}
+			}
+		});
+	}
 }

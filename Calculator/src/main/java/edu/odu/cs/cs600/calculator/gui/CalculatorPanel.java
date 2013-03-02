@@ -87,7 +87,7 @@ public class CalculatorPanel extends JPanel {
 		this.add(jbReciprocal);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 1;
-		jbPower = bf.createButton(ButtonFactory.POWER, "On");
+		jbPower = bf.createButton(ButtonFactory.ON, "On");
 		this.add(jbPower);
 		
         gbConstraints.gridx = 0; gbConstraints.gridy = 2;

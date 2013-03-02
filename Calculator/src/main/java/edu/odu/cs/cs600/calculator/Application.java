@@ -6,6 +6,7 @@ public class Application
 {
 	
 	private static final Phrase phrase = new Phrase();
+	public static boolean state = true;  // true: calculator is "on"; false: "off"
 
 	public static void main(String[] args) 
 	{
@@ -19,5 +20,32 @@ public class Application
 			}        
 		});
 	}
+	
+	
+	
+	/**
+	 * Put the calculator into an "off" state
+	 */
+	public static void off() {
+		state = false;
+	}
+	
+	
+	
+	/**
+	 * Put the calculator into an "on" state
+	 */
+	public static void on() {
+		state = true;
+	}
 
+
+
+	/**
+	 * Returns true if the calculator is in an "on" state, false otherwise
+	 * @return
+	 */
+	public static boolean isOn() {
+		return state;
+	}
 }
