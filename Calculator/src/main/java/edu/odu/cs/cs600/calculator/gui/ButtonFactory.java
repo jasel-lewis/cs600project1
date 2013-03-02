@@ -7,10 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
 import edu.odu.cs.cs600.calculator.Application;
 import edu.odu.cs.cs600.calculator.Phrase;
 
@@ -50,46 +47,46 @@ public class ButtonFactory {
 	 * @param text
 	 * @return
 	 */
-	public JButton createButton(int type, String imageFilenamePath, String fallbackText) {
+	public CalculatorButton createButton(int type, String imageFilenamePath, String fallbackText) {
 		ImageIcon imgIcon = createImageIcon(imageFilenamePath);
-		JButton jb;
+		CalculatorButton cb;
 		
 		if (imgIcon == null) {
-			jb = new JButton(fallbackText);
+			cb = new CalculatorButton(fallbackText);
 		} else {
-			jb = new JButton(imgIcon);
+			cb = new CalculatorButton(imgIcon);
 		}
 		
-		jb.setFont(BUTTON_FONT);
-		gbLayout.setConstraints(jb, gbConstraints);
+		cb.setFont(BUTTON_FONT);
+		gbLayout.setConstraints(cb, gbConstraints);
 		
 		switch(type) {
 			case MORPHEME:
-				morphemeButton(jb);
+				morphemeButton(cb, fallbackText);
 				break;
 			case CLEAR_ENTRY:
-				clearEntryButton(jb);
+				clearEntryButton(cb);
 				break;
 			case CLEAR_ALL:
-				clearAllButton(jb);
+				clearAllButton(cb);
 				break;
 			case UNARY:
-				unaryButton(jb);
+				unaryButton(cb);
 				break;
 			case BINARY:
-				binaryButton(jb);
+				binaryButton(cb);
 				break;
 			case ON:
-				onButton(jb);
+				onButton(cb);
 				break;
 			case OFF:
-				offButton(jb);
+				offButton(cb);
 				break;
 			default:
 				break;
 		}
 		
-		return jb;
+		return cb;
 	}
 	
 	
@@ -119,15 +116,17 @@ public class ButtonFactory {
 	 * @param jb
 	 * @param phrase
 	 */
-	private void morphemeButton(JButton jb) {
-		jb.addActionListener(new ActionListener() {
+	private void morphemeButton(CalculatorButton cb, String morpheme) {
+		cb.setMorpheme(morpheme);
+		
+		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (Application.isOn()) {
-					phrase.push(((JButton)ae.getSource()).getText());
+					phrase.push(((CalculatorButton)ae.getSource()).getMorpheme());
 				}
 			}
 		});
-	}  // end morphemeButton(JButton)
+	}  // end morphemeButton(CalculatorButton)
 	
 	
 	
@@ -137,15 +136,15 @@ public class ButtonFactory {
 	 * @param jb
 	 * @param phrase
 	 */
-	private void clearEntryButton(JButton jb) {
-		jb.addActionListener(new ActionListener() {
+	private void clearEntryButton(CalculatorButton cb) {
+		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (Application.isOn()) {
 					phrase.pop();
 				}
 			}
 		});
-	}  // end clearEntryButton(JButton)
+	}  // end clearEntryButton(CalculatorButton)
 	
 	
 	
@@ -154,43 +153,43 @@ public class ButtonFactory {
 	 * {@link Phrase#clear() clear()} to reset the phrase
 	 * @param jb
 	 */
-	private void clearAllButton(JButton jb) {
-		jb.addActionListener(new ActionListener() {
+	private void clearAllButton(CalculatorButton cb) {
+		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (Application.isOn()) {
 					phrase.clear();
 				}
 			}
 		});
-	}  // end clearAllButton(JButton)
+	}  // end clearAllButton(CalculatorButton)
 	
 	
 	
-	private void unaryButton(JButton jb) {
+	private void unaryButton(CalculatorButton cb) {
 		;
-	}  // end unaryButton(JButton)
+	}  // end unaryButton(CalculatorButton)
 	
 	
 	
-	private void binaryButton(JButton jb) {
+	private void binaryButton(CalculatorButton cb) {
 		;
-	}  // end binaryButton(JButton)
+	}  // end binaryButton(CalculatorButton)
 	
 	
 	
-	private void onButton(JButton jb) {
-		jb.addActionListener(new ActionListener() {
+	private void onButton(CalculatorButton cb) {
+		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				phrase.clear();
 				Application.on();
 			}
 		});		
-	}  // end onButton(JButton)
+	}  // end onButton(CalculatorButton)
 	
 	
 	
-	private void offButton(JButton jb) {
-		jb.addActionListener(new ActionListener() {
+	private void offButton(CalculatorButton cb) {
+		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (Application.isOn()) {
 					phrase.offState();
@@ -198,5 +197,5 @@ public class ButtonFactory {
 				}
 			}
 		});
-	}
+	}  // end offButton(CalculatorButton)
 }
