@@ -16,8 +16,8 @@ public class ButtonFactory {
 	public static final int MORPHEME = 9001;
 	public static final int CLEAR_ENTRY = 9002;
 	public static final int CLEAR_ALL = 9003;
-	public static final int UNARY_OPERATOR = 8001;
-	public static final int BINARY_OPERATOR = 8002;
+	public static final int UNARY = 8001;
+	public static final int BINARY = 8002;
 	public static final int ON = 7001;
 	public static final int OFF = 7002;
 	
@@ -63,10 +63,10 @@ public class ButtonFactory {
 			case CLEAR_ALL:
 				clearAllButton(jb);
 				break;
-			case UNARY_OPERATOR:
+			case UNARY:
 				unaryButton(jb);
 				break;
-			case BINARY_OPERATOR:
+			case BINARY:
 				binaryButton(jb);
 				break;
 			case ON:
@@ -151,10 +151,8 @@ public class ButtonFactory {
 	private void onButton(JButton jb) {
 		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				if (!Application.isOn()) {
-					phrase.clear();
-					Application.on();
-				}
+				phrase.clear();
+				Application.on();
 			}
 		});		
 	}  // end onButton(JButton)
