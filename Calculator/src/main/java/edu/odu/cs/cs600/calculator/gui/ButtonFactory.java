@@ -5,7 +5,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import edu.odu.cs.cs600.calculator.Application;
@@ -31,7 +34,7 @@ public class ButtonFactory {
 	public ButtonFactory(GridBagLayout gbLayout, GridBagConstraints gbConstraints, Phrase phrase) {
 		this.gbLayout = gbLayout;
 		this.gbConstraints = gbConstraints;
-		this.phrase = phrase;
+		this.phrase = phrase; 
 	}
 	
 	
@@ -47,8 +50,15 @@ public class ButtonFactory {
 	 * @param text
 	 * @return
 	 */
-	public JButton createButton(int type, String text) {
-		JButton jb = new JButton(text);
+	public JButton createButton(int type, String imageFilenamePath, String fallbackText) {
+		ImageIcon imgIcon = createImageIcon(imageFilenamePath);
+		JButton jb;
+		
+		if (imgIcon == null) {
+			jb = new JButton(fallbackText);
+		} else {
+			jb = new JButton(imgIcon);
+		}
 		
 		jb.setFont(BUTTON_FONT);
 		gbLayout.setConstraints(jb, gbConstraints);
@@ -83,6 +93,26 @@ public class ButtonFactory {
 	}
 	
 	
+	
+	/**
+	 * Create an ImageIcon from the passed path and filename.  Return null if unable to
+	 * locate the resource.
+	 * @param path
+	 * @return
+	 */
+	protected ImageIcon createImageIcon(String path) {
+		URL imgURL = (Thread.currentThread().getContextClassLoader()).getResource(path);
+		
+		if (imgURL != null) {
+			return new ImageIcon(imgURL);
+		} else {
+			System.err.println("Could not locate image resource for button icon: " + path);
+			return null;
+		}
+	}  // end createImageIcon(String)
+
+
+
 	/**
 	 * Creates the listener for a morpheme button which calls {@link Phrase#push() push()}
 	 * to add the morpheme to the phrase 
