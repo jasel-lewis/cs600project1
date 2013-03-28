@@ -16,7 +16,7 @@ public class ApplicationFrame extends JFrame
 		// Set defaults
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);         
 		
-		this.setContentPane(new CalculatorPanel(phrase));
+		this.setContentPane(new CalculatorPanel(phrase, this.getRootPane()));
 		
 		this.setResizable(false);
 	}

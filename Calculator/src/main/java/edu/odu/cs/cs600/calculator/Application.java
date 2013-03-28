@@ -7,6 +7,7 @@ public class Application
 	
 	private static final Phrase phrase = new Phrase();
 	public static boolean state = true;  // true: calculator is "on"; false: "off"
+	public static final boolean debug = true;  // Set the debug mode
 
 	public static void main(String[] args) 
 	{

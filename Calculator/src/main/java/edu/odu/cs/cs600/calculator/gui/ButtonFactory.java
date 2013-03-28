@@ -7,7 +7,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.ComponentInputMap;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.JRootPane;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.plaf.ActionMapUIResource;
+
 import edu.odu.cs.cs600.calculator.Application;
 import edu.odu.cs.cs600.calculator.Phrase;
 
@@ -24,14 +34,24 @@ public class ButtonFactory {
 	private GridBagLayout gbLayout;
 	private GridBagConstraints gbConstraints;
 	private final Phrase phrase;
+	private JRootPane jRootPane;
 	
 	// Move this into some kind of properties file later
 	private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 26);
+	
+	/*private Action action = new Action() {
+		public void actionPerformed(ActionEvent e) {
+			if (debug) {
+				System.out.println("Keypress: " + e.getActionCommand());
+			}
+		}
+	};*/
 
-	public ButtonFactory(GridBagLayout gbLayout, GridBagConstraints gbConstraints, Phrase phrase) {
+	public ButtonFactory(GridBagLayout gbLayout, GridBagConstraints gbConstraints, Phrase phrase, JRootPane jRootPane) {
 		this.gbLayout = gbLayout;
 		this.gbConstraints = gbConstraints;
-		this.phrase = phrase; 
+		this.phrase = phrase;
+		this.jRootPane = jRootPane;
 	}
 	
 	
@@ -47,15 +67,21 @@ public class ButtonFactory {
 	 * @param text
 	 * @return
 	 */
-	public CalculatorButton createButton(int type, String imageFilenamePath, String fallbackText) {
+	public CalculatorButton createButton(int type, String imageFilenamePath, String fallbackText, char key) {
 		ImageIcon imgIcon = createImageIcon(imageFilenamePath);
-		CalculatorButton cb;
-		
-		if (imgIcon == null) {
-			cb = new CalculatorButton(fallbackText);
-		} else {
-			cb = new CalculatorButton(imgIcon);
-		}
+		CalculatorButton cb = new CalculatorButton(fallbackText, imgIcon, key);
+		customizeButton(cb, type, fallbackText);
+		return cb;
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @param cb
+	 */
+	public void customizeButton(CalculatorButton cb, int type, String fallbackText) {
+		final int keyType = cb.getKeyType();
 		
 		cb.setFont(BUTTON_FONT);
 		gbLayout.setConstraints(cb, gbConstraints);
@@ -86,8 +112,26 @@ public class ButtonFactory {
 				break;
 		}
 		
-		return cb;
-	}
+		if (keyType != CalculatorButton.KEY_TYPE_NULL) {
+			InputMap keyMap = new ComponentInputMap(cb);
+			
+			
+			keyMap.put(KeyStroke.getKeyStroke(cb.getKeyCodeValue(), 0), cb.getFallbackText());
+			
+			ActionMap actionMap = new ActionMapUIResource();
+			actionMap.put(cb.getFallbackText(), new AbstractAction() {
+				public void actionPerformed(ActionEvent ae) {
+					if (Application.debug) {
+						System.err.println("ActionEvent: " + ae);
+					}
+					((CalculatorButton)ae.getSource()).doClick();
+				}
+			});
+			
+			SwingUtilities.replaceUIActionMap(cb,  actionMap);
+			SwingUtilities.replaceUIInputMap(cb, JComponent.WHEN_IN_FOCUSED_WINDOW, keyMap);
+		}
+	}  // end customizeButton(CalculatorButton)
 	
 	
 	
