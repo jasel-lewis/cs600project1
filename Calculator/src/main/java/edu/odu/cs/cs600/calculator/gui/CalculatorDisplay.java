@@ -3,6 +3,10 @@ package edu.odu.cs.cs600.calculator.gui;
 import javax.swing.JLabel;
 
 public class CalculatorDisplay extends JLabel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 495748020793031026L;
 	String phrase = "0";
 	
 	/**

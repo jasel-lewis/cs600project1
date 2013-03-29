@@ -13,7 +13,6 @@ import javax.swing.ComponentInputMap;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
-import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.ActionMapUIResource;
@@ -117,6 +116,11 @@ public class ButtonFactory {
 			
 			ActionMap actionMap = new ActionMapUIResource();
 			actionMap.put(cb.getFallbackText(), new AbstractAction() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 303540849078642457L;
+
 				public void actionPerformed(ActionEvent ae) {
 					if (Application.debug) {
 						System.err.println("ActionEvent: " + ae);
