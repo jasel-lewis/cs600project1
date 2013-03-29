@@ -7,16 +7,12 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
-
-import edu.odu.cs.cs600.calculator.Phrase;
 
 public class CalculatorPanel extends JPanel {
 
 	private static final long serialVersionUID = -2691106243294969972L;
 	
-	private Phrase phrase;
-	private JRootPane jRootPane;
+	private CalculatorDisplay display = new CalculatorDisplay();
 	
 	private JButton jb0, jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jbDecimal;
 	private JButton jbOpenParen, jbCloseParen;
@@ -24,24 +20,18 @@ public class CalculatorPanel extends JPanel {
 	private JButton jbNegate, jbReciprocal, jbSquareRoot, jbCeiling, jbFloor;
 	private JButton jbOn, jbOff, jbClearEntry, jbClearAll;
 
-	public CalculatorPanel(Phrase phrase, JRootPane jRootPane) {
+	public CalculatorPanel() {
 		GridBagLayout gbLayout = new GridBagLayout();
-		JLabel display = new JLabel();
 		
 		this.setLayout(gbLayout);
 		
-		this.jRootPane = jRootPane;
-		
-		this.phrase = phrase;
-		phrase.setDisplay(display);
-		
-		generateDisplay(gbLayout, display);
-		generateButtons(gbLayout);
+		constructDisplay(gbLayout);
+		constructButtons(gbLayout);
 	}  // end constructor CalculatorPanel()
 	
 	
 	
-	private void generateDisplay(GridBagLayout gbLayout, JLabel display) {
+	private void constructDisplay(GridBagLayout gbLayout) {
 		GridBagConstraints gbConstraints = new GridBagConstraints();
 		
 		gbConstraints.fill = GridBagConstraints.BOTH;
@@ -61,9 +51,9 @@ public class CalculatorPanel extends JPanel {
 
 	
 	
-	private void generateButtons(GridBagLayout gbLayout) {
+	private void constructButtons(GridBagLayout gbLayout) {
         GridBagConstraints gbConstraints = new GridBagConstraints();
-        ButtonFactory bf = new ButtonFactory(gbLayout, gbConstraints, phrase, jRootPane);
+        ButtonFactory bf = new ButtonFactory(gbLayout, gbConstraints, display);
         
         gbConstraints.fill = GridBagConstraints.BOTH;
         gbConstraints.gridheight = 1;

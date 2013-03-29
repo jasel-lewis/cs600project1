@@ -19,7 +19,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.plaf.ActionMapUIResource;
 
 import edu.odu.cs.cs600.calculator.Application;
-import edu.odu.cs.cs600.calculator.Phrase;
 
 public class ButtonFactory {
 	
@@ -33,8 +32,7 @@ public class ButtonFactory {
 	
 	private GridBagLayout gbLayout;
 	private GridBagConstraints gbConstraints;
-	private final Phrase phrase;
-	private JRootPane jRootPane;
+	private CalculatorDisplay display;
 	
 	// Move this into some kind of properties file later
 	private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 26);
@@ -47,11 +45,10 @@ public class ButtonFactory {
 		}
 	};*/
 
-	public ButtonFactory(GridBagLayout gbLayout, GridBagConstraints gbConstraints, Phrase phrase, JRootPane jRootPane) {
+	public ButtonFactory(GridBagLayout gbLayout, GridBagConstraints gbConstraints, CalculatorDisplay display) {
 		this.gbLayout = gbLayout;
 		this.gbConstraints = gbConstraints;
-		this.phrase = phrase;
-		this.jRootPane = jRootPane;
+		this.display = display;
 	}
 	
 	
@@ -166,7 +163,7 @@ public class ButtonFactory {
 		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (Application.isOn()) {
-					phrase.push(((CalculatorButton)ae.getSource()).getMorpheme());
+					display.push(((CalculatorButton)ae.getSource()).getMorpheme());
 				}
 			}
 		});
@@ -184,7 +181,7 @@ public class ButtonFactory {
 		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (Application.isOn()) {
-					phrase.pop();
+					display.pop();
 				}
 			}
 		});
@@ -201,7 +198,7 @@ public class ButtonFactory {
 		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (Application.isOn()) {
-					phrase.clear();
+					display.clear();
 				}
 			}
 		});
@@ -224,7 +221,7 @@ public class ButtonFactory {
 	private void onButton(CalculatorButton cb) {
 		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				phrase.clear();
+				display.clear();
 				Application.on();
 			}
 		});		
@@ -236,10 +233,10 @@ public class ButtonFactory {
 		cb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (Application.isOn()) {
-					phrase.offState();
+					display.offState();
 					Application.off();
 				}
 			}
 		});
 	}  // end offButton(CalculatorButton)
-}
+}  // end class ButtonFactory

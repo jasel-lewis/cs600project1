@@ -5,7 +5,6 @@ import edu.odu.cs.cs600.calculator.gui.ApplicationFrame;
 public class Application 
 {
 	
-	private static final Phrase phrase = new Phrase();
 	public static boolean state = true;  // true: calculator is "on"; false: "off"
 	public static final boolean debug = true;  // Set the debug mode
 
@@ -15,7 +14,7 @@ public class Application
 		// creating and showing this application's GUI.        
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {            
 			public void run() {                
-				ApplicationFrame appFrame = new ApplicationFrame(phrase);
+				ApplicationFrame appFrame = new ApplicationFrame();
 				appFrame.pack();
 				appFrame.setVisible(true);
 			}        
