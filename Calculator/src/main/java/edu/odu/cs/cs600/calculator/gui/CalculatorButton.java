@@ -1,47 +1,54 @@
 package edu.odu.cs.cs600.calculator.gui;
 
-import javax.swing.Icon;
+import java.awt.Font;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class CalculatorButton extends JButton {
+public abstract class CalculatorButton extends JButton {
 
 	private static final long serialVersionUID = -7812322272853697084L;
-	public static final int KEY_TYPE_NULL = 0;
-	public static final int KEY_TYPE_NOT_NULL = 5674;
+	
+	// Move this into some kind of properties file later
+	private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 26);
 	
 	private String fallbackText = "";
-	private String morpheme = "";
-	private int keyCodeType = KEY_TYPE_NOT_NULL;
-	private char keyCodeValue;
 	
-	public CalculatorButton(String fallbackText, Icon icon, char key) {
-		super(fallbackText, icon);
+	public CalculatorButton(String imageFilenamePath, String fallbackText) {
+		super(fallbackText);
+		
+		ImageIcon imgIcon = createImageIcon(imageFilenamePath);
 		
 		// If we have a valid Icon, we do not want the text to show
-		if (icon != null) {
+		if (imgIcon != null) {
+			this.setIcon(imgIcon);
 			this.setText("");
 		}
 		
 		this.fallbackText = fallbackText;
 		
-		if (key == 'u') {
-			this.keyCodeType = KEY_TYPE_NULL;
+		setFont(BUTTON_FONT);
+	}  // end constructor CalculatorButton(String, String)
+	
+	
+	
+	/**
+	 * Create an ImageIcon from the passed path and filename.  Return null if unable to
+	 * locate the resource.
+	 * @param path
+	 * @return
+	 */
+	protected ImageIcon createImageIcon(String path) {
+		URL imgURL = (Thread.currentThread().getContextClassLoader()).getResource(path);
+		
+		if (imgURL != null) {
+			return new ImageIcon(imgURL);
 		} else {
-			this.keyCodeValue = key;
+			System.err.println("Could not locate image resource for button icon: " + path);
+			return null;
 		}
-	}
-	
-	
-	
-	public int getKeyType() {
-		return keyCodeType;
-	}  // end getKeyType()
-	
-	
-	
-	public char getKeyCodeValue() {
-		return keyCodeValue;
-	}  // end getKeyCodeValue()
+	}  // end createImageIcon(String)
 	
 	
 	
@@ -50,25 +57,6 @@ public class CalculatorButton extends JButton {
 	 * @return
 	 */
 	public String getFallbackText() {
-		return(fallbackText);
+		return fallbackText;
 	}  // end getFallbackText()
-	
-	
-	
-	/**
-	 * Return the morpheme this button produces
-	 * @return
-	 */
-	public String getMorpheme() {
-		return(morpheme);
-	}  // end getMorpheme()
-	
-	
-	
-	/**
-	 * Set the morpheme which this button produces
-	 */
-	public void setMorpheme(String morpheme) {
-		this.morpheme = morpheme;
-	}  // end setMorpheme(String)
 }  // end class CalculatorButton

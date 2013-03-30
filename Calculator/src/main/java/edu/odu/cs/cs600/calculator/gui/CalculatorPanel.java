@@ -3,22 +3,20 @@ package edu.odu.cs.cs600.calculator.gui;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import edu.odu.cs.cs600.calculator.Application;
 
 public class CalculatorPanel extends JPanel {
 
 	private static final long serialVersionUID = -2691106243294969972L;
 	
 	private CalculatorDisplay display = new CalculatorDisplay();
-	
-	private JButton jb0, jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jbDecimal;
-	private JButton jbOpenParen, jbCloseParen;
-	private JButton jbAdd, jbSubtract, jbMultiply, jbDivide, jbEquals;
-	private JButton jbNegate, jbReciprocal, jbSquareRoot, jbCeiling, jbFloor;
-	private JButton jbOn, jbOff, jbClearEntry, jbClearAll;
 
 	public CalculatorPanel() {
 		GridBagLayout gbLayout = new GridBagLayout();
@@ -53,7 +51,6 @@ public class CalculatorPanel extends JPanel {
 	
 	private void constructButtons(GridBagLayout gbLayout) {
         GridBagConstraints gbConstraints = new GridBagConstraints();
-        ButtonFactory bf = new ButtonFactory(gbLayout, gbConstraints, display);
         
         gbConstraints.fill = GridBagConstraints.BOTH;
         gbConstraints.gridheight = 1;
@@ -65,121 +62,179 @@ public class CalculatorPanel extends JPanel {
         // in the Swing tutorial (http://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html)
         
         gbConstraints.gridx = 0; gbConstraints.gridy = 1;
-        jbCeiling = bf.createButton(ButtonFactory.UNARY, "ceiling.png", "Ceiling", 'u');
-        this.add(jbCeiling);
+        FunctionButton obCeiling = new FunctionButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED,
+           		new ActionListener() {
+    				public void actionPerformed(ActionEvent ae) {
+    					if (Application.isOn()) {
+    						;
+    					}
+    				}
+    			});
+        //gbLayout.setConstraints(obCeiling, gbConstraints);
+        this.add(obCeiling, gbConstraints);
         
         gbConstraints.gridx = 1; gbConstraints.gridy = 1;
-        jbFloor = bf.createButton(ButtonFactory.UNARY, "floor.png", "Floor", 'u');
-        this.add(jbFloor);
+        FunctionButton obFloor = new FunctionButton("floor.png", "Floor", KeyEvent.VK_UNDEFINED,
+            	new ActionListener() {
+        			public void actionPerformed(ActionEvent ae) {
+        				if (Application.isOn()) {
+        					;
+        				}
+        			}
+        		});
+        this.add(obFloor, gbConstraints);
         
         gbConstraints.gridx = 2; gbConstraints.gridy = 1;
-        jbReciprocal = bf.createButton(ButtonFactory.UNARY, "reciprocal.png", "<html>1/x</html>", 'u');
-        this.add(jbReciprocal);
+        FunctionButton obReciprocal = new FunctionButton("reciprocal.png", "<html>1/x</html>", KeyEvent.VK_UNDEFINED,
+               	new ActionListener() {
+        			public void actionPerformed(ActionEvent ae) {
+        				if (Application.isOn()) {
+       						;
+       					}
+        			}
+        		});
+        this.add(obReciprocal, gbConstraints);
         
         gbConstraints.gridx = 3; gbConstraints.gridy = 1;
         gbConstraints.gridwidth = 2;
-		jbOn = bf.createButton(ButtonFactory.ON, "on.png", "On", 'u');
-		this.add(jbOn);
+        FunctionButton obOn = new FunctionButton("on.png", "On", KeyEvent.VK_UNDEFINED,
+    			new ActionListener() {
+        			public void actionPerformed(ActionEvent ae) {
+        				if (Application.isOn()) {
+        					display.clear();
+        				} else {
+        					Application.on();
+        					display.onState();
+        				}
+        			}
+        		});
+		this.add(obOn, gbConstraints);
 		
 		gbConstraints.gridwidth = 1;  // reset
-        
+		
         gbConstraints.gridx = 0; gbConstraints.gridy = 2;
-		jbOpenParen = bf.createButton(ButtonFactory.MORPHEME, "parenthesis_left.png", "(", '(');
-		this.add(jbOpenParen);
+		this.add(new CharacterButton("parenthesis_left.png", '(', display), gbConstraints);
 		
         gbConstraints.gridx = 1; gbConstraints.gridy = 2;
-        jbCloseParen = bf.createButton(ButtonFactory.MORPHEME, "parenthesis_right.png", ")", ')');
-        this.add(jbCloseParen);
+        this.add(new CharacterButton("parenthesis_right.png", ')', display), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 2;
-		jbSquareRoot = bf.createButton(ButtonFactory.UNARY, "square_root.png", "<html>&radic;</html>", 'u');
-		this.add(jbSquareRoot);
+		FunctionButton obSquareRoot = new FunctionButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED,
+		       	new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						if (Application.isOn()) {
+							;
+						}
+					}
+				});
+		this.add(obSquareRoot, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 2;
 		gbConstraints.gridwidth = 2;
-		jbOff = bf.createButton(ButtonFactory.OFF, "off.png", "Off", 'u');
-		this.add(jbOff);
+		FunctionButton obOff = new FunctionButton("off.png", "Off", KeyEvent.VK_UNDEFINED,
+		       	new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						if (Application.isOn()) {
+							Application.off();
+							display.offState();
+						}
+					}
+				});
+		this.add(obOff, gbConstraints);
 		
 		gbConstraints.gridwidth = 1;  // reset
 		
         gbConstraints.gridx = 0; gbConstraints.gridy = 3;
-		jb7 = bf.createButton(ButtonFactory.MORPHEME, "7.png", "7", '7');
-		this.add(jb7);
+		this.add(new CharacterButton("7.png", '7', display), gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 3;
-		jb8 = bf.createButton(ButtonFactory.MORPHEME, "8.png", "8", '8');
-		this.add(jb8);
+		this.add(new CharacterButton("8.png", '8', display), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 3;
-		jb9 = bf.createButton(ButtonFactory.MORPHEME, "9.png", "9", '9');
-		this.add(jb9);
+		this.add(new CharacterButton("9.png", '9', display), gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 3;
-		jbDivide = bf.createButton(ButtonFactory.BINARY, "divide.png", "<html>&divide;</html>", '/');
-		this.add(jbDivide);
+		this.add(new OperatorButton("divide.png", "&divide;", '/', display), gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 3;
-		jbClearEntry = bf.createButton(ButtonFactory.CLEAR_ENTRY, "clear_entry.png", "CE", 'u');
-		this.add(jbClearEntry);
+		FunctionButton obClearEntry = new FunctionButton("clear_entry.png", "CE", KeyEvent.VK_BACK_SPACE,
+		       	new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						if (Application.isOn()) {
+							display.pop();
+						}
+					}
+				});
+		this.add(obClearEntry, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 4;
-		jb4 = bf.createButton(ButtonFactory.MORPHEME, "4.png", "4", '4');
-		this.add(jb4);
+		this.add(new CharacterButton("4.png", '4', display), gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 4;
-		jb5 = bf.createButton(ButtonFactory.MORPHEME, "5.png", "5", '5');
-		this.add(jb5);
+		this.add(new CharacterButton("5.png", '5', display), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 4;
-		jb6 = bf.createButton(ButtonFactory.MORPHEME, "6.png", "6", '6');
-		this.add(jb6);
+		this.add(new CharacterButton("6.png", '6', display), gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 4;
-		jbMultiply = bf.createButton(ButtonFactory.BINARY, "multiply.png", "<html>&times;</html>", '*');
-		this.add(jbMultiply);
+		this.add(new OperatorButton("multiply.png", "&times;", '*', display), gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 4;
-		jbClearAll = bf.createButton(ButtonFactory.CLEAR_ALL, "clear_all.png", "C", 'u');
-		this.add(jbClearAll);
+		FunctionButton obClearAll = new FunctionButton("clear_all.png", "C", KeyEvent.VK_UNDEFINED,
+		       	new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						if (Application.isOn()) {
+							display.clear();
+						}
+					}
+				});
+		this.add(obClearAll, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 5;
-		jb1 = bf.createButton(ButtonFactory.MORPHEME, "1.png", "1", '1');
-		this.add(jb1);
+		this.add(new CharacterButton("1.png", '1', display), gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 5;
-		jb2 = bf.createButton(ButtonFactory.MORPHEME, "2.png", "2", '2');
-		this.add(jb2);
+		this.add(new CharacterButton("2.png", '2', display), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 5;
-		jb3 = bf.createButton(ButtonFactory.MORPHEME, "3.png", "3", '3');
-		this.add(jb3);
+		this.add(new CharacterButton("3.png", '3', display), gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 5;
-		jbSubtract = bf.createButton(ButtonFactory.BINARY, "subtract.png", "<html>&minus;</html>", '-');
-		this.add(jbSubtract);
+		this.add(new OperatorButton("subtract.png", "-", '-', display), gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 5;
 		gbConstraints.gridheight = 2;
-		jbEquals = bf.createButton(ButtonFactory.UNARY, "equal.png", "=", 'u');
-		this.add(jbEquals);
+		FunctionButton obEqual = new FunctionButton("equal.png", "=", KeyEvent.VK_UNDEFINED,
+		       	new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						if (Application.isOn()) {
+							;
+						}
+					}
+				});
+		this.add(obEqual, gbConstraints);
 		
 		gbConstraints.gridheight = 1;  // reset
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 6;
-		jb0 = bf.createButton(ButtonFactory.MORPHEME, "0.png", "0", '0');
-		this.add(jb0);
+		this.add(new CharacterButton("0.png", '0', display), gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 6;
-		jbDecimal = bf.createButton(ButtonFactory.MORPHEME, "decimal.png", ".", '.');
-		this.add(jbDecimal);
+		this.add(new CharacterButton("decimal.png", '.', display), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 6;
-		jbNegate = bf.createButton(ButtonFactory.UNARY, "negate.png", "<html>&plusmn;</html>", 'u');
-		this.add(jbNegate);
+		FunctionButton obNegate = new FunctionButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED,
+		       	new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						if (Application.isOn()) {
+							;
+						}
+					}
+				});
+		this.add(obNegate, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 6;
-		jbAdd = bf.createButton(ButtonFactory.BINARY, "add.png", "<html>+</html>", '+');
-		this.add(jbAdd);
+		this.add(new OperatorButton("add.png", "+", '+', display), gbConstraints);
 		
 		// Reset values
 		gbConstraints.gridwidth = 1;

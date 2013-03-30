@@ -1,60 +1,83 @@
 package edu.odu.cs.cs600.calculator.gui;
 
+import java.util.ArrayList;
+import java.util.ListIterator;
+
 import javax.swing.JLabel;
 
 public class CalculatorDisplay extends JLabel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 495748020793031026L;
-	String phrase = "0";
+	private static final ArrayList <CalculatorCharacter> OFF = new ArrayList <CalculatorCharacter> ();
+	
+	private ArrayList <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
+	
+	
+	public CalculatorDisplay() {
+		super();
+		
+		OFF.add(new CalculatorCharacter('O'));
+		OFF.add(new CalculatorCharacter('f'));
+		OFF.add(new CalculatorCharacter('f'));
+	}
+	
+	
 	
 	/**
-	 * Obtain the String representation of this Phrase
+	 * Returns the phrase for this CalculatorDisplay object.  If true is passed, the phrase
+	 * is wrapped in HTML tags and ISO codes are used for any {@link CalculatorCharacters}
+	 * which have them.  If false is passed, the returned phrase is a {@link java.lang.String}
+	 * of the single-character representation for each {@link CalculatorClass} (for use in
+	 * parsing when passed to a mathematical method).
+	 * @param display
 	 * @return
 	 */
-	public String getPhrase() {
+	public String getPhrase(boolean display) {
+		ListIterator<CalculatorCharacter> it = dcList.listIterator();
+		CalculatorCharacter cc;
+		String phrase = "";
+		
+		if (display) {
+			phrase = phrase.concat("<html>");
+		}
+		
+		while (it.hasNext()) {
+			cc = it.next();
+			
+			if (cc.requiresISORepresentation() && display) {
+				phrase = phrase.concat(cc.getISORepresentation());
+			} else {
+				phrase = phrase.concat(String.valueOf(cc.getMorpheme()));
+			}
+		}
+		
+		if (display) {
+			phrase = phrase.concat("</html>");
+		}
+		
 		return phrase;
 	}  // end default constructor
 	
 	
 	
 	/**
-	 * Add a morpheme to this Phrase
+	 * Add a {@link CalculatorCharacter} to this CalculatorDisplay
 	 * @param string
 	 */
-	public void push(String string) {
-		int length = phrase.length() + string.length();
-		
-		if (!string.equals(".")) {
-			if (length <= 10) {
-				if (phrase.equals("0")) {
-					phrase = string;
-				} else {
-					phrase = phrase.concat(string);
-				}
-				
-				update();
-			}
-		} else {
-			// <= 9 because it's senseless to make the tenth character a decimal point
-			if ((length <= 9) && (!phrase.contains("."))) {
-				phrase = phrase.concat(string);
-				update();
-			}
+	public void push(CalculatorCharacter cc) {
+		if (dcList.size() < 10) {
+			dcList.add(cc);
+			update();
 		}
 	}  // end push(String)
 	
 	
 	
 	/**
-	 * Remove a morpheme from this Phrase
+	 * Remove a {@link CalculatorCharacter} from this CalculatorDisplay
 	 */
 	public void pop() {
-		int length = phrase.length();
-		
-		if ((length > 1)) {
-			phrase = phrase.substring(0, (length - 1));
+		if (dcList.size() > 1) {
+			dcList.remove(dcList.size() - 1);
 			update();
 		} else {
 			clear();
@@ -64,28 +87,28 @@ public class CalculatorDisplay extends JLabel {
 	
 	
 	/**
-	 * Reset this Phrase according to simple calculator standards (represent the
-	 * number 0)
+	 * Reset this CalculatorDsiplay according to simple calculator standards (represent
+	 * the number 0)
 	 */
 	public void clear() {
-		phrase = "0";
+		dcList.clear();
+		dcList.add(new CalculatorCharacter('0'));
 		update();
 	}  // end clear()
 	
 	
 	
 	/**
-	 * Update the display of the calculator to reflect the current state of this
-	 * Phrase
+	 * Update the display to reflect the current state
 	 */
 	public void update() {
-		setText(phrase);
+		setText(getPhrase(true));
 	}  // end updateLabel()
 
 
 
 	/**
-	 * Place this Phrase into the "on" state for the calculator.  Functionality
+	 * Place this CalculatorDisplay into the "on" state for the calculator.  Functionality
 	 * is the same as what {@link #clear() clear()} performs.
 	 */
 	public void onState() {
@@ -95,12 +118,12 @@ public class CalculatorDisplay extends JLabel {
 	
 	
 	/**
-	 * Place this Phrase into the "off" state for the calculator.  The Phrase
-	 * is emptied of all characters and the display is updated with such
+	 * Place this CalculatorDisplay into the "off" state for the calculator.  The
+	 * phrase is emptied of all characters and the display is updated with such
 	 * (presenting the user with a blank display).
 	 */
 	public void offState() {
-		phrase = "";
+		dcList = (ArrayList<CalculatorCharacter>) OFF.clone();
 		update();
 	}  // end offState()
-}
+}  // end class CalculatorDisplay
