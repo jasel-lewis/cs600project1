@@ -1,13 +1,11 @@
 package edu.odu.cs.cs600.calculator.gui;
 
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import edu.odu.cs.cs600.calculator.Application;
@@ -38,13 +36,7 @@ public class CalculatorPanel extends JPanel {
 		gbConstraints.weightx = 1.0;
 		gbConstraints.gridx = 0; gbConstraints.gridy = 0;
 		
-		gbLayout.setConstraints(display, gbConstraints);
-		
-        display.setFont(new Font("Courier New", Font.BOLD, 36));
-        display.setText("0");
-        display.setHorizontalAlignment(JLabel.RIGHT);
-        
-        this.add(display);
+		this.add(display, gbConstraints);
 	}  // end generateDisplay(GridBagLayout)
 
 	

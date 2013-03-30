@@ -1,5 +1,7 @@
 package edu.odu.cs.cs600.calculator.gui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -15,9 +17,15 @@ public class CalculatorDisplay extends JLabel {
 	public CalculatorDisplay() {
 		super();
 		
+		setFont(new Font("Courier New", Font.BOLD, 36));
+		setForeground(Color.DARK_GRAY);
+        setHorizontalAlignment(JLabel.RIGHT);
+		
 		OFF.add(new CalculatorCharacter('O'));
 		OFF.add(new CalculatorCharacter('f'));
 		OFF.add(new CalculatorCharacter('f'));
+		
+		push(new CalculatorCharacter('0'));
 	}
 	
 	
@@ -64,6 +72,16 @@ public class CalculatorDisplay extends JLabel {
 	 * @param string
 	 */
 	public void push(CalculatorCharacter cc) {
+		// List of characters which will allow us to keep zero as the first character in the phrase
+		String zeroAllowedAsFirst = ".+*-/";
+		
+		// If zero is the first (or only) character in the display, get rid of it on the next button
+		// action which enters a character in the display only if the character is one of those
+		// listed in zerAllowedAsFirst
+		if ((dcList.size() == 1) && (zeroAllowedAsFirst.indexOf(String.valueOf(cc.getMorpheme())) < 0)) {
+			dcList.clear();
+		}
+		
 		if (dcList.size() < 10) {
 			dcList.add(cc);
 			update();
@@ -112,6 +130,7 @@ public class CalculatorDisplay extends JLabel {
 	 * is the same as what {@link #clear() clear()} performs.
 	 */
 	public void onState() {
+		setForeground(Color.DARK_GRAY);
 		clear();
 	}  // end onState()
 	
@@ -124,6 +143,7 @@ public class CalculatorDisplay extends JLabel {
 	 */
 	public void offState() {
 		dcList = (ArrayList<CalculatorCharacter>) OFF.clone();
+		setForeground(Color.LIGHT_GRAY);
 		update();
 	}  // end offState()
 }  // end class CalculatorDisplay
