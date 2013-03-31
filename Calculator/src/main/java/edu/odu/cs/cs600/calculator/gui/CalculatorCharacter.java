@@ -36,4 +36,10 @@ public class CalculatorCharacter {
 	public boolean requiresISORepresentation() {
 		return hasISORepresentation;
 	}
+
+
+
+	public boolean equalsMorpheme(char morpheme) {
+		return(this.morpheme == morpheme);
+	}
 }  // end class CalculatorCharacter

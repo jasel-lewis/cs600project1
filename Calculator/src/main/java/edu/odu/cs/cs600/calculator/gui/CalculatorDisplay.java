@@ -78,7 +78,7 @@ public class CalculatorDisplay extends JLabel {
 		// If zero is the first (or only) character in the display, get rid of it on the next button
 		// action which enters a character in the display only if the character is one of those
 		// listed in zerAllowedAsFirst
-		if ((dcList.size() == 1) && (zeroAllowedAsFirst.indexOf(String.valueOf(cc.getMorpheme())) < 0)) {
+		if ((dcList.size() == 1) && (zeroAllowedAsFirst.indexOf(String.valueOf(cc.getMorpheme())) < 0) && (dcList.get(0).equalsMorpheme('0'))) {
 			dcList.clear();
 		}
 		
