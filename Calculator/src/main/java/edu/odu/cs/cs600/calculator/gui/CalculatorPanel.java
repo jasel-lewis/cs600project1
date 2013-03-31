@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 
 import edu.odu.cs.cs600.calculator.Application;
+import edu.odu.cs.cs600.calculator.math.MathUtil;
 
 public class CalculatorPanel extends JPanel {
 
@@ -200,7 +201,7 @@ public class CalculatorPanel extends JPanel {
 		       	new ActionListener() {
 					public void actionPerformed(ActionEvent ae) {
 						if (Application.isOn()) {
-							;
+							double result = MathUtil.evaluate(display.getPhrase(false));
 						}
 					}
 				});

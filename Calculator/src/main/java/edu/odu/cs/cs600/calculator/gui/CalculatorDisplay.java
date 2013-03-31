@@ -28,37 +28,35 @@ public class CalculatorDisplay extends JLabel {
 		push(new CalculatorCharacter('0'));
 	}
 	
-	
-	
 	/**
 	 * Returns the phrase for this CalculatorDisplay object.  If true is passed, the phrase
 	 * is wrapped in HTML tags and ISO codes are used for any {@link CalculatorCharacters}
 	 * which have them.  If false is passed, the returned phrase is a {@link java.lang.String}
 	 * of the single-character representation for each {@link CalculatorClass} (for use in
 	 * parsing when passed to a mathematical method).
-	 * @param display
+	 * @param htmlEncode
 	 * @return
 	 */
-	public String getPhrase(boolean display) {
+	public String getPhrase(boolean htmlEncode) {
 		ListIterator<CalculatorCharacter> it = dcList.listIterator();
 		CalculatorCharacter cc;
 		String phrase = "";
 		
-		if (display) {
+		if (htmlEncode) {
 			phrase = phrase.concat("<html>");
 		}
 		
 		while (it.hasNext()) {
 			cc = it.next();
 			
-			if (cc.requiresISORepresentation() && display) {
+			if (cc.requiresISORepresentation() && htmlEncode) {
 				phrase = phrase.concat(cc.getISORepresentation());
 			} else {
 				phrase = phrase.concat(String.valueOf(cc.getMorpheme()));
 			}
 		}
 		
-		if (display) {
+		if (htmlEncode) {
 			phrase = phrase.concat("</html>");
 		}
 		
