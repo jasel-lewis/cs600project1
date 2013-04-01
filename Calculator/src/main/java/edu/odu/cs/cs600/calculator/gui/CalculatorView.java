@@ -32,8 +32,8 @@ public class CalculatorView extends JFrame {
 		
 		initComponents();
 		this.setContentPane(panel);
-		
 		this.setResizable(false);
+		this.pack();
 	}
 	
 	

@@ -19,7 +19,6 @@ public class Application
 				CalculatorView view = new CalculatorView(model);
 				CalculatorController controller = new CalculatorController(model, view);
 				
-				view.pack();
 				view.setVisible(true);
 			}        
 		});
