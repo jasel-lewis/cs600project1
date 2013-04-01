@@ -7,10 +7,15 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 
 public class CalculatorController {
-	public CalculatorController(CalculatorModel model, CalculatorView view) {
-		;
-	}
 	
+	private CalculatorModel model = null;
+	private CalculatorView view = null;
+	
+	public CalculatorController(CalculatorModel model, CalculatorView view)
+	{
+		this.model = model;
+		this.view = view;
+	}
 	
 	
 	/**
