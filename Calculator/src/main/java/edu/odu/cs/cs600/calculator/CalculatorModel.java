@@ -8,11 +8,11 @@ import java.util.ListIterator;
 import javax.swing.JLabel;
 
 import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
-import edu.odu.cs.cs600.calculator.gui.CalculatorClass;
 
 public class CalculatorModel {
 	
 	private static final ArrayList <CalculatorCharacter> OFF = new ArrayList <CalculatorCharacter> ();
+	private static boolean isOn = true;  // true: calculator is "on"; false: "off"
 	private ArrayList <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
 	
 	public CalculatorModel() {
@@ -22,6 +22,36 @@ public class CalculatorModel {
 		
 		push(new CalculatorCharacter('0'));
 	}
+	
+	
+	
+	/**
+	 * Put the calculator into an "off" isOn
+	 */
+	public static void off() {
+		isOn = false;
+	}
+	
+	
+	
+	/**
+	 * Put the calculator into an "on" isOn
+	 */
+	public static void on() {
+		isOn = true;
+	}
+
+
+
+	/**
+	 * Returns true if the calculator is in an "on" isOn, false otherwise
+	 * @return
+	 */
+	public static boolean isOn() {
+		return isOn;
+	}
+	
+	
 	
 	/**
 	 * Returns the phrase for this CalculatorDisplay object.  If true is passed, the phrase
@@ -112,33 +142,9 @@ public class CalculatorModel {
 	
 	
 	/**
-	 * Update the display to reflect the current state
+	 * Update the display to reflect the current isOn
 	 */
 	public void update() {
 		setText(getPhrase(true));
 	}  // end updateLabel()
-
-
-
-	/**
-	 * Place this CalculatorDisplay into the "on" state for the calculator.  Functionality
-	 * is the same as what {@link #clear() clear()} performs.
-	 */
-	public void onState() {
-		setForeground(Color.DARK_GRAY);
-		clear();
-	}  // end onState()
-	
-	
-	
-	/**
-	 * Place this CalculatorDisplay into the "off" state for the calculator.  The
-	 * phrase is emptied of all characters and the display is updated with such
-	 * (presenting the user with a blank display).
-	 */
-	public void offState() {
-		dcList = (ArrayList<CalculatorCharacter>) OFF.clone();
-		setForeground(Color.LIGHT_GRAY);
-		update();
-	}  // end offState()
 }  // end class CalculatorModel

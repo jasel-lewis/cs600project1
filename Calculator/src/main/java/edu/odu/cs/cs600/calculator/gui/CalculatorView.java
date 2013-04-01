@@ -21,14 +21,12 @@ public class CalculatorView extends JFrame {
 	private static final long serialVersionUID = -2851779459457181013L;
 	
 	private JPanel panel = new JPanel();
-	private CalculatorModel model;
 
 	public CalculatorView(CalculatorModel model) {
 		super("Calculator");
 		
 		// Set defaults
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-		this.model = model;
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		initComponents();
 		this.setContentPane(panel);
@@ -257,4 +255,4 @@ public class CalculatorView extends JFrame {
 		gbConstraints.gridwidth = 1;
 		gbConstraints.gridheight = 1;
 	}  // end GenerateButtons(GridBagLayout)
-}
+}  // end class CalculatorView
