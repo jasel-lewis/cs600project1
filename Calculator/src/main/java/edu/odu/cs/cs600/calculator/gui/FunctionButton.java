@@ -19,18 +19,20 @@ public class FunctionButton extends CalculatorButton {
 
 	private static final long serialVersionUID = 7320338606786314438L;
 
-
-	public FunctionButton(String imageFilenamePath, String fallbackText, int keyCode, ActionListener al) {
+	public FunctionButton(String imageFilenamePath, String fallbackText, int keyCode)
+	{
 		super(imageFilenamePath, fallbackText);
 		
 		if (keyCode != KeyEvent.VK_UNDEFINED) {
 			hookKeyInput(keyCode);
 		}
-		
+	}
+	
+	public FunctionButton(String imageFilenamePath, String fallbackText, int keyCode, ActionListener al) 
+	{
+		this(imageFilenamePath, fallbackText, keyCode);
 		addActionListener(al);
-	}  // end constructor FunctionButton(String, String, int, ActionListener)
-	
-	
+	}
 	
 	private void hookKeyInput(int keyCode) {
 		InputMap keyMap = new ComponentInputMap(this);

@@ -18,11 +18,23 @@ public class CalculatorController {
 		this.view = view;
 		
 		this.initModelListeners();
+		this.initViewListeners();
 	}
 	
+	/**
+	 * Initializes listeners on properties of the model
+	 */
 	private void initModelListeners()
 	{
 		this.model.addStateChangeListener(new StateChangeListener());
+	}
+	
+	/**
+	 * Initializes listeners on properties of the view
+	 */
+	private void initViewListeners()
+	{
+		
 	}
 	
 	/**
