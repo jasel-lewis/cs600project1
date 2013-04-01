@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
 public class CalculatorView extends JFrame {
 	private static final long serialVersionUID = -2851779459457181013L;
 	
