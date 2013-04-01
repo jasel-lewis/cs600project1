@@ -24,7 +24,7 @@ public class CalculatorView extends JFrame {
 	private JLabel display = new JLabel();
 	private FunctionButton equalsButton = null;
 
-	public CalculatorView(CalculatorModel model) {
+	public CalculatorView() {
 		super("Calculator");
 		
 		// Set defaults

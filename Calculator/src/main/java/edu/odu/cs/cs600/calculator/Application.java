@@ -12,7 +12,7 @@ public class Application {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {            
 			public void run() {
 				CalculatorModel model = new CalculatorModel();
-				CalculatorView view = new CalculatorView(model);
+				CalculatorView view = new CalculatorView();
 				CalculatorController controller = new CalculatorController(model, view);
 				
 				view.setVisible(true);

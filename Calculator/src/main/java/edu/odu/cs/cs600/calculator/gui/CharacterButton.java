@@ -41,32 +41,7 @@ public class CharacterButton extends CalculatorButton {
 			}
 		});
 	}  // end constructor CharacterButton(String, char, CalculatorDisplay)
-	
-	
-	
-	private void hookKeyInput(char character) {
-		InputMap keyMap = new ComponentInputMap(this);
 		
-		// TODO: Figure out why the fuck getFallbackText() got put in here
-		keyMap.put(KeyStroke.getKeyStroke(character), this.getFallbackText());
-		
-		ActionMap actionMap = new ActionMapUIResource();
-		actionMap.put(this.getFallbackText(), new AbstractAction() {
-			private static final long serialVersionUID = 303540849078642457L;
-
-			public void actionPerformed(ActionEvent ae) {
-				if (Application.debug) {
-					System.err.println("ActionEvent: " + ae);
-				}
-				((CalculatorButton)ae.getSource()).doClick();
-			}
-		});
-		
-		SwingUtilities.replaceUIActionMap(this,  actionMap);
-		SwingUtilities.replaceUIInputMap(this, JComponent.WHEN_IN_FOCUSED_WINDOW, keyMap);
-	}  // end hookKeyInput(char)
-	
-	
 	
 	public CalculatorCharacter getCalclatorCharacter() {
 		return cc;
