@@ -33,9 +33,7 @@ public class CalculatorView extends JFrame {
 		this.setContentPane(panel);
 		this.setResizable(false);
 		this.pack();
-	}
-	
-	
+	}	
 	
 	private void initComponents() {
 		GridBagLayout gbLayout = new GridBagLayout();

@@ -14,8 +14,14 @@ public class CalculatorController {
 	{
 		this.model = model;
 		this.view = view;
+		
+		this.initListeners();
 	}
 	
+	private void initListeners()
+	{
+		
+	}
 	
 	/**
 	 * Place this CalculatorDisplay into the "on" isOn for the calculator.  Functionality

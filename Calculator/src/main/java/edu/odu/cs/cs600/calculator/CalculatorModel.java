@@ -10,11 +10,10 @@ import javax.swing.JLabel;
 import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 
 public class CalculatorModel {
-	private static final ArrayList <CalculatorCharacter> OFF = new ArrayList <CalculatorCharacter> ();
 	
+	private static final ArrayList <CalculatorCharacter> OFF = new ArrayList <CalculatorCharacter> ();
 	private static boolean isOn = true;  // true: calculator is "on"; false: "off"
 	private ArrayList <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
-	
 	
 	public CalculatorModel() {
 		OFF.add(new CalculatorCharacter('O'));
