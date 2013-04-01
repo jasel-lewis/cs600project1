@@ -2,6 +2,8 @@ package edu.odu.cs.cs600.calculator;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -11,8 +13,10 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 
 public class CalculatorModel {
 	
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
 	private static final ArrayList <CalculatorCharacter> OFF = new ArrayList <CalculatorCharacter> ();
-	private static boolean isOn = true;  // true: calculator is "on"; false: "off"
+	private boolean state = true;  // true: calculator is "on"; false: "off"
 	private ArrayList <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
 	
 	public CalculatorModel() {
@@ -25,35 +29,29 @@ public class CalculatorModel {
 		push(new CalculatorCharacter('0'));
 	}
 	
-	
-	
-	/**
-	 * Put the calculator into an "off" isOn
-	 */
-	public void off() {
-		dcList = (ArrayList<CalculatorCharacter>) OFF.clone();
-		isOn = false;
+	public void addStateChangeListener(PropertyChangeListener listener)
+	{
+		this.pcs.addPropertyChangeListener("state", listener);
 	}
 	
-	
+	/**
+	 * Put the calculator into an "on":true or "off":false state
+	 */
+	public void setState(boolean state) {
+		if(this.state != state)
+		{
+			this.pcs.firePropertyChange("state", this.state, state);
+			this.state = state;
+		}
 	
 	/**
-	 * Put the calculator into an "on" isOn
+	 * Returns the current state of the calculator. "on":true and "off":false
+	 * @return boolean
 	 */
-	public void on() {
-		isOn = true;
+	public boolean getState()
+	{
+		return this.state;
 	}
-
-
-
-	/**
-	 * Returns true if the calculator is in an "on" state, false otherwise
-	 * @return
-	 */
-	public boolean isOn() {
-		return isOn;
-	}
-	
 	
 	
 	/**
