@@ -23,7 +23,7 @@ public class CalculatorView extends JFrame {
 	private JPanel panel = new JPanel();
 	private JLabel display = new JLabel();
 
-	public CalculatorView(CalculatorModel model) {
+	public CalculatorView() {
 		super("Calculator");
 		
 		// Set defaults
@@ -262,4 +262,10 @@ public class CalculatorView extends JFrame {
 	public JLabel getDisplay() {
 		return display;
 	}  // end getDisplay()
+	
+	
+	
+	public void updateDisplay(String string) {
+		display.setText(string);
+	}  // end updateDisplay(String)
 }  // end class CalculatorView

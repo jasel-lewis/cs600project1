@@ -34,6 +34,15 @@ public class CalculatorModel {
 		this.pcs.addPropertyChangeListener("state", listener);
 	}
 	
+	
+	
+	public void addPhraseChangeListener(PropertyChangeListener listener)
+	{
+		this.pcs.addPropertyChangeListener("phrase", listener);
+	}
+	
+	
+	
 	/**
 	 * Put the calculator into an "on":true or "off":false state
 	 */
@@ -43,6 +52,7 @@ public class CalculatorModel {
 			this.pcs.firePropertyChange("state", this.state, state);
 			this.state = state;
 		}
+	}
 	
 	/**
 	 * Returns the current state of the calculator. "on":true and "off":false
@@ -146,6 +156,6 @@ public class CalculatorModel {
 	 * Update the display to reflect the current isOn
 	 */
 	public void update() {
-		setText(getPhrase(true));
+		this.pcs.firePropertyChange("phrase", getPhrase(true), getPhrase(true));
 	}  // end updateLabel()
 }  // end class CalculatorModel

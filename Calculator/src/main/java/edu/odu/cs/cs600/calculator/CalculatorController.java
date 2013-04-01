@@ -3,9 +3,7 @@ package edu.odu.cs.cs600.calculator;
 import java.awt.Color;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
-import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 
 public class CalculatorController {
@@ -23,12 +21,12 @@ public class CalculatorController {
 	private void initModelListeners()
 	{
 		this.model.addStateChangeListener(new StateChangeListener());
+		this.model.addPhraseChangeListener(new PhraseChangeListener());
 	}
 	
 	/**
 	 * When the state of the calculator is turned on, the display is lit up
-	 * and the display is zerod out.  When turned off, the display is grayed out.
-	 *
+	 * and the display is zeroed out.  When turned off, the display is grayed out.
 	 */
 	private class StateChangeListener implements PropertyChangeListener
 	{
@@ -50,5 +48,16 @@ public class CalculatorController {
 	
 	
 	
-	
+	/**
+	 * When the state of the calculator is turned on, the display is lit up
+	 * and the display is zeroed out.  When turned off, the display is grayed out.
+	 */
+	private class PhraseChangeListener implements PropertyChangeListener
+	{
+		@Override
+		public void propertyChange(PropertyChangeEvent evt) {
+			String phrase = (String)evt.getNewValue();
+			view.updateDisplay(phrase);
+		}
+	}
 }  // end class CalculatorController
