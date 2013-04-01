@@ -11,10 +11,9 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 import edu.odu.cs.cs600.calculator.gui.CalculatorClass;
 
 public class CalculatorModel {
+	
 	private static final ArrayList <CalculatorCharacter> OFF = new ArrayList <CalculatorCharacter> ();
-	
 	private ArrayList <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
-	
 	
 	public CalculatorModel() {
 		OFF.add(new CalculatorCharacter('O'));

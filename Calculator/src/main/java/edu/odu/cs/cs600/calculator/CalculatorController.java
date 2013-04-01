@@ -11,7 +11,13 @@ public class CalculatorController {
 	{
 		this.model = model;
 		this.view = view;
+		
+		this.initListeners();
 	}
 	
+	private void initListeners()
+	{
+		
+	}
 	
 }
