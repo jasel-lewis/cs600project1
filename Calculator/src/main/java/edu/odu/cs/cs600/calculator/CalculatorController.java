@@ -1,6 +1,8 @@
 package edu.odu.cs.cs600.calculator;
 
 import java.awt.Color;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
@@ -15,32 +17,38 @@ public class CalculatorController {
 		this.model = model;
 		this.view = view;
 		
-		this.initListeners();
+		this.initModelListeners();
 	}
 	
-	private void initListeners()
+	private void initModelListeners()
 	{
-		
+		this.model.addStateChangeListener(new StateChangeListener());
 	}
 	
 	/**
-	 * Place this CalculatorDisplay into the "on" isOn for the calculator.  Functionality
-	 * is the same as what {@link #clear() clear()} performs.
+	 * When the state of the calculator is turned on, the display is lit up
+	 * and the display is zerod out.  When turned off, the display is grayed out.
+	 *
 	 */
-	public void onState() {
-		view.getDisplay().setForeground(Color.DARK_GRAY);
-		model.clear();
-	}  // end onState()
+	private class StateChangeListener implements PropertyChangeListener
+	{
+		@Override
+		public void propertyChange(PropertyChangeEvent evt) {
+			boolean state = (Boolean)evt.getNewValue();
+			if(state)
+			{
+				view.getDisplay().setForeground(Color.DARK_GRAY);
+				model.clear();
+			}
+			else
+			{
+				view.getDisplay().setForeground(Color.LIGHT_GRAY);
+				model.update();
+			}
+		}
+	}
 	
 	
 	
-	/**
-	 * Place this CalculatorDisplay into the "off" isOn for the calculator.  The
-	 * phrase is emptied of all characters and the display is updated with such
-	 * (presenting the user with a blank display).
-	 */
-	public void offState() {
-		view.getDisplay().setForeground(Color.LIGHT_GRAY);
-		model.update();
-	}  // end offState()
+	
 }  // end class CalculatorController
