@@ -1,6 +1,6 @@
 package edu.odu.cs.cs600.calculator;
 
-import edu.odu.cs.cs600.calculator.gui.ApplicationFrame;
+import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 
 public class Application 
 {
@@ -13,8 +13,8 @@ public class Application
 		// Schedule a job for the event-dispatching thread:        
 		// creating and showing this application's GUI.        
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {            
-			public void run() {                
-				ApplicationFrame appFrame = new ApplicationFrame();
+			public void run() {
+				CalculatorView appFrame = new CalculatorView(CalculatorController);
 				appFrame.pack();
 				appFrame.setVisible(true);
 			}        
