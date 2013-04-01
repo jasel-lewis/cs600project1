@@ -29,7 +29,8 @@ public class CalculatorModel {
 	/**
 	 * Put the calculator into an "off" isOn
 	 */
-	public static void off() {
+	public void off() {
+		dcList = (ArrayList<CalculatorCharacter>) OFF.clone();
 		isOn = false;
 	}
 	
@@ -38,7 +39,7 @@ public class CalculatorModel {
 	/**
 	 * Put the calculator into an "on" isOn
 	 */
-	public static void on() {
+	public void on() {
 		isOn = true;
 	}
 
@@ -48,7 +49,7 @@ public class CalculatorModel {
 	 * Returns true if the calculator is in an "on" isOn, false otherwise
 	 * @return
 	 */
-	public static boolean isOn() {
+	public boolean isOn() {
 		return isOn;
 	}
 	
