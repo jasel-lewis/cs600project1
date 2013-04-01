@@ -21,6 +21,7 @@ public class CalculatorView extends JFrame {
 	private static final long serialVersionUID = -2851779459457181013L;
 	
 	private JPanel panel = new JPanel();
+	private JLabel display = new JLabel();
 
 	public CalculatorView(CalculatorModel model) {
 		super("Calculator");
@@ -41,14 +42,12 @@ public class CalculatorView extends JFrame {
 		this.setLayout(gbLayout);
 		
 		panel.add(constructDisplay(gbLayout, gbConstraints));
-		constructButtons(gbLayout, gbConstraints, panel);
+		constructButtons(gbLayout, gbConstraints);
 	}
 	
 	
 	
 	private JLabel constructDisplay(GridBagLayout gbLayout, GridBagConstraints gbConstraints) {
-		JLabel display = new JLabel();
-		
 		gbConstraints.fill = GridBagConstraints.BOTH;
 		gbConstraints.gridheight = 1;
 		gbConstraints.gridwidth = 5;
@@ -66,7 +65,7 @@ public class CalculatorView extends JFrame {
 	
 	
 	
-	private void constructButtons(GridBagLayout gbLayout, GridBagConstraints gbConstraints, JPanel panel) {
+	private void constructButtons(GridBagLayout gbLayout, GridBagConstraints gbConstraints) {
         gbConstraints.fill = GridBagConstraints.BOTH;
         gbConstraints.gridheight = 1;
         gbConstraints.gridwidth = 1;
@@ -255,4 +254,10 @@ public class CalculatorView extends JFrame {
 		gbConstraints.gridwidth = 1;
 		gbConstraints.gridheight = 1;
 	}  // end GenerateButtons(GridBagLayout)
+	
+	
+	
+	public JLabel getDisplay() {
+		return display;
+	}  // end getDisplay()
 }  // end class CalculatorView

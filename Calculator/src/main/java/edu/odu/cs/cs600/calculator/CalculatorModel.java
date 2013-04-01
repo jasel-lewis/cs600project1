@@ -41,7 +41,6 @@ public class CalculatorModel {
 			this.pcs.firePropertyChange("state", this.state, state);
 			this.state = state;
 		}
-	}
 	
 	/**
 	 * Returns the current state of the calculator. "on":true and "off":false

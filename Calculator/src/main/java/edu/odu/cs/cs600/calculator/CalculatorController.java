@@ -7,7 +7,6 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 
 public class CalculatorController {
-	
 	private CalculatorModel model = null;
 	private CalculatorView view = null;
 	
@@ -29,8 +28,8 @@ public class CalculatorController {
 	 * is the same as what {@link #clear() clear()} performs.
 	 */
 	public void onState() {
-		setForeground(Color.DARK_GRAY);
-		clear();
+		view.getDisplay().setForeground(Color.DARK_GRAY);
+		model.clear();
 	}  // end onState()
 	
 	
@@ -41,8 +40,7 @@ public class CalculatorController {
 	 * (presenting the user with a blank display).
 	 */
 	public void offState() {
-		dcList = (ArrayList<CalculatorCharacter>) OFF.clone();
-		setForeground(Color.LIGHT_GRAY);
-		update();
+		view.getDisplay().setForeground(Color.LIGHT_GRAY);
+		model.update();
 	}  // end offState()
-}
+}  // end class CalculatorController
