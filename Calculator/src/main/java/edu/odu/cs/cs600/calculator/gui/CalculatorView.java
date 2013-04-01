@@ -22,6 +22,7 @@ public class CalculatorView extends JFrame {
 	
 	private JPanel panel = new JPanel();
 	private JLabel display = new JLabel();
+	private FunctionButton equalsButton = null;
 
 	public CalculatorView() {
 		super("Calculator");
@@ -220,15 +221,8 @@ public class CalculatorView extends JFrame {
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 5;
 		gbConstraints.gridheight = 2;
-		FunctionButton obEqual = new FunctionButton("equal.png", "=", KeyEvent.VK_UNDEFINED,
-		       	new ActionListener() {
-					public void actionPerformed(ActionEvent ae) {
-						if (model.isOn()) {
-							double result = MathUtil.evaluate(display.getPhrase(false));
-						}
-					}
-				});
-		panel.add(obEqual, gbConstraints);
+		this.equalsButton = new FunctionButton("equal.png", "=", KeyEvent.VK_UNDEFINED);
+		panel.add(this.equalsButton, gbConstraints);
 		
 		gbConstraints.gridheight = 1;  // reset
 		
@@ -268,4 +262,11 @@ public class CalculatorView extends JFrame {
 	public void updateDisplay(String string) {
 		display.setText(string);
 	}  // end updateDisplay(String)
+	
+	
+	
+	public void addEvaluateButtonClickListener(ActionListener listener)
+	{
+		this.equalsButton.addActionListener(listener);
+	}
 }  // end class CalculatorView
