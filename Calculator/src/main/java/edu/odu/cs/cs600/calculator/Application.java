@@ -14,9 +14,13 @@ public class Application
 		// creating and showing this application's GUI.        
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {            
 			public void run() {
-				CalculatorView appFrame = new CalculatorView(CalculatorController);
-				appFrame.pack();
-				appFrame.setVisible(true);
+				
+				CalculatorModel model = new CalculatorModel();
+				CalculatorView view = new CalculatorView(model);
+				CalculatorController controller = new CalculatorController(model, view);
+				
+				view.pack();
+				view.setVisible(true);
 			}        
 		});
 	}
