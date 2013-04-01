@@ -79,145 +79,85 @@ public class CalculatorView extends JFrame {
         // in the Swing tutorial (http://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html)
         
         gbConstraints.gridx = 0; gbConstraints.gridy = 1;
-        FunctionButton obCeiling = new FunctionButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED,
-           		new ActionListener() {
-    				public void actionPerformed(ActionEvent ae) {
-    					if (model.isOn()) {
-    						;
-    					}
-    				}
-    			});
+        FunctionButton obCeiling = new FunctionButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED);
         //gbLayout.setConstraints(obCeiling, gbConstraints);
         panel.add(obCeiling, gbConstraints);
         
         gbConstraints.gridx = 1; gbConstraints.gridy = 1;
-        FunctionButton obFloor = new FunctionButton("floor.png", "Floor", KeyEvent.VK_UNDEFINED,
-            	new ActionListener() {
-        			public void actionPerformed(ActionEvent ae) {
-        				if (model.isOn()) {
-        					;
-        				}
-        			}
-        		});
+        FunctionButton obFloor = new FunctionButton("floor.png", "Floor", KeyEvent.VK_UNDEFINED);
         panel.add(obFloor, gbConstraints);
         
         gbConstraints.gridx = 2; gbConstraints.gridy = 1;
-        FunctionButton obReciprocal = new FunctionButton("reciprocal.png", "<html>1/x</html>", KeyEvent.VK_UNDEFINED,
-               	new ActionListener() {
-        			public void actionPerformed(ActionEvent ae) {
-        				if (model.isOn()) {
-       						;
-       					}
-        			}
-        		});
+        FunctionButton obReciprocal = new FunctionButton("reciprocal.png", "<html>1/x</html>", KeyEvent.VK_UNDEFINED);
         panel.add(obReciprocal, gbConstraints);
         
         gbConstraints.gridx = 3; gbConstraints.gridy = 1;
         gbConstraints.gridwidth = 2;
-        FunctionButton obOn = new FunctionButton("on.png", "On", KeyEvent.VK_UNDEFINED,
-    			new ActionListener() {
-        			public void actionPerformed(ActionEvent ae) {
-        				if (model.isOn()) {
-        					display.clear();
-        				} else {
-        					model.on();
-        					display.onState();
-        				}
-        			}
-        		});
+        FunctionButton obOn = new FunctionButton("on.png", "On", KeyEvent.VK_UNDEFINED);
 		panel.add(obOn, gbConstraints);
 		
 		gbConstraints.gridwidth = 1;  // reset
 		
         gbConstraints.gridx = 0; gbConstraints.gridy = 2;
-		panel.add(new CharacterButton("parenthesis_left.png", '(', display), gbConstraints);
+		panel.add(new CharacterButton("parenthesis_left.png", '('), gbConstraints);
 		
         gbConstraints.gridx = 1; gbConstraints.gridy = 2;
-        panel.add(new CharacterButton("parenthesis_right.png", ')', display), gbConstraints);
+        panel.add(new CharacterButton("parenthesis_right.png", ')'), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 2;
-		FunctionButton obSquareRoot = new FunctionButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED,
-		       	new ActionListener() {
-					public void actionPerformed(ActionEvent ae) {
-						if (model.isOn()) {
-							;
-						}
-					}
-				});
+		FunctionButton obSquareRoot = new FunctionButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED);
 		panel.add(obSquareRoot, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 2;
 		gbConstraints.gridwidth = 2;
-		FunctionButton obOff = new FunctionButton("off.png", "Off", KeyEvent.VK_UNDEFINED,
-		       	new ActionListener() {
-					public void actionPerformed(ActionEvent ae) {
-						if (model.isOn()) {
-							model.off();
-							display.offState();
-						}
-					}
-				});
+		FunctionButton obOff = new FunctionButton("off.png", "Off", KeyEvent.VK_UNDEFINED);
 		panel.add(obOff, gbConstraints);
 		
 		gbConstraints.gridwidth = 1;  // reset
 		
         gbConstraints.gridx = 0; gbConstraints.gridy = 3;
-		panel.add(new CharacterButton("7.png", '7', display), gbConstraints);
+		panel.add(new CharacterButton("7.png", '7'), gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 3;
-		panel.add(new CharacterButton("8.png", '8', display), gbConstraints);
+		panel.add(new CharacterButton("8.png", '8'), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 3;
-		panel.add(new CharacterButton("9.png", '9', display), gbConstraints);
+		panel.add(new CharacterButton("9.png", '9'), gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 3;
-		panel.add(new OperatorButton("divide.png", "&divide;", '/', display), gbConstraints);
+		panel.add(new OperatorButton("divide.png", "&divide;", '/'), gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 3;
-		FunctionButton obClearEntry = new FunctionButton("clear_entry.png", "CE", KeyEvent.VK_BACK_SPACE,
-		       	new ActionListener() {
-					public void actionPerformed(ActionEvent ae) {
-						if (Application.isOn()) {
-							display.pop();
-						}
-					}
-				});
+		FunctionButton obClearEntry = new FunctionButton("clear_entry.png", "CE", KeyEvent.VK_BACK_SPACE);
 		panel.add(obClearEntry, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 4;
-		panel.add(new CharacterButton("4.png", '4', display), gbConstraints);
+		panel.add(new CharacterButton("4.png", '4'), gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 4;
-		panel.add(new CharacterButton("5.png", '5', display), gbConstraints);
+		panel.add(new CharacterButton("5.png", '5'), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 4;
-		panel.add(new CharacterButton("6.png", '6', display), gbConstraints);
+		panel.add(new CharacterButton("6.png", '6'), gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 4;
-		panel.add(new OperatorButton("multiply.png", "&times;", '*', display), gbConstraints);
+		panel.add(new OperatorButton("multiply.png", "&times;", '*'), gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 4;
-		FunctionButton obClearAll = new FunctionButton("clear_all.png", "C", KeyEvent.VK_UNDEFINED,
-		       	new ActionListener() {
-					public void actionPerformed(ActionEvent ae) {
-						if (model.isOn()) {
-							display.clear();
-						}
-					}
-				});
+		FunctionButton obClearAll = new FunctionButton("clear_all.png", "C", KeyEvent.VK_UNDEFINED);
 		panel.add(obClearAll, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 5;
-		panel.add(new CharacterButton("1.png", '1', display), gbConstraints);
+		panel.add(new CharacterButton("1.png", '1'), gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 5;
-		panel.add(new CharacterButton("2.png", '2', display), gbConstraints);
+		panel.add(new CharacterButton("2.png", '2'), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 5;
-		panel.add(new CharacterButton("3.png", '3', display), gbConstraints);
+		panel.add(new CharacterButton("3.png", '3'), gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 5;
-		panel.add(new OperatorButton("subtract.png", "-", '-', display), gbConstraints);
+		panel.add(new OperatorButton("subtract.png", "-", '-'), gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 5;
 		gbConstraints.gridheight = 2;
@@ -227,24 +167,17 @@ public class CalculatorView extends JFrame {
 		gbConstraints.gridheight = 1;  // reset
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 6;
-		panel.add(new CharacterButton("0.png", '0', display), gbConstraints);
+		panel.add(new CharacterButton("0.png", '0'), gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 6;
-		panel.add(new CharacterButton("decimal.png", '.', display), gbConstraints);
+		panel.add(new CharacterButton("decimal.png", '.'), gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 6;
-		FunctionButton obNegate = new FunctionButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED,
-		       	new ActionListener() {
-					public void actionPerformed(ActionEvent ae) {
-						if (model.isOn()) {
-							;
-						}
-					}
-				});
+		FunctionButton obNegate = new FunctionButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED);
 		panel.add(obNegate, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 6;
-		panel.add(new OperatorButton("add.png", "+", '+', display), gbConstraints);
+		panel.add(new OperatorButton("add.png", "+", '+'), gbConstraints);
 		
 		// Reset values
 		gbConstraints.gridwidth = 1;
