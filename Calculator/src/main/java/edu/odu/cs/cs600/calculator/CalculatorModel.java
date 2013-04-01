@@ -16,10 +16,12 @@ public class CalculatorModel {
 	private ArrayList <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
 	
 	public CalculatorModel() {
+		// Setup the "Off" character string for use in the display
 		OFF.add(new CalculatorCharacter('O'));
 		OFF.add(new CalculatorCharacter('f'));
 		OFF.add(new CalculatorCharacter('f'));
 		
+		// Initially show a "0" in the display on calculator launch
 		push(new CalculatorCharacter('0'));
 	}
 	
@@ -45,7 +47,7 @@ public class CalculatorModel {
 
 
 	/**
-	 * Returns true if the calculator is in an "on" isOn, false otherwise
+	 * Returns true if the calculator is in an "on" state, false otherwise
 	 * @return
 	 */
 	public boolean isOn() {

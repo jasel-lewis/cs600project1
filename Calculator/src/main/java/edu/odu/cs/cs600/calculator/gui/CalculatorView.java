@@ -33,7 +33,9 @@ public class CalculatorView extends JFrame {
 		this.setContentPane(panel);
 		this.setResizable(false);
 		this.pack();
-	}	
+	}
+	
+	
 	
 	private void initComponents() {
 		GridBagLayout gbLayout = new GridBagLayout();
@@ -79,7 +81,7 @@ public class CalculatorView extends JFrame {
         FunctionButton obCeiling = new FunctionButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED,
            		new ActionListener() {
     				public void actionPerformed(ActionEvent ae) {
-    					if (Application.isOn()) {
+    					if (model.isOn()) {
     						;
     					}
     				}
@@ -91,7 +93,7 @@ public class CalculatorView extends JFrame {
         FunctionButton obFloor = new FunctionButton("floor.png", "Floor", KeyEvent.VK_UNDEFINED,
             	new ActionListener() {
         			public void actionPerformed(ActionEvent ae) {
-        				if (Application.isOn()) {
+        				if (model.isOn()) {
         					;
         				}
         			}
@@ -102,7 +104,7 @@ public class CalculatorView extends JFrame {
         FunctionButton obReciprocal = new FunctionButton("reciprocal.png", "<html>1/x</html>", KeyEvent.VK_UNDEFINED,
                	new ActionListener() {
         			public void actionPerformed(ActionEvent ae) {
-        				if (Application.isOn()) {
+        				if (model.isOn()) {
        						;
        					}
         			}
@@ -114,10 +116,10 @@ public class CalculatorView extends JFrame {
         FunctionButton obOn = new FunctionButton("on.png", "On", KeyEvent.VK_UNDEFINED,
     			new ActionListener() {
         			public void actionPerformed(ActionEvent ae) {
-        				if (Application.isOn()) {
+        				if (model.isOn()) {
         					display.clear();
         				} else {
-        					Application.on();
+        					model.on();
         					display.onState();
         				}
         			}
@@ -136,7 +138,7 @@ public class CalculatorView extends JFrame {
 		FunctionButton obSquareRoot = new FunctionButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED,
 		       	new ActionListener() {
 					public void actionPerformed(ActionEvent ae) {
-						if (Application.isOn()) {
+						if (model.isOn()) {
 							;
 						}
 					}
@@ -148,8 +150,8 @@ public class CalculatorView extends JFrame {
 		FunctionButton obOff = new FunctionButton("off.png", "Off", KeyEvent.VK_UNDEFINED,
 		       	new ActionListener() {
 					public void actionPerformed(ActionEvent ae) {
-						if (Application.isOn()) {
-							Application.off();
+						if (model.isOn()) {
+							model.off();
 							display.offState();
 						}
 					}
@@ -197,7 +199,7 @@ public class CalculatorView extends JFrame {
 		FunctionButton obClearAll = new FunctionButton("clear_all.png", "C", KeyEvent.VK_UNDEFINED,
 		       	new ActionListener() {
 					public void actionPerformed(ActionEvent ae) {
-						if (Application.isOn()) {
+						if (model.isOn()) {
 							display.clear();
 						}
 					}
@@ -221,7 +223,7 @@ public class CalculatorView extends JFrame {
 		FunctionButton obEqual = new FunctionButton("equal.png", "=", KeyEvent.VK_UNDEFINED,
 		       	new ActionListener() {
 					public void actionPerformed(ActionEvent ae) {
-						if (Application.isOn()) {
+						if (model.isOn()) {
 							double result = MathUtil.evaluate(display.getPhrase(false));
 						}
 					}
@@ -240,7 +242,7 @@ public class CalculatorView extends JFrame {
 		FunctionButton obNegate = new FunctionButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED,
 		       	new ActionListener() {
 					public void actionPerformed(ActionEvent ae) {
-						if (Application.isOn()) {
+						if (model.isOn()) {
 							;
 						}
 					}
