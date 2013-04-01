@@ -26,16 +26,6 @@ public class CharacterButton extends CalculatorButton {
 		cc = new CalculatorCharacter(morpheme);
 		
 		hookKeyInput(morpheme);
-//		
-//		addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent ae) {
-//				if (Application.isOn()) {
-//					CharacterButton cb = (CharacterButton)ae.getSource();
-//					cb.getDisplay().push(cb.getCalclatorCharacter());
-//					//display.push(((CharacterButton)ae.getSource()).getMorpheme());
-//				}
-//			}
-//		});
 	}  // end constructor CharacterButton(String, char, CalculatorDisplay)
 		
 	
