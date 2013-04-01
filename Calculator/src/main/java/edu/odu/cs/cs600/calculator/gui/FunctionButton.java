@@ -24,7 +24,7 @@ public class FunctionButton extends CalculatorButton {
 		super(imageFilenamePath, fallbackText);
 		
 		if (keyCode != KeyEvent.VK_UNDEFINED) {
-			hookKeyInput(keyCode);
+			this.hookKeyInput(keyCode);
 		}
 	}
 	
@@ -34,25 +34,4 @@ public class FunctionButton extends CalculatorButton {
 		addActionListener(al);
 	}
 	
-	private void hookKeyInput(int keyCode) {
-		InputMap keyMap = new ComponentInputMap(this);
-		
-		// TODO: Figure out why the fuck getFallbackText() got put in here
-		keyMap.put(KeyStroke.getKeyStroke(keyCode, 0), this.getFallbackText());
-		
-		ActionMap actionMap = new ActionMapUIResource();
-		actionMap.put(this.getFallbackText(), new AbstractAction() {
-			private static final long serialVersionUID = 303540849078642457L;
-
-			public void actionPerformed(ActionEvent ae) {
-				if (Application.debug) {
-					System.err.println("ActionEvent: " + ae);
-				}
-				((CalculatorButton)ae.getSource()).doClick();
-			}
-		});
-		
-		SwingUtilities.replaceUIActionMap(this,  actionMap);
-		SwingUtilities.replaceUIInputMap(this, JComponent.WHEN_IN_FOCUSED_WINDOW, keyMap);
-	}  // end hookKeyInput(char)
 }  // end class OperationButton

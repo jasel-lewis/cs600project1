@@ -1,10 +1,21 @@
 package edu.odu.cs.cs600.calculator.gui;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.net.URL;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.ComponentInputMap;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.plaf.ActionMapUIResource;
+
+import edu.odu.cs.cs600.calculator.Application;
 
 public abstract class CalculatorButton extends JButton {
 
@@ -59,4 +70,40 @@ public abstract class CalculatorButton extends JButton {
 	public String getFallbackText() {
 		return fallbackText;
 	}  // end getFallbackText()
+	
+	
+	protected void hookKeyInput(int keyCode)
+	{
+		this.hookKeyInput(KeyStroke.getKeyStroke(keyCode, 0));
+	}
+	
+	protected void hookKeyInput(char character)
+	{
+		this.hookKeyInput(KeyStroke.getKeyStroke(character));
+	}	
+	
+	protected void hookKeyInput(KeyStroke keyCode) 
+	{
+		InputMap keyMap = new ComponentInputMap(this);
+		
+		// TODO: Figure out why the fuck getFallbackText() got put in here
+		keyMap.put(keyCode, this.getFallbackText());
+		
+		ActionMap actionMap = new ActionMapUIResource();
+		actionMap.put(this.getFallbackText(), new AbstractAction() {
+			private static final long serialVersionUID = 303540849078642457L;
+
+			public void actionPerformed(ActionEvent ae) {
+				if (Application.debug) {
+					System.err.println("ActionEvent: " + ae);
+				}
+				((CalculatorButton)ae.getSource()).doClick();
+			}
+		});
+		
+		SwingUtilities.replaceUIActionMap(this,  actionMap);
+		SwingUtilities.replaceUIInputMap(this, JComponent.WHEN_IN_FOCUSED_WINDOW, keyMap);
+	}  // end hookKeyInput(char)
+	
+	
 }  // end class CalculatorButton
