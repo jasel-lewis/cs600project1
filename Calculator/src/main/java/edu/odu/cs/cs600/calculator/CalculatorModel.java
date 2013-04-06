@@ -102,7 +102,7 @@ public class CalculatorModel {
 	public void push(CalculatorCharacter cc) 
 	{
 		dcList.add(cc);
-		update();
+		notifyPhraseUpdated();
 		
 //		There's problems in this code that need to be cleaned up... Temporarily commented it all out
 //		so that I could get stuff into the display so I can work on other stuff....
@@ -133,7 +133,7 @@ public class CalculatorModel {
 	public void pop() {
 		if (dcList.size() > 1) {
 			dcList.remove(dcList.size() - 1);
-			update();
+			notifyPhraseUpdated();
 		} else {
 			clear();
 		}
@@ -148,13 +148,14 @@ public class CalculatorModel {
 	public void clear() {
 		dcList.clear();
 		dcList.add(new CalculatorCharacter('0'));
-		update();
+		notifyPhraseUpdated();
 	}  // end clear()
 	
 	
 	public void setPhrase(List<CalculatorCharacter> phrase)
 	{
 		dcList = phrase;
+		notifyPhraseUpdated();
 	}
 	
 	// TODO : Make this static once a formal "Phrase" object is created
@@ -171,7 +172,7 @@ public class CalculatorModel {
 	/**
 	 * Update the display to reflect the current isOn
 	 */
-	public void update() 
+	public void notifyPhraseUpdated() 
 	{
 		this.pcs.firePropertyChange("phrase", null, getPhrase(true));
 	} 

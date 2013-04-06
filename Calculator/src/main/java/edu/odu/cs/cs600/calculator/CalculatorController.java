@@ -10,9 +10,11 @@ import java.io.InvalidClassException;
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
+import edu.odu.cs.cs600.calculator.math.MathUtil;
 import edu.odu.cs.cs600.calculator.math.parser.Parser;
 
-public class CalculatorController {
+public class CalculatorController 
+{
 	private CalculatorModel model = null;
 	private CalculatorView view = null;
 	
@@ -60,6 +62,7 @@ public class CalculatorController {
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
+			System.out.println("Command button pressed");
 			if(e.getSource() instanceof CommandButton)
 			{
 				CalculatorCommand command = ((CommandButton)e.getSource()).getCommand();
@@ -81,7 +84,12 @@ public class CalculatorController {
 					//  Mathematical Commands
 					// ***********************
 					case CEILING:
+					{
+						double result = Parser.evaluate(model.getPhrase(false));
+						result = MathUtil.ceiling(result);
+						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
 						break;
+					}
 					case EVALUATE: 
 					{
 						double result = Parser.evaluate(model.getPhrase(false));
@@ -91,16 +99,31 @@ public class CalculatorController {
 					case FLOOR:
 					{
 						double result = Parser.evaluate(model.getPhrase(false));
-						
+						result = MathUtil.floor(result);
 						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
 						break;
 					}
 					case NEGATE:
+					{
+						double result = Parser.evaluate(model.getPhrase(false));
+						result = MathUtil.negate(result);
+						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
 						break;
+					}
 					case RECIPROCAL:
+					{
+						double result = Parser.evaluate(model.getPhrase(false));
+						result = MathUtil.reciprocal(result);
+						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
 						break;
+					}
 					case SQUAREROOT:
+					{
+						double result = Parser.evaluate(model.getPhrase(false));
+						result = MathUtil.squareRoot(result);
+						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
 						break;
+					}
 					default:
 						break;
 				};
@@ -125,7 +148,7 @@ public class CalculatorController {
 			else
 			{
 				view.getDisplay().setForeground(Color.LIGHT_GRAY);
-				model.update();
+				model.notifyPhraseUpdated();
 			}
 		}
 	}
@@ -144,4 +167,4 @@ public class CalculatorController {
 			view.updateDisplay(phrase);
 		}
 	}
-}  // end class CalculatorController
+} 

@@ -4,7 +4,8 @@ public class NegationEvaluator implements IEvaluator {
 
 	public double compute(double value)
 	{
-		return 0;
+		System.err.println("Function utilized that has not yet been completed.  Currently using improper implementation.");
+		return -value;
 	}
 	
 }
