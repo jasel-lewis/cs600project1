@@ -85,9 +85,15 @@ public class CalculatorController
 					// ***********************
 					case CEILING:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
-						result = MathUtil.ceiling(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.ceiling(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do something w/ this!
+							System.err.println(ex);
+						}
+						
 						break;
 					}
 					case EVALUATE: 
@@ -98,30 +104,50 @@ public class CalculatorController
 					}
 					case FLOOR:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
-						result = MathUtil.floor(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.floor(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do somethign w/ this!
+							System.err.println(ex);
+						}
 						break;
 					}
 					case NEGATE:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
-						result = MathUtil.negate(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.negate(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do somethign w/ this!
+							System.err.println(ex);
+						}
 						break;
 					}
 					case RECIPROCAL:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
-						result = MathUtil.reciprocal(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.reciprocal(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do somethign w/ this!
+							System.err.println(ex);
+						}
 						break;
 					}
 					case SQUAREROOT:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
-						result = MathUtil.squareRoot(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.squareRoot(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do somethign w/ this!
+							System.err.println(ex);
+						}
 						break;
 					}
 					default:
