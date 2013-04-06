@@ -7,6 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.InvalidClassException;
 
+import edu.odu.cs.cs600.calculator.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
@@ -33,7 +34,6 @@ public class CalculatorController
 	private void initModelListeners()
 	{
 		this.model.addStateChangeListener(new StateChangeListener());
-		this.model.addPhraseChangeListener(new PhraseChangeListener());
 	}
 	
 	/**
@@ -45,6 +45,17 @@ public class CalculatorController
 		this.view.addCommandButtonListener(new CommandButtonActionListener());
 	}
 	
+	
+	
+	private class PhraseChangeListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			view.setDisplay(phrase.getPhrase(true));
+		}
+	}
+	
+	
+	
 	private class CharacterInputButtonActionListener implements ActionListener
 	{
 		@Override
@@ -52,7 +63,7 @@ public class CalculatorController
 			if(e.getSource() instanceof CharacterInputButton)
 			{
 				CharacterInputButton button = (CharacterInputButton)e.getSource();
-				model.push(button.getCalclatorCharacter());
+				phrase.push(button.getCalclatorCharacter());
 			}
 		}
 	}
@@ -85,43 +96,43 @@ public class CalculatorController
 					// ***********************
 					case CEILING:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
+						double result = Parser.evaluate(phrase.getPhrase(false));
 						result = MathUtil.ceiling(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
 						break;
 					}
 					case EVALUATE: 
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						double result = Parser.evaluate(phrase.getPhrase(false));
+						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
 						break;
 					}
 					case FLOOR:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
+						double result = Parser.evaluate(phrase.getPhrase(false));
 						result = MathUtil.floor(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
 						break;
 					}
 					case NEGATE:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
+						double result = Parser.evaluate(phrase.getPhrase(false));
 						result = MathUtil.negate(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
 						break;
 					}
 					case RECIPROCAL:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
+						double result = Parser.evaluate(phrase.getPhrase(false));
 						result = MathUtil.reciprocal(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
 						break;
 					}
 					case SQUAREROOT:
 					{
-						double result = Parser.evaluate(model.getPhrase(false));
+						double result = Parser.evaluate(phrase.getPhrase(false));
 						result = MathUtil.squareRoot(result);
-						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
 						break;
 					}
 					default:
@@ -143,12 +154,12 @@ public class CalculatorController
 			if(state)
 			{
 				view.getDisplay().setForeground(Color.DARK_GRAY);
-				model.clear();
+				phrase.clear();
 			}
 			else
 			{
 				view.getDisplay().setForeground(Color.LIGHT_GRAY);
-				model.notifyPhraseUpdated();
+				phrase.setOffState();
 			}
 		}
 	}
@@ -156,15 +167,14 @@ public class CalculatorController
 	
 	
 	/**
-	 * When the state of the calculator is turned on, the display is lit up
-	 * and the display is zeroed out.  When turned off, the display is grayed out.
+	 * When the Phrase is changed, have the view update its display
 	 */
-	private class PhraseChangeListener implements PropertyChangeListener
-	{
-		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
-			String phrase = (String)evt.getNewValue();
-			view.updateDisplay(phrase);
-		}
-	}
+//	private class PhraseChangeListener implements PropertyChangeListener
+//	{
+//		@Override
+//		public void propertyChange(PropertyChangeEvent evt) {
+//			String phrase = (String)evt.getNewValue();
+//			view.setDisplay(phrase.getPhrase(true));
+//		}
+//	}
 } 

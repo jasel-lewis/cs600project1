@@ -1,12 +1,13 @@
 package edu.odu.cs.cs600.calculator.gui;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 public class CalculatorView extends JFrame {
 	private static final long serialVersionUID = -2851779459457181013L;
 	
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
 	private JPanel panel = new JPanel();
 	private JLabel display = new JLabel("0");
 	
@@ -33,6 +36,8 @@ public class CalculatorView extends JFrame {
 		}
 	};
 	
+	
+	
 	private List<ActionListener> commandButtonActionListeners = new ArrayList<ActionListener>();
 	private ActionListener commandButtonActionListener = new ActionListener(){
 		@Override
@@ -41,6 +46,8 @@ public class CalculatorView extends JFrame {
 				listener.actionPerformed(e);
 		}
 	};
+	
+	
 	
 	public CalculatorView() 
 	{
@@ -75,7 +82,6 @@ public class CalculatorView extends JFrame {
 		gbConstraints.gridx = 0; gbConstraints.gridy = 0;
 		
 		display.setFont(new Font("Courier New", Font.BOLD, 36));
-		display.setForeground(Color.DARK_GRAY);
         display.setHorizontalAlignment(JLabel.RIGHT);
         
         panel.add(display, gbConstraints);
@@ -249,9 +255,9 @@ public class CalculatorView extends JFrame {
 	
 	
 	
-	public void updateDisplay(String string) {
+	public void setDisplay(String string) {
 		display.setText(string);
-	}  // end updateDisplay(String)
+	}  // end setDisplay(String)
 	
 	public void addCharacterInputButtonListener(ActionListener listener)
 	{
@@ -265,4 +271,8 @@ public class CalculatorView extends JFrame {
 	
 	
 	
+	public void addPhraseChangeListener(PropertyChangeListener listener)
+	{
+		this.pcs.addPropertyChangeListener("phrase", listener);
+	}
 }  

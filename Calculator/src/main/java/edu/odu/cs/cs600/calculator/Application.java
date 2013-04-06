@@ -16,6 +16,7 @@ public class Application {
 			public void run() {
 				CalculatorModel model = new CalculatorModel();
 				CalculatorView view = new CalculatorView();
+				
 				CalculatorController controller = new CalculatorController(model, view);
 				
 				// Turn the calculator on
