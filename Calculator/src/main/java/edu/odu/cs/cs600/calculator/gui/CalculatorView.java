@@ -4,21 +4,45 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
+import edu.odu.cs.cs600.calculator.gui.button.FunctionButton;
+
 public class CalculatorView extends JFrame {
 	private static final long serialVersionUID = -2851779459457181013L;
 	
 	private JPanel panel = new JPanel();
-	private JLabel display = new JLabel();
-	private FunctionButton equalsButton = null;
+	private JLabel display = new JLabel("0");
 	
-	public CalculatorView() {
+	private List<ActionListener> characterInputButtonActionListeners = new ArrayList<ActionListener>();
+	private ActionListener characterInputButtonActionListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			for(ActionListener listener : characterInputButtonActionListeners)
+				listener.actionPerformed(e);
+		}
+	};
+	
+	private List<ActionListener> functionButtonActionListeners = new ArrayList<ActionListener>();
+	private ActionListener functionButtonActionListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			for(ActionListener listener : functionButtonActionListeners)
+				listener.actionPerformed(e);
+		}
+	};
+	
+	public CalculatorView() 
+	{
 		super("Calculator");
 		
 		// Set defaults
@@ -30,24 +54,24 @@ public class CalculatorView extends JFrame {
 		this.pack();
 	}
 	
-	
-	
-	private void initComponents() {
+	private void initComponents() 
+	{
 		GridBagLayout gbLayout = new GridBagLayout();
 		GridBagConstraints gbConstraints = new GridBagConstraints();
 		
-		//this.setLayout(gbLayout);
 		panel.setLayout(gbLayout);
 		
-		//panel.add(constructDisplay(gbLayout, gbConstraints));
+		initSharedListeners();
 		constructDisplay(gbLayout, gbConstraints);
 		constructButtons(gbLayout, gbConstraints);
 	}
 	
+	private void initSharedListeners()
+	{
+	}
 	
-	
-	//private JLabel constructDisplay(GridBagLayout gbLayout, GridBagConstraints gbConstraints) {
-	private void constructDisplay(GridBagLayout gbLayout, GridBagConstraints gbConstraints) {
+	private void constructDisplay(GridBagLayout gbLayout, GridBagConstraints gbConstraints) 
+	{
 		gbConstraints.fill = GridBagConstraints.BOTH;
 		gbConstraints.gridheight = 1;
 		gbConstraints.gridwidth = 5;
@@ -58,11 +82,8 @@ public class CalculatorView extends JFrame {
 		display.setForeground(Color.DARK_GRAY);
         display.setHorizontalAlignment(JLabel.RIGHT);
         
-        //gbLayout.setConstraints(display, gbConstraints);
         panel.add(display, gbConstraints);
-		
-		//return display;
-	}  // end generateDisplay(GridBagLayout)
+	}
 	
 	
 	
@@ -78,7 +99,6 @@ public class CalculatorView extends JFrame {
         
         gbConstraints.gridx = 0; gbConstraints.gridy = 1;
         FunctionButton obCeiling = new FunctionButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED);
-        //gbLayout.setConstraints(obCeiling, gbConstraints);
         panel.add(obCeiling, gbConstraints);
         
         gbConstraints.gridx = 1; gbConstraints.gridy = 1;
@@ -97,10 +117,14 @@ public class CalculatorView extends JFrame {
 		gbConstraints.gridwidth = 1;  // reset
 		
         gbConstraints.gridx = 0; gbConstraints.gridy = 2;
-		panel.add(new CharacterButton("parenthesis_left.png", '('), gbConstraints);
+        CharacterInputButton leftParenthesisButton = new CharacterInputButton("parenthesis_left.png", new CalculatorCharacter('('));
+        leftParenthesisButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(leftParenthesisButton, gbConstraints);
 		
         gbConstraints.gridx = 1; gbConstraints.gridy = 2;
-        panel.add(new CharacterButton("parenthesis_right.png", ')'), gbConstraints);
+        CharacterInputButton rightParenthesisButton = new CharacterInputButton("parenthesis_right.png", new CalculatorCharacter(')'));
+        rightParenthesisButton.addActionListener(this.characterInputButtonActionListener);
+        panel.add(rightParenthesisButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 2;
 		FunctionButton obSquareRoot = new FunctionButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED);
@@ -114,68 +138,98 @@ public class CalculatorView extends JFrame {
 		gbConstraints.gridwidth = 1;  // reset
 		
         gbConstraints.gridx = 0; gbConstraints.gridy = 3;
-		panel.add(new CharacterButton("7.png", '7'), gbConstraints);
+        CharacterInputButton sevenButton = new CharacterInputButton("7.png", new CalculatorCharacter('7'));
+        sevenButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(sevenButton, gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 3;
-		panel.add(new CharacterButton("8.png", '8'), gbConstraints);
+		CharacterInputButton eightButton = new CharacterInputButton("8.png", new CalculatorCharacter('8'));
+		eightButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(eightButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 3;
-		panel.add(new CharacterButton("9.png", '9'), gbConstraints);
+		CharacterInputButton nineButton = new CharacterInputButton("9.png", new CalculatorCharacter('9'));
+		nineButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(nineButton, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 3;
-		panel.add(new OperatorButton("divide.png", "&divide;", '/'), gbConstraints);
+		CharacterInputButton divideButton = new CharacterInputButton("divide.png", new CalculatorCharacter('/', "&divide;"));
+		divideButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(divideButton, gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 3;
 		FunctionButton obClearEntry = new FunctionButton("clear_entry.png", "CE", KeyEvent.VK_BACK_SPACE);
 		panel.add(obClearEntry, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 4;
-		panel.add(new CharacterButton("4.png", '4'), gbConstraints);
+		CharacterInputButton fourButton = new CharacterInputButton("4.png", new CalculatorCharacter('4'));
+		fourButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(fourButton, gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 4;
-		panel.add(new CharacterButton("5.png", '5'), gbConstraints);
+		CharacterInputButton fiveButton = new CharacterInputButton("5.png", new CalculatorCharacter('5'));
+		fiveButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(fiveButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 4;
-		panel.add(new CharacterButton("6.png", '6'), gbConstraints);
+		CharacterInputButton sixButton = new CharacterInputButton("6.png", new CalculatorCharacter('6'));
+		sixButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(sixButton, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 4;
-		panel.add(new OperatorButton("multiply.png", "&times;", '*'), gbConstraints);
+		CharacterInputButton multiplyButton = new CharacterInputButton("multiply.png", new CalculatorCharacter('*'));
+		multiplyButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(multiplyButton, gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 4;
 		FunctionButton obClearAll = new FunctionButton("clear_all.png", "C", KeyEvent.VK_UNDEFINED);
 		panel.add(obClearAll, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 5;
-		panel.add(new CharacterButton("1.png", '1'), gbConstraints);
+		CharacterInputButton oneButton = new CharacterInputButton("1.png", new CalculatorCharacter('1'));
+		oneButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(oneButton, gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 5;
-		panel.add(new CharacterButton("2.png", '2'), gbConstraints);
-		
+		CharacterInputButton twoButton = new CharacterInputButton("2.png", new CalculatorCharacter('2'));
+		twoButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(twoButton, gbConstraints);
+
 		gbConstraints.gridx = 2; gbConstraints.gridy = 5;
-		panel.add(new CharacterButton("3.png", '3'), gbConstraints);
+		CharacterInputButton threeButton = new CharacterInputButton("3.png", new CalculatorCharacter('3'));
+		threeButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(threeButton, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 5;
-		panel.add(new OperatorButton("subtract.png", "-", '-'), gbConstraints);
+		CharacterInputButton subtractButton = new CharacterInputButton("subtract.png", new CalculatorCharacter('-'));
+		subtractButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(subtractButton, gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 5;
 		gbConstraints.gridheight = 2;
-		this.equalsButton = new FunctionButton("equal.png", "=", KeyEvent.VK_UNDEFINED);
-		panel.add(this.equalsButton, gbConstraints);
+		FunctionButton equalsButton = new FunctionButton("equal.png", "=", KeyEvent.VK_UNDEFINED);
+		panel.add(equalsButton, gbConstraints);
 		
 		gbConstraints.gridheight = 1;  // reset
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 6;
-		panel.add(new CharacterButton("0.png", '0'), gbConstraints);
+		CharacterInputButton zeroButton = new CharacterInputButton("0.png", new CalculatorCharacter('0'));
+		zeroButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(zeroButton, gbConstraints);
 		
 		gbConstraints.gridx = 1; gbConstraints.gridy = 6;
-		panel.add(new CharacterButton("decimal.png", '.'), gbConstraints);
+		CharacterInputButton decimalButton = new CharacterInputButton("decimal.png", new CalculatorCharacter('.'));
+		decimalButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(decimalButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 6;
 		FunctionButton obNegate = new FunctionButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED);
 		panel.add(obNegate, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 6;
-		panel.add(new OperatorButton("add.png", "+", '+'), gbConstraints);
+		CharacterInputButton addButton = new CharacterInputButton("add.png", new CalculatorCharacter('+'));
+		addButton.addActionListener(this.characterInputButtonActionListener);
+		panel.add(addButton, gbConstraints);
 		
 		// Reset values
 		gbConstraints.gridwidth = 1;
@@ -194,10 +248,16 @@ public class CalculatorView extends JFrame {
 		display.setText(string);
 	}  // end updateDisplay(String)
 	
-	
-	
-	public void addEvaluateButtonClickListener(ActionListener listener)
+	public void addCharacterInputButtonListener(ActionListener listener)
 	{
-		this.equalsButton.addActionListener(listener);
+		this.characterInputButtonActionListeners.add(listener);
 	}
-}  // end class CalculatorView
+	
+	public void addFunctionButtonListener(ActionListener listener)
+	{
+		this.functionButtonActionListeners.add(listener);
+	}
+	
+	
+	
+}  

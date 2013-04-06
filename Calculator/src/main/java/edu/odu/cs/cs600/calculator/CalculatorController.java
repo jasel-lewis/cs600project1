@@ -1,10 +1,13 @@
 package edu.odu.cs.cs600.calculator;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
+import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 
 public class CalculatorController {
 	private CalculatorModel model = null;
@@ -16,7 +19,7 @@ public class CalculatorController {
 		this.view = view;
 		
 		this.initModelListeners();
-		this.initViewListeners();
+		this.initViewListeners();		
 	}
 	
 	/**
@@ -33,7 +36,29 @@ public class CalculatorController {
 	 */
 	private void initViewListeners()
 	{
-		
+		this.view.addCharacterInputButtonListener(new CharacterInputButtonActionListener());
+		this.view.addFunctionButtonListener(new FunctionButtonActionListener());
+	}
+	
+	private class CharacterInputButtonActionListener implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() instanceof CharacterInputButton)
+			{
+				CharacterInputButton button = (CharacterInputButton)e.getSource();
+				model.push(button.getCalclatorCharacter());
+			}
+		}
+	}
+	
+	private class FunctionButtonActionListener implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 	
 	/**

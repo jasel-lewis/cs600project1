@@ -98,24 +98,31 @@ public class CalculatorModel {
 	 * Add a {@link CalculatorCharacter} to this CalculatorDisplay
 	 * @param string
 	 */
-	public void push(CalculatorCharacter cc) {
-		// List of characters which will allow us to keep zero as the first character in the phrase
-		String zeroAllowedAsFirst = ".+*-/";
+	public void push(CalculatorCharacter cc) 
+	{
+		dcList.add(cc);
+		update();
 		
-		// If zero is the first (or only) character in the display, get rid of it on the next button
-		// action which enters a character in the display only if the character is one of those
-		// listed in zerAllowedAsFirst
-		if ((dcList.size() == 1) 
-				&& (zeroAllowedAsFirst.indexOf(String.valueOf(cc.getMorpheme())) < 0)
-				&& (dcList.get(0).equalsMorpheme('0'))) {
-			dcList.clear();
-		}
-		
-		if (dcList.size() < 10) {
-			dcList.add(cc);
-			update();
-		}
-	}  // end push(String)
+//		There's problems in this code that need to be cleaned up... Temporarily commented it all out
+//		so that I could get stuff into the display so I can work on other stuff....
+//
+//		// List of characters which will allow us to keep zero as the first character in the phrase
+//		String zeroAllowedAsFirst = ".+*-/";
+//		
+//		// If zero is the first (or only) character in the display, get rid of it on the next button
+//		// action which enters a character in the display only if the character is one of those
+//		// listed in zerAllowedAsFirst
+//		if ((dcList.size() == 1) 
+//				&& (zeroAllowedAsFirst.indexOf(String.valueOf(cc.getMorpheme())) < 0)
+//				&& (dcList.get(0).equalsMorpheme('0'))) {
+//			dcList.clear();
+//		}
+//		
+//		if (dcList.size() < 10) {
+//			dcList.add(cc);
+//			update();
+//		}
+	}
 	
 	
 	
@@ -148,7 +155,8 @@ public class CalculatorModel {
 	/**
 	 * Update the display to reflect the current isOn
 	 */
-	public void update() {
-		this.pcs.firePropertyChange("phrase", getPhrase(true), getPhrase(true));
-	}  // end updateLabel()
+	public void update() 
+	{
+		this.pcs.firePropertyChange("phrase", null, getPhrase(true));
+	} 
 }  // end class CalculatorModel

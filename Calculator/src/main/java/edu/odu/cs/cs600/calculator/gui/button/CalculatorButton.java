@@ -1,4 +1,4 @@
-package edu.odu.cs.cs600.calculator.gui;
+package edu.odu.cs.cs600.calculator.gui.button;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;

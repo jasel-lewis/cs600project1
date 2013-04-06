@@ -11,8 +11,6 @@ public class CalculatorCharacter {
 		this.isoRepresentation = String.valueOf(morpheme);
 	}
 	
-	
-	
 	public CalculatorCharacter(char morpheme, String isoRepresentation) {
 		this.morpheme = morpheme;
 		this.isoRepresentation = isoRepresentation;

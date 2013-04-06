@@ -1,8 +1,8 @@
 package edu.odu.cs.cs600.calculator.math;
 
-public class CeilingEvaluator {
+public class CeilingEvaluator implements IEvaluator {
 
-	public static double compute(double value)
+	public double compute(double value)
 	{
 		return 0;
 	}
