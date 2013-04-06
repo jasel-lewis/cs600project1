@@ -14,8 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import edu.odu.cs.cs600.calculator.gui.button.CalculatorButton;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
-import edu.odu.cs.cs600.calculator.gui.button.FunctionButton;
+import edu.odu.cs.cs600.calculator.gui.button.MathematicalFunctionButton;
 
 public class CalculatorView extends JFrame {
 	private static final long serialVersionUID = -2851779459457181013L;
@@ -98,20 +99,20 @@ public class CalculatorView extends JFrame {
         // in the Swing tutorial (http://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html)
         
         gbConstraints.gridx = 0; gbConstraints.gridy = 1;
-        FunctionButton obCeiling = new FunctionButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED);
+        MathematicalFunctionButton obCeiling = new MathematicalFunctionButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED);
         panel.add(obCeiling, gbConstraints);
         
         gbConstraints.gridx = 1; gbConstraints.gridy = 1;
-        FunctionButton obFloor = new FunctionButton("floor.png", "Floor", KeyEvent.VK_UNDEFINED);
+        MathematicalFunctionButton obFloor = new MathematicalFunctionButton("floor.png", "Floor", KeyEvent.VK_UNDEFINED);
         panel.add(obFloor, gbConstraints);
         
         gbConstraints.gridx = 2; gbConstraints.gridy = 1;
-        FunctionButton obReciprocal = new FunctionButton("reciprocal.png", "<html>1/x</html>", KeyEvent.VK_UNDEFINED);
+        MathematicalFunctionButton obReciprocal = new MathematicalFunctionButton("reciprocal.png", "<html>1/x</html>", KeyEvent.VK_UNDEFINED);
         panel.add(obReciprocal, gbConstraints);
         
         gbConstraints.gridx = 3; gbConstraints.gridy = 1;
         gbConstraints.gridwidth = 2;
-        FunctionButton obOn = new FunctionButton("on.png", "On", KeyEvent.VK_UNDEFINED);
+        CalculatorButton obOn = new CalculatorButton("on.png", "On");
 		panel.add(obOn, gbConstraints);
 		
 		gbConstraints.gridwidth = 1;  // reset
@@ -127,12 +128,12 @@ public class CalculatorView extends JFrame {
         panel.add(rightParenthesisButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 2;
-		FunctionButton obSquareRoot = new FunctionButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED);
+		MathematicalFunctionButton obSquareRoot = new MathematicalFunctionButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED);
 		panel.add(obSquareRoot, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 2;
 		gbConstraints.gridwidth = 2;
-		FunctionButton obOff = new FunctionButton("off.png", "Off", KeyEvent.VK_UNDEFINED);
+		CalculatorButton obOff = new CalculatorButton("off.png", "Off");
 		panel.add(obOff, gbConstraints);
 		
 		gbConstraints.gridwidth = 1;  // reset
@@ -158,7 +159,7 @@ public class CalculatorView extends JFrame {
 		panel.add(divideButton, gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 3;
-		FunctionButton obClearEntry = new FunctionButton("clear_entry.png", "CE", KeyEvent.VK_BACK_SPACE);
+		CalculatorButton obClearEntry = new CalculatorButton("clear_entry.png", "CE", KeyEvent.VK_BACK_SPACE);
 		panel.add(obClearEntry, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 4;
@@ -182,7 +183,7 @@ public class CalculatorView extends JFrame {
 		panel.add(multiplyButton, gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 4;
-		FunctionButton obClearAll = new FunctionButton("clear_all.png", "C", KeyEvent.VK_UNDEFINED);
+		CalculatorButton obClearAll = new CalculatorButton("clear_all.png", "C", KeyEvent.VK_UNDEFINED);
 		panel.add(obClearAll, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 5;
@@ -207,7 +208,7 @@ public class CalculatorView extends JFrame {
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 5;
 		gbConstraints.gridheight = 2;
-		FunctionButton equalsButton = new FunctionButton("equal.png", "=", KeyEvent.VK_UNDEFINED);
+		MathematicalFunctionButton equalsButton = new MathematicalFunctionButton("equal.png", "=", KeyEvent.VK_UNDEFINED);
 		panel.add(equalsButton, gbConstraints);
 		
 		gbConstraints.gridheight = 1;  // reset
@@ -223,7 +224,7 @@ public class CalculatorView extends JFrame {
 		panel.add(decimalButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 6;
-		FunctionButton obNegate = new FunctionButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED);
+		MathematicalFunctionButton obNegate = new MathematicalFunctionButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED);
 		panel.add(obNegate, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 6;

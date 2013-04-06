@@ -2,6 +2,7 @@ package edu.odu.cs.cs600.calculator.gui.button;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 
 import javax.swing.AbstractAction;
@@ -17,17 +18,18 @@ import javax.swing.plaf.ActionMapUIResource;
 
 import edu.odu.cs.cs600.calculator.Application;
 
-public abstract class CalculatorButton extends JButton {
+public class CalculatorButton extends JButton {
 
 	private static final long serialVersionUID = -7812322272853697084L;
 	
 	// Move this into some kind of properties file later
 	private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 26);
 	
-	private String fallbackText = "";
+	private String altText = "";
 	
-	public CalculatorButton(String imageFilenamePath, String fallbackText) {
-		super(fallbackText);
+	public CalculatorButton(String imageFilenamePath, String altText)
+	{
+		super(altText);
 		
 		ImageIcon imgIcon = createImageIcon(imageFilenamePath);
 		
@@ -37,10 +39,19 @@ public abstract class CalculatorButton extends JButton {
 			this.setText("");
 		}
 		
-		this.fallbackText = fallbackText;
+		this.altText = altText;
 		
 		setFont(BUTTON_FONT);
-	}  // end constructor CalculatorButton(String, String)
+	}
+	
+	public CalculatorButton(String imageFilenamePath, String altText, int keyCode)
+	{
+		this(imageFilenamePath, altText);
+		
+		if (keyCode != KeyEvent.VK_UNDEFINED) {
+			this.hookKeyInput(keyCode);
+		}
+	}
 	
 	
 	
@@ -67,8 +78,8 @@ public abstract class CalculatorButton extends JButton {
 	 * Return the fall-back, character representation of this CalculatorButton
 	 * @return
 	 */
-	public String getFallbackText() {
-		return fallbackText;
+	public String getAltText() {
+		return altText;
 	}  // end getFallbackText()
 	
 	
@@ -86,11 +97,11 @@ public abstract class CalculatorButton extends JButton {
 	{
 		InputMap keyMap = new ComponentInputMap(this);
 		
-		// TODO: Figure out why the fuck getFallbackText() got put in here
-		keyMap.put(keyCode, this.getFallbackText());
+		// TODO: Figure out why the fuck getAlt+Text() got put in here
+		keyMap.put(keyCode, this.getAltText());
 		
 		ActionMap actionMap = new ActionMapUIResource();
-		actionMap.put(this.getFallbackText(), new AbstractAction() {
+		actionMap.put(this.getAltText(), new AbstractAction() {
 			private static final long serialVersionUID = 303540849078642457L;
 
 			public void actionPerformed(ActionEvent ae) {
