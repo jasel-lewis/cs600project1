@@ -2,6 +2,8 @@ package edu.odu.cs.cs600.calculator;
 
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 
+// http://www.codeproject.com/KB/tips/ModelViewController/Figure4.gif
+
 public class Application {
 	public static final boolean debug = true;  // Set the debug mode
 	private static final CalculatorModel model = new CalculatorModel();
