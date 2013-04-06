@@ -36,15 +36,18 @@ public class CalculatorView extends JFrame {
 		GridBagLayout gbLayout = new GridBagLayout();
 		GridBagConstraints gbConstraints = new GridBagConstraints();
 		
-		this.setLayout(gbLayout);
+		//this.setLayout(gbLayout);
+		panel.setLayout(gbLayout);
 		
-		panel.add(constructDisplay(gbLayout, gbConstraints));
+		//panel.add(constructDisplay(gbLayout, gbConstraints));
+		constructDisplay(gbLayout, gbConstraints);
 		constructButtons(gbLayout, gbConstraints);
 	}
 	
 	
 	
-	private JLabel constructDisplay(GridBagLayout gbLayout, GridBagConstraints gbConstraints) {
+	//private JLabel constructDisplay(GridBagLayout gbLayout, GridBagConstraints gbConstraints) {
+	private void constructDisplay(GridBagLayout gbLayout, GridBagConstraints gbConstraints) {
 		gbConstraints.fill = GridBagConstraints.BOTH;
 		gbConstraints.gridheight = 1;
 		gbConstraints.gridwidth = 5;
@@ -55,9 +58,10 @@ public class CalculatorView extends JFrame {
 		display.setForeground(Color.DARK_GRAY);
         display.setHorizontalAlignment(JLabel.RIGHT);
         
-        gbLayout.setConstraints(display, gbConstraints);
+        //gbLayout.setConstraints(display, gbConstraints);
+        panel.add(display, gbConstraints);
 		
-		return display;
+		//return display;
 	}  // end generateDisplay(GridBagLayout)
 	
 	

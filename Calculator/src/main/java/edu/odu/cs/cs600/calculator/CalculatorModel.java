@@ -12,7 +12,7 @@ public class CalculatorModel {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
 	private static final ArrayList <CalculatorCharacter> OFF = new ArrayList <CalculatorCharacter> ();
-	private boolean state = true;  // true: calculator is "on"; false: "off"
+	private boolean state = false;  // true: calculator is "on"; false: "off"
 	private ArrayList <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
 	
 	public CalculatorModel() {
@@ -20,9 +20,6 @@ public class CalculatorModel {
 		OFF.add(new CalculatorCharacter('O'));
 		OFF.add(new CalculatorCharacter('f'));
 		OFF.add(new CalculatorCharacter('f'));
-		
-		// Initially show a "0" in the display on calculator launch
-		push(new CalculatorCharacter('0'));
 	}
 	
 	public void addStateChangeListener(PropertyChangeListener listener)

@@ -17,8 +17,11 @@ public class Application {
 				CalculatorView view = new CalculatorView();
 				CalculatorController controller = new CalculatorController(model, view);
 				
+				// Turn the calculator on
+				model.setState(true);
+				
 				view.setVisible(true);
 			}        
 		});
-	}
+	}  // end main(String[])
 }  // end class Application
