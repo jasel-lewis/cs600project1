@@ -1,6 +1,6 @@
 package edu.odu.cs.cs600.calculator.math;
 
-public class ReciprocalEvaluator implements IEvaluator {
+public class ReciprocalEvaluator implements IUnaryEvaluator {
 
 	public double compute(double value)
 	{

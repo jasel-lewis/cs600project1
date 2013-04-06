@@ -176,4 +176,4 @@ public class CalculatorModel {
 	{
 		this.pcs.firePropertyChange("phrase", null, getPhrase(true));
 	} 
-}  // end class CalculatorModel
+}  

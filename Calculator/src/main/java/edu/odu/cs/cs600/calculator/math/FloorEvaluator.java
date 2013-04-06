@@ -1,6 +1,6 @@
 package edu.odu.cs.cs600.calculator.math;
 
-public class FloorEvaluator implements IEvaluator {
+public class FloorEvaluator implements IUnaryEvaluator {
 
 	public double compute(double value)
 	{

@@ -2,11 +2,11 @@ package edu.odu.cs.cs600.calculator.math;
 
 public class MathUtil {
 	
-	private static final IEvaluator ceilingEvaluator = new CeilingEvaluator();
-	private static final IEvaluator floorEvaluator = new FloorEvaluator();
-	private static final IEvaluator negationEvaluator = new NegationEvaluator();
-	private static final IEvaluator reciprocalEvaluator = new ReciprocalEvaluator();
-	private static final IEvaluator squareRootEvaluator = new SquareRootEvaluator();
+	private static final IUnaryEvaluator ceilingEvaluator = new CeilingEvaluator();
+	private static final IUnaryEvaluator floorEvaluator = new FloorEvaluator();
+	private static final IUnaryEvaluator negationEvaluator = new NegationEvaluator();
+	private static final IUnaryEvaluator reciprocalEvaluator = new ReciprocalEvaluator();
+	private static final IUnaryEvaluator squareRootEvaluator = new SquareRootEvaluator();
 
 	public static double ceiling(double value) {
 		return ceilingEvaluator.compute(value);
