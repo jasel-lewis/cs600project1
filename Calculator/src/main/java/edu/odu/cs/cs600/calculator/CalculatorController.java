@@ -37,7 +37,7 @@ public class CalculatorController {
 	private void initViewListeners()
 	{
 		this.view.addCharacterInputButtonListener(new CharacterInputButtonActionListener());
-		this.view.addFunctionButtonListener(new MathematicalFunctionButtonActionListener());
+		this.view.addMathematicalFunctionButtonListener(new MathematicalFunctionButtonActionListener());
 	}
 	
 	private class CharacterInputButtonActionListener implements ActionListener

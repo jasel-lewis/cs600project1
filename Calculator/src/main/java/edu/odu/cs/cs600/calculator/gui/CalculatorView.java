@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 import edu.odu.cs.cs600.calculator.gui.button.CalculatorButton;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
-import edu.odu.cs.cs600.calculator.gui.button.MathematicalFunctionButton;
+import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 
 public class CalculatorView extends JFrame {
 	private static final long serialVersionUID = -2851779459457181013L;
@@ -33,11 +33,11 @@ public class CalculatorView extends JFrame {
 		}
 	};
 	
-	private List<ActionListener> functionButtonActionListeners = new ArrayList<ActionListener>();
-	private ActionListener functionButtonActionListener = new ActionListener(){
+	private List<ActionListener> mathematicalFunctionButtonActionListeners = new ArrayList<ActionListener>();
+	private ActionListener mathematicalFunctionButtonActionListener = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for(ActionListener listener : functionButtonActionListeners)
+			for(ActionListener listener : mathematicalFunctionButtonActionListeners)
 				listener.actionPerformed(e);
 		}
 	};
@@ -99,15 +99,15 @@ public class CalculatorView extends JFrame {
         // in the Swing tutorial (http://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html)
         
         gbConstraints.gridx = 0; gbConstraints.gridy = 1;
-        MathematicalFunctionButton obCeiling = new MathematicalFunctionButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED);
+        CommandButton obCeiling = new CommandButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED);
         panel.add(obCeiling, gbConstraints);
         
         gbConstraints.gridx = 1; gbConstraints.gridy = 1;
-        MathematicalFunctionButton obFloor = new MathematicalFunctionButton("floor.png", "Floor", KeyEvent.VK_UNDEFINED);
+        CommandButton obFloor = new CommandButton("floor.png", "Floor", KeyEvent.VK_UNDEFINED);
         panel.add(obFloor, gbConstraints);
         
         gbConstraints.gridx = 2; gbConstraints.gridy = 1;
-        MathematicalFunctionButton obReciprocal = new MathematicalFunctionButton("reciprocal.png", "<html>1/x</html>", KeyEvent.VK_UNDEFINED);
+        CommandButton obReciprocal = new CommandButton("reciprocal.png", "<html>1/x</html>", KeyEvent.VK_UNDEFINED);
         panel.add(obReciprocal, gbConstraints);
         
         gbConstraints.gridx = 3; gbConstraints.gridy = 1;
@@ -128,7 +128,7 @@ public class CalculatorView extends JFrame {
         panel.add(rightParenthesisButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 2;
-		MathematicalFunctionButton obSquareRoot = new MathematicalFunctionButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED);
+		CommandButton obSquareRoot = new CommandButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED);
 		panel.add(obSquareRoot, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 2;
@@ -208,7 +208,7 @@ public class CalculatorView extends JFrame {
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 5;
 		gbConstraints.gridheight = 2;
-		MathematicalFunctionButton equalsButton = new MathematicalFunctionButton("equal.png", "=", KeyEvent.VK_UNDEFINED);
+		CommandButton equalsButton = new CommandButton("equal.png", "=", KeyEvent.VK_UNDEFINED);
 		panel.add(equalsButton, gbConstraints);
 		
 		gbConstraints.gridheight = 1;  // reset
@@ -224,7 +224,7 @@ public class CalculatorView extends JFrame {
 		panel.add(decimalButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 6;
-		MathematicalFunctionButton obNegate = new MathematicalFunctionButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED);
+		CommandButton obNegate = new CommandButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED);
 		panel.add(obNegate, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 6;
@@ -254,9 +254,9 @@ public class CalculatorView extends JFrame {
 		this.characterInputButtonActionListeners.add(listener);
 	}
 	
-	public void addFunctionButtonListener(ActionListener listener)
+	public void addMathematicalFunctionButtonListener(ActionListener listener)
 	{
-		this.functionButtonActionListeners.add(listener);
+		this.mathematicalFunctionButtonActionListeners.add(listener);
 	}
 	
 	
