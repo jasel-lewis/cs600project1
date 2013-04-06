@@ -33,11 +33,11 @@ public class CalculatorView extends JFrame {
 		}
 	};
 	
-	private List<ActionListener> mathematicalFunctionButtonActionListeners = new ArrayList<ActionListener>();
-	private ActionListener mathematicalFunctionButtonActionListener = new ActionListener(){
+	private List<ActionListener> commandButtonActionListeners = new ArrayList<ActionListener>();
+	private ActionListener commandButtonActionListener = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for(ActionListener listener : mathematicalFunctionButtonActionListeners)
+			for(ActionListener listener : commandButtonActionListeners)
 				listener.actionPerformed(e);
 		}
 	};
@@ -254,9 +254,9 @@ public class CalculatorView extends JFrame {
 		this.characterInputButtonActionListeners.add(listener);
 	}
 	
-	public void addMathematicalFunctionButtonListener(ActionListener listener)
+	public void addCommandButtonListener(ActionListener listener)
 	{
-		this.mathematicalFunctionButtonActionListeners.add(listener);
+		this.commandButtonActionListeners.add(listener);
 	}
 	
 	
