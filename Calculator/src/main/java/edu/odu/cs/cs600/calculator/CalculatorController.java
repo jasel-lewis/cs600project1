@@ -10,6 +10,7 @@ import java.io.InvalidClassException;
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
+import edu.odu.cs.cs600.calculator.math.parser.Parser;
 
 public class CalculatorController {
 	private CalculatorModel model = null;
@@ -81,10 +82,19 @@ public class CalculatorController {
 					// ***********************
 					case CEILING:
 						break;
-					case EVALUATE:
+					case EVALUATE: 
+					{
+						double result = Parser.evaluate(model.getPhrase(false));
+						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
 						break;
+					}
 					case FLOOR:
+					{
+						double result = Parser.evaluate(model.getPhrase(false));
+						
+						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
 						break;
+					}
 					case NEGATE:
 						break;
 					case RECIPROCAL:

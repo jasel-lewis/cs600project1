@@ -3,6 +3,7 @@ package edu.odu.cs.cs600.calculator;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 
 import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
@@ -13,7 +14,7 @@ public class CalculatorModel {
 	
 	private static final ArrayList <CalculatorCharacter> OFF = new ArrayList <CalculatorCharacter> ();
 	private boolean state = false;  // true: calculator is "on"; false: "off"
-	private ArrayList <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
+	private List <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
 	
 	public CalculatorModel() {
 		// Setup the "Off" character string for use in the display
@@ -151,6 +152,21 @@ public class CalculatorModel {
 	}  // end clear()
 	
 	
+	public void setPhrase(List<CalculatorCharacter> phrase)
+	{
+		dcList = phrase;
+	}
+	
+	// TODO : Make this static once a formal "Phrase" object is created
+	public List<CalculatorCharacter> convertToPhrase(String phrase)
+	{
+		List<CalculatorCharacter> result = new ArrayList<CalculatorCharacter>();
+		for(int i = 0; i < phrase.length(); i++)
+		{
+			result.add(new CalculatorCharacter(phrase.charAt(i)));
+		}
+		return result;
+	}
 	
 	/**
 	 * Update the display to reflect the current isOn
