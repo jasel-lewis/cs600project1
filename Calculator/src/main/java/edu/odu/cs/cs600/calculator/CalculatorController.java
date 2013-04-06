@@ -5,9 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.InvalidClassException;
 
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
+import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 
 public class CalculatorController {
 	private CalculatorModel model = null;
@@ -37,7 +39,7 @@ public class CalculatorController {
 	private void initViewListeners()
 	{
 		this.view.addCharacterInputButtonListener(new CharacterInputButtonActionListener());
-		this.view.addCommandButtonListener(new MathematicalFunctionButtonActionListener());
+		this.view.addCommandButtonListener(new CommandButtonActionListener());
 	}
 	
 	private class CharacterInputButtonActionListener implements ActionListener
@@ -52,12 +54,47 @@ public class CalculatorController {
 		}
 	}
 	
-	private class MathematicalFunctionButtonActionListener implements ActionListener
+	private class CommandButtonActionListener implements ActionListener
 	{
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
+		public void actionPerformed(ActionEvent e) 
+		{
+			if(e.getSource() instanceof CommandButton)
+			{
+				CalculatorCommand command = ((CommandButton)e.getSource()).getCommand();
+				switch(command)
+				{
+					// ***********************
+					//   Functional Commands
+					// ***********************
+					case CLEAR:
+						break;
+					case CLEAR_ALL:
+						break;
+					case POWERON:
+						break;
+					case POWEROFF:
+						break;
+						
+					// ***********************
+					//  Mathematical Commands
+					// ***********************
+					case CEILING:
+						break;
+					case EVALUATE:
+						break;
+					case FLOOR:
+						break;
+					case NEGATE:
+						break;
+					case RECIPROCAL:
+						break;
+					case SQUAREROOT:
+						break;
+					default:
+						break;
+				};
+			}
 		}
 	}
 	

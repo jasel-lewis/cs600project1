@@ -18,7 +18,7 @@ import javax.swing.plaf.ActionMapUIResource;
 
 import edu.odu.cs.cs600.calculator.Application;
 
-public class CalculatorButton extends JButton {
+public abstract class CalculatorButton extends JButton {
 
 	private static final long serialVersionUID = -7812322272853697084L;
 	

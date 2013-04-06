@@ -6,5 +6,9 @@ public enum CalculatorCommand {
 	CLEAR_ALL,
 	EVALUATE,
 	FLOOR,
-	RECIPROCAL
+	NEGATE,
+	POWEROFF,
+	POWERON,
+	RECIPROCAL,
+	SQUAREROOT
 }

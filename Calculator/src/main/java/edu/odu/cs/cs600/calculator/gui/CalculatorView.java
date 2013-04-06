@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import edu.odu.cs.cs600.calculator.CalculatorCommand;
 import edu.odu.cs.cs600.calculator.gui.button.CalculatorButton;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
@@ -99,20 +100,20 @@ public class CalculatorView extends JFrame {
         // in the Swing tutorial (http://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html)
         
         gbConstraints.gridx = 0; gbConstraints.gridy = 1;
-        CommandButton obCeiling = new CommandButton("ceiling.png", "Ceiling", KeyEvent.VK_UNDEFINED);
+        CommandButton obCeiling = new CommandButton("ceiling.png", "Ceiling", CalculatorCommand.CEILING);
         panel.add(obCeiling, gbConstraints);
         
         gbConstraints.gridx = 1; gbConstraints.gridy = 1;
-        CommandButton obFloor = new CommandButton("floor.png", "Floor", KeyEvent.VK_UNDEFINED);
+        CommandButton obFloor = new CommandButton("floor.png", "Floor", CalculatorCommand.FLOOR);
         panel.add(obFloor, gbConstraints);
         
         gbConstraints.gridx = 2; gbConstraints.gridy = 1;
-        CommandButton obReciprocal = new CommandButton("reciprocal.png", "<html>1/x</html>", KeyEvent.VK_UNDEFINED);
+        CommandButton obReciprocal = new CommandButton("reciprocal.png", "<html>1/x</html>", CalculatorCommand.RECIPROCAL);
         panel.add(obReciprocal, gbConstraints);
         
         gbConstraints.gridx = 3; gbConstraints.gridy = 1;
         gbConstraints.gridwidth = 2;
-        CalculatorButton obOn = new CalculatorButton("on.png", "On");
+        CommandButton obOn = new CommandButton("on.png", "On", CalculatorCommand.POWERON);
 		panel.add(obOn, gbConstraints);
 		
 		gbConstraints.gridwidth = 1;  // reset
@@ -128,12 +129,12 @@ public class CalculatorView extends JFrame {
         panel.add(rightParenthesisButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 2;
-		CommandButton obSquareRoot = new CommandButton("square_root.png", "<html>&radic;</html>", KeyEvent.VK_UNDEFINED);
+		CommandButton obSquareRoot = new CommandButton("square_root.png", "<html>&radic;</html>", CalculatorCommand.SQUAREROOT);
 		panel.add(obSquareRoot, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 2;
 		gbConstraints.gridwidth = 2;
-		CalculatorButton obOff = new CalculatorButton("off.png", "Off");
+		CommandButton obOff = new CommandButton("off.png", "Off", CalculatorCommand.POWEROFF);
 		panel.add(obOff, gbConstraints);
 		
 		gbConstraints.gridwidth = 1;  // reset
@@ -159,7 +160,7 @@ public class CalculatorView extends JFrame {
 		panel.add(divideButton, gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 3;
-		CalculatorButton obClearEntry = new CalculatorButton("clear_entry.png", "CE", KeyEvent.VK_BACK_SPACE);
+		CommandButton obClearEntry = new CommandButton("clear_entry.png", "CE", CalculatorCommand.CLEAR, KeyEvent.VK_BACK_SPACE);
 		panel.add(obClearEntry, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 4;
@@ -183,7 +184,7 @@ public class CalculatorView extends JFrame {
 		panel.add(multiplyButton, gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 4;
-		CalculatorButton obClearAll = new CalculatorButton("clear_all.png", "C", KeyEvent.VK_UNDEFINED);
+		CommandButton obClearAll = new CommandButton("clear_all.png", "C", CalculatorCommand.CLEAR_ALL);
 		panel.add(obClearAll, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 5;
@@ -208,7 +209,7 @@ public class CalculatorView extends JFrame {
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 5;
 		gbConstraints.gridheight = 2;
-		CommandButton equalsButton = new CommandButton("equal.png", "=", KeyEvent.VK_UNDEFINED);
+		CommandButton equalsButton = new CommandButton("equal.png", "=", CalculatorCommand.EVALUATE);
 		panel.add(equalsButton, gbConstraints);
 		
 		gbConstraints.gridheight = 1;  // reset
@@ -224,7 +225,7 @@ public class CalculatorView extends JFrame {
 		panel.add(decimalButton, gbConstraints);
 		
 		gbConstraints.gridx = 2; gbConstraints.gridy = 6;
-		CommandButton obNegate = new CommandButton("negate.png", "<html>&plusmn;</html>", KeyEvent.VK_UNDEFINED);
+		CommandButton obNegate = new CommandButton("negate.png", "<html>&plusmn;</html>", CalculatorCommand.NEGATE);
 		panel.add(obNegate, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 6;
@@ -235,7 +236,7 @@ public class CalculatorView extends JFrame {
 		// Reset values
 		gbConstraints.gridwidth = 1;
 		gbConstraints.gridheight = 1;
-	}  // end GenerateButtons(GridBagLayout)
+	}  
 	
 	
 	
