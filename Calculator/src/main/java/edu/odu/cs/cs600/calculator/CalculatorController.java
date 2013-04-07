@@ -93,12 +93,16 @@ public class CalculatorController
 					// Functional Commands
 					// ***********************
 					case CLEAR:
+						model.getPhrase().pop();
 						break;
 					case CLEAR_ALL:
+						model.getPhrase().clear();
 						break;
 					case POWERON:
+						model.setState(true);
 						break;
 					case POWEROFF:
+						model.setState(false);
 						break;
 	
 					// ***********************
@@ -199,18 +203,4 @@ public class CalculatorController
 			}
 		}
 	}
-	
-	
-	
-	/**
-	 * When the Phrase is changed, have the view update its display
-	 */
-//	private class PhraseChangeListener implements PropertyChangeListener
-//	{
-//		@Override
-//		public void propertyChange(PropertyChangeEvent evt) {
-//			String phrase = (String)evt.getNewValue();
-//			view.setDisplay(phrase.getPhrase(true));
-//		}
-//	}
 } 

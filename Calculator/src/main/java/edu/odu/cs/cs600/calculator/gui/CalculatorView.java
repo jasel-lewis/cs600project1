@@ -185,13 +185,14 @@ public class CalculatorView extends JFrame {
 		panel.add(sixButton, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 4;
-		CharacterInputButton multiplyButton = new CharacterInputButton("multiply.png", new CalculatorCharacter('*'));
+		CharacterInputButton multiplyButton = new CharacterInputButton("multiply.png", new CalculatorCharacter('*', "&lowast;"));
 		multiplyButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(multiplyButton, gbConstraints);
 		
 		gbConstraints.gridx = 4; gbConstraints.gridy = 4;
-		CommandButton obClearAll = new CommandButton("clear_all.png", "C", CalculatorCommand.CLEAR_ALL);
-		panel.add(obClearAll, gbConstraints);
+		CommandButton clearAllButton = new CommandButton("clear_all.png", "C", CalculatorCommand.CLEAR_ALL);
+		clearAllButton.addActionListener(commandButtonActionListener);
+		panel.add(clearAllButton, gbConstraints);
 		
 		gbConstraints.gridx = 0; gbConstraints.gridy = 5;
 		CharacterInputButton oneButton = new CharacterInputButton("1.png", new CalculatorCharacter('1'));
