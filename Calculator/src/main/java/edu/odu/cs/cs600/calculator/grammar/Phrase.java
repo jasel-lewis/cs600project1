@@ -10,11 +10,11 @@ import javax.swing.event.ChangeListener;
 import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 
 public class Phrase {
-	
 	private List <CalculatorCharacter> phrase = new ArrayList <CalculatorCharacter> ();
 	private List<ChangeListener> changeListeners = new ArrayList<ChangeListener> ();
 	
 	public Phrase() {
+		clear();
 	}
 	
 	
@@ -75,6 +75,13 @@ public class Phrase {
 		
 		return phrase;
 	}  // end default constructor
+	
+	
+	
+	// Returns the non-HTML version of this Phrase
+	public String toString() {
+		return getPhrase(false);
+	}
 	
 	
 	

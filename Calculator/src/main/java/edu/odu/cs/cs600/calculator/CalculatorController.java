@@ -13,7 +13,7 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 import edu.odu.cs.cs600.calculator.math.MathUtil;
-import edu.odu.cs.cs600.calculator.math.parser.Parser;
+import edu.odu.cs.cs600.calculator.math.grammar.Parser;
 
 public class CalculatorController 
 {
@@ -111,7 +111,7 @@ public class CalculatorController
 					case CEILING:
 					{
 						try {
-							double result = Parser.evaluate(model.getPhrase().getPhrase(false));
+							double result = Parser.parse(model.getPhrase().getPhrase(false));
 							result = MathUtil.ceiling(result);
 							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
 						} catch(Exception ex) {
@@ -123,14 +123,14 @@ public class CalculatorController
 					}
 					case EVALUATE:
 					{
-						double result = Parser.evaluate(model.getPhrase().getPhrase(false));
+						double result = Parser.parse(model.getPhrase().getPhrase(false));
 						model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
 						break;
 					}
 					case FLOOR:
 					{
 						try {
-							double result = Parser.evaluate(model.getPhrase().getPhrase(false));
+							double result = Parser.parse(model.getPhrase().getPhrase(false));
 							result = MathUtil.floor(result);
 							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
 						} catch(Exception ex) {
@@ -142,7 +142,7 @@ public class CalculatorController
 					case NEGATE:
 					{
 						try {
-							double result = Parser.evaluate(model.getPhrase().getPhrase(false));
+							double result = Parser.parse(model.getPhrase().getPhrase(false));
 							result = MathUtil.negate(result);
 							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
 						} catch(Exception ex) {
@@ -154,7 +154,7 @@ public class CalculatorController
 					case RECIPROCAL:
 					{
 						try {
-							double result = Parser.evaluate(model.getPhrase().getPhrase(false));
+							double result = Parser.parse(model.getPhrase().getPhrase(false));
 							result = MathUtil.reciprocal(result);
 							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
 						} catch(Exception ex) {
@@ -166,7 +166,7 @@ public class CalculatorController
 					case SQUAREROOT:
 					{
 						try {
-							double result = Parser.evaluate(model.getPhrase().getPhrase(false));
+							double result = Parser.parse(model.getPhrase().getPhrase(false));
 							result = MathUtil.squareRoot(result);
 							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
 						} catch(Exception ex) {
