@@ -52,7 +52,6 @@ class Tokenizer {
 		
 		if (buffer.length() > 0) {
 			if ((NUMBERS.indexOf(buffer.charAt(0)) >= 0) || (DECIMAL.indexOf(buffer.charAt(0)) >= 0)) {
-System.err.println("in recognizeNextToken(): buffer.charAt(0): " + buffer.charAt(0));
 				tokenType = recognizeNumber();
 			}
 		} else {
@@ -70,7 +69,6 @@ System.err.println("in recognizeNextToken(): buffer.charAt(0): " + buffer.charAt
 		recognizeWholeNumber();
 		
 		if ((buffer.length() > 0) && (buffer.charAt(0) == '.')) {
-System.err.println("in recognizeNumber(): buffer.charAt(0): " + buffer.charAt(0));
 			lexeme.append(buffer.charAt(0));
 			buffer = buffer.deleteCharAt(0);
 			
@@ -87,7 +85,6 @@ System.err.println("in recognizeNumber(): buffer.charAt(0): " + buffer.charAt(0)
 		buffer = buffer.deleteCharAt(0);
 		
 		while ((buffer.length() > 0) && (NUMBERS.indexOf(buffer.charAt(0)) >= 0)) {
-System.err.println("in recognizeWholeNumber(): buffer.charAt(0): " + buffer.charAt(0));
 			lexeme.append(buffer.charAt(0));
 			buffer = buffer.deleteCharAt(0);
 		}

@@ -34,7 +34,7 @@ public class ParserTest {
 		Phrase phrase = new Phrase();
 		double val = 0.0;
 		
-		phrase.convertToPhrase("1");
+		phrase.setPhrase(Phrase.convertToPhrase("1"));
 		val = 1.0;
 		assertEquals("Parsing integer value 1", val, Parser.parse(phrase), EPSILON);
 	}
@@ -44,27 +44,27 @@ public class ParserTest {
 		Phrase phrase = new Phrase();
 		double val = 0.0;
 		
-		phrase.convertToPhrase("3.0");
+		phrase.setPhrase(Phrase.convertToPhrase("3.0"));
 		val = 3.0;
 		assertEquals("Parsing double \"3.0\"", val, Parser.parse(phrase), EPSILON);
 		
-		phrase.convertToPhrase("6.000");
+		phrase.setPhrase(Phrase.convertToPhrase("6.000"));
 		val = 6.0;
 		assertEquals("Parsing double \"6.000\"", val, Parser.parse(phrase), EPSILON);
 		
-		phrase.convertToPhrase("9.00000000");
+		phrase.setPhrase(Phrase.convertToPhrase("9.00000000"));
 		val = 9.0;
 		assertEquals("Parsing double \"9.00000000\"", val, Parser.parse(phrase), EPSILON);
 		
-		phrase.convertToPhrase(".12345");
+		phrase.setPhrase(Phrase.convertToPhrase(".12345"));
 		val = 0.12345;
 		assertEquals("Parsing double \".12345\"", val, Parser.parse(phrase), EPSILON);
 		
-		phrase.convertToPhrase("0.0");
+		phrase.setPhrase(Phrase.convertToPhrase("0.0"));
 		val = 0.0;
 		assertEquals("Parsing double \"0.0\"", val, Parser.parse(phrase), EPSILON);
 		
-		phrase.convertToPhrase("0.8765");
+		phrase.setPhrase(Phrase.convertToPhrase("0.8765"));
 		val = 0.8765;
 		assertEquals("Parsing double \"0.8765\"", val, Parser.parse(phrase), EPSILON);
 	}
