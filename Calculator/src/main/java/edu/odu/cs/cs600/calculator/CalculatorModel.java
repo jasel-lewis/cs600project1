@@ -2,12 +2,8 @@ package edu.odu.cs.cs600.calculator;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-
-import javax.swing.event.ChangeListener;
 
 import edu.odu.cs.cs600.calculator.grammar.Phrase;
-import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 
 public class CalculatorModel {
 	
@@ -21,12 +17,6 @@ public class CalculatorModel {
 	public void addStateChangeListener(PropertyChangeListener listener)
 	{
 		this.pcs.addPropertyChangeListener("state", listener);
-	}
-	
-	
-	
-	public void addPhraseChangeListener(ChangeListener listener) {
-		
 	}
 	
 	
@@ -60,5 +50,5 @@ public class CalculatorModel {
 	
 	public void setPhrase(Phrase phrase) {
 		this.phrase = phrase;
-	}
-}  // end class CalculatorModel
+	} 
+}

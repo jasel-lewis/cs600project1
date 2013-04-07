@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeListener;
 
 import edu.odu.cs.cs600.calculator.CalculatorCommand;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
@@ -22,7 +23,7 @@ import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 public class CalculatorView extends JFrame {
 	private static final long serialVersionUID = -2851779459457181013L;
 	
-	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private List<ChangeListener> displayChangeListener = new ArrayList<ChangeListener> ();
 	
 	private JPanel panel = new JPanel();
 	private JLabel display = new JLabel("0");
@@ -271,8 +272,8 @@ public class CalculatorView extends JFrame {
 	
 	
 	
-	public void addPhraseChangeListener(PropertyChangeListener listener)
+	public void addPhraseChangeListener(ChangeListener listener)
 	{
-		this.pcs.addPropertyChangeListener("phrase", listener);
+		this.displayChangeListener.add(listener);
 	}
 }  

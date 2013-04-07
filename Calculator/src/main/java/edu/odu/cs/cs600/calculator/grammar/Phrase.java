@@ -6,7 +6,6 @@ import java.util.ListIterator;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.EventListenerList;
 
 import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 
@@ -85,8 +84,6 @@ public class Phrase {
 	 */
 	//TODO: Fix this
 	public void push(CalculatorCharacter cc) {
-		String oldPhrase = getPhrase(true);
-		
 		dcList.add(cc);
 		fireChangeEvent();
 		
@@ -118,8 +115,6 @@ public class Phrase {
 	 */
 	public void pop() {		
 		if (dcList.size() > 1) {
-			String oldPhrase = getPhrase(true);
-			
 			dcList.remove(dcList.size() - 1);
 			fireChangeEvent();
 		} else {
@@ -134,8 +129,6 @@ public class Phrase {
 	 * the number 0)
 	 */
 	public void clear() {
-		String oldPhrase = getPhrase(true);
-		
 		dcList.clear();
 		dcList.add(new CalculatorCharacter('0'));
 		

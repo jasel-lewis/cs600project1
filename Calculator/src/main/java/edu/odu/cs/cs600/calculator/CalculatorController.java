@@ -7,6 +7,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.InvalidClassException;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import edu.odu.cs.cs600.calculator.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
@@ -43,14 +46,15 @@ public class CalculatorController
 	{
 		this.view.addCharacterInputButtonListener(new CharacterInputButtonActionListener());
 		this.view.addCommandButtonListener(new CommandButtonActionListener());
+		this.view.addPhraseChangeListener(new PhraseChangeListener());
 	}
 	
 	
 	
-	private class PhraseChangeListener implements ActionListener {
+	private class PhraseChangeListener implements ChangeListener {
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			view.setDisplay(phrase.getPhrase(true));
+		public void stateChanged(ChangeEvent e) {
+			view.setDisplay(model.getPhrase().getPhrase(true));
 		}
 	}
 	
@@ -63,15 +67,16 @@ public class CalculatorController
 			if(e.getSource() instanceof CharacterInputButton)
 			{
 				CharacterInputButton button = (CharacterInputButton)e.getSource();
-				phrase.push(button.getCalclatorCharacter());
+				model.getPhrase().push(button.getCalclatorCharacter());
 			}
 		}
 	}
 	
+
 	private class CommandButtonActionListener implements ActionListener
 	{
 		@Override
-		public void actionPerformed(ActionEvent e) 
+		public void actionPerformed(ActionEvent e)
 		{
 			System.out.println("Command button pressed");
 			if(e.getSource() instanceof CommandButton)
@@ -80,7 +85,7 @@ public class CalculatorController
 				switch(command)
 				{
 					// ***********************
-					//   Functional Commands
+					// Functional Commands
 					// ***********************
 					case CLEAR:
 						break;
@@ -90,49 +95,75 @@ public class CalculatorController
 						break;
 					case POWEROFF:
 						break;
-						
+	
 					// ***********************
-					//  Mathematical Commands
+					// Mathematical Commands
 					// ***********************
 					case CEILING:
 					{
-						double result = Parser.evaluate(phrase.getPhrase(false));
-						result = MathUtil.ceiling(result);
-						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.ceiling(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do something w/ this!
+							System.err.println(ex);
+						}
+	
 						break;
 					}
-					case EVALUATE: 
+					case EVALUATE:
 					{
-						double result = Parser.evaluate(phrase.getPhrase(false));
-						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
+						double result = Parser.evaluate(model.getPhrase(false));
+						model.setPhrase(model.convertToPhrase(String.valueOf(result)));
 						break;
 					}
 					case FLOOR:
 					{
-						double result = Parser.evaluate(phrase.getPhrase(false));
-						result = MathUtil.floor(result);
-						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.floor(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do somethign w/ this!
+							System.err.println(ex);
+						}
 						break;
 					}
 					case NEGATE:
 					{
-						double result = Parser.evaluate(phrase.getPhrase(false));
-						result = MathUtil.negate(result);
-						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.negate(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do somethign w/ this!
+							System.err.println(ex);
+						}
 						break;
 					}
 					case RECIPROCAL:
 					{
-						double result = Parser.evaluate(phrase.getPhrase(false));
-						result = MathUtil.reciprocal(result);
-						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.reciprocal(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do somethign w/ this!
+							System.err.println(ex);
+						}
 						break;
 					}
 					case SQUAREROOT:
 					{
-						double result = Parser.evaluate(phrase.getPhrase(false));
-						result = MathUtil.squareRoot(result);
-						phrase.setPhrase(phrase.convertToPhrase(String.valueOf(result)));
+						try {
+							double result = Parser.evaluate(model.getPhrase(false));
+							result = MathUtil.squareRoot(result);
+							model.setPhrase(model.convertToPhrase(String.valueOf(result)));
+						} catch(Exception ex) {
+							// TODO - do somethign w/ this!
+							System.err.println(ex);
+						}
 						break;
 					}
 					default:
@@ -154,12 +185,12 @@ public class CalculatorController
 			if(state)
 			{
 				view.getDisplay().setForeground(Color.DARK_GRAY);
-				phrase.clear();
+				model.getPhrase().clear();
 			}
 			else
 			{
 				view.getDisplay().setForeground(Color.LIGHT_GRAY);
-				phrase.setOffState();
+				model.getPhrase().setOffState();
 			}
 		}
 	}
