@@ -11,7 +11,7 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 
 public class Phrase {
 	
-	private List <CalculatorCharacter> dcList = new ArrayList <CalculatorCharacter> ();
+	private List <CalculatorCharacter> phrase = new ArrayList <CalculatorCharacter> ();
 	private List<ChangeListener> changeListeners = new ArrayList<ChangeListener> ();
 	
 	public Phrase() {
@@ -51,7 +51,7 @@ public class Phrase {
 	 * @return
 	 */
 	public String getPhrase(boolean htmlEncode) {
-		ListIterator<CalculatorCharacter> it = dcList.listIterator();
+		ListIterator<CalculatorCharacter> it = phrase.listIterator();
 		CalculatorCharacter cc;
 		String phrase = "";
 		
@@ -82,30 +82,28 @@ public class Phrase {
 	 * Add a {@link CalculatorCharacter} to this CalculatorDisplay
 	 * @param string
 	 */
-	//TODO: Fix this
 	public void push(CalculatorCharacter cc) {
-		dcList.add(cc);
-		fireChangeEvent();
+		// If the calculator was just turned on or was just cleared, a zero is displayed.  This
+		// is a list of characters which will allow us to keep zero as the first character in the
+		// phrase.  If anything other than these characters comes in to this push() function, the
+		// zero is overwritten.
+		String charList = ".+*-/";
 		
-//		There's problems in this code that need to be cleaned up... Temporarily commented it all out
-//		so that I could get stuff into the display so I can work on other stuff....
-//
-//		// List of characters which will allow us to keep zero as the first character in the phrase
-//		String zeroAllowedAsFirst = ".+*-/";
-//		
-//		// If zero is the first (or only) character in the display, get rid of it on the next button
-//		// action which enters a character in the display only if the character is one of those
-//		// listed in zerAllowedAsFirst
-//		if ((dcList.size() == 1) 
-//				&& (zeroAllowedAsFirst.indexOf(String.valueOf(cc.getMorpheme())) < 0)
-//				&& (dcList.get(0).equalsMorpheme('0'))) {
-//			dcList.clear();
-//		}
-//		
-//		if (dcList.size() < 10) {
-//			dcList.add(cc);
-//			update();
-//		}
+		// If zero is the first (or only) character in the display, get rid of it on the next button
+		// action which enters a character in the display only if the character is one of those
+		// listed in charList
+		if ((phrase.size() == 1)  // phrase only has one character in it
+				&& (phrase.get(0).equalsMorpheme('0'))  // the first (and only) character in phrase is 0
+				&& (charList.indexOf(String.valueOf(cc.getMorpheme())) < 0)  // the character to add does NOT appear in charList
+				) {
+			phrase.clear();
+		}
+		
+		if (phrase.size() < 10) {
+			phrase.add(cc);
+		}
+		
+		fireChangeEvent();
 	}
 	
 	
@@ -114,8 +112,8 @@ public class Phrase {
 	 * Remove a {@link CalculatorCharacter} from this CalculatorDisplay
 	 */
 	public void pop() {		
-		if (dcList.size() > 1) {
-			dcList.remove(dcList.size() - 1);
+		if (phrase.size() > 1) {
+			phrase.remove(phrase.size() - 1);
 			fireChangeEvent();
 		} else {
 			clear();
@@ -129,8 +127,8 @@ public class Phrase {
 	 * the number 0)
 	 */
 	public void clear() {
-		dcList.clear();
-		dcList.add(new CalculatorCharacter('0'));
+		phrase.clear();
+		phrase.add(new CalculatorCharacter('0'));
 		
 		fireChangeEvent();
 	}  // end clear()
@@ -138,7 +136,7 @@ public class Phrase {
 	
 	
 	public void setPhrase(List<CalculatorCharacter> phrase) {
-		dcList = phrase;
+		this.phrase = phrase;
 		fireChangeEvent();
 	}
 	
@@ -147,6 +145,7 @@ public class Phrase {
 	// TODO : Make this static once a formal "Phrase" object is created
 	public List<CalculatorCharacter> convertToPhrase(String phrase) {
 		List<CalculatorCharacter> result = new ArrayList<CalculatorCharacter>();
+		
 		for (int i = 0; i < phrase.length(); i++) {
 			result.add(new CalculatorCharacter(phrase.charAt(i)));
 		}
@@ -157,11 +156,11 @@ public class Phrase {
 	
 	
 	public void setOffState() {
-		dcList.clear();
+		phrase.clear();
 		
-		dcList.add(new CalculatorCharacter('O'));
-		dcList.add(new CalculatorCharacter('f'));
-		dcList.add(new CalculatorCharacter('f'));
+		phrase.add(new CalculatorCharacter('O'));
+		phrase.add(new CalculatorCharacter('f'));
+		phrase.add(new CalculatorCharacter('f'));
 		
 		fireChangeEvent();
 	}

@@ -26,7 +26,8 @@ public class CalculatorController
 		this.view = view;
 		
 		this.initModelListeners();
-		this.initViewListeners();		
+		this.initViewListeners();
+		this.initPhraseListeners();
 	}
 	
 	/**
@@ -44,7 +45,12 @@ public class CalculatorController
 	{
 		this.view.addCharacterInputButtonListener(new CharacterInputButtonActionListener());
 		this.view.addCommandButtonListener(new CommandButtonActionListener());
-		this.view.addPhraseChangeListener(new PhraseChangeListener());
+	}
+	
+	
+	
+	private void initPhraseListeners() {
+		this.model.getPhrase().addChangeListener(new PhraseChangeListener());
 	}
 	
 	
@@ -64,6 +70,7 @@ public class CalculatorController
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() instanceof CharacterInputButton)
 			{
+				System.out.println("Character button pressed");
 				CharacterInputButton button = (CharacterInputButton)e.getSource();
 				model.getPhrase().push(button.getCalclatorCharacter());
 			}
