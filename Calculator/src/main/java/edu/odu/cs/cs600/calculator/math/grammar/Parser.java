@@ -1,5 +1,6 @@
 package edu.odu.cs.cs600.calculator.math.grammar;
 
+import edu.odu.cs.cs600.calculator.exceptions.InvalidTokenException;
 import edu.odu.cs.cs600.calculator.grammar.Phrase;
 
 /**
@@ -52,8 +53,11 @@ public class Parser {
 					System.err.println("Tokenizer.getNextToken() returned grouper");
 					break;
 				case Tokenizer.INVALID:
-					System.err.println("Tokenizer.getNextToken() returned unknown token type");
-					break;
+					String message = "Encountered an invalid token in the Phrase.\n";
+					message.concat("-- Original Phrase: " + phrase.toString() + "\n");
+					message.concat("-- Tokenizer has processed: " + tokenizer.getToken() + "\n");
+					message.concat("-- Tokenizer has not processed: " + tokenizer.getBufferString() + "\n");
+					throw new InvalidTokenException(message);
 				default:
 					System.err.println("Tokenizer.getNextToken() returned unknown token type");
 			

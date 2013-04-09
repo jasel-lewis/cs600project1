@@ -8,8 +8,10 @@ import org.junit.Test;
 
 import edu.odu.cs.cs600.calculator.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.Parser;
+import edu.odu.cs.cs600.calculator.exceptions.*;
 
 public class ParserTest {
+	// For double comparison, this is the precision to which assertEquals will compare values
 	private static final double EPSILON = 1e-12;
 	
 	@Before
@@ -18,6 +20,14 @@ public class ParserTest {
 
 	@After
 	public void tearDown() throws Exception {
+	}
+	
+	@Test(expected= InvalidTokenException.class)
+	public void testInvalidChar() {
+		Phrase phrase = new Phrase();
+		phrase.setPhrase(Phrase.convertToPhrase("r"));
+		
+		Parser.parse(phrase);
 	}
 	
 	@Test
@@ -30,7 +40,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void integerInputTest() {
+	public void testIntegerInput() {
 		Phrase phrase = new Phrase();
 		double val = 0.0;
 		
@@ -40,7 +50,7 @@ public class ParserTest {
 	}
 	
 	@Test
-	public void doubleInputTest() {
+	public void testDoubleInput() {
 		Phrase phrase = new Phrase();
 		double val = 0.0;
 		
@@ -67,5 +77,23 @@ public class ParserTest {
 		phrase.setPhrase(Phrase.convertToPhrase("0.8765"));
 		val = 0.8765;
 		assertEquals("Parsing double \"0.8765\"", val, Parser.parse(phrase), EPSILON);
+	}
+	
+	@Test
+	public void testExponentialNotationInput() {
+		Phrase phrase = new Phrase();
+		double val = 0.0;
+		
+		phrase.setPhrase(Phrase.convertToPhrase("1E4"));
+		val = 10000.0;
+		assertEquals("Parsing exponential notation \"1E4\"", val, Parser.parse(phrase), EPSILON);
+		
+		phrase.setPhrase(Phrase.convertToPhrase("2.3E2"));
+		val = 230.0;
+		assertEquals("Parsing exponential notation \"2.3E2\"", val, Parser.parse(phrase), EPSILON);
+		
+		phrase.setPhrase(Phrase.convertToPhrase("2.04E-3"));
+		val = 0.00204;
+		assertEquals("Parsing exponential notation \"2.04E-3\"", val, Parser.parse(phrase), EPSILON);
 	}
 }

@@ -66,13 +66,36 @@ class Tokenizer {
 	private int recognizeNumber() {
 		tokenType = NUMBER;
 		
+		// Process the first character
+		lexeme.append(buffer.charAt(0));
+		buffer = buffer.deleteCharAt(0);
+		
 		recognizeWholeNumber();
 		
 		if ((buffer.length() > 0) && (buffer.charAt(0) == '.')) {
+			// Process the decimal
 			lexeme.append(buffer.charAt(0));
 			buffer = buffer.deleteCharAt(0);
 			
 			recognizeWholeNumber();
+		}
+		
+		if ((buffer.length() > 0) && (buffer.charAt(0) == 'E')) {
+			// Process the exponential character
+			lexeme.append(buffer.charAt(0));
+			buffer = buffer.deleteCharAt(0);
+			
+			if ((buffer.length() > 0) && (buffer.charAt(0) == '-')) {
+				// Process the negation character
+				lexeme.append(buffer.charAt(0));
+				buffer = buffer.deleteCharAt(0);
+			}
+			
+			// Must recognize numbers after an "E" (with or without a "-"),
+			// otherwise this number is invalid
+			if (!recognizeWholeNumber()) {
+				tokenType = INVALID;
+			}
 		}
 		
 		return tokenType;
@@ -80,14 +103,16 @@ class Tokenizer {
 	
 	
 	
-	private void recognizeWholeNumber() {
-		lexeme.append(buffer.charAt(0));
-		buffer = buffer.deleteCharAt(0);
+	private boolean recognizeWholeNumber() {
+		boolean numbersFound = false;
 		
 		while ((buffer.length() > 0) && (NUMBERS.indexOf(buffer.charAt(0)) >= 0)) {
 			lexeme.append(buffer.charAt(0));
 			buffer = buffer.deleteCharAt(0);
+			numbersFound = true;
 		}
+		
+		return numbersFound;
 	}
 	
 	
@@ -108,5 +133,16 @@ class Tokenizer {
 	 */
 	public String getToken() {
 		return lexeme.toString();
+	}
+	
+	
+	
+	/**
+	 * This method is only here to support the message supplied to InvalidTokenException.
+	 * It should not be used for any other purpose.
+	 * @return
+	 */
+	public String getBufferString() {
+		return buffer.toString();
 	}
 }
