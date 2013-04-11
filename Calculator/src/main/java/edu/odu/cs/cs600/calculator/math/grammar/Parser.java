@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
+import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
 import edu.odu.cs.cs600.calculator.math.grammar.parselet.InfixParselet;
 import edu.odu.cs.cs600.calculator.math.grammar.parselet.PrefixParselet;
 

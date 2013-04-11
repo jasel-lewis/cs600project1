@@ -11,7 +11,8 @@ public enum TokenType {
 	MINUS,
 	ASTERISK,
 	SLASH,
-	NAME,
+	CARET,
+	NUMBER,
 	EOF;
 	
 	/**
@@ -33,6 +34,8 @@ public enum TokenType {
 				return '*';
 			case SLASH:
 				return '/';
+			case CARET:
+				return '^';
 			default:
 				return null;
 		}

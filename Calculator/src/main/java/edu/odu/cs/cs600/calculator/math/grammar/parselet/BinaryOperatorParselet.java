@@ -1,8 +1,9 @@
 package edu.odu.cs.cs600.calculator.math.grammar.parselet;
 
-import edu.odu.cs.cs600.calculator.math.grammar.Expression;
 import edu.odu.cs.cs600.calculator.math.grammar.Parser;
 import edu.odu.cs.cs600.calculator.math.grammar.Token;
+import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
+import edu.odu.cs.cs600.calculator.math.grammar.expressions.OperatorExpression;
 
 /**
  * Class to support an infix parselet for binary operators (+, -, *, /, ^).

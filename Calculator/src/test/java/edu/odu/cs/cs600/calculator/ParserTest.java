@@ -6,8 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.odu.cs.cs600.calculator.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.Parser;
+import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.exceptions.*;
 
 public class ParserTest {

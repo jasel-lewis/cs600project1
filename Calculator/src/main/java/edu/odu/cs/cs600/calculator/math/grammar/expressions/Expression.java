@@ -1,4 +1,4 @@
-package edu.odu.cs.cs600.calculator.math.grammar;
+package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
 /**
  * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/Expression.java

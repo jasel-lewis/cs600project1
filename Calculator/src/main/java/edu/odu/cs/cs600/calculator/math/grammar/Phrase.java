@@ -1,4 +1,4 @@
-package edu.odu.cs.cs600.calculator.grammar;
+package edu.odu.cs.cs600.calculator.math.grammar;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
 package edu.odu.cs.cs600.calculator.math.grammar.parselet;
 
-import edu.odu.cs.cs600.calculator.math.grammar.Expression;
 import edu.odu.cs.cs600.calculator.math.grammar.Parser;
 import edu.odu.cs.cs600.calculator.math.grammar.Token;
 import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
+import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
 
 /**
  * Parses the parentheses used to group an {@link Expression}.

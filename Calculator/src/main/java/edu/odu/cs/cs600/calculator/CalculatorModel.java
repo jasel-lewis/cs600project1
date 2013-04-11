@@ -3,7 +3,7 @@ package edu.odu.cs.cs600.calculator;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import edu.odu.cs.cs600.calculator.grammar.Phrase;
+import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
 
 public class CalculatorModel {
 	
