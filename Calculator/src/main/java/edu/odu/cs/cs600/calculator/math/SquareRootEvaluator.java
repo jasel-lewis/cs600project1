@@ -5,12 +5,12 @@ public class SquareRootEvaluator implements IUnaryEvaluator
 	
 	private static final double EPSILON = 0.0000000000001;
 	
-	public double compute(double value) throws Exception
+	public double compute(double value) throws ArithmeticException
 	{
 		System.err.println("Function utilized that has not yet been completed.  Currently using improper implementation.  Need to replace / with division function");
 		
 		if(value < 0)
-			throw new Exception("Unable to compute the square root negative values.");
+			throw new ArithmeticException("Unable to compute the square root negative values.");
 		
 		int i = 0;
 		double x = 1.0;

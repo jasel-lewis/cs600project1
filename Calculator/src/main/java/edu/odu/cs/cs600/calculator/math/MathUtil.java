@@ -11,35 +11,35 @@ public class MathUtil
 	private static final IBinaryEvaluator subtractionEvaluator = new SubtractionEvaluator();
 	private static final IBinaryEvaluator divisionEvaluator = new DivisionEvaluator();
 
-	public static double abs(double value) throws Exception {
+	public static double abs(double value) throws ArithmeticException {
 		return absoluteValueEvaluator.compute(value);
 	}
 	
-	public static double divide(double numerator, double divisor) throws Exception {
+	public static double divide(double numerator, double divisor) throws ArithmeticException {
 		return divisionEvaluator.compute(numerator, divisor);
 	}
 	
-	public static double ceiling(double value) throws Exception {
+	public static double ceiling(double value) throws ArithmeticException {
 		return ceilingEvaluator.compute(value);
 	}
 
-	public static double floor(double value) throws Exception {
+	public static double floor(double value) throws ArithmeticException {
 		return floorEvaluator.compute(value);
 	}
 
-	public static double negate(double value) throws Exception {
+	public static double negate(double value) throws ArithmeticException {
 		return negationEvaluator.compute(value);
 	}
 
-	public static double reciprocal(double value) throws Exception {
+	public static double reciprocal(double value) throws ArithmeticException {
 		return reciprocalEvaluator.compute(value);
 	}
 
-	public static double squareRoot(double value) throws Exception {
+	public static double squareRoot(double value) throws ArithmeticException {
 		return squareRootEvaluator.compute(value);
 	}
 	
-	public static double subtract(double x, double y) throws Exception {
+	public static double subtract(double x, double y) throws ArithmeticException {
 		return subtractionEvaluator.compute(x, y);
 	}
 }

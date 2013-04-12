@@ -4,7 +4,7 @@ public class AbsoluteValueEvaluator implements IUnaryEvaluator
 {
 
 	@Override
-	public double compute(double value) throws Exception 
+	public double compute(double value) throws ArithmeticException 
 	{
 		if(value < 0)
 			return MathUtil.negate(value);
