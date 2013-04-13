@@ -185,7 +185,7 @@ public class CalculatorView extends JFrame {
 		panel.add(sixButton, gbConstraints);
 		
 		gbConstraints.gridx = 3; gbConstraints.gridy = 4;
-		CharacterInputButton multiplyButton = new CharacterInputButton("multiply.png", new CalculatorCharacter('*', "&lowast;"));
+		CharacterInputButton multiplyButton = new CharacterInputButton("multiply.png", new CalculatorCharacter('*', "&times;"));
 		multiplyButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(multiplyButton, gbConstraints);
 		
