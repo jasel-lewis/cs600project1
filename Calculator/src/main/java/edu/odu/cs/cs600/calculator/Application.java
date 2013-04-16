@@ -7,7 +7,6 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 public class Application {
 	
 	public static final boolean debug = true;  // Set the debug mode
-	private static final CalculatorModel model = new CalculatorModel();
 
 	public static void main(String[] args) {		
 		

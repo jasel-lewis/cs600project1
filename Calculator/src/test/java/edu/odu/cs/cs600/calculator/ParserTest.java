@@ -10,7 +10,9 @@ import edu.odu.cs.cs600.calculator.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.Parser;
 import edu.odu.cs.cs600.calculator.exceptions.*;
 
-public class ParserTest {
+public class ParserTest 
+{
+	
 	// For double comparison, this is the precision to which assertEquals will compare values
 	private static final double EPSILON = 1e-12;
 	
