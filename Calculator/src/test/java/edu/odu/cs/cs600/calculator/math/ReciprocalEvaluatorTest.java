@@ -17,7 +17,7 @@ import org.junit.runners.Parameterized.Parameters;
 public class ReciprocalEvaluatorTest 
 {
 	// For double comparison, this is the precision to which assertEquals will compare values
-	private static final double EPSILON = 1e-12;
+	private static final double EPSILON = 1e-10;
 	private ReciprocalEvaluator reciprocalEvaluator = null;
 	private double inputValue;
 	private double expectedResult;
@@ -51,12 +51,18 @@ public class ReciprocalEvaluatorTest
 			{15.0, 1.0/15.0},
 			{99.0, 1.0/99.0},
 			// x = 1
+			{1.0, 1.0/1.0},
 			// 0 < x < 1
 			{0.25, 1.0/0.25},
 			{0.33, 1.0/0.33},
-			{0.576, 1.0/0.576}
+			{0.576, 1.0/0.576},
+			{0.00002, 1.0/0.00002},
 			// -1 < x < 0
+			{-0.25, 1.0/-0.25},
+			{-0.33, 1.0/-0.33},
+			{-0.576, 1.0/-0.576},
 			// x = -1
+			{-1.0, 1.0/-1.0}
 			// x <= -1
 		});
 	}

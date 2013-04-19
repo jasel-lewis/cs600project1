@@ -30,6 +30,10 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 		else if (x == 1)
 			return 1;
 		
+		// If the value is negative, then first flip to positive, then revert in the end
+		boolean isNegative = (x < 0);
+		if(isNegative) x = x * -1;
+		
 		// If the value is greater than 1, then normalize by shifting the decimal
 		// place until the value is in the range of (0,1)
 		int factor = 0;
@@ -42,9 +46,9 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 				x = x * 0.1;
 			}
 		}
-		else if(x < 0.001)
+		else if(x < 0.01)
 		{
-			while(x < 0.001)
+			while(x < 0.01)
 			{
 				factor--;
 				x = x * 10;
@@ -84,62 +88,11 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 			}
 		}
 		
+		if(isNegative) x = x * -1;
+		
 		logger.debug("Computed the reciprocal of x (1/x)="+x);
 		
 		return x;
 	}
-	
-	
-	
-//	public double compute(double inputValue) throws ArithmeticException
-//	{
-//		logger.debug("Computing reciprocal of: " + inputValue);
-//		
-//		if(inputValue == 0)
-//			throw new ArithmeticException("divide by zero");
-//		else if (inputValue == 1)
-//			return 1;
-//		
-//		int normalizationFactor = 0;
-//		
-//		while(inputValue >= 1)
-//		{
-//			normalizationFactor++;
-//			inputValue = inputValue * 0.5;
-//		}
-//		
-//		logger.debug("Normalization factor: " + normalizationFactor);
-//		logger.debug("Normalized value: " + inputValue);
-//		
-//		int i = 0;
-//		double x = 1;
-//		double y = MathUtil.subtract(1, inputValue);
-//		double tolerance = EPSILON * inputValue * inputValue;
-//		double yPrev, xPrev;
-//		
-//		do
-//		{
-//			yPrev = y;
-//			xPrev = x;
-//			i = i + 1;
-//			x = xPrev * (1+yPrev);
-//			y = yPrev*yPrev;
-//		} while (MathUtil.abs(yPrev - y) >= tolerance);
-//		
-//		logger.debug("1 / " + inputValue + " = " + x);
-//		
-//		
-//		//System.err.println("Function utilized that has not yet been completed.  Half implemented and only works for values where (0 < x < 1).");
-//		
-//		while(normalizationFactor > 0)
-//		{
-//			normalizationFactor--;
-//			x *= 2;
-//		}
-//		
-//		logger.debug("Denoramlized value: " + x);
-//		
-//		return x;
-//	}
 	
 }
