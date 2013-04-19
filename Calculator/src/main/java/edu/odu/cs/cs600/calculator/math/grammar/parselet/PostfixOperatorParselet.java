@@ -4,7 +4,6 @@ import edu.odu.cs.cs600.calculator.math.grammar.Parser;
 import edu.odu.cs.cs600.calculator.math.grammar.Token;
 import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
 import edu.odu.cs.cs600.calculator.math.grammar.expressions.PostfixExpression;
-import edu.odu.cs.cs600.calculator.math.grammar.expressions.PrefixExpression;
 
 /**
  * Generic infix parselet for an unary arithmetic operator. Parses postfix unary expressions
