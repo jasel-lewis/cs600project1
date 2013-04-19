@@ -11,4 +11,5 @@ public final class Precedence {
 	public static final int PRODUCT = 2;
 	public static final int EXPONENT = 3;
 	public static final int PREFIX = 4;
+	public static final int POSTFIX = 5;
 }

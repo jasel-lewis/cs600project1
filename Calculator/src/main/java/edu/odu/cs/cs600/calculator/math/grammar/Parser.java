@@ -24,8 +24,8 @@ import edu.odu.cs.cs600.calculator.math.grammar.parselet.PrefixParselet;
  *            | <item>
  * <item>   ::= <number>
  *            | (<phrase>)
- * <number> ::= PositiveWholeNumber
- *            | PositiveRealNumber
+ * <number> ::= WholeNumber
+ *            | RealNumber
  * <addop>  ::= +
  *            | -
  * <mulop>  ::= *
@@ -74,11 +74,16 @@ public class Parser {
 
 		Expression left = prefix.parse(this, token);
 
-		while (precedence < getPrecedence()) {
+		while (precedence < getPrecedence()) {  // This is the original line
+		//while (precedence <= getPrecedence()) {
 			token = consume();
 			InfixParselet infix = infixParseletMap.get(token.getTokenType());
 			left = infix.parse(this, left, token);
 		}
+		
+		// Could maybe check here if left is an instance of NumberExpression, consume another
+		// token and see if that's a number - if so, throw an error - but seems like too much
+		// logic for right here.
 
 		return left;
 	}

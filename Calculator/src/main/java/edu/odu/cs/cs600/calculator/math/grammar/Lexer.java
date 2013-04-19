@@ -16,14 +16,20 @@ public class Lexer implements Iterator<Token> {
 	private final Map<Character, TokenType> punctuatorsMap = new HashMap<Character, TokenType>();
 	private final String phrase;
 	private int index = 0;
-
+	
 	/**
-	 * Creates a new Lexer to tokenize the given string.
-	 * @param phrase String to tokenize
+	 * Create a new Lexer to tokenize the given Phrase
+	 * @param phrase {@link Phrase} to tokenize
 	 */
-	public Lexer(String phrase) {
+	public Lexer(Phrase phrase) {
+		this.phrase = phrase.toString();
+		init();
+	}
+
+	
+	
+	private void init() {
 		index = 0;
-		this.phrase = phrase;
 
 		// Register all of the TokenTypes that are explicit punctuators
 		for (TokenType type : TokenType.values()) {
@@ -46,22 +52,37 @@ public class Lexer implements Iterator<Token> {
 	
 	@Override
 	public Token next() {
+//		boolean decimalEncountered = false;
+		
 		while (index < phrase.length()) {
 			char c = phrase.charAt(index++);
 
 			if (punctuatorsMap.containsKey(c)) {
-				// Handle punctuation
+				// Handle punctuator
 				return new Token(punctuatorsMap.get(c), Character.toString(c));
-			} else if (Character.isLetter(c)) {
-				// Handle names
+			} else if ((Character.isDigit(c)) || (c == '.')) {
+				// Handle numbers
+				// digit       [0-9]
+				// integer     {digit}+
+				// exponent    [eE][+-]?{integer}
+				// real        ({integer}("."{integer})?|"."{integer}){exponent}?
 				int start = index - 1;
 				while (index < phrase.length()) {
-					if (!Character.isLetter(phrase.charAt(index))) break;
-					index++;
+					c = phrase.charAt(index);
+					
+					if (Character.isDigit(c) || (c == '.')) {
+//					if (Character.isDigit(c)) {
+//						index++;
+//					} else if ((c == '.') && !decimalEncountered) {
+//						decimalEncountered = true;
+						index++;
+					} else {
+						break;
+					}
 				}
 
-				String name = phrase.substring(start, index);
-				return new Token(TokenType.NAME, name);
+				String number = phrase.substring(start, index);
+				return new Token(TokenType.NUMBER, number);
 			} else {
 				// Ignore all other characters (whitespace, etc.)
 			}

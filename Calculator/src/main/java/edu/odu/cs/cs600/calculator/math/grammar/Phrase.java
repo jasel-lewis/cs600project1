@@ -149,7 +149,6 @@ public class Phrase {
 	
 	
 	
-	// TODO : Make this static once a formal "Phrase" object is created
 	public static List<CalculatorCharacter> convertToPhrase(String phrase) {
 		List<CalculatorCharacter> result = new ArrayList<CalculatorCharacter>();
 		

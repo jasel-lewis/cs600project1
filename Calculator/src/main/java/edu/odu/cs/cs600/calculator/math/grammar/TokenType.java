@@ -12,12 +12,13 @@ public enum TokenType {
 	ASTERISK,
 	SLASH,
 	CARET,
+	BANG,
 	NUMBER,
 	EOF;
 	
 	/**
 	 * "Punctuators" are tokens that can split identifiers.  If the TokenType represents
-	 * a "punctuator," this function will get its represented character.
+	 * a punctuator, this function will get its represented character.
 	 * @return
 	 */
 	public Character punctuator() {
@@ -36,6 +37,8 @@ public enum TokenType {
 				return '/';
 			case CARET:
 				return '^';
+			case BANG:
+				return '!';
 			default:
 				return null;
 		}
