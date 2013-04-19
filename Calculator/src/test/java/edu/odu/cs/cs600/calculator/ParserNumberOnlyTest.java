@@ -43,8 +43,7 @@ public class ParserNumberOnlyTest {
 	@Ignore
 	@Test
 	public void testSingleDigitIntegerInput() {
-		Phrase phrase = new Phrase();
-		phrase.setPhrase(Phrase.convertToPhrase("1"));
+		Phrase phrase = Phrase.convertToPhrase("1");
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
 		StringBuilder builder = new StringBuilder();
 		parser.parseExpression().print(builder);
@@ -55,8 +54,7 @@ public class ParserNumberOnlyTest {
 	@Ignore
 	@Test
 	public void testTwoDigitIntegerInput() {
-		Phrase phrase = new Phrase();
-		phrase.setPhrase(Phrase.convertToPhrase("54"));
+		Phrase phrase = Phrase.convertToPhrase("54");
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
 		StringBuilder builder = new StringBuilder();
 		parser.parseExpression().print(builder);
@@ -67,8 +65,7 @@ public class ParserNumberOnlyTest {
 	@Ignore
 	@Test
 	public void testMultipleDigitIntegerInput() {
-		Phrase phrase = new Phrase();
-		phrase.setPhrase(Phrase.convertToPhrase("9876543210"));
+		Phrase phrase = Phrase.convertToPhrase("9876543210");
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
 		StringBuilder builder = new StringBuilder();
 		parser.parseExpression().print(builder);
@@ -79,8 +76,7 @@ public class ParserNumberOnlyTest {
 	@Ignore
 	@Test
 	public void testRealNumberInput() {
-		Phrase phrase = new Phrase();
-		phrase.setPhrase(Phrase.convertToPhrase("0.0"));
+		Phrase phrase = Phrase.convertToPhrase("0.0");
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
 		StringBuilder builder = new StringBuilder();
 		parser.parseExpression().print(builder);
@@ -91,8 +87,7 @@ public class ParserNumberOnlyTest {
 	@Ignore
 	@Test
 	public void testRealNumberInput2() {
-		Phrase phrase = new Phrase();
-		phrase.setPhrase(Phrase.convertToPhrase("0.123"));
+		Phrase phrase = Phrase.convertToPhrase("0.123");
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
 		StringBuilder builder = new StringBuilder();
 		parser.parseExpression().print(builder);
@@ -103,8 +98,7 @@ public class ParserNumberOnlyTest {
 	@Ignore
 	@Test
 	public void testRealNumberInput3() {
-		Phrase phrase = new Phrase();
-		phrase.setPhrase(Phrase.convertToPhrase("9876.6879"));
+		Phrase phrase = Phrase.convertToPhrase("9876.6879");
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
 		StringBuilder builder = new StringBuilder();
 		parser.parseExpression().print(builder);
@@ -115,8 +109,7 @@ public class ParserNumberOnlyTest {
 	@Ignore
 	@Test
 	public void testRealNumberInput4() {
-		Phrase phrase = new Phrase();
-		phrase.setPhrase(Phrase.convertToPhrase(".69"));
+		Phrase phrase = Phrase.convertToPhrase(".69");
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
 		StringBuilder builder = new StringBuilder();
 		parser.parseExpression().print(builder);
@@ -126,8 +119,7 @@ public class ParserNumberOnlyTest {
 	
 	@Test
 	public void testUnrealNumberInput() {
-		Phrase phrase = new Phrase();
-		phrase.setPhrase(Phrase.convertToPhrase("12.34.56"));
+		Phrase phrase = Phrase.convertToPhrase("12.34.56");
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
 		StringBuilder builder = new StringBuilder();
 		parser.parseExpression().print(builder);

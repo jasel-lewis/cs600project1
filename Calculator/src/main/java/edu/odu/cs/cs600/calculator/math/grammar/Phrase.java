@@ -13,11 +13,17 @@ public class Phrase {
 	private List <CalculatorCharacter> phrase = new ArrayList <CalculatorCharacter> ();
 	private List<ChangeListener> changeListeners = new ArrayList<ChangeListener> ();
 	
+	
 	public Phrase() {
 		clear();
 	}
+
 	
-	
+	private Phrase(List<CalculatorCharacter> phrase)
+	{
+		this.phrase = phrase;
+	}
+
 	
 	public void addChangeListener(ChangeListener listener) {
 		changeListeners.add(listener);
@@ -142,21 +148,21 @@ public class Phrase {
 	
 	
 	
-	public void setPhrase(List<CalculatorCharacter> phrase) {
-		this.phrase = phrase;
-		fireChangeEvent();
-	}
+//	public void setPhrase(List<CalculatorCharacter> phrase) {
+//		this.phrase = phrase;
+//		fireChangeEvent();
+//	}
 	
 	
 	
-	public static List<CalculatorCharacter> convertToPhrase(String phrase) {
+	public static Phrase convertToPhrase(String phrase) {
 		List<CalculatorCharacter> result = new ArrayList<CalculatorCharacter>();
 		
 		for (int i = 0; i < phrase.length(); i++) {
 			result.add(new CalculatorCharacter(phrase.charAt(i)));
 		}
 		
-		return result;
+		return new Phrase(result);
 	}
 	
 	

@@ -41,7 +41,7 @@ public class ReciprocalEvaluatorTest
 	}
 	
 	@Parameters
-	public static Collection testData()
+	public static Collection<Object[]> testData()
 	{
 		return Arrays.asList(new Object[][] {
 			/* { inputValue, expectedValue }, */

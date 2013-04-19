@@ -1,8 +1,6 @@
 package edu.odu.cs.cs600.calculator.gui.button;
 
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import edu.odu.cs.cs600.calculator.CalculatorCommand;
 
 public class CommandButton extends CalculatorButton {
