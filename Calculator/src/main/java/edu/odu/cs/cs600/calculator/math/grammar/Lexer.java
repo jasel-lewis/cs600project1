@@ -33,7 +33,7 @@ public class Lexer implements Iterator<Token> {
 
 		// Register all of the TokenTypes that are explicit punctuators
 		for (TokenType type : TokenType.values()) {
-			Character punctuator = type.punctuator();
+			Character punctuator = type.getPunctuator();
 			
 			if (punctuator != null) {
 				punctuatorsMap.put(punctuator, type);

@@ -24,13 +24,13 @@ public class SimpleCalculatorParser extends Parser {
 		prefix(TokenType.PLUS, Precedence.PREFIX);
 		prefix(TokenType.MINUS, Precedence.PREFIX);
 		
-		postfix(TokenType.BANG, Precedence.POSTFIX);
+		postfix(TokenType.FACTORIAL, Precedence.POSTFIX);
 		
 		infixLeft(TokenType.PLUS, Precedence.SUM);
 		infixLeft(TokenType.MINUS, Precedence.SUM);
-		infixLeft(TokenType.ASTERISK, Precedence.PRODUCT);
-		infixLeft(TokenType.SLASH, Precedence.PRODUCT);
-		infixRight(TokenType.CARET, Precedence.EXPONENT);
+		infixLeft(TokenType.MULTIPLY, Precedence.PRODUCT);
+		infixLeft(TokenType.DIVIDE, Precedence.PRODUCT);
+		infixRight(TokenType.POWER, Precedence.EXPONENT);
 	}
 	
 	

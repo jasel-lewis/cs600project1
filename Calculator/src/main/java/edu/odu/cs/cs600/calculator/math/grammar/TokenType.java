@@ -9,10 +9,10 @@ public enum TokenType {
 	RIGHT_PARENTHESIS,
 	PLUS,
 	MINUS,
-	ASTERISK,
-	SLASH,
-	CARET,
-	BANG,
+	MULTIPLY,
+	DIVIDE,
+	POWER,
+	FACTORIAL,
 	NUMBER,
 	EOF;
 	
@@ -21,7 +21,7 @@ public enum TokenType {
 	 * a punctuator, this function will get its represented character.
 	 * @return
 	 */
-	public Character punctuator() {
+	public Character getPunctuator() {
 		switch (this) {
 			case LEFT_PARENTHESIS:
 				return '(';
@@ -31,13 +31,13 @@ public enum TokenType {
 				return '+';
 			case MINUS:
 				return '-';
-			case ASTERISK:
+			case MULTIPLY:
 				return '*';
-			case SLASH:
+			case DIVIDE:
 				return '/';
-			case CARET:
+			case POWER:
 				return '^';
-			case BANG:
+			case FACTORIAL:
 				return '!';
 			default:
 				return null;

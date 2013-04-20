@@ -2,45 +2,91 @@ package edu.odu.cs.cs600.calculator.math.grammar;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameters;
 
+import edu.odu.cs.cs600.calculator.math.ReciprocalEvaluator;
 import edu.odu.cs.cs600.calculator.math.grammar.Lexer;
 import edu.odu.cs.cs600.calculator.math.grammar.Parser;
 import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
-public class ParserNumberOnlyTest {
+@RunWith(Parameterized.class)
+public class SimpleEvaluationTest {
 	// For double comparison, this is the precision to which assertEquals will compare values
+	private static final double EPSILON = 1e-10;
+	
+	private ReciprocalEvaluator reciprocalEvaluator = null;
+	private String expression;
+	private double expectedResult;
+	private Parser parser = null;
+	
+	
+	public SimpleEvaluationTest(String expression, double expectedResult) {
+		this.expression = expression;
+		this.expectedResult = expectedResult;
+	}
+	
+	
 	@Before
-	public void setUp() throws Exception {}
-
+	public void setUp() {
+		//reciprocalEvaluator = new ReciprocalEvaluator();
+		parser = new SimpleCalculatorParser(new Lexer(Phrase.convertToPhrase(expression)));
+	}
+	
 	@After
-	public void tearDown() throws Exception {}
+	public void tearDown() {
+		//reciprocalEvaluator = null;
+		parser = null;
+	}
 	
-//	@Test(expected= InvalidTokenException.class)
-//	public void testInvalidChar() {
-//		Phrase phrase = new Phrase();
-//		phrase.setPhrase(Phrase.convertToPhrase("r"));
-//		
-//		Parser.parse(phrase);
-//	}
+	@Parameters
+	public static Collection<Object[]> testData()
+	{
+		return Arrays.asList(new Object[][] {
+			// { expression, expectedResult }
+			{ "", 0.0 },					// Null phrase
+			{ "0", 0.0 },					// Evaluate integer 0
+			{ "1", 1.0 },					// Evaluate integer 1
+			{ "0000", 0.0 },				// Evaluate valid, though oddly-represented, integer
+			{ "98765432", 98765432.0 },		// Evaluate multi-digit integer
+			{ "0.0", 0.0 },					// Evaluate real number 0.0
+			{ ".0", 0.0 },					// Evaluate valid real number with single digit in decimal position
+			{ ".8", 0.8 },					// Evaluate valid real number with single digit in decimal position
+			{ ".000", 0.0 },				// Evaluate valid real number with multiple digits in decimal position
+			{ ".123", 0.123 },				// Evaluate valid real number with multiple digits in decimal position
+			{ "00000.0", 0.0 },				// Evaluate valid, though oddly-represented, real number
+			{ "543.0", 543.0 },				// Evaluate valid, real number with multiple digits in whole number position
+			{ "232.98", 232.98 }			// Evaluate valid, real number with multiple digits in whole number and decimal positions
+		});
+	}
 	
-	@Ignore
+	@Test
+	public void testReciprocalEvaluator() {
+		double result = parser.parseExpression().evaluate();
+		assertEquals(
+			actualResult,
+			this.expectedResult,
+			EPSILON
+		);
+	}
+	
 	@Test
 	public void testBlankPhrase() {
 		// "Blank Phrase" is really a falsity, at a minimum, 0 is always the value of a new Phrase
 		Phrase phrase = new Phrase();
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
-		StringBuilder builder = new StringBuilder();
-		parser.parseExpression().print(builder);
 		
-		assertEquals("\"Blank\" phrase test should equal \"0\"", "0", builder.toString());
+		assertEquals("Blank phrase test should equal 0", 0.0, parser.parseExpression().evaluate(), EPSILON);
 	}
 
-	@Ignore
 	@Test
 	public void testSingleDigitIntegerInput() {
 		Phrase phrase = Phrase.convertToPhrase("1");
@@ -51,7 +97,6 @@ public class ParserNumberOnlyTest {
 		assertEquals("Integer should have been parsed as 1", "1", builder.toString());
 	}
 	
-	@Ignore
 	@Test
 	public void testTwoDigitIntegerInput() {
 		Phrase phrase = Phrase.convertToPhrase("54");
@@ -62,7 +107,6 @@ public class ParserNumberOnlyTest {
 		assertEquals("Integer should have been parsed as 54", "54", builder.toString());
 	}
 	
-	@Ignore
 	@Test
 	public void testMultipleDigitIntegerInput() {
 		Phrase phrase = Phrase.convertToPhrase("9876543210");
@@ -73,7 +117,6 @@ public class ParserNumberOnlyTest {
 		assertEquals("Integer should have been parsed as 9876543210", "9876543210", builder.toString());
 	}
 	
-	@Ignore
 	@Test
 	public void testRealNumberInput() {
 		Phrase phrase = Phrase.convertToPhrase("0.0");
@@ -84,7 +127,6 @@ public class ParserNumberOnlyTest {
 		assertEquals("Real number should have been parsed as 0.0", "0.0", builder.toString());
 	}
 	
-	@Ignore
 	@Test
 	public void testRealNumberInput2() {
 		Phrase phrase = Phrase.convertToPhrase("0.123");
@@ -95,7 +137,6 @@ public class ParserNumberOnlyTest {
 		assertEquals("Real number should have been parsed as 0.123", "0.123", builder.toString());
 	}
 	
-	@Ignore
 	@Test
 	public void testRealNumberInput3() {
 		Phrase phrase = Phrase.convertToPhrase("9876.6879");
@@ -106,7 +147,6 @@ public class ParserNumberOnlyTest {
 		assertEquals("Real number should have been parsed as 9876.6879", "9876.6879", builder.toString());
 	}
 	
-	@Ignore
 	@Test
 	public void testRealNumberInput4() {
 		Phrase phrase = Phrase.convertToPhrase(".69");
@@ -124,6 +164,6 @@ public class ParserNumberOnlyTest {
 		StringBuilder builder = new StringBuilder();
 		parser.parseExpression().print(builder);
 		
-		assertEquals("Integer should have been parsed as 12.34", "12.34", builder.toString());
+		assertEquals("Real number should have been parsed as 12.34", "12.34", builder.toString());
 	}
 }

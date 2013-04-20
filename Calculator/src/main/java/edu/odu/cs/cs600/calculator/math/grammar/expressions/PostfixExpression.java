@@ -11,6 +11,8 @@ public class PostfixExpression implements Expression {
 	private final TokenType operator;
 	private final Expression left;
 	
+	private double value = 0.0;
+	
 	public PostfixExpression(Expression left, TokenType operator) {
 		this.operator = operator;
 		this.left = left;
@@ -18,9 +20,36 @@ public class PostfixExpression implements Expression {
 	
 	
 	
+	@Override
 	public void print(StringBuilder builder) {
 		builder.append("(");
 		left.print(builder);
-		builder.append(operator.punctuator()).append(")");
+		builder.append(operator.getPunctuator()).append(")");
+	}
+	
+	
+	
+	@Override
+	public double getValue() {
+		return value;
+	}
+	
+	
+	
+	@Override
+	public void evaluate() {
+		switch(operator) {
+			case FACTORIAL:
+				int i = (int)left.getValue();
+				
+				value = i;
+				
+				while (i > 1) {
+					value = value * i;
+					i--;
+				}
+			default:
+				;
+		}
 	}
 }
