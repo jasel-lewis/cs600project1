@@ -6,11 +6,13 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
 
 public class CharacterInputButton extends CalculatorButton 
 {	
+	private static final long serialVersionUID = 1L;
+	
 	private CalculatorCharacter calculatorInputCharacter;	
 
-	public CharacterInputButton(String imageFilenamePath, CalculatorCharacter calculatorCharacter) 
+	public CharacterInputButton(String imagePath, String imageOverPath, CalculatorCharacter calculatorCharacter) 
 	{
-		super(imageFilenamePath, String.valueOf(calculatorCharacter.getMorpheme()));
+		super(imagePath, imageOverPath, String.valueOf(calculatorCharacter.getMorpheme()));
 		
 		this.calculatorInputCharacter = calculatorCharacter;
 		

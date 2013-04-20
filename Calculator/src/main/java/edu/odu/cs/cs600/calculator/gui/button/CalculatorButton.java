@@ -7,6 +7,7 @@ import java.net.URL;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
+import javax.swing.BorderFactory;
 import javax.swing.ComponentInputMap;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
@@ -18,35 +19,44 @@ import javax.swing.plaf.ActionMapUIResource;
 
 import edu.odu.cs.cs600.calculator.Application;
 
-public abstract class CalculatorButton extends JButton {
+public abstract class CalculatorButton extends JButton 
+{
 
 	private static final long serialVersionUID = -7812322272853697084L;
-	
-	// Move this into some kind of properties file later
 	private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 26);
 	
-	private String altText = "";
+	private String altText;
 	
-	public CalculatorButton(String imageFilenamePath, String altText)
+	public CalculatorButton(String imagePath, String imageOverPath, String altText)
 	{
-		super(altText);
+		super();
 		
-		ImageIcon imgIcon = createImageIcon(imageFilenamePath);
+		this.altText = altText;
+		
+		ImageIcon imgIcon = createImageIcon(imagePath);
 		
 		// If we have a valid Icon, we do not want the text to show
 		if (imgIcon != null) {
 			this.setIcon(imgIcon);
-			this.setText("");
 		}
 		
-		this.altText = altText;
+		ImageIcon imgOverIcon = createImageIcon(imageOverPath);
+		
+		// If we have a valid Icon, we do not want the text to show
+		if (imgOverIcon != null) {
+			this.setPressedIcon(imgOverIcon);
+			this.setRolloverIcon(imgOverIcon);
+		}
+		
+		this.setBorder(BorderFactory.createEmptyBorder());
+		this.setContentAreaFilled(false);
 		
 		setFont(BUTTON_FONT);
 	}
 	
-	public CalculatorButton(String imageFilenamePath, String altText, int keyCode)
+	public CalculatorButton(String imagePath, String imageOverPath, String altText, int keyCode)
 	{
-		this(imageFilenamePath, altText);
+		this(imagePath, imageOverPath, altText);
 		
 		if (keyCode != KeyEvent.VK_UNDEFINED) {
 			this.hookKeyInput(keyCode);
@@ -61,7 +71,8 @@ public abstract class CalculatorButton extends JButton {
 	 * @param path
 	 * @return
 	 */
-	protected ImageIcon createImageIcon(String path) {
+	protected ImageIcon createImageIcon(String path)
+	{
 		URL imgURL = (Thread.currentThread().getContextClassLoader()).getResource(path);
 		
 		if (imgURL != null) {
@@ -70,7 +81,7 @@ public abstract class CalculatorButton extends JButton {
 			System.err.println("Could not locate image resource for button icon: " + path);
 			return null;
 		}
-	}  // end createImageIcon(String)
+	}
 	
 	
 	
@@ -78,9 +89,10 @@ public abstract class CalculatorButton extends JButton {
 	 * Return the fall-back, character representation of this CalculatorButton
 	 * @return
 	 */
-	public String getAltText() {
+	public String getAltText() 
+	{
 		return altText;
-	}  // end getFallbackText()
+	}
 	
 	
 	protected void hookKeyInput(int keyCode)
@@ -114,7 +126,7 @@ public abstract class CalculatorButton extends JButton {
 		
 		SwingUtilities.replaceUIActionMap(this,  actionMap);
 		SwingUtilities.replaceUIInputMap(this, JComponent.WHEN_IN_FOCUSED_WINDOW, keyMap);
-	}  // end hookKeyInput(char)
+	}
 	
 	
-}  // end class CalculatorButton
+}
