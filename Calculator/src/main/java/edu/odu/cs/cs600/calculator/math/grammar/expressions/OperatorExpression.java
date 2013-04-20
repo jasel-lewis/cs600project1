@@ -1,5 +1,7 @@
 package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
+import edu.odu.cs.cs600.calculator.math.DivisionEvaluator;
+import edu.odu.cs.cs600.calculator.math.NegationEvaluator;
 import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
 
 /**
@@ -35,12 +37,18 @@ public class OperatorExpression implements Expression {
 			case PLUS:
 				return (left.getValue() + right.getValue());
 			case MINUS:
+				//NegationEvaluator ne = new NegationEvaluator();
+				//return (left.getValue() + ne.compute(right.getValue()));
 				return (left.getValue() - right.getValue());
 			case MULTIPLY:
 				return (left.getValue() * right.getValue());
 			case DIVIDE:
+				//DivisionEvaluator de = new DivisionEvaluator();
+				//return (de.compute(left.getValue(), right.getValue()));
 				return (left.getValue() / right.getValue());
 			case POWER:
+				//ExponentiationEvaluator ee = new DivisionEvaluator();
+				//return (ee.compute(left.getValue(), right.getValue()));
 				return (Math.pow(left.getValue(), right.getValue()));
 			default:
 				return 0.0;

@@ -20,7 +20,7 @@ import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
 @RunWith(Parameterized.class)
-public class SimpleExpressionEvaluationTest {
+public class UnaryExpressionEvaluationTest {
 	// For double comparison, this is the precision to which assertEquals will compare values
 	private static final double EPSILON = 1e-10;
 	
@@ -29,7 +29,7 @@ public class SimpleExpressionEvaluationTest {
 	private Parser parser = null;
 	
 	
-	public SimpleExpressionEvaluationTest(String expression, double expectedResult) {
+	public UnaryExpressionEvaluationTest(String expression, double expectedResult) {
 		this.expression = expression;
 		this.expectedResult = expectedResult;
 	}
@@ -51,19 +51,19 @@ public class SimpleExpressionEvaluationTest {
 	public static Collection<Object[]> testData() {
 		// { expression, expectedResult }
 		return Arrays.asList(new Object[][] {
-			{ "(9)", 9.0 },
-			{ "((((76.3))))", 76.3 },
-			{ "(  (( 3)))", 3.0 },
-			{ "8+4", 12.0 },
-			{ "8 + 4", 12.0 },
-			{ "8       +4", 12.0 },
-			{ "8-4", 4.0 },
-			{ "8 - 4", 4.0 },
-			{ "8*4", 32.0 },
-			{ "8 * 4", 32.0 },
-			{ "8/4", 2.0 },
-			{ "8 / 4", 2.0 },
-			{ "8^4", 4096.0 }
+			{ "+9", 9.0 },
+			{ "-76.3", -76.3 },
+			{ "++++++3.000", 3.0 },
+			{ "------12", 12.0 },
+			{ "---12", -12.0 },
+			{ "- - - 13", -13.0 },
+			{ "-.043", -0.043 },
+			{ "++.976", 0.976 },
+			{ "+(8)", 8.0 },
+			{ "-(9.1)", -9.1 },
+			{ "-(-(-(-4.3)))", 4.3 },	// Yes, more than 10 characters, but this is a test
+			{ "(+(+(+(+5))))", 5.0 },	// Yes, more than 10 characters, but this is a test
+			{ "+(+(+(+(+5))))", 5.0 }	// Yes, more than 10 characters, but this is a test
 		});
 	}
 	
