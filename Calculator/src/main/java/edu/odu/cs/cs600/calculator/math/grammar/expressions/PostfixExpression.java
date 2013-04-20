@@ -11,7 +11,6 @@ public class PostfixExpression implements Expression {
 	private final TokenType operator;
 	private final Expression left;
 	
-	private double value = 0.0;
 	
 	public PostfixExpression(Expression left, TokenType operator) {
 		this.operator = operator;
@@ -31,25 +30,19 @@ public class PostfixExpression implements Expression {
 	
 	@Override
 	public double getValue() {
-		return value;
-	}
-	
-	
-	
-	@Override
-	public void evaluate() {
 		switch(operator) {
 			case FACTORIAL:
 				int i = (int)left.getValue();
-				
-				value = i;
+				double value = i;
 				
 				while (i > 1) {
 					value = value * i;
 					i--;
 				}
+				
+				return value;
 			default:
-				;
+				return 0.0;
 		}
 	}
 }

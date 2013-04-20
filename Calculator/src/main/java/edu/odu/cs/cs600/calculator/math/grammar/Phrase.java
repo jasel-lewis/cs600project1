@@ -19,9 +19,12 @@ public class Phrase {
 	}
 
 	
-	private Phrase(List<CalculatorCharacter> phrase)
-	{
-		this.phrase = phrase;
+	private Phrase(List<CalculatorCharacter> phrase) {
+		this();
+		
+		if (!phrase.isEmpty()) {
+			this.phrase = phrase;
+		}
 	}
 
 	

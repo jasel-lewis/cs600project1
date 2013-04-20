@@ -12,7 +12,6 @@ public class PrefixExpression implements Expression {
 	private final TokenType operator;
 	private final Expression right;
 	
-	private double value = 0.0;
 	
 	public PrefixExpression(TokenType operator, Expression right) {
 		this.operator = operator;
@@ -32,22 +31,15 @@ public class PrefixExpression implements Expression {
 	
 	@Override
 	public double getValue() {
-		return value;
-	}
-	
-	
-	
-	@Override
-	public void evaluate() {
 		switch(operator) {
 			case PLUS:
 				// A unary plus prior to the expression
-				value = right.getValue();
+				return (right.getValue());
 			case MINUS:
 				// A unary minus prior to the expression
-				value = 0.0 - right.getValue();
+				return (0.0 - right.getValue());
 			default:
-				;
+				return 0.0;
 		}
 	}
 }

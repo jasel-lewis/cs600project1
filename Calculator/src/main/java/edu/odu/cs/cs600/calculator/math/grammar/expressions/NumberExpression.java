@@ -7,11 +7,9 @@ package edu.odu.cs.cs600.calculator.math.grammar.expressions;
  */
 public class NumberExpression implements Expression {
 	private final String number;
-	private final double value;
 	
 	public NumberExpression(String number) {
 		this.number = number;
-		this.value = Double.parseDouble(number);
 	}
 	
 	
@@ -25,14 +23,6 @@ public class NumberExpression implements Expression {
 	
 	@Override
 	public double getValue() {
-		return value;
-	}
-	
-	
-	
-	@Override
-	public void evaluate() {
-		// Do nothing - value is set by the constructor
-		;
+		return Double.parseDouble(number);
 	}
 }

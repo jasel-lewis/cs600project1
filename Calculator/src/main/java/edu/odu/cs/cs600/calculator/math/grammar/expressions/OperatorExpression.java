@@ -10,8 +10,6 @@ public class OperatorExpression implements Expression {
 	private final Expression right;
 	private final TokenType operator;
 	
-	private double value = 0.0;
-	
 	public OperatorExpression(Expression left, TokenType operator, Expression right) {
 		this.left = left;
 		this.operator = operator;
@@ -32,27 +30,20 @@ public class OperatorExpression implements Expression {
 	
 	
 	@Override
-	public void evaluate() {
+	public double getValue() {
 		switch (operator) {
 			case PLUS:
-				value = left.getValue() + right.getValue();
+				return (left.getValue() + right.getValue());
 			case MINUS:
-				value = left.getValue() - right.getValue();
+				return (left.getValue() - right.getValue());
 			case MULTIPLY:
-				value = left.getValue() * right.getValue();
+				return (left.getValue() * right.getValue());
 			case DIVIDE:
-				value = left.getValue() / right.getValue();
+				return (left.getValue() / right.getValue());
 			case POWER:
-				value = Math.pow(left.getValue(), right.getValue());
+				return (Math.pow(left.getValue(), right.getValue()));
 			default:
-				;
+				return 0.0;
 		}
-	}
-
-
-
-	@Override
-	public double getValue() {
-		return value;
 	}
 }

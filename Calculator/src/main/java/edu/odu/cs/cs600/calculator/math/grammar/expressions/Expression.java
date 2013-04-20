@@ -6,6 +6,5 @@ package edu.odu.cs.cs600.calculator.math.grammar.expressions;
  */
 public interface Expression {
 	public void print(StringBuilder builder);
-	public void evaluate();
 	public double getValue();
 }
