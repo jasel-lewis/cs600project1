@@ -8,21 +8,21 @@ public class CommandButton extends CalculatorButton {
 	private static final long serialVersionUID = 7320338606786314438L;
 	private CalculatorCommand command = null;
 	
-	public CommandButton(String imageFilenamePath, String altText, CalculatorCommand command)
+	public CommandButton(String imagePath, String imageOverPath, String altText, CalculatorCommand command)
 	{
-		super(imageFilenamePath, altText);
+		super(imagePath, imageOverPath, altText);
 		this.command = command;
 	}
 
-	public CommandButton(String imageFilenamePath, String fallbackText, CalculatorCommand command, int keyCode)
+	public CommandButton(String imagePath, String imageOverPath, String altText, CalculatorCommand command, int keyCode)
 	{
-		super(imageFilenamePath, fallbackText, keyCode);
+		super(imagePath, imageOverPath, altText, keyCode);
 		this.command = command;
 	}
 	
-	public CommandButton(String imageFilenamePath, String fallbackText, CalculatorCommand command, int keyCode, ActionListener al) 
+	public CommandButton(String imagePath, String imageOverPath, String altText, CalculatorCommand command, int keyCode, ActionListener al) 
 	{
-		this(imageFilenamePath, fallbackText, command, keyCode);
+		this(imagePath, imageOverPath, altText, command, keyCode);
 		addActionListener(al);
 	}
 	
