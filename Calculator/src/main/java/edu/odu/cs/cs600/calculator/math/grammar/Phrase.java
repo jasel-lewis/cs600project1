@@ -7,7 +7,7 @@ import java.util.ListIterator;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
+import edu.odu.cs.cs600.calculator.CalculatorCharacter;
 
 public class Phrase {
 	private List <CalculatorCharacter> phrase = new ArrayList <CalculatorCharacter> ();

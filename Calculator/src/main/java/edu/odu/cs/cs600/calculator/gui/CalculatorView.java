@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeListener;
 
+import edu.odu.cs.cs600.calculator.CalculatorCharacter;
 import edu.odu.cs.cs600.calculator.CalculatorCommand;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
