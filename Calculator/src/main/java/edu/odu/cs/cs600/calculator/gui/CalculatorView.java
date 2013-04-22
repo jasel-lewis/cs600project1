@@ -2,8 +2,6 @@ package edu.odu.cs.cs600.calculator.gui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,8 +13,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeListener;
 
 import edu.odu.cs.cs600.calculator.CalculatorCharacter;

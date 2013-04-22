@@ -17,6 +17,7 @@ public class Application {
 				CalculatorModel model = new CalculatorModel();
 				CalculatorView view = new CalculatorView();
 				
+				@SuppressWarnings("unused")
 				CalculatorController controller = new CalculatorController(model, view);
 				
 				// Turn the calculator on
