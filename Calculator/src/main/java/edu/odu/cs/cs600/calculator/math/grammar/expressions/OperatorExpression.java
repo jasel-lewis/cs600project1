@@ -2,6 +2,7 @@ package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
 import edu.odu.cs.cs600.calculator.math.DivisionEvaluator;
 import edu.odu.cs.cs600.calculator.math.ExponentiationEvaluator;
+import edu.odu.cs.cs600.calculator.math.MathUtil;
 import edu.odu.cs.cs600.calculator.math.NegationEvaluator;
 import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
 import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
@@ -37,27 +38,21 @@ public class OperatorExpression implements Expression {
 	public double getValue() {
 		switch (operator) {
 			case PLUS:
-				// TODO: The next line is OK to use because we can accept simple addition as a given, correct?
-				return (left.getValue() + right.getValue());
+				return (MathUtil.add(left.getValue(), right.getValue()));
 			case MINUS:
-				// TODO: Should this be a simple addition to the return of a method call to MathUtil.negate()?
-				// i.e.: return (left.getValue() + MathUtil.negate(right.getValue()));
-				NegationEvaluator ne = new NegationEvaluator();
-				return (left.getValue() + ne.compute(right.getValue()));
-				//return (left.getValue() - right.getValue());
+				return (MathUtil.subtract(left.getValue(), right.getValue()));
 			case MULTIPLY:
-				// TODO: The next line is OK to use because we can accept simple multiplication as a given, correct?
-				return (left.getValue() * right.getValue());
+				return (MathUtil.multiply(left.getValue(), right.getValue()));
 			case DIVIDE:
-				// TODO: Should this be a simple method call to MathUtil.divide()?
-				// i.e.: return (MathUtil.divide(left.getValue(), right.getValue()));
-				DivisionEvaluator de = new DivisionEvaluator();
-				return (de.compute(left.getValue(), right.getValue()));
-				//return (left.getValue() / right.getValue());
+				return (MathUtil.divide(left.getValue(), right.getValue()));
 			case POWER:
-				// TODO: Should this be a method call to MathUtil.exponentiation()? (With the appropriate method created, of course)
-				ExponentiationEvaluator ee = new ExponentiationEvaluator();
-				return (ee.compute(left.getValue(), right.getValue()));
+				try {
+					int exponent = Integer.parseInt(Double.toString(right.getValue()));
+					return (MathUtil.exponentiate(left.getValue(), exponent));
+				} catch (NumberFormatException nfe) {
+					throw new ParseException("Exponent must be an integer");
+				}
+				
 			default:
 				throw new ParseException("Unrecognized operator");
 		}
