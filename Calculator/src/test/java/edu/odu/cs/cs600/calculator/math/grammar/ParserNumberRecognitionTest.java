@@ -99,14 +99,4 @@ public class ParserNumberRecognitionTest {
 		
 		assertEquals("Real number should have been parsed as .69", ".69", builder.toString());
 	}
-	
-	@Test
-	public void testUnrealNumberInput() {
-		Phrase phrase = Phrase.convertToPhrase("12.34.56");
-		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
-		StringBuilder builder = new StringBuilder();
-		parser.parseExpression().print(builder);
-		
-		assertEquals("Real number should have been parsed as 12.34", "12.34", builder.toString());
-	}
 }

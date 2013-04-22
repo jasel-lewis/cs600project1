@@ -1,8 +1,10 @@
 package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
 import edu.odu.cs.cs600.calculator.math.DivisionEvaluator;
+import edu.odu.cs.cs600.calculator.math.ExponentiationEvaluator;
 import edu.odu.cs.cs600.calculator.math.NegationEvaluator;
 import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
+import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
 
 /**
  * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/OperatorExpression.java
@@ -35,23 +37,29 @@ public class OperatorExpression implements Expression {
 	public double getValue() {
 		switch (operator) {
 			case PLUS:
+				// TODO: The next line is OK to use because we can accept simple addition as a given, correct?
 				return (left.getValue() + right.getValue());
 			case MINUS:
-				//NegationEvaluator ne = new NegationEvaluator();
-				//return (left.getValue() + ne.compute(right.getValue()));
-				return (left.getValue() - right.getValue());
+				// TODO: Should this be a simple addition to the return of a method call to MathUtil.negate()?
+				// i.e.: return (left.getValue() + MathUtil.negate(right.getValue()));
+				NegationEvaluator ne = new NegationEvaluator();
+				return (left.getValue() + ne.compute(right.getValue()));
+				//return (left.getValue() - right.getValue());
 			case MULTIPLY:
+				// TODO: The next line is OK to use because we can accept simple multiplication as a given, correct?
 				return (left.getValue() * right.getValue());
 			case DIVIDE:
-				//DivisionEvaluator de = new DivisionEvaluator();
-				//return (de.compute(left.getValue(), right.getValue()));
-				return (left.getValue() / right.getValue());
+				// TODO: Should this be a simple method call to MathUtil.divide()?
+				// i.e.: return (MathUtil.divide(left.getValue(), right.getValue()));
+				DivisionEvaluator de = new DivisionEvaluator();
+				return (de.compute(left.getValue(), right.getValue()));
+				//return (left.getValue() / right.getValue());
 			case POWER:
-				//ExponentiationEvaluator ee = new DivisionEvaluator();
-				//return (ee.compute(left.getValue(), right.getValue()));
-				return (Math.pow(left.getValue(), right.getValue()));
+				// TODO: Should this be a method call to MathUtil.exponentiation()? (With the appropriate method created, of course)
+				ExponentiationEvaluator ee = new ExponentiationEvaluator();
+				return (ee.compute(left.getValue(), right.getValue()));
 			default:
-				return 0.0;
+				throw new ParseException("Unrecognized operator");
 		}
 	}
 }

@@ -1,6 +1,8 @@
 package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
+import edu.odu.cs.cs600.calculator.math.MathUtil;
 import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
+import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
 
 /**
  * Prefix unary expression.  For our calculator, the only legal prefix
@@ -37,9 +39,9 @@ public class PrefixExpression implements Expression {
 				return (right.getValue());
 			case MINUS:
 				// A unary minus prior to the expression
-				return (0.0 - right.getValue());
+				return (MathUtil.negate(right.getValue()));
 			default:
-				return 0.0;
+				throw new ParseException("Unrecognized prefix operation");
 		}
 	}
 }

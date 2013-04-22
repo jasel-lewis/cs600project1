@@ -1,6 +1,8 @@
 package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
+import edu.odu.cs.cs600.calculator.math.FactorialEvaluator;
 import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
+import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
 
 /**
  * A postfix unary arithmetic expression such as "!"
@@ -32,17 +34,11 @@ public class PostfixExpression implements Expression {
 	public double getValue() {
 		switch(operator) {
 			case FACTORIAL:
-				int i = (int)left.getValue();
-				double value = i;
-				
-				while (i > 1) {
-					value = value * i;
-					i--;
-				}
-				
-				return value;
+				// TODO: Should this be a method call to MathUtil.factorial() (creating that method, of course)
+				FactorialEvaluator fe = new FactorialEvaluator();
+				return fe.compute((int)left.getValue());
 			default:
-				return 0.0;
+				throw new ParseException("Unrecognized PostFix operation");
 		}
 	}
 }
