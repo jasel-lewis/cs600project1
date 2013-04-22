@@ -2,8 +2,6 @@ package edu.odu.cs.cs600.calculator.math;
 
 public class AbsoluteValueEvaluator implements IUnaryEvaluator
 {
-
-	@Override
 	public double compute(double value) throws ArithmeticException 
 	{
 		if(value < 0)

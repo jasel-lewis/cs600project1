@@ -2,7 +2,6 @@ package edu.odu.cs.cs600.calculator.math;
 
 public class ExponentiationEvaluator implements IBinaryEvaluator {
 
-	@Override
 	public double compute(double base, double exponent) throws ArithmeticException {
 		// TODO: This is very ugly and brute-force.  Let's look into a more elegant/faster
 		// determination such as was explained in class.  Do we wish to accept and

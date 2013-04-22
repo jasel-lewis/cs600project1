@@ -2,14 +2,14 @@ package edu.odu.cs.cs600.calculator.math;
 
 public class MathUtil 
 {
-	private static final IUnaryEvaluator absoluteValueEvaluator = new AbsoluteValueEvaluator();
-	private static final IUnaryEvaluator ceilingEvaluator = new CeilingEvaluator();
-	private static final IUnaryEvaluator floorEvaluator = new FloorEvaluator();
-	private static final IUnaryEvaluator negationEvaluator = new NegationEvaluator();
-	private static final IUnaryEvaluator reciprocalEvaluator = new ReciprocalEvaluator();
-	private static final IUnaryEvaluator squareRootEvaluator = new SquareRootEvaluator();
-	private static final IBinaryEvaluator subtractionEvaluator = new SubtractionEvaluator();
-	private static final IBinaryEvaluator divisionEvaluator = new DivisionEvaluator();
+	private static final AbsoluteValueEvaluator absoluteValueEvaluator = new AbsoluteValueEvaluator();
+	private static final CeilingEvaluator ceilingEvaluator = new CeilingEvaluator();
+	private static final FloorEvaluator floorEvaluator = new FloorEvaluator();
+	private static final NegationEvaluator negationEvaluator = new NegationEvaluator();
+	private static final ReciprocalEvaluator reciprocalEvaluator = new ReciprocalEvaluator();
+	private static final SquareRootEvaluator squareRootEvaluator = new SquareRootEvaluator();
+	private static final SubtractionEvaluator subtractionEvaluator = new SubtractionEvaluator();
+	private static final DivisionEvaluator divisionEvaluator = new DivisionEvaluator();
 
 	public static double abs(double value) throws ArithmeticException {
 		return absoluteValueEvaluator.compute(value);

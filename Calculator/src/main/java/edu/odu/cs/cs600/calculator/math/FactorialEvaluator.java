@@ -2,7 +2,6 @@ package edu.odu.cs.cs600.calculator.math;
 
 public class FactorialEvaluator implements IUnaryEvaluator {
 
-	@Override
 	public double compute(double value) throws ArithmeticException {
 		// This method really needs to accept an int and return an int.
 		// Factorial may only operate on integers.
