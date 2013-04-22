@@ -1,9 +1,6 @@
 package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
-import edu.odu.cs.cs600.calculator.math.DivisionEvaluator;
-import edu.odu.cs.cs600.calculator.math.ExponentiationEvaluator;
 import edu.odu.cs.cs600.calculator.math.MathUtil;
-import edu.odu.cs.cs600.calculator.math.NegationEvaluator;
 import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
 import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
 

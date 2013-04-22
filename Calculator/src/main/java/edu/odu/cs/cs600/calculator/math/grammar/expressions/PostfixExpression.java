@@ -1,6 +1,6 @@
 package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
-import edu.odu.cs.cs600.calculator.math.FactorialEvaluator;
+import edu.odu.cs.cs600.calculator.math.MathUtil;
 import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
 import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
 
@@ -34,9 +34,12 @@ public class PostfixExpression implements Expression {
 	public double getValue() {
 		switch(operator) {
 			case FACTORIAL:
-				// TODO: Should this be a method call to MathUtil.factorial() (creating that method, of course)
-				FactorialEvaluator fe = new FactorialEvaluator();
-				return fe.compute((int)left.getValue());
+				try {
+					int base = Integer.parseInt(Double.toString((int)left.getValue()));
+					return MathUtil.factorial(base);
+				} catch (NumberFormatException nfe) {
+					throw new ParseException("Factorial applied to non-integer");
+				}
 			default:
 				throw new ParseException("Unrecognized PostFix operation");
 		}
