@@ -18,7 +18,7 @@ import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
 @RunWith(Parameterized.class)
-public class SimpleExpressionEvaluationTest {
+public class ComplicatedExpressionEvaluationTest {
 	// For double comparison, this is the precision to which assertEquals will compare values
 	private static final double EPSILON = 1e-10;
 	
@@ -27,7 +27,7 @@ public class SimpleExpressionEvaluationTest {
 	private Parser parser = null;
 	
 	
-	public SimpleExpressionEvaluationTest(String expression, double expectedResult) {
+	public ComplicatedExpressionEvaluationTest(String expression, double expectedResult) {
 		this.expression = expression;
 		this.expectedResult = expectedResult;
 	}
@@ -49,19 +49,19 @@ public class SimpleExpressionEvaluationTest {
 	public static Collection<Object[]> testData() {
 		// { expression, expectedResult }
 		return Arrays.asList(new Object[][] {
-			{ "(9)", 9.0 },				//  0
-			{ "((((76.3))))", 76.3 },	//  1
-			{ "(  (( 3)))", 3.0 },		//  2
-			{ "8+4", 12.0 },			//  3
-			{ "8 + 4", 12.0 },			//  4
-			{ "8       +4", 12.0 },		//  5
-			{ "8-4", 4.0 },				//  6
-			{ "8 - 4", 4.0 },			//  7
-			{ "8*4", 32.0 },			//  8
-			{ "8 * 4", 32.0 },			//  9
-			{ "8/4", 2.0 },				// 10
-			{ "8 / 4", 2.0 },			// 11
-			{ "8^4", 4096.0 }			// 12
+			{ "6 + 5 - 4 * 3 / 2 ", 5.0 },				//  0
+			{ "6 - 5 * 4 / 3 + 2 ", 1.3333333333 },		//  1
+			{ "6 * 5 / 4 + 3 - 2 ", 8.5 },				//  2
+			{ "6 / 5 + 4 - 3 * 2 ", -0.8 },				//  3
+			{ "6 - 5 + 4 * 3 / 2 ", 7.0 },				//  4
+			{ "6 + 5 - 4 / 3 * 2 ", 8.3333333333 },		//  5
+			{ "6 / 5 - 4 * 3 + 2 ", -8.8 },				//  6
+			{ "6 + 5 * 4 - 3 / 2 ", 24.5 },				//  7
+			{ "6 * 5 + 4 / 3 - 2 ", 29.3333333333 },	//  8
+			{ "6 * 5 - 4 + 3 / 2 ", 27.5 },				//  9
+			{ "(6+5)/(4-3)*2", 22.0 },					// 10
+			{ "(6-5*4)/(3+2*3)", -1.5555555555 },		// 11
+			{ "((6-5)*4)/((3+2)*3)", 0.2666666666 }		// 12
 		});
 	}
 	
