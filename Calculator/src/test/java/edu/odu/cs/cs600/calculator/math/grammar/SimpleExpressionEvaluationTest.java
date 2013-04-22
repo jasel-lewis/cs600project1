@@ -61,7 +61,7 @@ public class SimpleExpressionEvaluationTest {
 			{ "8 * 4", 32.0 },			//  9
 			{ "8/4", 2.0 },				// 10
 			{ "8 / 4", 2.0 },			// 11
-			{ "8^4", 4096.0 }			// 12
+			{ "8^4", Math.pow(8,  4) }	// 12
 		});
 	}
 	

@@ -49,9 +49,8 @@ public class OperatorExpression implements Expression {
 				return result;
 			case POWER:
 				try {
-					int exponent = Integer.parseInt(Double.toString(rightValue));
-					result = MathUtil.exponentiate(leftValue, exponent); 
-					logger.debug("Parser evaluating " + leftValue + " ^ " + exponent + " and getting: " + result);
+					result = MathUtil.exponentiate(leftValue, rightValue); 
+					logger.debug("Parser evaluating " + leftValue + " ^ " + rightValue + " and getting: " + result);
 					return result;
 				} catch (NumberFormatException nfe) {
 					throw new ParseException("Exponent must be an integer");

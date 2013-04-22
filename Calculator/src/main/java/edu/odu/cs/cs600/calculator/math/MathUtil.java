@@ -47,7 +47,7 @@ public class MathUtil
 		return subtractionEvaluator.compute(x, y);
 	}
 	
-	public static double exponentiate(double x, int y) throws ArithmeticException {
+	public static double exponentiate(double x, double y) throws ArithmeticException {
 		return exponentiationEvaluator.compute(x, y);
 	}
 	
