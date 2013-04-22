@@ -34,9 +34,14 @@ public class PostfixExpression implements Expression {
 	public double getValue() {
 		switch(operator) {
 			case FACTORIAL:
-				// TODO: Should this be a method call to MathUtil.factorial() (creating that method, of course)
-				FactorialEvaluator fe = new FactorialEvaluator();
-				return fe.compute((int)left.getValue());
+				// TODO: This if statement seems a little clumsy, yes/no?
+				if (((NumberExpression)left).isInt()) {
+					// TODO: Should this be a method call to MathUtil.factorial() (creating that method, of course)
+					FactorialEvaluator fe = new FactorialEvaluator();
+					return fe.compute((int)left.getValue());
+				} else {
+					throw new ParseException("Factorial operator must follow an integer");
+				}
 			default:
 				throw new ParseException("Unrecognized PostFix operation");
 		}

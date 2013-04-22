@@ -4,9 +4,9 @@ public class FactorialEvaluator implements IUnaryEvaluator {
 
 	@Override
 	public double compute(double value) throws ArithmeticException {
-		// TODO: Need to make sure that we only accept an integer before a factorial in the Phrase.
-		// Not because of the below line (of which we'd get rounding errors) - but because factorial
-		// only operates on whole numbers.
+		// Taking it on faith here that we're receiving a double form of an
+		// integer value.  Relying on NumberExpression.isInt() to determine
+		// this.  Factorial may only operate on integers.
 		int i = (int)value;
 		
 		while (i > 1) {
