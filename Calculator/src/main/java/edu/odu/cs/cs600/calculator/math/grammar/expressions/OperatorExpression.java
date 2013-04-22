@@ -25,17 +25,6 @@ public class OperatorExpression implements Expression {
 	
 	
 	@Override
-	public void print(StringBuilder builder) {
-		builder.append("(");
-		left.print(builder);
-		builder.append(" ").append(operator.getPunctuator()).append(" ");
-		right.print(builder);
-		builder.append(")");
-	}
-	
-	
-	
-	@Override
 	public double getValue() {
 		double leftValue = left.getValue();
 		double rightValue = right.getValue();
