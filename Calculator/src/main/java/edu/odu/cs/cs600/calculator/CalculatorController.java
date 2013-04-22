@@ -64,6 +64,8 @@ public class CalculatorController
 	
 	private class CharacterInputButtonActionListener implements ActionListener
 	{
+		// TODO : Check flag to see if the input needs to be cleared before adding the input to the phrase
+		// TODO : Replace System.out calls w/ Logger calls
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() instanceof CharacterInputButton)
@@ -96,16 +98,11 @@ public class CalculatorController
 					case CLEAR_ALL:
 						model.getPhrase().clear();
 						break;
-					case POWERON:
-						model.setState(true);
-						break;
-					case POWEROFF:
-						model.setState(false);
-						break;
 	
 					// ***********************
 					// Mathematical Commands
 					// ***********************
+					// TODO : Set a flag so that when next key entry, the display is cleared
 					case CEILING:
 					{
 						try {
