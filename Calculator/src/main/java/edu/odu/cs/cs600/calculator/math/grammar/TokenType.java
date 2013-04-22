@@ -12,7 +12,6 @@ public enum TokenType {
 	MULTIPLY,
 	DIVIDE,
 	POWER,
-	FACTORIAL,
 	NUMBER,
 	EOF;
 	
@@ -37,8 +36,6 @@ public enum TokenType {
 				return '/';
 			case POWER:
 				return '^';
-			case FACTORIAL:
-				return '!';
 			default:
 				return null;
 		}
