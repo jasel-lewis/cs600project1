@@ -12,6 +12,6 @@ public enum CalculatorCommand {
 	POWEROFF,
 	POWERON,
 	RECIPROCAL,
-	SQUARED,
-	SQUAREROOT 
+	SQUARE,
+	SQUAREROOT
 }

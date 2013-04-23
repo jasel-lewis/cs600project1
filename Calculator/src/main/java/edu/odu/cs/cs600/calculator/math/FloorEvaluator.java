@@ -7,6 +7,5 @@ public class FloorEvaluator implements IUnaryEvaluator {
 	{
 		System.err.println("Function utilized that has not yet been completed.  Currently using improper implementation.");
 		return Math.floor(value);
-	}
-	
+	}	
 }

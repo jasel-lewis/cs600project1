@@ -8,13 +8,13 @@ public class ExponentiationEvaluator implements IBinaryEvaluator {
 		// Also look at:
 		// http://en.wikipedia.org/wiki/Exponentiation#Efficient_computation_of_integer_powers
 		
-		// We're only going to accept the common notion that the exponent must
-		// be an integer.
-		if (MathUtil.floor(exponent) != exponent) {
+		// We're only going to perform the common notion of exponentiation where the exponent
+		// must be an integer.
+		if (Double.compare(MathUtil.floor(exponent), exponent) != 0) {
 			throw new ArithmeticException("Exponent must be an integer");
 		}
 		
-		for (int i = 2; i < (int)exponent; i++) {
+		for (int i = 2; i <= (int)exponent; i++) {
 			base = base * base;
 		}
 		

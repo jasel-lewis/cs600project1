@@ -157,7 +157,7 @@ public class CalculatorView extends JFrame {
 		squareRootButton.addActionListener(commandButtonActionListener);
 		panel.add(squareRootButton);
 		
-		CommandButton squaredButton = new CommandButton("buttonSquared.png", "buttonSquaredOver.png", "<html>&radic;</html>", CalculatorCommand.SQUARED);
+		CommandButton squaredButton = new CommandButton("buttonSquared.png", "buttonSquaredOver.png", "<html>&radic;</html>", CalculatorCommand.SQUARE);
 		squaredButton.setBounds(221, 184, 56, 56);
 		squaredButton.addActionListener(commandButtonActionListener);
 		panel.add(squaredButton);
