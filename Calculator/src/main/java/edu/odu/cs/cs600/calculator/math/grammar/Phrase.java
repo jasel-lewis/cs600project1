@@ -135,12 +135,14 @@ public class Phrase {
 	/**
 	 * Remove a {@link CalculatorCharacter} from this CalculatorDisplay
 	 */
-	public void pop() {		
-		if (phrase.size() > 1) {
-			phrase.remove(phrase.size() - 1);
-			fireChangeEvent();
-		} else {
-			clear();
+	public void pop() {
+		if (!errorState) {
+			if (phrase.size() > 1) {
+				phrase.remove(phrase.size() - 1);
+				fireChangeEvent();
+			} else {
+				clear();
+			}
 		}
 	}  // end pop()
 	
@@ -192,7 +194,7 @@ public class Phrase {
 	public void setErrorState() {
 		errorState = true;
 		
-		clear();
+		phrase.clear();
 		
 		phrase.add(new CalculatorCharacter('E'));
 		phrase.add(new CalculatorCharacter('r'));
