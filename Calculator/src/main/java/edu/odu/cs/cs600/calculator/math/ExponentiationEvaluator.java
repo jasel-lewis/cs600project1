@@ -26,7 +26,6 @@ public class ExponentiationEvaluator implements IBinaryEvaluator {
 			return base;
 		} else if ((exponent % 2) == 0) {  // If even
 			return helper(base * base, exponent/2);
-		//} else if ((exponent % 2) == 1) {  // If odd
 		} else {
 			return (base * helper(base * base, (exponent - 1)/2));
 		}
