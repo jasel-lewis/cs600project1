@@ -3,6 +3,8 @@ package edu.odu.cs.cs600.calculator.math;
 public class ExponentiationEvaluator implements IBinaryEvaluator {
 
 	public double compute(double base, double exponent) throws ArithmeticException {
+		double result = base;
+		
 		// TODO: This is very ugly and brute-force.  Let's look into a more elegant/faster
 		// determination such as was explained in class.
 		// Also look at:
@@ -15,9 +17,9 @@ public class ExponentiationEvaluator implements IBinaryEvaluator {
 		}
 		
 		for (int i = 2; i <= (int)exponent; i++) {
-			base = base * base;
+			result = result * base;
 		}
 		
-		return base;
+		return result;
 	}
 }
