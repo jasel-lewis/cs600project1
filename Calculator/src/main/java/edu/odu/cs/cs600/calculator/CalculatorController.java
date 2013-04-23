@@ -118,6 +118,8 @@ public class CalculatorController
 							// functionality seems as if it'd belong to the display, however,
 							// there will most likely need to be some number introspection which
 							// would place the logic here within the controller.
+							// On the flip side - what if we did 145^456789?  We would have to
+							// convert to scientific notation and display.
 							model.getPhrase().setPhrase(MathUtil.ceiling(parser.parseExpression().getValue()));
 						} catch(Exception ex) {
 							model.getPhrase().setErrorState();
