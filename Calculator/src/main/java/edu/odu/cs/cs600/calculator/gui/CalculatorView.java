@@ -130,10 +130,8 @@ public class CalculatorView extends JFrame {
 		reciprocalButton.addActionListener(commandButtonActionListener);
 		panel.add(reciprocalButton);
 		
-		//CommandButton exponentiateButton = new CommandButton("buttonExponent.png", "buttonExponentOver.png", "<html>&radic;</html>", CalculatorCommand.EXPONENTIATE);
 		CharacterInputButton exponentiateButton = new CharacterInputButton("buttonExponent.png", "buttonExponentOver.png", new CalculatorCharacter('^'));
 		exponentiateButton.setBounds(221, 118, 56, 56);
-		//exponentiateButton.addActionListener(commandButtonActionListener);
 		exponentiateButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(exponentiateButton);
 		
