@@ -35,7 +35,7 @@ public class MathUtil
 		return negationEvaluator.compute(value);
 	}
 
-	public static double reciprocal(double value) throws ArithmeticException {
+	public static double reciprocate(double value) throws ArithmeticException {
 		return reciprocalEvaluator.compute(value);
 	}
 

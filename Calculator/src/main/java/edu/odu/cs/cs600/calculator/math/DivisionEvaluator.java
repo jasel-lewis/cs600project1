@@ -4,7 +4,7 @@ public class DivisionEvaluator implements IBinaryEvaluator {
 
 	public double compute(double numerator, double divisor) throws ArithmeticException 
 	{
-		return numerator * MathUtil.reciprocal(divisor);
+		return numerator * MathUtil.reciprocate(divisor);
 	}
 
 }
