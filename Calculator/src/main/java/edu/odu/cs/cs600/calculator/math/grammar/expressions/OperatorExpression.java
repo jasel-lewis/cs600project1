@@ -33,29 +33,24 @@ public class OperatorExpression implements Expression {
 		switch (operator) {
 			case PLUS:
 				result = MathUtil.add(leftValue, rightValue); 
-				logger.debug("Parser evaluating " + leftValue + " + " + rightValue + " and getting: " + result);
+				logger.debug("Evaluating " + leftValue + " + " + rightValue + " and getting: " + result);
 				return result;
 			case MINUS:
 				result = MathUtil.subtract(leftValue, rightValue); 
-				logger.debug("Parser evaluating " + leftValue + " - " + rightValue + " and getting: " + result);
+				logger.debug("Evaluating " + leftValue + " - " + rightValue + " and getting: " + result);
 				return result;
 			case MULTIPLY:
 				result = MathUtil.multiply(leftValue, rightValue); 
-				logger.debug("Parser evaluating " + leftValue + " * " + rightValue + " and getting: " + result);
+				logger.debug("Evaluating " + leftValue + " * " + rightValue + " and getting: " + result);
 				return result;
 			case DIVIDE:
 				result = MathUtil.divide(leftValue, rightValue); 
-				logger.debug("Parser evaluating " + leftValue + " / " + rightValue + " and getting: " + result);
+				logger.debug("Evaluating " + leftValue + " / " + rightValue + " and getting: " + result);
 				return result;
 			case POWER:
-				try {
-					result = MathUtil.exponentiate(leftValue, rightValue); 
-					logger.debug("Parser evaluating " + leftValue + " ^ " + rightValue + " and getting: " + result);
-					return result;
-				} catch (NumberFormatException nfe) {
-					throw new ParseException("Exponent must be an integer");
-				}
-				
+				result = MathUtil.exponentiate(leftValue, rightValue); 
+				logger.debug("Evaluating " + leftValue + " ^ " + rightValue + " and getting: " + result);
+				return result;
 			default:
 				throw new ParseException("Unrecognized operator");
 		}

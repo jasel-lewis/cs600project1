@@ -169,17 +169,17 @@ public class CalculatorView extends JFrame {
 		
 		// ROW 3
 		
-		CharacterInputButton sevenButton = new CharacterInputButton("button7.png", "button7over.png", new CalculatorCharacter('4'));
+		CharacterInputButton sevenButton = new CharacterInputButton("button7.png", "button7over.png", new CalculatorCharacter('7'));
 		sevenButton.setBounds(25, 250, 56, 56);
 		sevenButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(sevenButton);
 
-		CharacterInputButton eightButton = new CharacterInputButton("button8.png", "button8over.png", new CalculatorCharacter('5'));
+		CharacterInputButton eightButton = new CharacterInputButton("button8.png", "button8over.png", new CalculatorCharacter('8'));
 		eightButton.setBounds(91, 250, 56, 56);
 		eightButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(eightButton);
 		
-		CharacterInputButton nineButton = new CharacterInputButton("button9.png", "button9over.png", new CalculatorCharacter('6'));
+		CharacterInputButton nineButton = new CharacterInputButton("button9.png", "button9over.png", new CalculatorCharacter('9'));
 		nineButton.setBounds(156, 250, 56, 56);
 		nineButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(nineButton);
