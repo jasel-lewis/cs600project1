@@ -50,19 +50,8 @@ public class CalculatorView extends JFrame {
 	public CalculatorView() 
 	{
 		super("Calculator");
-		
-		// Set defaults
-		//this.setUndecorated(true); // Remove title bar
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+			
 		initComponents();
-		this.setContentPane(panel);
-		this.setResizable(false);
-		this.setSize(374, 562);
-		this.setBackground(new Color(0,0,0));
-		
-		
-		//this.pack();
 	}
 	
 	private void initComponents() 
@@ -71,48 +60,30 @@ public class CalculatorView extends JFrame {
 		URL imgURL = (Thread.currentThread().getContextClassLoader()).getResource("background.png");
 		Image image = (new ImageIcon(imgURL)).getImage();
 		panel = new ImagePanel(image);
-				
-		//GridBagLayout gbLayout = new GridBagLayout();
-		//GridBagConstraints gbConstraints = new GridBagConstraints();
-		
-		//panel.setLayout(gbLayout);
-		
-		//constructDisplay(gbLayout, gbConstraints);
-		//constructButtons(gbLayout, gbConstraints);
 		
 		initDisplay();
 		initButtons();
+
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setContentPane(panel);
+		this.setResizable(false);
+		this.setSize(374, 562);
+		this.setBackground(new Color(0,0,0));
 	}
 	
 	private void initDisplay() 
 	{
-//		gbConstraints.fill = GridBagConstraints.BOTH;
-//		gbConstraints.gridheight = 1;
-//		gbConstraints.gridwidth = 5;
-//		gbConstraints.weightx = 1.0;
-//		gbConstraints.gridx = 0; gbConstraints.gridy = 0;
-		
 		display = new JLabel();
 		display.setFont(new Font("Courier New", Font.BOLD, 42));
         display.setHorizontalAlignment(JLabel.RIGHT);
         display.setBounds(10, 70, 330, 30);
-        //display.setText("123456789.123456");
         panel.add(display);
-        
 	}
 	
 	
 	
 	private void initButtons() 
 	{
-//        CommandButton onButton = new CommandButton("on.png", "On", CalculatorCommand.POWERON);
-//        onButton.addActionListener(this.commandButtonActionListener);        
-//		panel.add(onButton, gbConstraints);
-
-//		
-//		
-//		
-
 		// ROW 1
 		
 		CommandButton ceilingButton = new CommandButton("buttonCeiling.png", "buttonCeilingOver.png", CalculatorCommand.CEILING);
@@ -270,28 +241,21 @@ public class CalculatorView extends JFrame {
 	
 	public JLabel getDisplay() {
 		return display;
-	}  // end getDisplay()
-	
-	
+	} 
 	
 	public void setDisplay(String string) {
 		display.setText(string);
-	}  // end setDisplay(String)
+	}
 	
-	public void addCharacterInputButtonListener(ActionListener listener)
-	{
+	public void addCharacterInputButtonListener(ActionListener listener) {
 		this.characterInputButtonActionListeners.add(listener);
 	}
 	
-	public void addCommandButtonListener(ActionListener listener)
-	{
+	public void addCommandButtonListener(ActionListener listener) {
 		this.commandButtonActionListeners.add(listener);
 	}
 	
-	
-	
-	public void addPhraseChangeListener(ChangeListener listener)
-	{
+	public void addPhraseChangeListener(ChangeListener listener) {
 		this.displayChangeListener.add(listener);
 	}
 }  
