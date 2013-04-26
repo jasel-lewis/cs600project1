@@ -129,7 +129,7 @@ public class CalculatorController
 //							result = MathUtil.floor(result);
 //							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
 						} catch(Exception ex) {
-							// TODO - do somethign w/ this!
+							// TODO - JS do somethign w/ this!
 							System.err.println(ex);
 						}
 						break;
@@ -141,7 +141,7 @@ public class CalculatorController
 //							result = MathUtil.negate(result);
 //							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
 						} catch(Exception ex) {
-							// TODO - do somethign w/ this!
+							// TODO - JS do somethign w/ this!
 							System.err.println(ex);
 						}
 						break;
