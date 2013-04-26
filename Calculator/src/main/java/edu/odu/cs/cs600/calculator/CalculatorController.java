@@ -113,7 +113,7 @@ public class CalculatorController
 					// ***********************
 					// Mathematical Commands
 					// ***********************
-					// TODO : Set a flag so that when next key entry, the display is cleared
+					// TODO: (Jared) Create a display to show the last expression executed...
 					case CEILING:
 					{
 						try {
