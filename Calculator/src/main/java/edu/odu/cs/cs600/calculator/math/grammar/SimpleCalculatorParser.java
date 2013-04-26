@@ -3,7 +3,6 @@ package edu.odu.cs.cs600.calculator.math.grammar;
 import edu.odu.cs.cs600.calculator.math.grammar.parselet.BinaryOperatorParselet;
 import edu.odu.cs.cs600.calculator.math.grammar.parselet.GroupParselet;
 import edu.odu.cs.cs600.calculator.math.grammar.parselet.NumberParselet;
-import edu.odu.cs.cs600.calculator.math.grammar.parselet.PostfixOperatorParselet;
 import edu.odu.cs.cs600.calculator.math.grammar.parselet.PrefixOperatorParselet;
 
 /**
@@ -24,24 +23,11 @@ public class SimpleCalculatorParser extends Parser {
 		prefix(TokenType.PLUS, Precedence.PREFIX);
 		prefix(TokenType.MINUS, Precedence.PREFIX);
 		
-		postfix(TokenType.FACTORIAL, Precedence.POSTFIX);
-		
 		infixLeft(TokenType.PLUS, Precedence.SUM);
 		infixLeft(TokenType.MINUS, Precedence.SUM);
 		infixLeft(TokenType.MULTIPLY, Precedence.PRODUCT);
 		infixLeft(TokenType.DIVIDE, Precedence.PRODUCT);
 		infixRight(TokenType.POWER, Precedence.EXPONENT);
-	}
-	
-	
-	
-	/**
-	 * Registers a postfix unary operator parselet for the given token and precedence
-	 * @param token
-	 * @param precedence
-	 */
-	public void postfix(TokenType token, int precedence) {
-		register(token, new PostfixOperatorParselet(precedence));
 	}
 
 	

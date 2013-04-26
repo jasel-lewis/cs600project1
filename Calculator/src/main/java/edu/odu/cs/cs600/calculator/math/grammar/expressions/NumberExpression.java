@@ -1,5 +1,6 @@
 package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
+
 /**
  * A number expression such as "3", "3874", ".9823", "0.0" and "12.873"
  * 
@@ -15,14 +16,8 @@ public class NumberExpression implements Expression {
 	
 	
 	@Override
-	public void print(StringBuilder builder) {
-		builder.append(number);
-	}
-	
-	
-	
-	@Override
 	public double getValue() {
-		return Double.parseDouble(number);
+		double result = Double.parseDouble(number);
+		return result;
 	}
 }

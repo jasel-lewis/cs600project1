@@ -20,6 +20,6 @@ public class InvalidNumberEvaluationTest {
 		thrown.expect(NumberFormatException.class);
 		thrown.expectMessage("multiple points");
 		
-		double result = parser.parseExpression().getValue();
+		parser.parseExpression().getValue();
 	}
 }

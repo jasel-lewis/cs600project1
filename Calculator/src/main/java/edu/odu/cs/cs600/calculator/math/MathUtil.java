@@ -10,6 +10,10 @@ public class MathUtil
 	private static final SquareRootEvaluator squareRootEvaluator = new SquareRootEvaluator();
 	private static final SubtractionEvaluator subtractionEvaluator = new SubtractionEvaluator();
 	private static final DivisionEvaluator divisionEvaluator = new DivisionEvaluator();
+	private static final ExponentiationEvaluator exponentiationEvaluator = new ExponentiationEvaluator();
+	private static final FactorialEvaluator factorialEvaluator = new FactorialEvaluator();
+	private static final MultiplicationEvaluator multiplicationEvaluator = new MultiplicationEvaluator();
+	private static final AdditionEvaluator additionEvaluator = new AdditionEvaluator();
 
 	public static double abs(double value) throws ArithmeticException {
 		return absoluteValueEvaluator.compute(value);
@@ -31,7 +35,7 @@ public class MathUtil
 		return negationEvaluator.compute(value);
 	}
 
-	public static double reciprocal(double value) throws ArithmeticException {
+	public static double reciprocate(double value) throws ArithmeticException {
 		return reciprocalEvaluator.compute(value);
 	}
 
@@ -41,5 +45,21 @@ public class MathUtil
 	
 	public static double subtract(double x, double y) throws ArithmeticException {
 		return subtractionEvaluator.compute(x, y);
+	}
+	
+	public static double exponentiate(double x, double y) throws ArithmeticException {
+		return exponentiationEvaluator.compute(x, y);
+	}
+	
+	public static int factorial(int x) throws ArithmeticException {
+		return factorialEvaluator.compute(x);
+	}
+	
+	public static double multiply(double x, double y) throws ArithmeticException {
+		return multiplicationEvaluator.compute(x, y);
+	}
+	
+	public static double add(double x, double y) throws ArithmeticException {
+		return additionEvaluator.compute(x, y);
 	}
 }

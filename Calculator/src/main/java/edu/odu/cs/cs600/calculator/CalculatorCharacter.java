@@ -1,4 +1,4 @@
-package edu.odu.cs.cs600.calculator.gui;
+package edu.odu.cs.cs600.calculator;
 
 public class CalculatorCharacter {
 	private char morpheme;

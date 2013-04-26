@@ -2,8 +2,6 @@ package edu.odu.cs.cs600.calculator.gui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,10 +13,9 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeListener;
 
+import edu.odu.cs.cs600.calculator.CalculatorCharacter;
 import edu.odu.cs.cs600.calculator.CalculatorCommand;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
@@ -133,9 +130,9 @@ public class CalculatorView extends JFrame {
 		reciprocalButton.addActionListener(commandButtonActionListener);
 		panel.add(reciprocalButton);
 		
-		CommandButton exponentiateButton = new CommandButton("buttonExponent.png", "buttonExponentOver.png", "<html>&radic;</html>", CalculatorCommand.EXPONENTIATE);
+		CharacterInputButton exponentiateButton = new CharacterInputButton("buttonExponent.png", "buttonExponentOver.png", new CalculatorCharacter('^'));
 		exponentiateButton.setBounds(221, 118, 56, 56);
-		exponentiateButton.addActionListener(commandButtonActionListener);
+		exponentiateButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(exponentiateButton);
 		
 		CommandButton clearEntryButton = new CommandButton("buttonClearEntry.png", "buttonClearEntryOver.png", "CE", CalculatorCommand.CLEAR, KeyEvent.VK_BACK_SPACE);
@@ -160,7 +157,7 @@ public class CalculatorView extends JFrame {
 		squareRootButton.addActionListener(commandButtonActionListener);
 		panel.add(squareRootButton);
 		
-		CommandButton squaredButton = new CommandButton("buttonSquared.png", "buttonSquaredOver.png", "<html>&radic;</html>", CalculatorCommand.SQUARED);
+		CommandButton squaredButton = new CommandButton("buttonSquared.png", "buttonSquaredOver.png", "<html>&radic;</html>", CalculatorCommand.SQUARE);
 		squaredButton.setBounds(221, 184, 56, 56);
 		squaredButton.addActionListener(commandButtonActionListener);
 		panel.add(squaredButton);
@@ -172,17 +169,17 @@ public class CalculatorView extends JFrame {
 		
 		// ROW 3
 		
-		CharacterInputButton sevenButton = new CharacterInputButton("button7.png", "button7over.png", new CalculatorCharacter('4'));
+		CharacterInputButton sevenButton = new CharacterInputButton("button7.png", "button7over.png", new CalculatorCharacter('7'));
 		sevenButton.setBounds(25, 250, 56, 56);
 		sevenButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(sevenButton);
 
-		CharacterInputButton eightButton = new CharacterInputButton("button8.png", "button8over.png", new CalculatorCharacter('5'));
+		CharacterInputButton eightButton = new CharacterInputButton("button8.png", "button8over.png", new CalculatorCharacter('8'));
 		eightButton.setBounds(91, 250, 56, 56);
 		eightButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(eightButton);
 		
-		CharacterInputButton nineButton = new CharacterInputButton("button9.png", "button9over.png", new CalculatorCharacter('6'));
+		CharacterInputButton nineButton = new CharacterInputButton("button9.png", "button9over.png", new CalculatorCharacter('9'));
 		nineButton.setBounds(156, 250, 56, 56);
 		nineButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(nineButton);

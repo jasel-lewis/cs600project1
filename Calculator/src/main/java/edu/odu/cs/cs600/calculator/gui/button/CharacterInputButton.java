@@ -2,7 +2,7 @@ package edu.odu.cs.cs600.calculator.gui.button;
 
 import java.awt.event.ActionEvent;
 
-import edu.odu.cs.cs600.calculator.gui.CalculatorCharacter;
+import edu.odu.cs.cs600.calculator.CalculatorCharacter;
 
 public class CharacterInputButton extends CalculatorButton 
 {	

@@ -1,8 +1,9 @@
 package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 
-import edu.odu.cs.cs600.calculator.math.DivisionEvaluator;
-import edu.odu.cs.cs600.calculator.math.ExponentiationEvaluator;
-import edu.odu.cs.cs600.calculator.math.NegationEvaluator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import edu.odu.cs.cs600.calculator.math.MathUtil;
 import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
 import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
 
@@ -10,6 +11,7 @@ import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
  * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/OperatorExpression.java
  */
 public class OperatorExpression implements Expression {
+	private static Logger logger = LogManager.getLogger(OperatorExpression.class);
 	private final Expression left;
 	private final Expression right;
 	private final TokenType operator;
@@ -23,41 +25,32 @@ public class OperatorExpression implements Expression {
 	
 	
 	@Override
-	public void print(StringBuilder builder) {
-		builder.append("(");
-		left.print(builder);
-		builder.append(" ").append(operator.getPunctuator()).append(" ");
-		right.print(builder);
-		builder.append(")");
-	}
-	
-	
-	
-	@Override
 	public double getValue() {
+		double leftValue = left.getValue();
+		double rightValue = right.getValue();
+		double result;
+		
 		switch (operator) {
 			case PLUS:
-				// TODO: The next line is OK to use because we can accept simple addition as a given, correct?
-				return (left.getValue() + right.getValue());
+				result = MathUtil.add(leftValue, rightValue); 
+				logger.debug("Evaluating " + leftValue + " + " + rightValue + " and getting: " + result);
+				return result;
 			case MINUS:
-				// TODO: Should this be a simple addition to the return of a method call to MathUtil.negate()?
-				// i.e.: return (left.getValue() + MathUtil.negate(right.getValue()));
-				NegationEvaluator ne = new NegationEvaluator();
-				return (left.getValue() + ne.compute(right.getValue()));
-				//return (left.getValue() - right.getValue());
+				result = MathUtil.subtract(leftValue, rightValue); 
+				logger.debug("Evaluating " + leftValue + " - " + rightValue + " and getting: " + result);
+				return result;
 			case MULTIPLY:
-				// TODO: The next line is OK to use because we can accept simple multiplication as a given, correct?
-				return (left.getValue() * right.getValue());
+				result = MathUtil.multiply(leftValue, rightValue); 
+				logger.debug("Evaluating " + leftValue + " * " + rightValue + " and getting: " + result);
+				return result;
 			case DIVIDE:
-				// TODO: Should this be a simple method call to MathUtil.divide()?
-				// i.e.: return (MathUtil.divide(left.getValue(), right.getValue()));
-				DivisionEvaluator de = new DivisionEvaluator();
-				return (de.compute(left.getValue(), right.getValue()));
-				//return (left.getValue() / right.getValue());
+				result = MathUtil.divide(leftValue, rightValue); 
+				logger.debug("Evaluating " + leftValue + " / " + rightValue + " and getting: " + result);
+				return result;
 			case POWER:
-				// TODO: Should this be a method call to MathUtil.exponentiation()? (With the appropriate method created, of course)
-				ExponentiationEvaluator ee = new ExponentiationEvaluator();
-				return (ee.compute(left.getValue(), right.getValue()));
+				result = MathUtil.exponentiate(leftValue, rightValue); 
+				logger.debug("Evaluating " + leftValue + " ^ " + rightValue + " and getting: " + result);
+				return result;
 			default:
 				throw new ParseException("Unrecognized operator");
 		}

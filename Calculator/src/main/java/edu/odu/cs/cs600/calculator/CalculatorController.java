@@ -12,11 +12,15 @@ import javax.swing.event.ChangeListener;
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
+import edu.odu.cs.cs600.calculator.math.MathUtil;
+import edu.odu.cs.cs600.calculator.math.grammar.Lexer;
+import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
 public class CalculatorController 
 {
 	private CalculatorModel model = null;
 	private CalculatorView view = null;
+	private SimpleCalculatorParser parser = null;
 	
 	public CalculatorController(CalculatorModel model, CalculatorView view)
 	{
@@ -56,7 +60,7 @@ public class CalculatorController
 	private class PhraseChangeListener implements ChangeListener {
 		@Override
 		public void stateChanged(ChangeEvent e) {
-			view.setDisplay(model.getPhrase().getPhrase(true));
+			view.setDisplay(model.getPhrase().toString(true));
 		}
 	}
 	
@@ -96,7 +100,7 @@ public class CalculatorController
 						model.getPhrase().pop();
 						break;
 					case CLEAR_ALL:
-						model.getPhrase().clear();
+						model.getPhrase().clearErrorState();
 						break;
 	
 					// ***********************
@@ -106,68 +110,93 @@ public class CalculatorController
 					case CEILING:
 					{
 						try {
-//							double result = Parser.parse(model.getPhrase().getPhrase(false));
-//							result = MathUtil.ceiling(result);
-//							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
+							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							// TODO: Might want to evaluate the returned double somewhere in here
+							// to ensure it's chopped at 10 characters.  For instance, if the
+							// double returned is 3.666666666666666667, we want to represent it
+							// as the 10-character string: 3.66666667.  This described
+							// functionality seems as if it'd belong to the display, however,
+							// there will most likely need to be some number introspection which
+							// would place the logic here within the controller.
+							// On the flip side - what if we did 125^125?  We would have to
+							// convert to scientific notation and display.
+							model.getPhrase().setPhrase(MathUtil.ceiling(parser.parseExpression().getValue()));
 						} catch(Exception ex) {
-							// TODO - do something w/ this!
-							System.err.println(ex);
+							model.getPhrase().setErrorState();
 						}
 	
 						break;
 					}
 					case EVALUATE:
 					{
-//						double result = Parser.parse(model.getPhrase().getPhrase(false));
-//						model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
+						try {
+							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							// TODO: Possibly evaluate character length (see above TODO)
+							model.getPhrase().setPhrase(parser.parseExpression().getValue());
+						} catch (Exception ex) {
+							model.getPhrase().setErrorState();
+						}
+						
 						break;
 					}
 					case FLOOR:
 					{
 						try {
-//							double result = Parser.parse(model.getPhrase().getPhrase(false));
-//							result = MathUtil.floor(result);
-//							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
-						} catch(Exception ex) {
-							// TODO - JS do somethign w/ this!
-							System.err.println(ex);
+							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							// TODO: Possibly evaluate character length (see above TODO)
+							model.getPhrase().setPhrase(MathUtil.floor(parser.parseExpression().getValue()));
+						} catch (Exception ex) {
+							model.getPhrase().setErrorState();
 						}
+						
 						break;
 					}
 					case NEGATE:
 					{
 						try {
-//							double result = Parser.parse(model.getPhrase().getPhrase(false));
-//							result = MathUtil.negate(result);
-//							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
-						} catch(Exception ex) {
-							// TODO - JS do somethign w/ this!
-							System.err.println(ex);
+							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							// TODO: Possibly evaluate character length (see above TODO)
+							model.getPhrase().setPhrase(MathUtil.negate(parser.parseExpression().getValue()));
+						} catch (Exception ex) {
+							model.getPhrase().setErrorState();
 						}
+						
 						break;
 					}
 					case RECIPROCAL:
 					{
 						try {
-//							double result = Parser.parse(model.getPhrase().getPhrase(false));
-//							result = MathUtil.reciprocal(result);
-//							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
-						} catch(Exception ex) {
-							// TODO - do somethign w/ this!
-							System.err.println(ex);
+							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							// TODO: Possibly evaluate character length (see above TODO)
+							model.getPhrase().setPhrase(MathUtil.reciprocate(parser.parseExpression().getValue()));
+						} catch (Exception ex) {
+							model.getPhrase().setErrorState();
 						}
+						
 						break;
 					}
 					case SQUAREROOT:
 					{
 						try {
-//							double result = Parser.parse(model.getPhrase().getPhrase(false));
-//							result = MathUtil.squareRoot(result);
-//							model.getPhrase().setPhrase(model.getPhrase().convertToPhrase(String.valueOf(result)));
-						} catch(Exception ex) {
-							// TODO - do somethign w/ this!
-							System.err.println(ex);
+							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							// TODO: Possibly evaluate character length (see above TODO)
+							model.getPhrase().setPhrase(MathUtil.squareRoot(parser.parseExpression().getValue()));
+						} catch (Exception ex) {
+							model.getPhrase().setErrorState();
 						}
+						
+						break;
+					}
+					case SQUARE:
+					{
+						try {
+							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							// TODO: Possibly evaluate character length (see above TODO)
+							model.getPhrase().setPhrase(MathUtil.exponentiate(parser.parseExpression().getValue(), 2.0));
+						} catch (Exception ex) {
+							model.getPhrase().setErrorState();
+						}
+						
 						break;
 					}
 					default:

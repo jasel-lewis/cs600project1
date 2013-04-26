@@ -22,7 +22,7 @@ public class Lexer implements Iterator<Token> {
 	 * @param phrase {@link Phrase} to tokenize
 	 */
 	public Lexer(Phrase phrase) {
-		this.phrase = phrase.toString();
+		this.phrase = phrase.toString(false);
 		init();
 	}
 
