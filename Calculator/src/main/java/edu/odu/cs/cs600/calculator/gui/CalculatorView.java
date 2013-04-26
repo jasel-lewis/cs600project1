@@ -115,17 +115,17 @@ public class CalculatorView extends JFrame {
 
 		// ROW 1
 		
-		CommandButton ceilingButton = new CommandButton("buttonCeiling.png", "buttonCeilingOver.png", "Ceiling", CalculatorCommand.CEILING);
+		CommandButton ceilingButton = new CommandButton("buttonCeiling.png", "buttonCeilingOver.png", CalculatorCommand.CEILING);
 		ceilingButton.setBounds(25, 118, 56, 56);
 		ceilingButton.addActionListener(commandButtonActionListener);
 		panel.add(ceilingButton);
 		  
-		CommandButton floorButton = new CommandButton("buttonFloor.png", "buttonFloorOver.png", "Floor", CalculatorCommand.FLOOR);
+		CommandButton floorButton = new CommandButton("buttonFloor.png", "buttonFloorOver.png", CalculatorCommand.FLOOR);
 		floorButton.setBounds(91, 118, 56, 56);
 		floorButton.addActionListener(commandButtonActionListener);
 		panel.add(floorButton);
 		  
-		CommandButton reciprocalButton = new CommandButton("buttonReciprocal.png", "buttonReciprocalOver.png", "<html>1/x</html>", CalculatorCommand.RECIPROCAL);
+		CommandButton reciprocalButton = new CommandButton("buttonReciprocal.png", "buttonReciprocalOver.png", CalculatorCommand.RECIPROCAL);
 		reciprocalButton.setBounds(156, 118, 56, 56);
 		reciprocalButton.addActionListener(commandButtonActionListener);
 		panel.add(reciprocalButton);
@@ -135,34 +135,34 @@ public class CalculatorView extends JFrame {
 		exponentiateButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(exponentiateButton);
 		
-		CommandButton clearEntryButton = new CommandButton("buttonClearEntry.png", "buttonClearEntryOver.png", "CE", CalculatorCommand.CLEAR, KeyEvent.VK_BACK_SPACE);
+		CommandButton clearEntryButton = new CommandButton("buttonClearEntry.png", "buttonClearEntryOver.png", CalculatorCommand.CLEAR, KeyEvent.VK_BACK_SPACE);
 		clearEntryButton.setBounds(286, 118, 56, 56);
 		clearEntryButton.addActionListener(commandButtonActionListener);
 		panel.add(clearEntryButton);
 		
 		// ROW 2
 		
-		CommandButton negateButton = new CommandButton("buttonNegate.png", "buttonNegateOver.png", "<html>&plusmn;</html>", CalculatorCommand.NEGATE);
+		CommandButton negateButton = new CommandButton("buttonNegate.png", "buttonNegateOver.png", CalculatorCommand.NEGATE);
 		negateButton.setBounds(25, 184, 56, 56);
 		negateButton.addActionListener(commandButtonActionListener);
 		panel.add(negateButton);
 		
-		CommandButton factorialButton = new CommandButton("buttonFactorial.png", "buttonFactorialOver.png", "<html>&radic;</html>", CalculatorCommand.FACTORIAL);
+		CommandButton factorialButton = new CommandButton("buttonFactorial.png", "buttonFactorialOver.png", CalculatorCommand.FACTORIAL);
 		factorialButton.setBounds(91, 184, 56, 56);
 		factorialButton.addActionListener(commandButtonActionListener);
 		panel.add(factorialButton);
 		
-		CommandButton squareRootButton = new CommandButton("buttonSquareRoot.png", "buttonSquareRootOver.png", "<html>&radic;</html>", CalculatorCommand.SQUAREROOT);
+		CommandButton squareRootButton = new CommandButton("buttonSquareRoot.png", "buttonSquareRootOver.png", CalculatorCommand.SQUAREROOT);
 		squareRootButton.setBounds(156, 184, 56, 56);
 		squareRootButton.addActionListener(commandButtonActionListener);
 		panel.add(squareRootButton);
 		
-		CommandButton squaredButton = new CommandButton("buttonSquared.png", "buttonSquaredOver.png", "<html>&radic;</html>", CalculatorCommand.SQUARE);
+		CommandButton squaredButton = new CommandButton("buttonSquared.png", "buttonSquaredOver.png", CalculatorCommand.SQUARE);
 		squaredButton.setBounds(221, 184, 56, 56);
 		squaredButton.addActionListener(commandButtonActionListener);
 		panel.add(squaredButton);
 		
-		CommandButton clearAllButton = new CommandButton("buttonClear.png", "buttonClearOver.png", "C", CalculatorCommand.CLEAR_ALL);
+		CommandButton clearAllButton = new CommandButton("buttonClear.png", "buttonClearOver.png", CalculatorCommand.CLEAR_ALL);
 		clearAllButton.setBounds(286, 184, 56, 56);
 		clearAllButton.addActionListener(commandButtonActionListener);
 		panel.add(clearAllButton);
@@ -243,7 +243,7 @@ public class CalculatorView extends JFrame {
 		multiplyButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(multiplyButton);
 
-		CommandButton equalsButton = new CommandButton("buttonEqual.png", "buttonEqualOver.png", "=", CalculatorCommand.EVALUATE);
+		CommandButton equalsButton = new CommandButton("buttonEqual.png", "buttonEqualOver.png", CalculatorCommand.EVALUATE);
 		equalsButton.setBounds(286, 382, 56, 122);
 		equalsButton.addActionListener(commandButtonActionListener);
 		panel.add(equalsButton);

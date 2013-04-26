@@ -20,9 +20,6 @@ import javax.swing.plaf.ActionMapUIResource;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import edu.odu.cs.cs600.calculator.Application;
-import edu.odu.cs.cs600.calculator.math.ReciprocalEvaluator;
-
 public abstract class CalculatorButton extends JButton 
 {
 
@@ -30,13 +27,9 @@ public abstract class CalculatorButton extends JButton
 	private static final long serialVersionUID = -7812322272853697084L;
 	private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 26);
 	
-	private String altText;
-	
-	public CalculatorButton(String imagePath, String imageOverPath, String altText)
+	public CalculatorButton(String imagePath, String imageOverPath)
 	{
 		super();
-		
-		this.altText = altText;
 		
 		ImageIcon imgIcon = createImageIcon(imagePath);
 		
@@ -59,16 +52,14 @@ public abstract class CalculatorButton extends JButton
 		setFont(BUTTON_FONT);
 	}
 	
-	public CalculatorButton(String imagePath, String imageOverPath, String altText, int keyCode)
+	public CalculatorButton(String imagePath, String imageOverPath, int keyCode)
 	{
-		this(imagePath, imageOverPath, altText);
+		this(imagePath, imageOverPath);
 		
 		if (keyCode != KeyEvent.VK_UNDEFINED) {
 			this.hookKeyInput(keyCode);
 		}
 	}
-	
-	
 	
 	/**
 	 * Create an ImageIcon from the passed path and filename.  Return null if unable to
@@ -88,18 +79,6 @@ public abstract class CalculatorButton extends JButton
 		}
 	}
 	
-	
-	
-	/**
-	 * Return the fall-back, character representation of this CalculatorButton
-	 * @return
-	 */
-	public String getAltText() 
-	{
-		return altText;
-	}
-	
-	
 	protected void hookKeyInput(int keyCode)
 	{
 		this.hookKeyInput(KeyStroke.getKeyStroke(keyCode, 0));
@@ -114,11 +93,10 @@ public abstract class CalculatorButton extends JButton
 	{
 		InputMap keyMap = new ComponentInputMap(this);
 		
-		// TODO: Figure out why the fuck getAlt+Text() got put in here
-		keyMap.put(keyCode, this.getAltText());
+		keyMap.put(keyCode, keyCode.getKeyCode());
 		
 		ActionMap actionMap = new ActionMapUIResource();
-		actionMap.put(this.getAltText(), new AbstractAction() {
+		actionMap.put(keyCode.getKeyCode(), new AbstractAction() {
 			private static final long serialVersionUID = 303540849078642457L;
 
 			public void actionPerformed(ActionEvent ae) {

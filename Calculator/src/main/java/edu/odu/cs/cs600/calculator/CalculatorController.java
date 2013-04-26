@@ -16,7 +16,6 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 import edu.odu.cs.cs600.calculator.math.MathUtil;
-import edu.odu.cs.cs600.calculator.math.ReciprocalEvaluator;
 import edu.odu.cs.cs600.calculator.math.grammar.Lexer;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 

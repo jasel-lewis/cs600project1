@@ -12,7 +12,7 @@ public class CharacterInputButton extends CalculatorButton
 
 	public CharacterInputButton(String imagePath, String imageOverPath, CalculatorCharacter calculatorCharacter) 
 	{
-		super(imagePath, imageOverPath, String.valueOf(calculatorCharacter.getMorpheme()));
+		super(imagePath, imageOverPath);
 		
 		this.calculatorInputCharacter = calculatorCharacter;
 		
