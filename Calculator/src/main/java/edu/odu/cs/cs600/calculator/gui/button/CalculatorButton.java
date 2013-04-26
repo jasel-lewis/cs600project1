@@ -17,11 +17,16 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.ActionMapUIResource;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import edu.odu.cs.cs600.calculator.Application;
+import edu.odu.cs.cs600.calculator.math.ReciprocalEvaluator;
 
 public abstract class CalculatorButton extends JButton 
 {
 
+	private static Logger logger = LogManager.getLogger(CalculatorButton.class);
 	private static final long serialVersionUID = -7812322272853697084L;
 	private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 26);
 	
@@ -78,7 +83,7 @@ public abstract class CalculatorButton extends JButton
 		if (imgURL != null) {
 			return new ImageIcon(imgURL);
 		} else {
-			System.err.println("Could not locate image resource for button icon: " + path);
+			logger.warn("Could not locate image resource for button icon: " + path);
 			return null;
 		}
 	}
@@ -117,9 +122,7 @@ public abstract class CalculatorButton extends JButton
 			private static final long serialVersionUID = 303540849078642457L;
 
 			public void actionPerformed(ActionEvent ae) {
-				if (Application.debug) {
-					System.err.println("ActionEvent: " + ae);
-				}
+				logger.debug("ActionEvent: " + ae);
 				((CalculatorButton)ae.getSource()).doClick();
 			}
 		});

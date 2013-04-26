@@ -40,4 +40,10 @@ public class CalculatorCharacter {
 	public boolean equalsMorpheme(char morpheme) {
 		return(this.morpheme == morpheme);
 	}
-}  // end class CalculatorCharacter
+	
+	
+	@Override
+	public String toString() {
+		return String.valueOf(this.morpheme); 
+	}
+}

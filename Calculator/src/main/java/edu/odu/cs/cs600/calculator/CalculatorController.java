@@ -9,15 +9,21 @@ import java.beans.PropertyChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 import edu.odu.cs.cs600.calculator.math.MathUtil;
+import edu.odu.cs.cs600.calculator.math.ReciprocalEvaluator;
 import edu.odu.cs.cs600.calculator.math.grammar.Lexer;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
 public class CalculatorController 
 {
+	private static Logger logger = LogManager.getLogger(CalculatorController.class);
+	
 	private CalculatorModel model = null;
 	private CalculatorView view = null;
 	private SimpleCalculatorParser parser = null;
@@ -69,14 +75,14 @@ public class CalculatorController
 	private class CharacterInputButtonActionListener implements ActionListener
 	{
 		// TODO : Check flag to see if the input needs to be cleared before adding the input to the phrase
-		// TODO : Replace System.out calls w/ Logger calls
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() instanceof CharacterInputButton)
 			{
-				System.out.println("Character button pressed");
 				CharacterInputButton button = (CharacterInputButton)e.getSource();
 				model.getPhrase().push(button.getCalclatorCharacter());
+				
+				logger.debug("Character button pressed: " + button.getCalclatorCharacter());
 			}
 		}
 	}
@@ -87,10 +93,12 @@ public class CalculatorController
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			System.out.println("Command button pressed");
 			if(e.getSource() instanceof CommandButton)
 			{
 				CalculatorCommand command = ((CommandButton)e.getSource()).getCommand();
+				
+				logger.debug("Command button pressed: " + command);
+				
 				switch(command)
 				{
 					// ***********************
