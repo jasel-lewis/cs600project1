@@ -1,10 +1,7 @@
 package edu.odu.cs.cs600.calculator;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
