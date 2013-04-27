@@ -18,27 +18,14 @@ public class Phrase {
 	public Phrase() {
 		clear();
 	}
-	
-	private Phrase(List<CalculatorCharacter> phrase) {
-		this();
 		
-		if (!phrase.isEmpty()) {
-			this.phrase = phrase;
-		}
-	}
-
-	
 	public void addChangeListener(ChangeListener listener) {
 		changeListeners.add(listener);
 	}
 	
-	
-	
 	public void removeChangeListener(ChangeListener listener) {
 		changeListeners.remove(listener);
 	}
-	
-	
 	
 	private void fireChangeEvent() {
 		ChangeEvent e = new ChangeEvent(this);
@@ -47,8 +34,6 @@ public class Phrase {
 			listener.stateChanged(e);
 		}
 	}
-	
-	
 	
 	/**
 	 * Returns a {@link String} representation of this Phrase.  If true is passed, the String
@@ -91,7 +76,6 @@ public class Phrase {
 		return toString(false);
 	}
 	
-	
 	/**
 	 * Add a {@link CalculatorCharacter} to this Phrase
 	 * @param string
@@ -114,7 +98,6 @@ public class Phrase {
 		fireChangeEvent();
 		
 	}
-	
 	
 	/**
 	 * Remove a {@link CalculatorCharacter} from this CalculatorDisplay
@@ -139,12 +122,18 @@ public class Phrase {
 		fireChangeEvent();
 	}	
 	
+	
+	
 	public static Phrase convertToPhrase(String phrase) {
-		return new Phrase(generateCharacterList(phrase));
+		List<CalculatorCharacter> charList = generateCharacterList(phrase);
+		Phrase p = new Phrase();
+		for(CalculatorCharacter cc : charList)
+			p.push(cc);
+		return p;
 	}
 	
 	public static Phrase convertToPhrase(double value) {
-		return new Phrase(generateCharacterList(Double.toString(value)));
+		return Phrase.convertToPhrase(Double.toString(value));
 	}
 	
 	private static List<CalculatorCharacter> generateCharacterList(String stringPhrase) {
@@ -157,8 +146,4 @@ public class Phrase {
 		return result;
 	}
 	
-	public void setPhrase(double value) {
-		this.phrase = generateCharacterList(Double.toString(value));
-		fireChangeEvent();
-	}
 }

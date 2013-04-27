@@ -14,6 +14,7 @@ import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 import edu.odu.cs.cs600.calculator.math.MathUtil;
 import edu.odu.cs.cs600.calculator.math.grammar.Lexer;
+import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
 public class CalculatorController 
@@ -143,7 +144,9 @@ public class CalculatorController
 							// would place the logic here within the controller.
 							// On the flip side - what if we did 125^125?  We would have to
 							// convert to scientific notation and display.
-							model.getActivePhrase().setPhrase(MathUtil.ceiling(parser.parseExpression().getValue()));
+							//model.getActivePhrase().setPhrase(MathUtil.ceiling(parser.parseExpression().getValue()));
+							double result = MathUtil.ceiling(parser.parseExpression().getValue());
+							model.setActivePhrase(Phrase.convertToPhrase(result));
 						} catch(Exception ex) {
 							model.setErrorState(true);
 						}
@@ -157,7 +160,8 @@ public class CalculatorController
 						try {
 							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getActivePhrase().setPhrase(parser.parseExpression().getValue());
+							double result = parser.parseExpression().getValue();
+							model.setActivePhrase(Phrase.convertToPhrase(result));
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -171,7 +175,8 @@ public class CalculatorController
 						try {
 							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getActivePhrase().setPhrase(MathUtil.floor(parser.parseExpression().getValue()));
+							double result = MathUtil.floor(parser.parseExpression().getValue());
+							model.setActivePhrase(Phrase.convertToPhrase(result));
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -185,7 +190,9 @@ public class CalculatorController
 						try {
 							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getActivePhrase().setPhrase(MathUtil.negate(parser.parseExpression().getValue()));
+							double result = MathUtil.negate(parser.parseExpression().getValue());
+							model.setActivePhrase(Phrase.convertToPhrase(result));
+							
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -199,7 +206,8 @@ public class CalculatorController
 						try {
 							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getActivePhrase().setPhrase(MathUtil.reciprocate(parser.parseExpression().getValue()));
+							double result = MathUtil.reciprocate(parser.parseExpression().getValue());
+							model.setActivePhrase(Phrase.convertToPhrase(result));
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -213,7 +221,8 @@ public class CalculatorController
 						try {
 							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getActivePhrase().setPhrase(MathUtil.squareRoot(parser.parseExpression().getValue()));
+							double result = MathUtil.squareRoot(parser.parseExpression().getValue());
+							model.setActivePhrase(Phrase.convertToPhrase(result));
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -227,7 +236,8 @@ public class CalculatorController
 						try {
 							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getActivePhrase().setPhrase(MathUtil.exponentiate(parser.parseExpression().getValue(), 2.0));
+							double result = MathUtil.exponentiate(parser.parseExpression().getValue(), 2.0);
+							model.setActivePhrase(Phrase.convertToPhrase(result));
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
