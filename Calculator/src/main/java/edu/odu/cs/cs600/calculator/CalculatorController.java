@@ -42,7 +42,7 @@ public class CalculatorController
 	 */
 	private void initModelListeners()
 	{
-		this.model.addStateChangeListener(new StateChangeListener());
+		
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class CalculatorController
 	private class PhraseChangeListener implements ChangeListener {
 		@Override
 		public void stateChanged(ChangeEvent e) {
-			view.setDisplay(model.getPhrase().toString(true));
+			view.setActiveDisplayText(model.getPhrase().toString(true));
 		}
 	}
 	
@@ -213,25 +213,4 @@ public class CalculatorController
 		}
 	}
 	
-	/**
-	 * When the state of the calculator is turned on, the display is lit up
-	 * and the display is zeroed out.  When turned off, the display is grayed out.
-	 */
-	private class StateChangeListener implements PropertyChangeListener
-	{
-		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
-			boolean state = (Boolean)evt.getNewValue();
-			if(state)
-			{
-				view.getDisplay().setForeground(Color.DARK_GRAY);
-				model.getPhrase().clear();
-			}
-			else
-			{
-				view.getDisplay().setForeground(Color.LIGHT_GRAY);
-				model.getPhrase().setOffState();
-			}
-		}
-	}
 } 

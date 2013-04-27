@@ -20,9 +20,6 @@ public class Application {
 				@SuppressWarnings("unused")
 				CalculatorController controller = new CalculatorController(model, view);
 				
-				// Turn the calculator on
-				model.setState(true);
-				
 				view.setVisible(true);
 			}        
 		});
