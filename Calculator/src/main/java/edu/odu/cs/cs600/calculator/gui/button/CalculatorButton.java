@@ -100,7 +100,6 @@ public abstract class CalculatorButton extends JButton
 			private static final long serialVersionUID = 303540849078642457L;
 
 			public void actionPerformed(ActionEvent ae) {
-				logger.debug("ActionEvent: " + ae);
 				((CalculatorButton)ae.getSource()).doClick();
 			}
 		});

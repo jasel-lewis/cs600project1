@@ -5,7 +5,7 @@
 	<!-- The value of a property is accessed via ${} -->
 	<property name="src.dir" location="src/main/java" />
 	<property name="test.dir" location="src/test/java" />
-	<property name="resources.dir" location="resources/images" />
+	<property name="resources.dir" location="resources" />
 	<property name="build.dir" location="build" />
 	<property name="dist.dir" location="dist" />
 	<property name="docs.dir" location="docs" />
@@ -69,6 +69,7 @@
 	<target name="jar" depends="compile">
 		<jar destfile="${dist.dir}\calculator.jar" basedir="${build.dir}">
 			<fileset dir="${resources.dir}" />
+			<fileset dir="${resources.dir}/images" />
 			<manifest>
 				<attribute name="Main-Class" value="edu.odu.cs.cs600.calculator.Application" />
 			</manifest>
