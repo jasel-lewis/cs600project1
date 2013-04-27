@@ -24,13 +24,13 @@ public class FloorEvaluator implements IUnaryEvaluator {
 		if (value >= 1.0) {
 			int k = 0, kPlusOne = 1;
 			
-			while (binaryExponentiation(kPlusOne) <= value) {
+			while (MathUtil.binaryExponentiation(kPlusOne) <= value) {
 				k = kPlusOne++;
 			}
 			
 			logger.debug("Bounded value with 2^" + k + " and 2^" + kPlusOne);
 			
-			return (double)floorBinarySearch(binaryExponentiation(k), binaryExponentiation(kPlusOne), value);
+			return (double)floorBinarySearch(MathUtil.binaryExponentiation(k), MathUtil.binaryExponentiation(kPlusOne), value);
 		} else if ((value >= 0.0) && (value < 1.0)) {
 			logger.debug("Special case handled: vaue is >= 0.0 && < 1.0");
 			return (0.0);
@@ -74,35 +74,5 @@ public class FloorEvaluator implements IUnaryEvaluator {
 		}
 		
 		return lower;
-	}
-	
-	
-	
-	/**
-	 * This method accepts a positive integer value as the exponent with which to
-	 * perform binary exponentiation.  MathUtil.exponentiate() could not be utilized
-	 * as this would have set up a circular dependency ({@link ExponentialEvaluator}
-	 * relies on MathUtil.floor() which then relies on this class).  If a negative
-	 * value is passed, an {@link ArithmeticException} is thrown.
-	 * @param exponent
-	 * @return
-	 * @throws {@link ArithmeticException}
-	 */
-	private int binaryExponentiation(int exponent) {
-		if (exponent == 0) {
-			return 1;
-		} else if (exponent == 1) {
-			return 2;
-		} else if (exponent > 1) {
-			int result = 2;
-			
-			while (exponent-- > 1) {
-				result = result * 2;
-			}
-			
-			return result;
-		} else {
-			throw new ArithmeticException("Argument must be positive");
-		}
 	}
 }

@@ -22,9 +22,13 @@ public class FloorRandomEvaluationTest {
 	public void testRandomNumbers() {
 		Random random = new Random(1337);
 		double randomDouble = 0.0;
+		int intMultiplier = 0;
 		
-		for (int i = 0; i < 1000; i++) {
-			randomDouble = random.nextGaussian();
+		for (int i = 0; i < 10000; i++) {
+			randomDouble = random.nextDouble();
+			intMultiplier = random.nextInt(6);
+			
+			randomDouble = randomDouble * Math.pow(10, intMultiplier);
 			assertEquals(Math.floor(randomDouble), MathUtil.floor(randomDouble), EPSILON);
 		}
 	}

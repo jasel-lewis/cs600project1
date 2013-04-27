@@ -62,4 +62,34 @@ public class MathUtil
 	public static double add(double x, double y) throws ArithmeticException {
 		return additionEvaluator.compute(x, y);
 	}
+	
+
+	/**
+	 * This method accepts a positive integer value as the exponent with which to
+	 * perform binary exponentiation.  {@link #exponentiate(double, double)} could
+	 * not be utilized as this would have set up a circular dependency
+	 * ({@link ExponentialEvaluator} relies on {@link #floor(double)} and
+	 * {@link #ceiling(double)} which then relies on this method).  If a negative
+	 * value is passed, an {@link ArithmeticException} is thrown.
+	 * @param exponent
+	 * @return
+	 * @throws {@link ArithmeticException}
+	 */
+	public static int binaryExponentiation(int exponent) {
+		if (exponent == 0) {
+			return 1;
+		} else if (exponent == 1) {
+			return 2;
+		} else if (exponent > 1) {
+			int result = 2;
+			
+			while (exponent-- > 1) {
+				result = result * 2;
+			}
+			
+			return result;
+		} else {
+			throw new ArithmeticException("Argument must be positive");
+		}
+	}
 }
