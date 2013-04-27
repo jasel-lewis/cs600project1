@@ -64,4 +64,11 @@ public class SimpleCalculatorParser extends Parser {
 	public void infixRight(TokenType token, int precedence) {
 		register(token, new BinaryOperatorParselet(precedence, true));
 	}
+	
+	
+	public static double evaluatePhrase(Phrase phrase)
+	{
+		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));
+		return parser.parseExpression().getValue();
+	}
 }
