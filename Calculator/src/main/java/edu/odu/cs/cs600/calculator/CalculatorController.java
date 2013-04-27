@@ -68,7 +68,8 @@ public class CalculatorController
 	private class ModelActivePhraseChangeListener implements PhraseChangedListener {
 		@Override
 		public void phraseChanged(Phrase phrase) {
-			view.setActiveDisplayText(phrase.toString(true));
+			
+			view.setActiveDisplayText(String.format(phrase.toString(true),"%g"));
 		}
 	}
 	

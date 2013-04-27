@@ -46,9 +46,9 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 				x = x * 0.1;
 			}
 		}
-		else if(x < 0.01)
+		else if(x < 0.1)
 		{
-			while(x < 0.01)
+			while(x < 0.1)
 			{
 				factor--;
 				x = x * 10;
