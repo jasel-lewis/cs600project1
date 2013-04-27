@@ -51,7 +51,7 @@ public class CalculatorView extends JFrame {
 	
 	public CalculatorView() 
 	{
-		super("Calculator");
+		super("World's Cheapest Calculator");
 			
 		initComponents();
 	}

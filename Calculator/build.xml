@@ -5,11 +5,11 @@
 	<!-- The value of a property is accessed via ${} -->
 	<property name="src.dir" location="src/main/java" />
 	<property name="test.dir" location="src/test/java" />
+	<property name="resources.dir" location="resources/images" />
 	<property name="build.dir" location="build" />
 	<property name="dist.dir" location="dist" />
 	<property name="docs.dir" location="docs" />
 	<property name="libs.dir" location="lib" />
-	<property name="resource.dir" location="resource" />
 	<property name="test.report.dir" location="testreport" />
   	
   	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
@@ -68,15 +68,15 @@
 	<!--Creates the deployable jar file -->
 	<target name="jar" depends="compile">
 		<jar destfile="${dist.dir}\calculator.jar" basedir="${build.dir}">
+			<fileset dir="${resources.dir}" />
 			<manifest>
 				<attribute name="Main-Class" value="edu.odu.cs.cs600.calculator.Application" />
 			</manifest>
 		</jar>
 	</target>
 
-	<!-- Run the JUnit Tests -->
-	<!-- Output is XML, could also be plain -->
-	<target name="junit" depends="compile">
+	<target name="test" depends="compile">
+		<description>Executes the automated unit tests.  Output is provided in ${test.report.dir}</description>
 		<junit printsummary="on" fork="true" haltonfailure="yes">
 			<classpath refid="junit.class.path" />
 			<formatter type="plain" />
@@ -89,12 +89,17 @@
 	</target>
 	
 	<target name="run">
-        <java jar="${dist.dir}\calculator.jar" fork="true"/>
+	  <description>Executes the application</description>
+      <java classname="edu.odu.cs.cs600.calculator.Application" fork="true"> 
+        <classpath>
+          <path refid="class.path" />
+          <pathelement location="${dist.dir}\calculator.jar" />
+        </classpath>
+      </java>
     </target>
 
-	<!-- Main target which compiles, creates the jar, generates the javadocs, and executes the application -->
-	<target name="main" depends="compile, jar, docs, junit, run">
-		<description>Main target</description>
+	<target name="main" depends="compile, jar, docs, test, run">
+		<description>Main target which compiles, creates the jar, generates the javadocs, executes the unit tests, and executes the application</description>
 	</target>
 
 </project> 
