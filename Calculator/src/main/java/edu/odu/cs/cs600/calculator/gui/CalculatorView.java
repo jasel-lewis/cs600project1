@@ -27,7 +27,8 @@ public class CalculatorView extends JFrame {
 	private List<ChangeListener> displayChangeListener = new ArrayList<ChangeListener> ();
 	
 	private ImagePanel panel;
-	private JLabel display;
+	private JLabel activeDisplay;
+	private JLabel historyDisplay;
 	
 	private List<ActionListener> characterInputButtonActionListeners = new ArrayList<ActionListener>();
 	private ActionListener characterInputButtonActionListener = new ActionListener(){
@@ -72,12 +73,18 @@ public class CalculatorView extends JFrame {
 	}
 	
 	private void initDisplay() 
-	{
-		display = new JLabel();
-		display.setFont(new Font("Courier New", Font.BOLD, 42));
-        display.setHorizontalAlignment(JLabel.RIGHT);
-        display.setBounds(10, 70, 330, 30);
-        panel.add(display);
+	{	
+		activeDisplay = new JLabel();
+		activeDisplay.setFont(new Font("Courier New", Font.BOLD, 42));
+        activeDisplay.setHorizontalAlignment(JLabel.RIGHT);
+        activeDisplay.setBounds(20, 70, 320, 30);
+        panel.add(activeDisplay);
+        
+        historyDisplay = new JLabel();
+        historyDisplay.setFont(new Font("Courier New", Font.PLAIN, 22));
+        historyDisplay.setHorizontalAlignment(JLabel.RIGHT);
+        historyDisplay.setBounds(20, 26, 320, 30);
+        panel.add(historyDisplay);
 	}
 	
 	
@@ -237,14 +244,12 @@ public class CalculatorView extends JFrame {
 		panel.add(divideButton);
 	}  
 	
+	public void setActiveDisplayText(String string) {
+		activeDisplay.setText(string);
+	}
 	
-	
-	public JLabel getDisplay() {
-		return display;
-	} 
-	
-	public void setDisplay(String string) {
-		display.setText(string);
+	public void setHistoryDisplayText(String string) {
+		historyDisplay.setText(string);
 	}
 	
 	public void addCharacterInputButtonListener(ActionListener listener) {
