@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeListener;
 
 import edu.odu.cs.cs600.calculator.CalculatorCharacter;
@@ -76,15 +77,18 @@ public class CalculatorView extends JFrame {
 	{	
 		activeDisplay = new JLabel();
 		activeDisplay.setFont(new Font("Courier New", Font.BOLD, 42));
-		activeDisplay.setHorizontalAlignment(JLabel.RIGHT);
-        activeDisplay.setBounds(20, 70, 320, 30);
+		//activeDisplay.setHorizontalAlignment(SwingConstants.RIGHT);
+		activeDisplay.setVerticalAlignment(SwingConstants.CENTER);
+        activeDisplay.setBounds(28, 68, 312, 32);
         panel.add(activeDisplay);
         
         historyDisplay = new JLabel();
         historyDisplay.setFont(new Font("Courier New", Font.PLAIN, 22));
-        historyDisplay.setHorizontalAlignment(JLabel.RIGHT);
-        historyDisplay.setBounds(20, 26, 320, 30);
+        //historyDisplay.setHorizontalAlignment(JLabel.RIGHT);
+        historyDisplay.setBounds(28, 26, 312, 25);
         panel.add(historyDisplay);
+        
+        
 	}
 	
 	

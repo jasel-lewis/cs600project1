@@ -1,5 +1,6 @@
 package edu.odu.cs.cs600.calculator.math.grammar;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -133,7 +134,8 @@ public class Phrase
 	}
 	
 	public static Phrase convertToPhrase(double value) {
-		return Phrase.convertToPhrase(Double.toString(value));
+		DecimalFormat df = new DecimalFormat("#.##########");
+		return Phrase.convertToPhrase(df.format(value));
 	}
 	
 	private static List<CalculatorCharacter> generateCharacterList(String stringPhrase) {
