@@ -8,6 +8,13 @@ public class SquareRootEvaluator implements IUnaryEvaluator
 	private static Logger logger = LogManager.getLogger(SquareRootEvaluator.class);
 	private static final double EPSILON = 0.0000000000001;
 	
+	// TODO: Jared explain this implementation in the Javadoc comments below
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 * @throws ArithmeticException
+	 */
 	public double compute(double value) throws ArithmeticException
 	{
 		if(value < 0)

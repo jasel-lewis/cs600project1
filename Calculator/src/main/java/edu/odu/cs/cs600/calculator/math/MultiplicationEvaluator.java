@@ -2,7 +2,14 @@ package edu.odu.cs.cs600.calculator.math;
 
 public class MultiplicationEvaluator implements IBinaryEvaluator {
 
-	public double compute(double numerator, double divisor) throws ArithmeticException {
-		return numerator * divisor;
+	/**
+	 * Perform simple multiplication on the passed factors
+	 * @param x first factor
+	 * @param y second factor
+	 * @return
+	 * @throws ArithmeticException
+	 */
+	public double compute(double x, double y) throws ArithmeticException {
+		return x * y;
 	}
 }

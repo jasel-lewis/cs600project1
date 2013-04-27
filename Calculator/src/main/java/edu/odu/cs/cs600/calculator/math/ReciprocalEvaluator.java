@@ -3,24 +3,21 @@ package edu.odu.cs.cs600.calculator.math;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-/**
- * Computes the reciprocal of the input value provided.
- * 
- * This method uses Newton's Method to solve f(x)=(1/x)-a=0
- * for x gives x=1/a.  This algorithm implemented
- * works natively on the input range (0,1), however, numerical
- * values outside of this range are "scaled" by shifting the decimal
- * point before computation, and then after.
- * 
- * @author shieldjt
- *
- */
 public class ReciprocalEvaluator implements IUnaryEvaluator 
 {
-	
 	private static Logger logger = LogManager.getLogger(ReciprocalEvaluator.class);
 	private static final double EPSILON = 1e-12;
 	
+	/**
+	 * Computes the reciprocal of the input value provided.  This method uses
+	 * Newton's Method to solve f(x) = (1/x) - a = 0 for x gives x = 1/a.  The
+	 * algorithm implemented works natively on the input range (0,1), however,
+	 * numerical values outside of this range are "scaled" by shifting the
+	 * decimal point before computation, and then after.
+	 * @param x
+	 * @return
+	 * @throws ArithmeticException
+	 */
 	public double compute(double x) throws ArithmeticException
 	{
 		logger.debug("Computing 1/x where x = " + x);
@@ -93,6 +90,5 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 		logger.debug("Computed the reciprocal of x (1/x)="+x);
 		
 		return x;
-	}
-	
+	}	
 }
