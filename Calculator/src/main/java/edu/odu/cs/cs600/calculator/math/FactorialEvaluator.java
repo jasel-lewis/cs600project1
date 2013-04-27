@@ -10,7 +10,7 @@ public class FactorialEvaluator implements IUnaryEvaluator {
 		// advanced mathematics, notably techniques from mathematical analysis.
 		// http://en.wikipedia.org/wiki/Factorial
 		if (value < 0) {
-			throw new ArithmeticException("Factor may only operate on positive integers");
+			throw new ArithmeticException("Factorial may only operate on positive integers");
 		} else if (value == 0) { 
 			return 1;
 		} else if (value == 1) {
