@@ -9,6 +9,9 @@ import org.apache.log4j.Logger;
 import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangedListener;
 
+/**
+ * This class is the Model of the MVC framework employed for this project
+ */
 public class CalculatorModel 
 {	
 	private static Logger logger = LogManager.getLogger(CalculatorModel.class);
@@ -21,16 +24,22 @@ public class CalculatorModel
 	private List<PhraseChangedListener> lastPhraseChangedListeners = new ArrayList<PhraseChangedListener>();
 	private List<ErrorStateChangedListener> errorStateChangedListeners = new ArrayList<ErrorStateChangedListener>();
 	
+	
+	/**
+	 * Constructor
+	 */
 	public CalculatorModel() {
 		this.errorState = false;
 		this.setActivePhrase(new Phrase());
 		this.setLastPhrase(new Phrase());
 	}	
 	
+	
+	// TODO: Jared - Javadoc for this
 	public void setActivePhrase(Phrase phrase) {
 		phrase.clearChangeListeners();
 		this.activePhrase = phrase;
-		this.activePhrase.addChangeListener(new PhraseChangedListener(){
+		this.activePhrase.addChangeListener(new PhraseChangedListener() {
 			@Override
 			public void phraseChanged(Phrase phrase) {
 				for(PhraseChangedListener listener : activePhraseChangedListeners)
@@ -41,10 +50,17 @@ public class CalculatorModel
 			listener.phraseChanged(phrase);
 	} 
 	
+	
+	/**
+	 * Return the active {@link Phrase} for this CalculatorModel
+	 * @return
+	 */
 	public Phrase getActivePhrase() {
 		return this.activePhrase;
 	}
 	
+	
+	// TODO: Jared - Javadoc for this
 	public void setLastPhrase(Phrase phrase) {
 		phrase.clearChangeListeners();
 		this.lastPhrase = phrase;
@@ -59,26 +75,60 @@ public class CalculatorModel
 			listener.phraseChanged(phrase);
 	}
 	
+	
+	/**
+	 * Return the historical {@link Phrase} for this CalculatorModel
+	 * @return
+	 */
 	public Phrase getLastPhrase() {
 		return this.lastPhrase;
 	}
 	
+	
+	/**
+	 * Add a listener to this CalculatorModel in order to recognize a change to
+	 * the current (non-historical) {@link Phrase}
+	 * @param listener
+	 */
 	public void addActivePhraseChangedListener(PhraseChangedListener listener) {
 		this.activePhraseChangedListeners.add(listener);
 	}
 	
+	
+	/**
+	 * Remove the listener which recognizes a change to the current (non-historcal)
+	 * {@link Phrase} for this CalculatorModel
+	 * @param listener
+	 */
 	public void removeActivePhraseChangedListener(PhraseChangedListener listener) {
 		this.activePhraseChangedListeners.remove(listener);
 	}
 	
+	
+	/**
+	 * Add a listener to this CalculatorModel in order to recognize a change to
+	 * the historical {@link Phrase}
+	 * @param listener
+	 */
 	public void addLastPhraseChangedListener(PhraseChangedListener listener) {
 		this.lastPhraseChangedListeners.add(listener);
 	}
 	
+	
+	/**
+	 * Remove the listener which recognizes a change to the historical {@link Phrase}
+	 * for this CalculatorModel
+	 * @param listener
+	 */
 	public void removeLastPhraseChangedListener(PhraseChangedListener listener) {
 		this.lastPhraseChangedListeners.remove(listener);
 	}
 	
+	
+	/**
+	 * Enter this CalculatorModel into an error state
+	 * @param errorState
+	 */
 	public void setErrorState(boolean errorState) {
 		if(this.errorState != errorState) {
 			this.errorState = errorState;
@@ -86,23 +136,43 @@ public class CalculatorModel
 		}
 	}
 	
+	
+	/**
+	 * True if this CalculatorModel is currently entered into an error state.
+	 * False if not.
+	 * @return
+	 */
 	public boolean getErrorState() {
 		return this.errorState;
 	}
-
+	
+	
+	/**
+	 * Add a listener to this CalculatorModel in order to recognize a change to
+	 * the error state
+	 * @param listener
+	 */
 	public void addErrorStateChangedListener(ErrorStateChangedListener listener) {
 		this.errorStateChangedListeners.add(listener);
 	}
 	
+	
+	/**
+	 * Remove the listener which recognizes a change to the error state
+	 * @param listener
+	 */
 	public void removeErrorStateChangedListener(ErrorStateChangedListener listener) {
 		this.errorStateChangedListeners.remove(listener);
 	}
 	
+	
+	/**
+	 * Alert all error state listeners to a change in the error state
+	 */
 	private void fireErrorStateChangedEvent() {
 		if(this.errorStateChangedListeners != null) {
 			for(ErrorStateChangedListener listener : this.errorStateChangedListeners)
 				listener.errorStateChanged(this.getErrorState());
 		}
 	}
-	
 }

@@ -14,6 +14,9 @@ import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangedListener;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
+/**
+ * This class is the Controller of the MVC framework employed for this project
+ */
 public class CalculatorController 
 {
 	private static Logger logger = LogManager.getLogger(CalculatorController.class);
@@ -22,6 +25,12 @@ public class CalculatorController
 	private CalculatorView view = null;
 	private SimpleCalculatorParser parser = null;
 	
+	
+	/**
+	 * Constructor method accepting the model and the view
+	 * @param model
+	 * @param view
+	 */
 	public CalculatorController(CalculatorModel model, CalculatorView view)
 	{
 		this.model = model;
@@ -33,6 +42,7 @@ public class CalculatorController
 		this.model.getActivePhrase().clear();
 	}
 	
+	
 	/**
 	 * Initializes listeners on properties of the model
 	 */
@@ -43,6 +53,7 @@ public class CalculatorController
 		this.model.addLastPhraseChangedListener(new ModelLastPhraseChangeListener());
 	}
 	
+	
 	/**
 	 * Initializes listeners on properties of the view
 	 */
@@ -52,6 +63,11 @@ public class CalculatorController
 		this.view.addCommandButtonListener(new CommandButtonActionListener());
 	}	
 	
+	
+	/**
+	 * Class for the {@link CalculatorModel} to recognize an error state.  Class is
+	 * private to the scope of {@link CalclatorController}.
+	 */
 	private class ModelErrorStateChangedListener implements ErrorStateChangedListener
 	{
 		@Override
@@ -65,14 +81,25 @@ public class CalculatorController
 		}
 	}
 	
+	
+	/**
+	 * Class for the {@link CalculatorModel} to recognize a change to the current
+	 * (non-historical) {@link Phrase}.  Class is private to the scope of
+	 * {@link CalculatorController}.
+	 */
 	private class ModelActivePhraseChangeListener implements PhraseChangedListener {
 		@Override
 		public void phraseChanged(Phrase phrase) {
-			
 			view.setActiveDisplayText(String.format(phrase.toString(true),"%g"));
 		}
 	}
 	
+	
+	/**
+	 * Class for the {@link CalculatorModel} to recognize a change to the {@link Phrase}
+	 * representing the historical Phrase entries.  Class is private to the scope of
+	 * {@link CalculatorController}.
+	 */
 	private class ModelLastPhraseChangeListener implements PhraseChangedListener {
 		@Override
 		public void phraseChanged(Phrase phrase) {
@@ -83,6 +110,12 @@ public class CalculatorController
 		}
 	}
 	
+	
+	/**
+	 * Class for the {@link CalculatorModel} to recognize input from the press of a
+	 * {@link CharacterInputButton} press.  Class is private to the scope of
+	 * {@link CalculatorController}. 
+	 */
 	private class CharacterInputButtonActionListener implements ActionListener
 	{
 		@Override
@@ -99,7 +132,12 @@ public class CalculatorController
 		}
 	}
 	
-
+	
+	/**
+	 * Class for the {@link CalculatorModel} to recognize input from the press of a
+	 * {@link CommandButton} press.  Class is private to the scope of
+	 * {@link CalculatorController}. 
+	 */
 	private class CommandButtonActionListener implements ActionListener
 	{
 		@Override
@@ -256,6 +294,5 @@ public class CalculatorController
 				};
 			}
 		}
-	}
-	
-} 
+	}	
+}
