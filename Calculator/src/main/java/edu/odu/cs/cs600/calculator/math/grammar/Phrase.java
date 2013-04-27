@@ -15,21 +15,9 @@ public class Phrase {
 	private List <CalculatorCharacter> phrase = new ArrayList <CalculatorCharacter> ();
 	private List<ChangeListener> changeListeners = new ArrayList<ChangeListener> ();
 	
-	private boolean errorState = false;
-	
-	
 	public Phrase() {
 		clear();
 	}
-	
-	
-	
-	public Phrase(Phrase phrase) {
-		this();
-		
-		this.phrase = phrase.getPhrase();
-	}
-
 	
 	private Phrase(List<CalculatorCharacter> phrase) {
 		this();
@@ -98,12 +86,10 @@ public class Phrase {
 	}
 	
 	
-	
 	@Override
 	public String toString() {
 		return toString(false);
 	}
-	
 	
 	
 	/**
@@ -111,61 +97,55 @@ public class Phrase {
 	 * @param string
 	 */
 	public void push(CalculatorCharacter cc) {
-		if (!errorState) {
-			// If the calculator was just turned on or was just cleared, a zero is displayed.  Zero is
-			// a valid first number to only the +, -, *, / and ^ functions.  If any other characters
-			// are passed to this method, the zero is overwritten.
-			if ((phrase.size() == 1)  // phrase only has one character in it
-					&& (phrase.get(0).equalsMorpheme('0'))  // the first (and only) character in phrase is 0
-					&& (CHARS_ALLOWING_ZERO.indexOf(String.valueOf(cc.getMorpheme())) < 0)  // the character to add does NOT appear in the special list
-					) {
-				phrase.clear();
-			}
-			
-			if (phrase.size() < 10) {
-				phrase.add(cc);
-			}
-			
-			fireChangeEvent();
-			}
+		// If the calculator was just turned on or was just cleared, a zero is displayed.  Zero is
+		// a valid first number to only the +, -, *, / and ^ functions.  If any other characters
+		// are passed to this method, the zero is overwritten.
+		if ((phrase.size() == 1)  // phrase only has one character in it
+				&& (phrase.get(0).equalsMorpheme('0'))  // the first (and only) character in phrase is 0
+				&& (CHARS_ALLOWING_ZERO.indexOf(String.valueOf(cc.getMorpheme())) < 0)  // the character to add does NOT appear in the special list
+				) {
+			phrase.clear();
+		}
+		
+		if (phrase.size() < 10) {
+			phrase.add(cc);
+		}
+		
+		fireChangeEvent();
+		
 	}
-	
 	
 	
 	/**
 	 * Remove a {@link CalculatorCharacter} from this CalculatorDisplay
 	 */
-	public void pop() {
-		if (!errorState) {
-			if (phrase.size() > 1) {
-				phrase.remove(phrase.size() - 1);
-				fireChangeEvent();
-			} else {
-				clear();
-			}
+	public void pop() {	
+		if (phrase.size() > 1) {
+			phrase.remove(phrase.size() - 1);
+			fireChangeEvent();
+		} else {
+			clear();
 		}
-	}  // end pop()
-	
+	} 
 	
 	
 	/**
-	 * Reset this CalculatorDsiplay according to simple calculator standards (represent
-	 * the number 0)
+	 * Resets the phrase to an empty phrase.  An empty phrase is represented by a single 0
 	 */
 	public void clear() {
 		phrase.clear();
 		phrase.add(new CalculatorCharacter('0'));
 		
 		fireChangeEvent();
-	}
-	
-	
+	}	
 	
 	public static Phrase convertToPhrase(String phrase) {
 		return new Phrase(generateCharacterList(phrase));
 	}
 	
-	
+	public static Phrase convertToPhrase(double value) {
+		return new Phrase(generateCharacterList(Double.toString(value)));
+	}
 	
 	private static List<CalculatorCharacter> generateCharacterList(String stringPhrase) {
 		List<CalculatorCharacter> result = new ArrayList<CalculatorCharacter>();
@@ -176,50 +156,6 @@ public class Phrase {
 		
 		return result;
 	}
-	
-	
-	
-	public void setOffState() {
-		phrase.clear();
-		
-		phrase.add(new CalculatorCharacter('O'));
-		phrase.add(new CalculatorCharacter('f'));
-		phrase.add(new CalculatorCharacter('f'));
-		
-		fireChangeEvent();
-	}
-	
-	
-	
-	public void setErrorState() {
-		errorState = true;
-		
-		phrase.clear();
-		
-		phrase.add(new CalculatorCharacter('E'));
-		phrase.add(new CalculatorCharacter('r'));
-		phrase.add(new CalculatorCharacter('r'));
-		phrase.add(new CalculatorCharacter('o'));
-		phrase.add(new CalculatorCharacter('r'));
-		
-		fireChangeEvent();
-	}
-	
-	
-	
-	public void clearErrorState() {
-		errorState = false;
-		
-		clear();
-	}
-	
-	
-	
-	public List<CalculatorCharacter> getPhrase() {
-		return phrase;
-	}
-	
-	
 	
 	public void setPhrase(double value) {
 		this.phrase = generateCharacterList(Double.toString(value));
