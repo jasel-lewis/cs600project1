@@ -16,7 +16,6 @@
 	<path id="junit.class.path">
 	  <pathelement location="lib/junit.jar" />
 	  <pathelement location="lib/hamcrest-core.jar" />
-      <pathelement location="lib/zohhak-1.0.0.jar" />
 	  <pathelement location="lib/log4j-1.2.9.jar" />	
 	  <pathelement location="${build.dir}" />
 	</path>
@@ -24,7 +23,6 @@
 	<path id="class.path">
 	  <pathelement location="lib/junit.jar" />
 	  <pathelement location="lib/hamcrest-core.jar" />
-      <pathelement location="lib/zohhak-1.0.0.jar" />
 	  <pathelement location="lib/log4j-1.2.9.jar" />
 	  <pathelement location="${build.dir}" />
 	</path>
