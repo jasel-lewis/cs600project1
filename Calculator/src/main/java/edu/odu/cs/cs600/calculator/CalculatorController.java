@@ -39,7 +39,7 @@ public class CalculatorController
 	 */
 	private void initModelListeners()
 	{
-		
+		this.model.addErrorStateChangedListener(new ModelErrorStateChangedListener());
 	}
 	
 	/**
@@ -54,15 +54,27 @@ public class CalculatorController
 	
 	
 	private void initPhraseListeners() {
-		this.model.getPhrase().addChangeListener(new PhraseChangeListener());
+		this.model.getActivePhrase().addChangeListener(new PhraseChangeListener());
 	}
 	
 	
+	private class ModelErrorStateChangedListener implements ErrorStateChangedListener
+	{
+		@Override
+		public void errorStateChanged(boolean errorState) {
+			view.setHistoryDisplayText("");
+			if(errorState) {
+				view.setActiveDisplayText("Error");
+			} else {
+				view.setActiveDisplayText(model.getActivePhrase().toString(true));
+			}
+		}
+	}
 	
 	private class PhraseChangeListener implements ChangeListener {
 		@Override
 		public void stateChanged(ChangeEvent e) {
-			view.setActiveDisplayText(model.getPhrase().toString(true));
+			view.setActiveDisplayText(model.getActivePhrase().toString(true));
 		}
 	}
 	
@@ -70,15 +82,16 @@ public class CalculatorController
 	
 	private class CharacterInputButtonActionListener implements ActionListener
 	{
-		// TODO : Check flag to see if the input needs to be cleared before adding the input to the phrase
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() instanceof CharacterInputButton)
+			if(!model.getErrorState())
 			{
-				CharacterInputButton button = (CharacterInputButton)e.getSource();
-				model.getPhrase().push(button.getCalclatorCharacter());
-				
-				logger.debug("Character button pressed: " + button.getCalclatorCharacter());
+				if(e.getSource() instanceof CharacterInputButton)
+				{
+					CharacterInputButton button = (CharacterInputButton)e.getSource();
+					model.getActivePhrase().push(button.getCalclatorCharacter());
+					logger.debug("Character button pressed: " + button.getCalclatorCharacter());
+				}
 			}
 		}
 	}
@@ -101,10 +114,14 @@ public class CalculatorController
 					// Functional Commands
 					// ***********************
 					case CLEAR:
-						model.getPhrase().pop();
+						if(model.getErrorState())
+							model.setErrorState(false);
+						else
+							model.getActivePhrase().pop();
 						break;
 					case CLEAR_ALL:
-						model.getPhrase().clearErrorState();
+						model.getActivePhrase().clear();
+						model.setErrorState(false);
 						break;
 	
 					// ***********************
@@ -113,8 +130,10 @@ public class CalculatorController
 					// TODO: (Jared) Create a display to show the last expression executed...
 					case CEILING:
 					{
+						if(model.getErrorState()) break;
+						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Might want to evaluate the returned double somewhere in here
 							// to ensure it's chopped at 10 characters.  For instance, if the
 							// double returned is 3.666666666666666667, we want to represent it
@@ -124,81 +143,93 @@ public class CalculatorController
 							// would place the logic here within the controller.
 							// On the flip side - what if we did 125^125?  We would have to
 							// convert to scientific notation and display.
-							model.getPhrase().setPhrase(MathUtil.ceiling(parser.parseExpression().getValue()));
+							model.getActivePhrase().setPhrase(MathUtil.ceiling(parser.parseExpression().getValue()));
 						} catch(Exception ex) {
-							model.getPhrase().setErrorState();
+							model.setErrorState(true);
 						}
 	
 						break;
 					}
 					case EVALUATE:
 					{
+						if(model.getErrorState()) break;
+						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getPhrase().setPhrase(parser.parseExpression().getValue());
+							model.getActivePhrase().setPhrase(parser.parseExpression().getValue());
 						} catch (Exception ex) {
-							model.getPhrase().setErrorState();
+							model.setErrorState(true);
 						}
 						
 						break;
 					}
 					case FLOOR:
 					{
+						if(model.getErrorState()) break;
+						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getPhrase().setPhrase(MathUtil.floor(parser.parseExpression().getValue()));
+							model.getActivePhrase().setPhrase(MathUtil.floor(parser.parseExpression().getValue()));
 						} catch (Exception ex) {
-							model.getPhrase().setErrorState();
+							model.setErrorState(true);
 						}
 						
 						break;
 					}
 					case NEGATE:
 					{
+						if(model.getErrorState()) break;
+						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getPhrase().setPhrase(MathUtil.negate(parser.parseExpression().getValue()));
+							model.getActivePhrase().setPhrase(MathUtil.negate(parser.parseExpression().getValue()));
 						} catch (Exception ex) {
-							model.getPhrase().setErrorState();
+							model.setErrorState(true);
 						}
 						
 						break;
 					}
 					case RECIPROCAL:
 					{
+						if(model.getErrorState()) break;
+						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getPhrase().setPhrase(MathUtil.reciprocate(parser.parseExpression().getValue()));
+							model.getActivePhrase().setPhrase(MathUtil.reciprocate(parser.parseExpression().getValue()));
 						} catch (Exception ex) {
-							model.getPhrase().setErrorState();
+							model.setErrorState(true);
 						}
 						
 						break;
 					}
 					case SQUAREROOT:
 					{
+						if(model.getErrorState()) break;
+						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getPhrase().setPhrase(MathUtil.squareRoot(parser.parseExpression().getValue()));
+							model.getActivePhrase().setPhrase(MathUtil.squareRoot(parser.parseExpression().getValue()));
 						} catch (Exception ex) {
-							model.getPhrase().setErrorState();
+							model.setErrorState(true);
 						}
 						
 						break;
 					}
 					case SQUARE:
 					{
+						if(model.getErrorState()) break;
+						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getPhrase()));
+							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Possibly evaluate character length (see above TODO)
-							model.getPhrase().setPhrase(MathUtil.exponentiate(parser.parseExpression().getValue(), 2.0));
+							model.getActivePhrase().setPhrase(MathUtil.exponentiate(parser.parseExpression().getValue(), 2.0));
 						} catch (Exception ex) {
-							model.getPhrase().setErrorState();
+							model.setErrorState(true);
 						}
 						
 						break;
