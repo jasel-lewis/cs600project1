@@ -3,9 +3,6 @@ package edu.odu.cs.cs600.calculator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -13,8 +10,8 @@ import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 import edu.odu.cs.cs600.calculator.math.MathUtil;
-import edu.odu.cs.cs600.calculator.math.grammar.Lexer;
 import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
+import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangedListener;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
 public class CalculatorController 
@@ -32,7 +29,8 @@ public class CalculatorController
 		
 		this.initModelListeners();
 		this.initViewListeners();
-		this.initPhraseListeners();
+		
+		this.model.getActivePhrase().clear();
 	}
 	
 	/**
@@ -41,6 +39,8 @@ public class CalculatorController
 	private void initModelListeners()
 	{
 		this.model.addErrorStateChangedListener(new ModelErrorStateChangedListener());
+		this.model.addActivePhraseChangedListener(new ModelActivePhraseChangeListener());
+		this.model.addLastPhraseChangedListener(new ModelLastPhraseChangeListener());
 	}
 	
 	/**
@@ -50,14 +50,7 @@ public class CalculatorController
 	{
 		this.view.addCharacterInputButtonListener(new CharacterInputButtonActionListener());
 		this.view.addCommandButtonListener(new CommandButtonActionListener());
-	}
-	
-	
-	
-	private void initPhraseListeners() {
-		this.model.getActivePhrase().addChangeListener(new PhraseChangeListener());
-	}
-	
+	}	
 	
 	private class ModelErrorStateChangedListener implements ErrorStateChangedListener
 	{
@@ -72,14 +65,19 @@ public class CalculatorController
 		}
 	}
 	
-	private class PhraseChangeListener implements ChangeListener {
+	private class ModelActivePhraseChangeListener implements PhraseChangedListener {
 		@Override
-		public void stateChanged(ChangeEvent e) {
-			view.setActiveDisplayText(model.getActivePhrase().toString(true));
+		public void phraseChanged(Phrase phrase) {
+			view.setActiveDisplayText(phrase.toString(true));
 		}
 	}
 	
-	
+	private class ModelLastPhraseChangeListener implements PhraseChangedListener {
+		@Override
+		public void phraseChanged(Phrase phrase) {
+			view.setHistoryDisplayText(phrase.toString(true));
+		}
+	}
 	
 	private class CharacterInputButtonActionListener implements ActionListener
 	{
@@ -122,19 +120,18 @@ public class CalculatorController
 						break;
 					case CLEAR_ALL:
 						model.getActivePhrase().clear();
+						model.getLastPhrase().clear();
 						model.setErrorState(false);
 						break;
 	
 					// ***********************
 					// Mathematical Commands
 					// ***********************
-					// TODO: (Jared) Create a display to show the last expression executed...
 					case CEILING:
 					{
 						if(model.getErrorState()) break;
 						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
 							// TODO: Might want to evaluate the returned double somewhere in here
 							// to ensure it's chopped at 10 characters.  For instance, if the
 							// double returned is 3.666666666666666667, we want to represent it
@@ -144,9 +141,11 @@ public class CalculatorController
 							// would place the logic here within the controller.
 							// On the flip side - what if we did 125^125?  We would have to
 							// convert to scientific notation and display.
-							//model.getActivePhrase().setPhrase(MathUtil.ceiling(parser.parseExpression().getValue()));
-							double result = MathUtil.ceiling(parser.parseExpression().getValue());
+							Phrase input = model.getActivePhrase();
+							double result = SimpleCalculatorParser.evaluatePhrase(input);
+							result = MathUtil.ceiling(result);
 							model.setActivePhrase(Phrase.convertToPhrase(result));
+							model.setLastPhrase(input);
 						} catch(Exception ex) {
 							model.setErrorState(true);
 						}
@@ -158,10 +157,10 @@ public class CalculatorController
 						if(model.getErrorState()) break;
 						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
-							// TODO: Possibly evaluate character length (see above TODO)
-							double result = parser.parseExpression().getValue();
+							Phrase input = model.getActivePhrase();
+							double result = SimpleCalculatorParser.evaluatePhrase(input);
 							model.setActivePhrase(Phrase.convertToPhrase(result));
+							model.setLastPhrase(input);
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -173,10 +172,11 @@ public class CalculatorController
 						if(model.getErrorState()) break;
 						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
-							// TODO: Possibly evaluate character length (see above TODO)
-							double result = MathUtil.floor(parser.parseExpression().getValue());
+							Phrase input = model.getActivePhrase();
+							double result = SimpleCalculatorParser.evaluatePhrase(input);
+							result = MathUtil.floor(result);
 							model.setActivePhrase(Phrase.convertToPhrase(result));
+							model.setLastPhrase(input);
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -188,11 +188,11 @@ public class CalculatorController
 						if(model.getErrorState()) break;
 						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
-							// TODO: Possibly evaluate character length (see above TODO)
-							double result = MathUtil.negate(parser.parseExpression().getValue());
+							Phrase input = model.getActivePhrase();
+							double result = SimpleCalculatorParser.evaluatePhrase(input);
+							result = MathUtil.negate(result);
 							model.setActivePhrase(Phrase.convertToPhrase(result));
-							
+							model.setLastPhrase(input);
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -204,10 +204,11 @@ public class CalculatorController
 						if(model.getErrorState()) break;
 						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
-							// TODO: Possibly evaluate character length (see above TODO)
-							double result = MathUtil.reciprocate(parser.parseExpression().getValue());
+							Phrase input = model.getActivePhrase();
+							double result = SimpleCalculatorParser.evaluatePhrase(input);
+							result = MathUtil.reciprocate(result);
 							model.setActivePhrase(Phrase.convertToPhrase(result));
+							model.setLastPhrase(input);
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -219,10 +220,11 @@ public class CalculatorController
 						if(model.getErrorState()) break;
 						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
-							// TODO: Possibly evaluate character length (see above TODO)
-							double result = MathUtil.squareRoot(parser.parseExpression().getValue());
+							Phrase input = model.getActivePhrase();
+							double result = SimpleCalculatorParser.evaluatePhrase(input);
+							result = MathUtil.squareRoot(result);
 							model.setActivePhrase(Phrase.convertToPhrase(result));
+							model.setLastPhrase(input);
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
@@ -234,10 +236,11 @@ public class CalculatorController
 						if(model.getErrorState()) break;
 						
 						try {
-							parser = new SimpleCalculatorParser(new Lexer(model.getActivePhrase()));
-							// TODO: Possibly evaluate character length (see above TODO)
-							double result = MathUtil.exponentiate(parser.parseExpression().getValue(), 2.0);
+							Phrase input = model.getActivePhrase();
+							double result = SimpleCalculatorParser.evaluatePhrase(input);
+							result = MathUtil.exponentiate(result,2);
 							model.setActivePhrase(Phrase.convertToPhrase(result));
+							model.setLastPhrase(input);
 						} catch (Exception ex) {
 							model.setErrorState(true);
 						}
