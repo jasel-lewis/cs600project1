@@ -75,7 +75,10 @@ public class CalculatorController
 	private class ModelLastPhraseChangeListener implements PhraseChangedListener {
 		@Override
 		public void phraseChanged(Phrase phrase) {
-			view.setHistoryDisplayText(phrase.toString(true));
+			if(phrase.toString(false).equals("0"))
+				view.setHistoryDisplayText("");
+			else
+				view.setHistoryDisplayText(phrase.toString(true));
 		}
 	}
 	

@@ -76,7 +76,7 @@ public class CalculatorView extends JFrame {
 	{	
 		activeDisplay = new JLabel();
 		activeDisplay.setFont(new Font("Courier New", Font.BOLD, 42));
-        activeDisplay.setHorizontalAlignment(JLabel.RIGHT);
+		activeDisplay.setHorizontalAlignment(JLabel.RIGHT);
         activeDisplay.setBounds(20, 70, 320, 30);
         panel.add(activeDisplay);
         
