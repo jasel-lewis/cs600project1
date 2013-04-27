@@ -23,6 +23,7 @@ public class CalculatorController
 	
 	private CalculatorModel model = null;
 	private CalculatorView view = null;
+	// TODO: parser (below) not used - remove?
 	private SimpleCalculatorParser parser = null;
 	
 	

@@ -21,6 +21,9 @@ import edu.odu.cs.cs600.calculator.CalculatorCommand;
 import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 
+/**
+ * This class is the View of the MVC framework employed for this project
+ */
 public class CalculatorView extends JFrame {
 	
 	private static final long serialVersionUID = -2851779459457181013L;
@@ -49,6 +52,10 @@ public class CalculatorView extends JFrame {
 		}
 	};
 	
+	
+	/**
+	 * Constructor
+	 */
 	public CalculatorView() 
 	{
 		super("World's Cheapest Calculator");
@@ -56,6 +63,11 @@ public class CalculatorView extends JFrame {
 		initComponents();
 	}
 	
+	
+	/**
+	 * Initialize the components of this CalculatorView (panel, labels, buttons and specific
+	 * parameters)
+	 */
 	private void initComponents() 
 	{
 		// Initialize the main panel
@@ -73,10 +85,16 @@ public class CalculatorView extends JFrame {
 		this.setBackground(new Color(0,0,0));
 	}
 	
+	
+	/**
+	 * Create, initialize and add the displays, current (non-historical) and historical, to
+	 * the view.  Both displays are underlying {@link JLabel}s.
+	 */
 	private void initDisplay() 
 	{	
 		activeDisplay = new JLabel();
 		activeDisplay.setFont(new Font("Courier New", Font.BOLD, 42));
+		// TODO - next line is commented - remove?
 		//activeDisplay.setHorizontalAlignment(SwingConstants.RIGHT);
 		activeDisplay.setVerticalAlignment(SwingConstants.CENTER);
         activeDisplay.setBounds(28, 68, 312, 32);
@@ -84,15 +102,17 @@ public class CalculatorView extends JFrame {
         
         historyDisplay = new JLabel();
         historyDisplay.setFont(new Font("Courier New", Font.PLAIN, 22));
+        // TODO - next line is commented - remove?
         //historyDisplay.setHorizontalAlignment(JLabel.RIGHT);
         historyDisplay.setBounds(28, 26, 312, 25);
         panel.add(historyDisplay);
-        
-        
 	}
 	
 	
-	
+	/**
+	 * Create, initialize and add {@link CommandButton}s and {@link CharacterInputButton}s
+	 * to the view
+	 */
 	private void initButtons() 
 	{
 		// ROW 1
@@ -248,22 +268,50 @@ public class CalculatorView extends JFrame {
 		panel.add(divideButton);
 	}  
 	
+	
+	/**
+	 * Show the passed {@link String} in the current (non-historical) display
+	 * @param string
+	 */
 	public void setActiveDisplayText(String string) {
 		activeDisplay.setText(string);
 	}
 	
+	
+	/**
+	 * Show the passed {@link String} in the historical display
+	 * @param string
+	 */
 	public void setHistoryDisplayText(String string) {
 		historyDisplay.setText(string);
 	}
 	
+	
+	/**
+	 * Apply the passed {@link ActionListener} to the list of {@link CharacterInputButton}
+	 * listeners for this CalculatorView
+	 * @param listener
+	 */
 	public void addCharacterInputButtonListener(ActionListener listener) {
 		this.characterInputButtonActionListeners.add(listener);
 	}
 	
+	
+	/**
+	 * Apply the passed {@link ActionListener} to the list of {@link CommandButton}
+	 * listeners for this CalculatorView
+	 * @param listener
+	 */
 	public void addCommandButtonListener(ActionListener listener) {
 		this.commandButtonActionListeners.add(listener);
 	}
 	
+	
+	/**
+	 * Apply the passed {@link ChangeListener} to the list of display listeners
+	 * for this CalculatorView
+	 * @param listener
+	 */
 	public void addPhraseChangeListener(ChangeListener listener) {
 		this.displayChangeListener.add(listener);
 	}
