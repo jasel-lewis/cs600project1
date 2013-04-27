@@ -17,6 +17,7 @@
 	  <pathelement location="lib/junit.jar" />
 	  <pathelement location="lib/hamcrest-core.jar" />
       <pathelement location="lib/zohhak-1.0.0.jar" />
+	  <pathelement location="lib/log4j-1.2.9.jar" />	
 	  <pathelement location="${build.dir}" />
 	</path>
 	
@@ -24,6 +25,7 @@
 	  <pathelement location="lib/junit.jar" />
 	  <pathelement location="lib/hamcrest-core.jar" />
       <pathelement location="lib/zohhak-1.0.0.jar" />
+	  <pathelement location="lib/log4j-1.2.9.jar" />
 	  <pathelement location="${build.dir}" />
 	</path>
 
@@ -57,6 +59,7 @@
 	<!-- Creates Javadoc -->
 	<target name="docs" depends="compile">
 		<javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
+			<classpath refid="class.path" />
 			<!-- Define which files / directory should get included, we include all -->
 			<fileset dir="${src.dir}">
 				<include name="**" />
