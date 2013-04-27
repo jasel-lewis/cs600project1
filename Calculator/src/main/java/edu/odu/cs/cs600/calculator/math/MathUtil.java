@@ -76,20 +76,16 @@ public class MathUtil
 	 * @throws {@link ArithmeticException}
 	 */
 	public static int binaryExponentiation(int exponent) {
-		if (exponent == 0) {
-			return 1;
-		} else if (exponent == 1) {
-			return 2;
-		} else if (exponent > 1) {
-			int result = 2;
-			
-			while (exponent-- > 1) {
-				result = result * 2;
-			}
-			
-			return result;
-		} else {
+		int num = 1;
+		
+		if (exponent < 0) {
 			throw new ArithmeticException("Argument must be positive");
+		} else {
+			while (exponent-- > 0) {
+				num = num << 1;
+			}
 		}
+		
+		return num;
 	}
 }
