@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Random;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,14 +14,14 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class FloorEvaluationTest {
+public class FloorFixedEvaluationTest {
 	// For double comparison, this is the precision to which assertEquals will compare values
 	private static final double EPSILON = 1e-10;
 	
 	private double value;
 	
 	
-	public FloorEvaluationTest(double value) {
+	public FloorFixedEvaluationTest(double value) {
 		this.value = value;
 	}
 	
