@@ -36,7 +36,12 @@ public class CalculatorModel
 	}	
 	
 	
-	// TODO: Jared - Javadoc for this
+	/**
+	 * Sets/stores the phrase that is currently associated as the "Active" expression.  This may
+	 * be as a result of user input, or the result of the evaluation of an expression.
+	 * 
+	 * @param phrase
+	 */
 	public void setActivePhrase(Phrase phrase) {
 		phrase.clearChangeListeners();
 		this.activePhrase = phrase;
@@ -53,15 +58,18 @@ public class CalculatorModel
 	
 	
 	/**
-	 * Return the active {@link Phrase} for this CalculatorModel
-	 * @return
+	 * Returns the active {@link edu.odu.cs.cs600.calculator.math.grammar.Phrase} for this CalculatorModel
+	 * @return the active {@link edu.odu.cs.cs600.calculator.math.grammar.Phrase} for this CalculatorModel
 	 */
 	public Phrase getActivePhrase() {
 		return this.activePhrase;
 	}
 	
 	
-	// TODO: Jared - Javadoc for this
+	/**
+	 * Sets/stores the phrase that represents the last evaluated expression.
+	 * @param phrase The last evaluated expression
+	 */
 	public void setLastPhrase(Phrase phrase) {
 		phrase.clearChangeListeners();
 		this.lastPhrase = phrase;
@@ -78,8 +86,9 @@ public class CalculatorModel
 	
 	
 	/**
-	 * Return the historical {@link Phrase} for this CalculatorModel
-	 * @return
+	 * Return the historical {@link edu.odu.cs.cs600.calculator.math.grammar.Phrase}
+	 * for this CalculatorModel
+	 * @return The Phrase representing the last expression executed
 	 */
 	public Phrase getLastPhrase() {
 		return this.lastPhrase;
@@ -141,7 +150,7 @@ public class CalculatorModel
 	/**
 	 * True if this CalculatorModel is currently entered into an error state.
 	 * False if not.
-	 * @return
+	 * @return The state of the calculator (is an error present or not)
 	 */
 	public boolean getErrorState() {
 		return this.errorState;

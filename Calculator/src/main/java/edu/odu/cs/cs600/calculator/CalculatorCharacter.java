@@ -4,7 +4,8 @@ package edu.odu.cs.cs600.calculator;
  * Class to encapsulate a character.  There are certain characters which appear
  * in the Calculator's display as Unicode glyphs, however, a consistent and
  * comparable (character-comparable) representation (morpheme) must be
- * represented within the {@link Phrase}.  A {@link CharacterInputButton} may
+ * represented within the {@link edu.odu.cs.cs600.calculator.math.grammar.Phrase}.  
+ * A {@link edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton} may
  * also utilize the Unicode glyph as a fall-back if the button's image fails to
  * load.
  */
@@ -40,7 +41,7 @@ public class CalculatorCharacter {
 	
 	/**
 	 * Return the printable, ASCII character representation of this CalculatorCharacter
-	 * @return
+	 * @return The ASCII representation of this CalculatorCharacter
 	 */
 	public char getMorpheme() {
 		return morpheme;
@@ -48,8 +49,8 @@ public class CalculatorCharacter {
 	
 	
 	/**
-	 * Return the Unicode glyph of this CalculatorCharacter
-	 * @return
+	 * Returns the Unicode glyph of this CalculatorCharacter
+	 * @return The Unicode glyph of this CalculatorCharacter
 	 */
 	public String getISORepresentation() {
 		return isoRepresentation;
@@ -59,7 +60,7 @@ public class CalculatorCharacter {
 	/**
 	 * True if this CalculatorCharacter has a Unicode glyph attributed to it.  False
 	 * if not.
-	 * @return
+	 * @return True if this CalculatorCharacter has a Unicode glyph attributed to it.  False if not.
 	 */
 	public boolean requiresISORepresentation() {
 		return hasISORepresentation;
@@ -70,7 +71,7 @@ public class CalculatorCharacter {
 	 * True if the printable, ASCII representation of this CalculatorCharacter matches
 	 * that of the passed character.  False if not.
 	 * @param morpheme character to compare
-	 * @return
+	 * @return The result of the comparison
 	 */
 	public boolean equalsMorpheme(char morpheme) {
 		return(this.morpheme == morpheme);
@@ -80,7 +81,7 @@ public class CalculatorCharacter {
 	/**
 	 * String representation of the single, printable, ASCII representation of this
 	 * CalculatorCharacter
-	 * @return
+	 * @return The ASCII representation that this {@link CalculatorCharacter} represents
 	 */
 	@Override
 	public String toString() {

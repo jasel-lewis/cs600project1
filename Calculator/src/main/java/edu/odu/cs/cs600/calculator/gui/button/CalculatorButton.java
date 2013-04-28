@@ -36,7 +36,7 @@ public abstract class CalculatorButton extends JButton
 	 * Constructor for a CalculatorButton without an attributed keyboard key
 	 * @param imageFilename filename of the image for use as the {@link ImageIcon} for this CalculatorButton
 	 * @param imageOverFilename filename of the image for use as the {@link ImageIcon} for this CalculatorButton when hovered over
-	 * @see {@link #createImageIcon(String)}
+	 * @see CalculatorButton#createImageIcon(String)
 	 */
 	public CalculatorButton(String imageFilename, String imageOverFilename)
 	{
@@ -69,7 +69,7 @@ public abstract class CalculatorButton extends JButton
 	 * @param imageFilename filename of the image for use as the {@link ImageIcon} for this CalculatorButton
 	 * @param imageOverFilename filename of the image for use as the {@link ImageIcon} for this CalculatorButton when hovered over
 	 * @param keyCode enumerated {@link KeyEvent} key code for the keyboard key to attribute to this CalculatorButton
-	 * @see {@link #createImageIcon(String)}
+	 * @see CalculatorButton#createImageIcon(String)
 	 */
 	public CalculatorButton(String imageFilename, String imageOverFilename, int keyCode)
 	{
@@ -85,7 +85,7 @@ public abstract class CalculatorButton extends JButton
 	 * Create an {@link ImageIcon} from the passed filename.  Return null if unable to
 	 * locate the resource.
 	 * @param imageFilename filename of the image (relative to the $project/resources/images directory)
-	 * @return
+	 * @return An {@link ImageIcon} object based on the filename passed in
 	 */
 	protected ImageIcon createImageIcon(String imageFilename)
 	{

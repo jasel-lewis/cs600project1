@@ -3,19 +3,26 @@ package edu.odu.cs.cs600.calculator.math;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-public class CeilingEvaluator implements IUnaryEvaluator {
+/**
+ * Evaluator calculates the ceiling of a passed term.
+ * 
+ * Implementation Notes: Divide the realm of infinite, real
+ * numbers into a range; bracketing value by two binary integers where
+ * 2^k < value <= 2^(k+1). Perform a binary search for value within this range.
+ * Method handles special cases such as 0.0 > value <= 1.0 and -1.0 > value <= 0.0
+ * as these can't be encapsulated by the above process.  Negative input is passed
+ * to {@link MathUtil.floor(double)} under the realization that ceiling(a) = -(floor(-a)).
+ *
+ */
+public class CeilingEvaluator implements IUnaryEvaluator 
+{
 
 	private static Logger logger = LogManager.getLogger(CeilingEvaluator.class);
 	
 	/**
-	 * Determine the ceiling of the passed value.  Divide the realm of infinite, real
-	 * numbers into a range; bracketing value by two binary integers where
-	 * 2^k < value <= 2^(k+1). Perform a binary search for value within this range.
-	 * Method handles special cases such as 0.0 > value <= 1.0 and -1.0 > value <= 0.0
-	 * as these can't be encapsulated by the above process.  Negative input is passed
-	 * to {@link MathUtil.floor(double)} under the realization that ceiling(a) = -(floor(-a)). 
-	 * @param value
-	 * @return
+	 * Determines the ceiling of the passed value.  See {@link CeilingEvaluator} for implementation notes. 
+	 * @param value The input value to determine the ceiling of
+	 * @return The ceiling of the input value
 	 * @throws ArithmeticException
 	 */
 	public double compute(double value) throws ArithmeticException {
