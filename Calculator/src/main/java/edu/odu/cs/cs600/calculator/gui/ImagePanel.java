@@ -6,12 +6,17 @@ import java.awt.Image;
 
 import javax.swing.JPanel;
 
+/**
+ * A lightly modified {@link JPanel} that enables the inclusion of a background image (easily).
+ */
 public class ImagePanel extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
 	private Image img;
 	
-	// TODO: Jared - Javadoc this (I don't want to mislead by giving generic comments)
+	/**
+	 * @param img The image to set as the background for the panel 
+	 */
 	public ImagePanel(Image img) {
 		this.img = img;
 		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
@@ -21,7 +26,6 @@ public class ImagePanel extends JPanel
 		setSize(size);
 		setLayout(null);
 	}
-	
 	
 	public void paintComponent(Graphics g) {
 		g.drawImage(img, 0, 0, null);

@@ -13,10 +13,7 @@ import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangedListener;
  * This class is the Model of the MVC framework employed for this project
  */
 public class CalculatorModel 
-{	
-	// TODO: Jared - logger (below) is not used - keep it?
-	private static Logger logger = LogManager.getLogger(CalculatorModel.class);
-	
+{		
 	private Phrase activePhrase;
 	private Phrase lastPhrase;
 	private boolean errorState;

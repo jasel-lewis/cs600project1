@@ -23,9 +23,6 @@ public class CalculatorController
 	
 	private CalculatorModel model = null;
 	private CalculatorView view = null;
-	// TODO: Jared - parser (below) not used - remove?
-	private SimpleCalculatorParser parser = null;
-	
 	
 	/**
 	 * Constructor method accepting the model and the view
@@ -175,17 +172,6 @@ public class CalculatorController
 						if(model.getErrorState()) break;
 						
 						try {
-							// TODO: Jared - I believe we're good on the below TO-DO, if so, please
-							// remove this one and that one?
-							// TODO: Might want to evaluate the returned double somewhere in here
-							// to ensure it's chopped at 10 characters.  For instance, if the
-							// double returned is 3.666666666666666667, we want to represent it
-							// as the 10-character string: 3.66666667.  This described
-							// functionality seems as if it'd belong to the display, however,
-							// there will most likely need to be some number introspection which
-							// would place the logic here within the controller.
-							// On the flip side - what if we did 125^125?  We would have to
-							// convert to scientific notation and display.
 							Phrase input = model.getActivePhrase();
 							double result = SimpleCalculatorParser.evaluatePhrase(input);
 							result = MathUtil.ceiling(result);
