@@ -8,7 +8,7 @@ import edu.odu.cs.cs600.calculator.CalculatorCharacter;
 
 /**
  * Class to represent a {@link CalculatorButton} which provides {@link CalculatorCharacter}
- * input to the current (non-historical) {@Phrase}
+ * input to the current (non-historical) {@link edu.odu.cs.cs600.calculator.math.grammar.Phrase}
  */
 public class CharacterInputButton extends CalculatorButton 
 {	
@@ -34,8 +34,8 @@ public class CharacterInputButton extends CalculatorButton
 	
 	
 	/**
-	 * Return the {@link CalculatorCharacter} attributed to this CharacterInputButton
-	 * @return
+	 * Return the {@link CalculatorCharacter} attributed to this button
+	 * @return the {@link CalculatorCharacter} attributed to this button
 	 */
 	public CalculatorCharacter getCalclatorCharacter() 
 	{

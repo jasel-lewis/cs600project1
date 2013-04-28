@@ -18,7 +18,7 @@ public enum TokenType {
 	/**
 	 * "Punctuators" are tokens that can split identifiers.  If the TokenType represents
 	 * a punctuator, this function will get its represented character.
-	 * @return
+	 * @return The puncuator associated with this TokenType (if any)
 	 */
 	public Character getPunctuator() {
 		switch (this) {

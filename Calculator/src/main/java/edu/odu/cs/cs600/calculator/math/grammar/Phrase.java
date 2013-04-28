@@ -47,7 +47,7 @@ public class Phrase
 	 * single-character representations for each CalculatorCharacter (for use in parsing when
 	 * passed to a mathematical method).
 	 * @param htmlEncode
-	 * @return
+	 * @return A string representation of the phrase
 	 */
 	public String toString(boolean htmlEncode) {
 		ListIterator<CalculatorCharacter> it = characterList.listIterator();
@@ -83,7 +83,7 @@ public class Phrase
 	
 	/**
 	 * Add a {@link CalculatorCharacter} to this Phrase
-	 * @param string
+	 * @param cc A calculator to append to the end of the phrase
 	 */
 	public void push(CalculatorCharacter cc) {
 		// If the calculator was just turned on or was just cleared, a zero is displayed.  Zero is

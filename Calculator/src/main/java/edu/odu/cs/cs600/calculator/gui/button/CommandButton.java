@@ -61,7 +61,7 @@ public class CommandButton extends CalculatorButton {
 	
 	/**
 	 * Return the {@link CalculatorCommand} attributed to this CommandButton
-	 * @return
+	 * @return the {@link CalculatorCommand} attributed to this CommandButton
 	 */
 	public CalculatorCommand getCommand()
 	{
