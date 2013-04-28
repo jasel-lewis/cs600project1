@@ -60,7 +60,7 @@
 			<classpath refid="class.path" />
 			<!-- Define which files / directory should get included, we include all -->
 			<fileset dir="${src.dir}">
-				<include name="**" />
+				<include name="**/*.java" />
 			</fileset>
 		</javadoc>
 	</target>

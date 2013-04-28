@@ -2,8 +2,14 @@ package edu.odu.cs.cs600.calculator;
 
 import edu.odu.cs.cs600.calculator.gui.CalculatorView;
 
-// http://www.codeproject.com/KB/tips/ModelViewController/Figure4.gif
-
+/**
+ * Represents entry-point to the Calculator application.  This application
+ * has been developed using an MVC design pattern.  In the main, the
+ * primary controller, model, and views are instantiated and wired together.
+ * The image below shows a diagram of the interactions between the model,
+ * view, and controller.
+ * <img alt="" src="doc-files/mvc.gif" />
+ */
 public class Application {
 	
 	public static final boolean debug = true;  // Set the debug mode
@@ -23,5 +29,5 @@ public class Application {
 				view.setVisible(true);
 			}        
 		});
-	}  // end main(String[])
-}  // end class Application
+	}
+}
