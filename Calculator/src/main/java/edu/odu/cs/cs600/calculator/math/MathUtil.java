@@ -45,9 +45,9 @@ public class MathUtil
 	 * This method accepts a positive integer value as the exponent with which to
 	 * perform binary exponentiation.  {@link #exponentiate(double, double)} could
 	 * not be utilized as this would have set up a circular dependency
-	 * ({@link ExponentialEvaluator} relies on {@link #floor(double)} and
+	 * ({@link ExponentiationEvaluator} relies on {@link #floor(double)} and
 	 * {@link #ceiling(double)} which then relies on this method).  If a negative
-	 * value is passed, an {@link ArithmeticException} is thrown.
+	 * value is passed, an {@link java.lang.ArithmeticException} is thrown.
 	 * @param exponent The power to compute (2^x)
 	 * @return The result of 2^x
 	 * @throws {@link ArithmeticException}

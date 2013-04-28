@@ -1,12 +1,15 @@
 package edu.odu.cs.cs600.calculator.math;
 
+/**
+ * Evaluator computes the factorial of a passed value.
+ */
 public class FactorialEvaluator implements IUnaryEvaluator {
 
 	/**
 	 * Compute the factorial of the passed value.  Throws {@link ArithmeticException}
 	 * if value is not a positive integer.
-	 * @param value
-	 * @return
+	 * @param value The value to compute the factorial of
+	 * @return the factorial of the passed value
 	 * @throws ArithmeticException
 	 */
 	public int compute(int value) throws ArithmeticException {

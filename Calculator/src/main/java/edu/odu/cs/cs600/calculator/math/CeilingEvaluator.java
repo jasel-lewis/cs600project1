@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  * 2^k < value <= 2^(k+1). Perform a binary search for value within this range.
  * Method handles special cases such as 0.0 > value <= 1.0 and -1.0 > value <= 0.0
  * as these can't be encapsulated by the above process.  Negative input is passed
- * to {@link MathUtil.floor(double)} under the realization that ceiling(a) = -(floor(-a)).
+ * to {@link MathUtil#floor(double)} under the realization that ceiling(a) = -(floor(-a)).
  *
  */
 public class CeilingEvaluator implements IUnaryEvaluator 

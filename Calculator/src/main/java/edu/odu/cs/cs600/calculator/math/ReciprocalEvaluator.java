@@ -3,6 +3,10 @@ package edu.odu.cs.cs600.calculator.math;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+/**
+ * Computes the reciprocal of a given value.  See {@link #compute(double)}
+ * for details regarding the implementation
+ */
 public class ReciprocalEvaluator implements IUnaryEvaluator 
 {
 	private static Logger logger = LogManager.getLogger(ReciprocalEvaluator.class);
@@ -14,8 +18,8 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 	 * algorithm implemented works natively on the input range (0,1), however,
 	 * numerical values outside of this range are "scaled" by shifting the
 	 * decimal point before computation, and then after.
-	 * @param x
-	 * @return
+	 * @param x The value to compute the reciprocal of
+	 * @return The reciprocal of the passed value (1/x)
 	 * @throws ArithmeticException
 	 */
 	public double compute(double x) throws ArithmeticException

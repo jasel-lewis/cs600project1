@@ -3,6 +3,10 @@ package edu.odu.cs.cs600.calculator.math;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+/**
+ * Evaluator computes the floor of a passed value.  See {@link #compute(double)} 
+ * for implementation details.
+ */
 public class FloorEvaluator implements IUnaryEvaluator {
 
 	private static Logger logger = LogManager.getLogger(FloorEvaluator.class);
@@ -13,9 +17,9 @@ public class FloorEvaluator implements IUnaryEvaluator {
 	 * 2^k <= value < 2^(k+1).  Perform a binary search for value within this range.  Method
 	 * handles special cases such as 0.0 >= value < 1.0 and -1.0 >= value < 0.0 as these
 	 * can't be encapsulated by the above process.  Negative input is passed to
-	 * {@link MathUtil.ceiling(double)} under the realization that floor(a) = -(ceiling(-a)). 
-	 * @param value
-	 * @return
+	 * {@link MathUtil#ceiling(double)} under the realization that floor(a) = -(ceiling(-a)). 
+	 * @param value The value to compute the floor of
+	 * @return The floor of the passed value
 	 * @throws ArithmeticException
 	 */
 	public double compute(double value) throws ArithmeticException {

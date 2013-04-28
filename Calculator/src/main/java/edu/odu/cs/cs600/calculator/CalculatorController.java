@@ -15,7 +15,9 @@ import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangedListener;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
 /**
- * This class is the Controller of the MVC framework employed for this project
+ * This class is the Controller of the MVC framework employed for this project.  The controllers purpose
+ * is to respond to various UI events, manage the "logic" of what happens based on UI events, and effectively
+ * "control" the data flow between the UI and the model.
  */
 public class CalculatorController 
 {

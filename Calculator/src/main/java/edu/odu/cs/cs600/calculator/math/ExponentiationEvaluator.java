@@ -1,18 +1,22 @@
 package edu.odu.cs.cs600.calculator.math;
 
-public class ExponentiationEvaluator implements IBinaryEvaluator {
+/**
+ * Evaluator calculates a double representation of the passed base taken to the passed exponent.
+ * There exists a way to calculate a base to a real number exponent, however, this
+ * gets deep into number theory and such is not the intention here.  The passed value
+ * for exponent must be a double representation of an integer value.  If this is not
+ * adhered to, an {@link ArithmeticException} is thrown.  The recursive method
+ * {@link #helper(double, int)} is used to efficiently evaluate the computation in
+ * O(log n) time.
+ */
+public class ExponentiationEvaluator implements IBinaryEvaluator 
+{
 
 	/**
-	 * Calculates a double representation of the passed base taken to the passed exponent.
-	 * There exists a way to calculate a base to a real number exponent, however, this
-	 * gets deep into number theory and such is not the intention here.  The passed value
-	 * for exponent must be a double representation of an integer value.  If this is not
-	 * adhered to, an {@link ArithmeticException} is thrown.  The recursive method
-	 * {@link #helper(double, int)} is used to efficiently evaluate the computation in
-	 * O(log n) time.
+	 * Evaluates the exponentiation (x^y) of a given base to a given power
 	 * @param base
 	 * @param exponent
-	 * @return
+	 * @return the result of the exponentiation (base^exponent)
 	 * @throws ArithmeticException
 	 */
 	public double compute(double base, double exponent) throws ArithmeticException {
@@ -25,8 +29,6 @@ public class ExponentiationEvaluator implements IBinaryEvaluator {
 		
 		return helper(base, (int)exponent);
 	}
-	
-	
 	
 	/**
 	 * O(log n) calculation of an exponent (similar to what we did in class) - taken from
