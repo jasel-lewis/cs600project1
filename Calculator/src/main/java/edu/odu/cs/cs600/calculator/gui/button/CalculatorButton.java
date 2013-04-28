@@ -20,6 +20,10 @@ import javax.swing.plaf.ActionMapUIResource;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+/**
+ * Base class for a CalculatorButton.  This class is extended by {@link CharacterInputButton}
+ * and {@link CommandButton}.
+ */
 public abstract class CalculatorButton extends JButton 
 {
 
@@ -27,18 +31,25 @@ public abstract class CalculatorButton extends JButton
 	private static final long serialVersionUID = -7812322272853697084L;
 	private static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 26);
 	
-	public CalculatorButton(String imagePath, String imageOverPath)
+	
+	/**
+	 * Constructor for a CalculatorButton without an attributed keyboard key
+	 * @param imageFilename filename of the image for use as the {@link ImageIcon} for this CalculatorButton
+	 * @param imageOverFilename filename of the image for use as the {@link ImageIcon} for this CalculatorButton when hovered over
+	 * @see {@link #createImageIcon(String)}
+	 */
+	public CalculatorButton(String imageFilename, String imageOverFilename)
 	{
 		super();
 		
-		ImageIcon imgIcon = createImageIcon(imagePath);
+		ImageIcon imgIcon = createImageIcon(imageFilename);
 		
 		// If we have a valid Icon, we do not want the text to show
 		if (imgIcon != null) {
 			this.setIcon(imgIcon);
 		}
 		
-		ImageIcon imgOverIcon = createImageIcon(imageOverPath);
+		ImageIcon imgOverIcon = createImageIcon(imageOverFilename);
 		
 		// If we have a valid Icon, we do not want the text to show
 		if (imgOverIcon != null) {
@@ -52,51 +63,78 @@ public abstract class CalculatorButton extends JButton
 		setFont(BUTTON_FONT);
 	}
 	
-	public CalculatorButton(String imagePath, String imageOverPath, int keyCode)
+	
+	/**
+	 * Constructor for a CalculatorButton with an attributed keyboard key
+	 * @param imageFilename filename of the image for use as the {@link ImageIcon} for this CalculatorButton
+	 * @param imageOverFilename filename of the image for use as the {@link ImageIcon} for this CalculatorButton when hovered over
+	 * @param keyCode enumerated {@link KeyEvent} key code for the keyboard key to attribute to this CalculatorButton
+	 * @see {@link #createImageIcon(String)}
+	 */
+	public CalculatorButton(String imageFilename, String imageOverFilename, int keyCode)
 	{
-		this(imagePath, imageOverPath);
+		this(imageFilename, imageOverFilename);
 		
 		if (keyCode != KeyEvent.VK_UNDEFINED) {
 			this.hookKeyInput(keyCode);
 		}
 	}
 	
+	
 	/**
-	 * Create an ImageIcon from the passed path and filename.  Return null if unable to
+	 * Create an {@link ImageIcon} from the passed filename.  Return null if unable to
 	 * locate the resource.
-	 * @param path
+	 * @param imageFilename filename of the image (relative to the $project/resources/images directory)
 	 * @return
 	 */
-	protected ImageIcon createImageIcon(String path)
+	protected ImageIcon createImageIcon(String imageFilename)
 	{
-		URL imgURL = (Thread.currentThread().getContextClassLoader()).getResource(path);
+		URL imgURL = (Thread.currentThread().getContextClassLoader()).getResource(imageFilename);
 		
 		if (imgURL != null) {
 			return new ImageIcon(imgURL);
 		} else {
-			logger.warn("Could not locate image resource for button icon: " + path);
+			logger.warn("Could not locate image resource for button icon: " + imageFilename);
 			return null;
 		}
 	}
 	
+	
+	/**
+	 * Creates a {@link KeyStroke} from the passed enumeration of {@link KeyEvent}.  The
+	 * KeyStroke is then passed to {@link #hookKeyInput(KeyStroke)}.
+	 * @param keyCode enumerated {@link KeyEvent} key code
+	 */
 	protected void hookKeyInput(int keyCode)
 	{
 		this.hookKeyInput(KeyStroke.getKeyStroke(keyCode, 0));
 	}
 	
+	
+	/**
+	 * Creates a {@link KeyStroke} from the passed character value.  The KeyStroke is then
+	 * passed to {@link #hookKeyInput(KeyStroke)}.
+	 * @param character
+	 */
 	protected void hookKeyInput(char character)
 	{
 		this.hookKeyInput(KeyStroke.getKeyStroke(character));
 	}	
 	
-	protected void hookKeyInput(KeyStroke keyCode) 
+	
+	/**
+	 * Record the passed {@link KeyStroke} within an {@link InputMap} for this
+	 * CalculatorButton
+	 * @param keyStroke
+	 */
+	protected void hookKeyInput(KeyStroke keyStroke) 
 	{
 		InputMap keyMap = new ComponentInputMap(this);
 		
-		keyMap.put(keyCode, keyCode.getKeyCode());
+		keyMap.put(keyStroke, keyStroke.getKeyCode());
 		
 		ActionMap actionMap = new ActionMapUIResource();
-		actionMap.put(keyCode.getKeyCode(), new AbstractAction() {
+		actionMap.put(keyStroke.getKeyCode(), new AbstractAction() {
 			private static final long serialVersionUID = 303540849078642457L;
 
 			public void actionPerformed(ActionEvent ae) {
@@ -104,9 +142,7 @@ public abstract class CalculatorButton extends JButton
 			}
 		});
 		
-		SwingUtilities.replaceUIActionMap(this,  actionMap);
+		SwingUtilities.replaceUIActionMap(this, actionMap);
 		SwingUtilities.replaceUIInputMap(this, JComponent.WHEN_IN_FOCUSED_WINDOW, keyMap);
 	}
-	
-	
 }
