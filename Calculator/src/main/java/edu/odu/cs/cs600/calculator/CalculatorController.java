@@ -23,7 +23,7 @@ public class CalculatorController
 	
 	private CalculatorModel model = null;
 	private CalculatorView view = null;
-	// TODO: parser (below) not used - remove?
+	// TODO: Jared - parser (below) not used - remove?
 	private SimpleCalculatorParser parser = null;
 	
 	
@@ -175,6 +175,8 @@ public class CalculatorController
 						if(model.getErrorState()) break;
 						
 						try {
+							// TODO: Jared - I believe we're good on the below TO-DO, if so, please
+							// remove this one and that one?
 							// TODO: Might want to evaluate the returned double somewhere in here
 							// to ensure it's chopped at 10 characters.  For instance, if the
 							// double returned is 3.666666666666666667, we want to represent it

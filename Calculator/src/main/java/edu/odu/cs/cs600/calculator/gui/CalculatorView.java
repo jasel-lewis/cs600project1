@@ -94,7 +94,7 @@ public class CalculatorView extends JFrame {
 	{	
 		activeDisplay = new JLabel();
 		activeDisplay.setFont(new Font("Courier New", Font.BOLD, 42));
-		// TODO - next line is commented - remove?
+		// TODO: Jared - next line is commented - remove?
 		//activeDisplay.setHorizontalAlignment(SwingConstants.RIGHT);
 		activeDisplay.setVerticalAlignment(SwingConstants.CENTER);
         activeDisplay.setBounds(28, 68, 312, 32);
@@ -102,7 +102,7 @@ public class CalculatorView extends JFrame {
         
         historyDisplay = new JLabel();
         historyDisplay.setFont(new Font("Courier New", Font.PLAIN, 22));
-        // TODO - next line is commented - remove?
+        // TODO: Jared - next line is commented - remove?
         //historyDisplay.setHorizontalAlignment(JLabel.RIGHT);
         historyDisplay.setBounds(28, 26, 312, 25);
         panel.add(historyDisplay);

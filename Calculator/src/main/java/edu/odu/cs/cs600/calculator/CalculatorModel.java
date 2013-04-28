@@ -14,7 +14,7 @@ import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangedListener;
  */
 public class CalculatorModel 
 {	
-	// TODO: Logger (below) is not used - keep it?
+	// TODO: Jared - logger (below) is not used - keep it?
 	private static Logger logger = LogManager.getLogger(CalculatorModel.class);
 	
 	private Phrase activePhrase;
