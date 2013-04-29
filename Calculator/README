@@ -18,9 +18,66 @@ Instructor:  Dr. Olariu
   1. PROJECT SUMMARY
 ----------------------------------------------------------------------------
 
+This purpose of this project is to implement a simple calculator.  The goal
+was to emulate a "cheap" version of a calculator such that many of the 
+supported operations are in the software, vice in the hardware.  With that, 
+various common mathematical expressions (including trivial tasks such as 
+subtraction and division) were carefully implemented in the software.
 
+The calculator supports the follow (required) functions:
+	- On/Off
+	- Clear Last Entry / Clear All
+	- Addition
+	- Subtraction
+	- +/- (unary "minus")
+	- Multiplication
+	- Division
+	- Floor
+	- Ceiling
+	- Reciprocal
+	- Square Root
+	- Parenthesis
+	
+The calculator also supports the following functions that 
+were not required by the project specification:
+	- Factorial
+	- Exponentiation (x^2, x^y)
 
+The underlying architecture of the software follows an Model-View-Controller
+(MVC) design pattern.  The MVC design pattern is a mechanism that separates
+the various responsibilities of an application between the model and the view
+and utilizes the controller to effectively "orchestrate" or "wire" the 
+flow of data between the two.
 
+The CalculatorModel class retains the state of the calculator.  The state
+consists of whether or not the calculator is on or off, whether of not an error
+flag has been set, and of course the active (and last) expression parsed or
+being input into the calculator.
+
+The CalcutatorView is ignorant of the operations of the calculator and has
+the sole purpose of display data (as dictated by the controller), and 
+issuing events when various buttons are pressed.
+
+The CalculatorController binds to the events that are fired in the view and
+the model respectively, and responds to each as necessary.  For example, when
+a button is pressed, the view fires an event that the controller is listening
+to.  If the event fired was that of a button click, then type and attributes
+of the button are gleaned to determine how the calculator should react.  If
+the button were the "3" button, for example, the controller would append a 
+phenome representing the number 3 to the active expression (or phrase)
+that is held in the Model.  The model would then recognize that the active
+phrase had been updated and would throw an event.  Again, the controller is
+wired to listen to events thrown by the model, including updates to the active 
+phrase.  In this case, an update to the active phrase would induce the
+controller to then update the visual display of the active display, using the
+View. 
+
+Within the software, each mathematical function implemented within the 
+calculator has been abstracted into it's own respective "Evaluator".  A facade 
+of the various mathematical functions (MathUtil) is available for easy access 
+to the various methods.
+
+[TODO] RJ Discuss the parser here
 
 ----------------------------------------------------------------------------
   2. GETTING STARTED
