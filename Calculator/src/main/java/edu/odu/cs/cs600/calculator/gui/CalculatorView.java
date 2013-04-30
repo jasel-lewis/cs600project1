@@ -292,7 +292,7 @@ public class CalculatorView extends JFrame {
 	
 	/**
 	 * Sets the visibility of the active display
-	 * @param boolean The visibility of the active display
+	 * @param visible The visibility of the active display
 	 */
 	public void setActiveDisplayVisible(boolean visible) {
 		activeDisplay.setVisible(visible);
@@ -308,7 +308,7 @@ public class CalculatorView extends JFrame {
 	
 	/**
 	 * Sets the visibility of the historical display
-	 * @param boolean The visibility of the historical display
+	 * @param visible The visibility of the historical display
 	 */
 	public void setHistoryDisplayVisible(boolean visible) {
 		historyDisplay.setVisible(visible);

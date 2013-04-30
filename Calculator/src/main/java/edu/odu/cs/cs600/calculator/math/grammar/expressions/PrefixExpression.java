@@ -21,7 +21,7 @@ public class PrefixExpression implements Expression {
 	
 	/**
 	 * Constructor
-	 * @param operator The (unary) operation to perform on the right-side {@link expression}
+	 * @param operator The (unary) operation to perform on the right-side {@link Expression}
 	 * @param right The right-side {@link Expression}
 	 */
 	public PrefixExpression(TokenType operator, Expression right) {
