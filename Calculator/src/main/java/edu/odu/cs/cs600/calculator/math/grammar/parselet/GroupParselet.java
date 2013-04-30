@@ -11,6 +11,11 @@ import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
  * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/GroupParselet.java
  */
 public class GroupParselet implements PrefixParselet {
+	
+	/**
+	 * Parse until the associated right parenthesis is reached
+	 * @return The resultant {@link Expression}
+	 */
 	public Expression parse(Parser parser, Token token) {
 		Expression expression = parser.parseExpression();
 		

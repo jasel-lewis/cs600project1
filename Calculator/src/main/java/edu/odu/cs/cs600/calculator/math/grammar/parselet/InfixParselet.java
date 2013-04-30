@@ -12,7 +12,7 @@ import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
  * halts and what has been parsed so far is returned.
  * 
  * An InfixParselet is associated with a token that appears in the _middle_
- * of an expression it parses.
+ * of an expression being parsed.
  * 
  * NOTE: This is also used for postfix expressions, albeit we do not plan for
  * any such functionality in our simple calculator grammar.

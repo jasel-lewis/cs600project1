@@ -17,13 +17,24 @@ public class BinaryOperatorParselet implements InfixParselet {
 	private final int precedence;
 	private final boolean isRightAssociative;
 	
+	
+	/**
+	 * Constructor
+	 * @param precedence The integer precedence value attributed to this BinaryOperatorParselet
+	 * @param isRightAssociative true if this BinaryOperatorParselt should be considered as right-associative
+	 */
 	public BinaryOperatorParselet(int precedence, boolean isRightAssociative) {
 		this.precedence = precedence;
 		this.isRightAssociative = isRightAssociative;
 	}
 	
 	
-	
+	/**
+	 * Create a new {@link OperatorExpression} from the passed left-side {@link Expression},
+	 * passed (operator) {@link Token} and right-side {@link Expression} as determined from
+	 * the passed {@link Parser}.
+	 * @return The resultant {@link Expression}
+	 */
 	public Expression parse(Parser parser, Expression left, Token token) {
 		// To be right-associative (for the "^" operator), the call to
 		// parseExpression() should take one _less_than_ the precedence.  This
@@ -41,7 +52,9 @@ public class BinaryOperatorParselet implements InfixParselet {
 	}
 
 	
-	
+	/**
+	 * @return The precedence attributed to this BinaryOperatorParselet
+	 */
 	@Override
 	public int getPrecedence() {
 		return precedence;

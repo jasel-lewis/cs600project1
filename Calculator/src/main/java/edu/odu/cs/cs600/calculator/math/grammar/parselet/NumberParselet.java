@@ -10,6 +10,11 @@ import edu.odu.cs.cs600.calculator.math.grammar.expressions.NumberExpression;
  * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
  */
 public class NumberParselet implements PrefixParselet {
+	
+	/**
+	 * @return A new {@link NumberExpression} from the passed {@link Parser} and the
+	 * passed lexeme ({@link String} representation of the number)
+	 */
 	public Expression parse(Parser parser, Token token) {
 		return new NumberExpression(token.getLexeme());
 	}
