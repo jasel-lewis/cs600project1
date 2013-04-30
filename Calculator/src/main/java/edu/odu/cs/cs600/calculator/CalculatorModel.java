@@ -3,9 +3,6 @@ package edu.odu.cs.cs600.calculator;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
 import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangedListener;
 
@@ -17,17 +14,19 @@ public class CalculatorModel
 	private Phrase activePhrase;
 	private Phrase lastPhrase;
 	private boolean errorState;
+	private boolean powerState;
 	
 	private List<PhraseChangedListener> activePhraseChangedListeners = new ArrayList<PhraseChangedListener>();
 	private List<PhraseChangedListener> lastPhraseChangedListeners = new ArrayList<PhraseChangedListener>();
 	private List<ErrorStateChangedListener> errorStateChangedListeners = new ArrayList<ErrorStateChangedListener>();
-	
+	private List<PowerStateChangedListener> powerStateChangedListeners = new ArrayList<PowerStateChangedListener>();
 	
 	/**
 	 * Constructor
 	 */
 	public CalculatorModel() {
-		this.errorState = false;
+		this.setPowerState(true);
+		this.setErrorState(false);
 		this.setActivePhrase(new Phrase());
 		this.setLastPhrase(new Phrase());
 	}	
@@ -180,6 +179,55 @@ public class CalculatorModel
 		if(this.errorStateChangedListeners != null) {
 			for(ErrorStateChangedListener listener : this.errorStateChangedListeners)
 				listener.errorStateChanged(this.getErrorState());
+		}
+	}
+	
+	/**
+	 * Sets whether or not the calculator is turned on (true) or off (false)
+	 * @param on on (true) or off (false)
+	 */
+	public void setPowerState(boolean on) {
+		if(on != this.powerState) {
+			this.powerState = on;
+			this.firePowerStateChangedEvent();
+		}
+		
+	}
+	
+	/**
+	 * Returns the power state of the calculator.
+	 * @return boolean The power state of the calculator (true) on / (false) off
+	 */
+	public boolean getPowerState() {
+		return this.powerState;
+	}
+	
+	/**
+	 * Add a listener to this CalculatorModel in order to recognize a change to
+	 * the state of the power
+	 * @param listener
+	 */
+	public void addPowerStateChangedListener(PowerStateChangedListener listener) {
+		this.powerStateChangedListeners.add(listener);
+	}
+	
+	
+	/**
+	 * Remove the listener which recognizes a change to the state of the power
+	 * of the calculator
+	 * @param listener
+	 */
+	public void removePowerStateChangedListener(PowerStateChangedListener listener) {
+		this.powerStateChangedListeners.remove(listener);
+	}
+	
+	/**
+	 * Alert all listeners that the power state of the calculator has changed
+	 */
+	private void firePowerStateChangedEvent() {
+		if(this.powerStateChangedListeners != null) {
+			for(PowerStateChangedListener listener : this.powerStateChangedListeners)
+				listener.powerStateChanged(this.getPowerState());
 		}
 	}
 }

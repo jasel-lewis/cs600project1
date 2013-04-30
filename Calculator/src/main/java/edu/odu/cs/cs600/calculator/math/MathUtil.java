@@ -164,7 +164,7 @@ public class MathUtil
 	 * @return The factorial of the passed value
 	 * @throws ArithmeticException
 	 */
-	public static int factorial(int x) throws ArithmeticException {
+	public static double factorial(double x) throws ArithmeticException {
 		return factorialEvaluator.compute(x);
 	}
 	

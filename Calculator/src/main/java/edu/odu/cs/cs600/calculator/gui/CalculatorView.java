@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -33,6 +34,7 @@ public class CalculatorView extends JFrame {
 	private ImagePanel panel;
 	private JLabel activeDisplay;
 	private JLabel historyDisplay;
+	private CommandButton powerToggleButton;
 	
 	private List<ActionListener> characterInputButtonActionListeners = new ArrayList<ActionListener>();
 	private ActionListener characterInputButtonActionListener = new ActionListener(){
@@ -113,7 +115,10 @@ public class CalculatorView extends JFrame {
 	{
 		// ROW 1
 		
-		// TODO: JS On Off Button
+		powerToggleButton = new CommandButton("buttonPowerOn.png", "buttonPowerOnOver.png", CalculatorCommand.POWERTOGGLE);
+		powerToggleButton.setBounds(25, 118, 56, 56);
+		powerToggleButton.addActionListener(commandButtonActionListener);
+		panel.add(powerToggleButton);
 		
 		CommandButton squareRootButton = new CommandButton("buttonSquareRoot.png", "buttonSquareRootOver.png", CalculatorCommand.SQUAREROOT);
 		squareRootButton.setBounds(91, 118, 56, 56);
@@ -238,7 +243,7 @@ public class CalculatorView extends JFrame {
 		subtractButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(subtractButton);
 
-		CommandButton equalsButton = new CommandButton("buttonEqual.png", "buttonEqualOver.png", CalculatorCommand.EVALUATE);
+		CommandButton equalsButton = new CommandButton("buttonEqual.png", "buttonEqualOver.png", CalculatorCommand.EVALUATE, KeyEvent.VK_ENTER);
 		equalsButton.setBounds(286, 382, 56, 122);
 		equalsButton.addActionListener(commandButtonActionListener);
 		panel.add(equalsButton);
@@ -264,64 +269,17 @@ public class CalculatorView extends JFrame {
 		addButton.setBounds(221, 448, 56, 56);
 		addButton.addActionListener(this.characterInputButtonActionListener);
 		panel.add(addButton);
-		
-		
-		
-		
-		
-		
-		// ROW 1
-		
-//		CommandButton ceilingButton = new CommandButton("buttonCeiling.png", "buttonCeilingOver.png", CalculatorCommand.CEILING);
-//		ceilingButton.setBounds(25, 118, 56, 56);
-//		ceilingButton.addActionListener(commandButtonActionListener);
-//		panel.add(ceilingButton);
-//		  
-//		CommandButton floorButton = new CommandButton("buttonFloor.png", "buttonFloorOver.png", CalculatorCommand.FLOOR);
-//		floorButton.setBounds(91, 118, 56, 56);
-//		floorButton.addActionListener(commandButtonActionListener);
-//		panel.add(floorButton);
-		  
-//		CommandButton reciprocalButton = new CommandButton("buttonReciprocal.png", "buttonReciprocalOver.png", CalculatorCommand.RECIPROCAL);
-//		reciprocalButton.setBounds(156, 118, 56, 56);
-//		reciprocalButton.addActionListener(commandButtonActionListener);
-//		panel.add(reciprocalButton);
-		
-//		CharacterInputButton exponentiateButton = new CharacterInputButton("buttonExponent.png", "buttonExponentOver.png", new CalculatorCharacter('^'));
-//		exponentiateButton.setBounds(221, 118, 56, 56);
-//		exponentiateButton.addActionListener(this.characterInputButtonActionListener);
-//		panel.add(exponentiateButton);
-		
-//		CommandButton clearEntryButton = new CommandButton("buttonClearEntry.png", "buttonClearEntryOver.png", CalculatorCommand.CLEAR, KeyEvent.VK_BACK_SPACE);
-//		clearEntryButton.setBounds(286, 118, 56, 56);
-//		clearEntryButton.addActionListener(commandButtonActionListener);
-//		panel.add(clearEntryButton);
-		
-		// ROW 2
-		
-//		CommandButton negateButton = new CommandButton("buttonNegate.png", "buttonNegateOver.png", CalculatorCommand.NEGATE);
-//		negateButton.setBounds(25, 184, 56, 56);
-//		negateButton.addActionListener(commandButtonActionListener);
-//		panel.add(negateButton);
-//		
-//		CommandButton factorialButton = new CommandButton("buttonFactorial.png", "buttonFactorialOver.png", CalculatorCommand.FACTORIAL);
-//		factorialButton.setBounds(91, 184, 56, 56);
-//		factorialButton.addActionListener(commandButtonActionListener);
-//		panel.add(factorialButton);
-		
-//		CommandButton squareRootButton = new CommandButton("buttonSquareRoot.png", "buttonSquareRootOver.png", CalculatorCommand.SQUAREROOT);
-//		squareRootButton.setBounds(156, 184, 56, 56);
-//		squareRootButton.addActionListener(commandButtonActionListener);
-//		panel.add(squareRootButton);
-		
-//		CommandButton squaredButton = new CommandButton("buttonSquared.png", "buttonSquaredOver.png", CalculatorCommand.SQUARE);
-//		squaredButton.setBounds(221, 184, 56, 56);
-//		squaredButton.addActionListener(commandButtonActionListener);
-//		panel.add(squaredButton);
-		
-		
-		
 	}  
+	
+	/**
+	 * Sets the images used for the power button.
+	 * @param imageFilename Path to an image to use for the button
+	 * @param imageOverFilename Path to an image to use for the button when hovered or pressed
+	 */
+	public void setPowerToggleButtonImages(String imageFilename, String imageOverFilename) {
+		this.powerToggleButton.setIcon(imageFilename);
+		this.powerToggleButton.setPressedIcon(imageOverFilename);
+	}
 	
 	
 	/**
@@ -332,6 +290,13 @@ public class CalculatorView extends JFrame {
 		activeDisplay.setText(string);
 	}
 	
+	/**
+	 * Sets the visibility of the active display
+	 * @param boolean The visibility of the active display
+	 */
+	public void setActiveDisplayVisible(boolean visible) {
+		activeDisplay.setVisible(visible);
+	}
 	
 	/**
 	 * Show the passed {@link String} in the historical display
@@ -341,6 +306,13 @@ public class CalculatorView extends JFrame {
 		historyDisplay.setText(string);
 	}
 	
+	/**
+	 * Sets the visibility of the historical display
+	 * @param boolean The visibility of the historical display
+	 */
+	public void setHistoryDisplayVisible(boolean visible) {
+		historyDisplay.setVisible(visible);
+	}
 	
 	/**
 	 * Apply the passed {@link ActionListener} to the list of {@link CharacterInputButton}

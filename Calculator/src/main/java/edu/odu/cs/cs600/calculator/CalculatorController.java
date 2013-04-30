@@ -51,8 +51,8 @@ public class CalculatorController
 		this.model.addErrorStateChangedListener(new ModelErrorStateChangedListener());
 		this.model.addActivePhraseChangedListener(new ModelActivePhraseChangeListener());
 		this.model.addLastPhraseChangedListener(new ModelLastPhraseChangeListener());
+		this.model.addPowerStateChangedListener(new ModelPowerStateChangedListener());
 	}
-	
 	
 	/**
 	 * Initializes listeners on properties of the view
@@ -62,6 +62,29 @@ public class CalculatorController
 		this.view.addCharacterInputButtonListener(new CharacterInputButtonActionListener());
 		this.view.addCommandButtonListener(new CommandButtonActionListener());
 	}	
+	
+	/**
+	 * Responds to changes in the power state in the model.  Primary controls the view
+	 * when the state changes.  When the power is turned on, the LCD displays are
+	 * set to visible and the power button is lit up.  When the power is turned off,
+	 * the LCD displays are hidden, and the power button is set to a dull "off" look and feel.
+	 */
+	private class ModelPowerStateChangedListener implements PowerStateChangedListener
+	{
+		@Override
+		public void powerStateChanged(boolean powerState) {
+			if(powerState) {
+				view.setPowerToggleButtonImages("buttonPowerOn.png", "buttonPowerOnOver.png");
+			} else {
+				view.setPowerToggleButtonImages("buttonPowerOff.png", "buttonPowerOffOver.png");
+				model.getLastPhrase().clear();
+				model.getActivePhrase().clear();
+			}
+			
+			view.setActiveDisplayVisible(powerState);
+			view.setHistoryDisplayVisible(powerState);
+		}
+	}
 	
 	
 	/**
@@ -165,13 +188,16 @@ public class CalculatorController
 						model.getLastPhrase().clear();
 						model.setErrorState(false);
 						break;
+					case POWERTOGGLE:
+						model.setPowerState(!model.getPowerState());
+						break;
 	
 					// ***********************
 					// Mathematical Commands
 					// ***********************
 					case CEILING:
 					{
-						if(model.getErrorState()) break;
+						if(model.getErrorState() || !model.getPowerState()) break;
 						
 						try {
 							Phrase input = model.getActivePhrase();
@@ -187,7 +213,7 @@ public class CalculatorController
 					}
 					case EVALUATE:
 					{
-						if(model.getErrorState()) break;
+						if(model.getErrorState() || !model.getPowerState()) break;
 						
 						try {
 							Phrase input = model.getActivePhrase();
@@ -200,9 +226,25 @@ public class CalculatorController
 						
 						break;
 					}
+					case FACTORIAL:
+					{
+						if(model.getErrorState() || !model.getPowerState()) break;
+						
+						try {
+							Phrase input = model.getActivePhrase();
+							double result = SimpleCalculatorParser.evaluatePhrase(input);
+							result = MathUtil.factorial(result);
+							model.setActivePhrase(Phrase.convertToPhrase(result));
+							model.setLastPhrase(input);
+						} catch (Exception ex) {
+							model.setErrorState(true);
+						}
+						
+						break;
+					}
 					case FLOOR:
 					{
-						if(model.getErrorState()) break;
+						if(model.getErrorState() || !model.getPowerState()) break;
 						
 						try {
 							Phrase input = model.getActivePhrase();
@@ -218,7 +260,7 @@ public class CalculatorController
 					}
 					case NEGATE:
 					{
-						if(model.getErrorState()) break;
+						if(model.getErrorState() || !model.getPowerState()) break;
 						
 						try {
 							Phrase input = model.getActivePhrase();
@@ -234,7 +276,7 @@ public class CalculatorController
 					}
 					case RECIPROCAL:
 					{
-						if(model.getErrorState()) break;
+						if(model.getErrorState() || !model.getPowerState()) break;
 						
 						try {
 							Phrase input = model.getActivePhrase();
@@ -250,7 +292,7 @@ public class CalculatorController
 					}
 					case SQUAREROOT:
 					{
-						if(model.getErrorState()) break;
+						if(model.getErrorState() || !model.getPowerState()) break;
 						
 						try {
 							Phrase input = model.getActivePhrase();
@@ -266,7 +308,7 @@ public class CalculatorController
 					}
 					case SQUARE:
 					{
-						if(model.getErrorState()) break;
+						if(model.getErrorState() || !model.getPowerState()) break;
 						
 						try {
 							Phrase input = model.getActivePhrase();
