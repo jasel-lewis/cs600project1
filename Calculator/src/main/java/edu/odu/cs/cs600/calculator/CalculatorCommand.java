@@ -7,11 +7,11 @@ package edu.odu.cs.cs600.calculator;
  *   <li>CLEAR</li>
  *   <li>CLEAR_ALL</li>
  *   <li>EVALUATE</li>
- *   <li>EXPONENTIATE</li>
  *   <li>FACTORIAL</li>
  *   <li>FLOOR</li>
  *   <li>NEGATE</li>
  *   <li>RECIPROCAL</li>
+ *   <li>POWERTOGGLE</li>
  *   <li>SQURE</li>
  *   <li>SQUAREROOT</li>
  * </ul>
@@ -21,10 +21,10 @@ public enum CalculatorCommand {
 	CLEAR,
 	CLEAR_ALL,
 	EVALUATE,
-	EXPONENTIATE,
 	FACTORIAL,
 	FLOOR,
 	NEGATE,
+	POWERTOGGLE,
 	RECIPROCAL,
 	SQUARE,
 	SQUAREROOT

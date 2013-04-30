@@ -7,7 +7,6 @@ import java.util.Map;
 // TODO: R. J. - update the PROJECT SUMMARY section of the README file with a summary of the parser implementation
 // TODO: Jared - Update the GETTING STARTED and DEVELOPER NOTES in the README
 // TODO: R. J. - Develop test cases for the rest of the evaluators
-// TODO: Jared - Add an ON/OFF button
 /**
  * Takes a string and splits it into a series of Tokens. Operators and punctuation
  * are mapped to enumerated values. Numbers are turned into NUMBER tokens. All other

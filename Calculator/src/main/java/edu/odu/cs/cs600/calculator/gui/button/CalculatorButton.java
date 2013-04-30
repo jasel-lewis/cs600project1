@@ -42,25 +42,34 @@ public abstract class CalculatorButton extends JButton
 	{
 		super();
 		
-		ImageIcon imgIcon = createImageIcon(imageFilename);
-		
-		// If we have a valid Icon, we do not want the text to show
-		if (imgIcon != null) {
-			this.setIcon(imgIcon);
-		}
-		
-		ImageIcon imgOverIcon = createImageIcon(imageOverFilename);
-		
-		// If we have a valid Icon, we do not want the text to show
-		if (imgOverIcon != null) {
-			this.setPressedIcon(imgOverIcon);
-			this.setRolloverIcon(imgOverIcon);
-		}
+		this.setIcon(imageFilename);
+		this.setPressedIcon(imageOverFilename);
 		
 		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setContentAreaFilled(false);
 		
 		setFont(BUTTON_FONT);
+	}
+	
+	/**
+	 * Sets the icon of the button
+	 * @param imageFilename Filename of the image available on the classpath
+	 */
+	public void setIcon(String imageFilename) 
+	{
+		ImageIcon imgIcon = createImageIcon(imageFilename);
+		this.setIcon(imgIcon);
+	}
+	
+	/**
+	 * Sets the icon of the button when pressed
+	 * @param imageFilename Filename of the image available on the classpath
+	 */
+	public void setPressedIcon(String imageFilename) 
+	{
+		ImageIcon imgOverIcon = createImageIcon(imageFilename);
+		this.setPressedIcon(imgOverIcon);
+		this.setRolloverIcon(imgOverIcon);
 	}
 	
 	
