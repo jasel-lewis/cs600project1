@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import edu.odu.cs.cs600.calculator.CalculatorCharacter;
 
 /**
@@ -17,7 +14,6 @@ import edu.odu.cs.cs600.calculator.CalculatorCharacter;
  */
 public class Phrase 
 {
-	private static Logger logger = LogManager.getLogger(Phrase.class);
 	private static final String CHARS_ALLOWING_ZERO = ".+*-/^";
 	
 	private List<CalculatorCharacter> characterList = new ArrayList <CalculatorCharacter> ();

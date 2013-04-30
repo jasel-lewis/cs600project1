@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
-import edu.odu.cs.cs600.calculator.CalculatorCharacter;
 import edu.odu.cs.cs600.calculator.CalculatorCommand;
 
 /**
