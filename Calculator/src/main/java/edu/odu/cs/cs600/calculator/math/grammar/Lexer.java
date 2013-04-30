@@ -28,8 +28,6 @@ public class Lexer implements Iterator<Token> {
 		this.phrase = phrase.toString(false);
 		init();
 	}
-
-	
 	
 	private void init() {
 		index = 0;
