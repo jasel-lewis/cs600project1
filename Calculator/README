@@ -115,10 +115,12 @@ This project has been developed using Eclipse (as the project contains a
 project file that can be used in eclipse), but can also be fully built 
 using Ant.
 
-The documentation below assumes that Ant has been installed on your machine
-and is available on your path.
+The project's source code repository is hosted in a private repository at
+GitHub, at the following address: https://github.com/jasel-lewis/cs600project1
 
-Various ANT targets are available in the build file, including
+Various ANT targets are available in the build file.  The documentation below 
+assumes that Ant has been installed on your machine and is available on 
+your path.
 
 TARGET: main (default)
 
