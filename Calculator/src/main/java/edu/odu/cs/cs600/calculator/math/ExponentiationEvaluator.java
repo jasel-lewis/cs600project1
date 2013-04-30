@@ -50,9 +50,9 @@ public class ExponentiationEvaluator implements IBinaryEvaluator
 		} else if (exponent == 1) {
 			return base;
 		} else if ((exponent % 2) == 0) {  // If exponent is even
-			return helper((base * base), (exponent / 2));
+			return helper(MathUtil.multiply(base, base), (exponent / 2));
 		} else {
-			return (base * helper((base * base), ((exponent - 1) / 2)));
+			return (base * helper(MathUtil.multiply(base,  base), ((exponent - 1) / 2)));
 		}
 	}
 }

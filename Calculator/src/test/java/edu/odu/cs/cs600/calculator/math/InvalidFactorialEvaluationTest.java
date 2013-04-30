@@ -23,4 +23,12 @@ public class InvalidFactorialEvaluationTest {
 		
 		MathUtil.factorial(-900);
 	}
+	
+	@Test
+	public void testInvalidFactorialNonInteger() {
+		thrown.expect(ArithmeticException.class);
+		thrown.expectMessage("Exponent must be an integer");
+		
+		MathUtil.factorial(0.5);
+	}
 }

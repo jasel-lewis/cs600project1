@@ -17,7 +17,7 @@ public class DivisionEvaluator implements IBinaryEvaluator {
 	 */
 	public double compute(double numerator, double divisor) throws ArithmeticException 
 	{
-		return numerator * MathUtil.reciprocate(divisor);
+		return MathUtil.multiply(numerator, MathUtil.reciprocate(divisor));
 	}
 
 }

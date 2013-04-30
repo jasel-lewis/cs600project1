@@ -33,7 +33,7 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 		
 		// If the value is negative, then first flip to positive, then revert in the end
 		boolean isNegative = (x < 0);
-		if(isNegative) x = x * -1;
+		if(isNegative) x = MathUtil.multiply(x, MathUtil.negate(1));
 		
 		// If the value is greater than 1, then normalize by shifting the decimal
 		// place until the value is in the range of (0,1)
@@ -44,7 +44,7 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 			while(x > 1)
 			{
 				factor++;
-				x = x * 0.1;
+				x = MathUtil.multiply(x, 0.1);
 			}
 		}
 		else if(x < 0.1)
@@ -52,7 +52,7 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 			while(x < 0.1)
 			{
 				factor--;
-				x = x * 10;
+				x = MathUtil.multiply(x, 10);
 			}
 		}
 		
@@ -60,23 +60,23 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 		double yi = MathUtil.subtract(1, x);
 		double xPrev;
 		double yPrev;
-		double tolerance = EPSILON * x * x;
+		double tolerance = MathUtil.multiply(MathUtil.multiply(EPSILON, x), x);
 		
 		do
 		{
 			xPrev = xi;
 			yPrev = yi;	
-			xi = xPrev*(1+yPrev);
-			yi = yPrev * yPrev;
+			xi = MathUtil.multiply(xPrev, MathUtil.add(yPrev, 1));
+			yi = MathUtil.multiply(yPrev, yPrev);
 		} 
-		while(MathUtil.abs(yPrev - yi) >= tolerance);
+		while(MathUtil.abs(MathUtil.subtract(yPrev, yi)) >= tolerance);
 		x = xi;
 		
 		if(factor > 0)
 		{
 			while (factor > 0)
 			{
-				x = x * 0.1;
+				x = MathUtil.multiply(x, 0.1);
 				factor--;
 			}
 		}
@@ -84,12 +84,12 @@ public class ReciprocalEvaluator implements IUnaryEvaluator
 		{
 			while (factor < 0)
 			{
-				x = x * 10;
+				x = MathUtil.multiply(x, 10);
 				factor++;
 			}
 		}
 		
-		if(isNegative) x = x * -1;
+		if(isNegative) x = MathUtil.multiply(x, MathUtil.negate(1));
 		
 		logger.debug("Computed the reciprocal of x (1/x)="+x);
 		

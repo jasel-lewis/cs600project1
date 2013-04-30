@@ -34,9 +34,9 @@ public class SquareRootEvaluator implements IUnaryEvaluator
 		{
 			i=i+1;
 			xPrev = x;
-			x= 0.5 * ( x + MathUtil.divide(value, x) );
+			x= MathUtil.multiply(0.5, MathUtil.add(x, MathUtil.divide(value, x)));
 			logger.debug("Square Root: Iteration=" + i + " xi=" + x + " xi-1=" + xPrev);
-		} while(MathUtil.abs(xPrev-x) >= EPSILON);
+		} while(MathUtil.abs(MathUtil.subtract(xPrev, x)) >= EPSILON);
 		
 		return x;
 	}
