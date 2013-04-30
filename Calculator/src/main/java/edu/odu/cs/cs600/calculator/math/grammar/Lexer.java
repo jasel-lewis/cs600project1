@@ -10,8 +10,9 @@ import java.util.Map;
 // TODO: Jared - Add an ON/OFF button
 /**
  * Takes a string and splits it into a series of Tokens. Operators and punctuation
- * are mapped to unique keywords. Numbers are turned into NUMBER tokens. All other
- * characters are ignored.
+ * are mapped to enumerated values. Numbers are turned into NUMBER tokens. All other
+ * characters are ignored (entry of such characters is impossible via the GUI
+ * interface).
  * 
  * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
  * Adapted from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Lexer.java
@@ -31,11 +32,12 @@ public class Lexer implements Iterator<Token> {
 	}
 
 	
-	
+	/**
+	 * Register each of the TokenTypes that are explicit "puncutators"
+	 */
 	private void init() {
 		index = 0;
-
-		// Register all of the TokenTypes that are explicit punctuators
+		
 		for (TokenType type : TokenType.values()) {
 			Character punctuator = type.getPunctuator();
 			
@@ -46,18 +48,23 @@ public class Lexer implements Iterator<Token> {
 	}
 
 	
-	
+	/**
+	 * Overridden method for the {@link Iterator} interface - for the purposes of this
+	 * class, always return true
+	 * @return boolean value true
+	 */
 	@Override
 	public boolean hasNext() {
 		return true;
 	}
-
 	
 	
+	/**
+	 * Return the next identified {@link Token}
+	 * @return the next {@link Token}
+	 */
 	@Override
 	public Token next() {
-//		boolean decimalEncountered = false;
-		
 		while (index < phrase.length()) {
 			char c = phrase.charAt(index++);
 
@@ -68,17 +75,13 @@ public class Lexer implements Iterator<Token> {
 				// Handle numbers
 				// digit       [0-9]
 				// integer     {digit}+
-				// exponent    [eE][+-]?{integer}
 				// real        ({integer}("."{integer})?|"."{integer}){exponent}?
 				int start = index - 1;
+				
 				while (index < phrase.length()) {
 					c = phrase.charAt(index);
 					
 					if (Character.isDigit(c) || (c == '.')) {
-//					if (Character.isDigit(c)) {
-//						index++;
-//					} else if ((c == '.') && !decimalEncountered) {
-//						decimalEncountered = true;
 						index++;
 					} else {
 						break;
@@ -99,7 +102,11 @@ public class Lexer implements Iterator<Token> {
 	}
 
 	
-	
+	/**
+	 * Overridden method for the {@link Iterator} interface - for the purposes of this
+	 * class, simply throw an {@link UnsupportedOperationException} as this method
+	 * holds no value in the overall implementation and should not be called
+	 */
 	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();

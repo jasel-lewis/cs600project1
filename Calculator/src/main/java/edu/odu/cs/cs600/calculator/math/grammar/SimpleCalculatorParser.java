@@ -6,7 +6,7 @@ import edu.odu.cs.cs600.calculator.math.grammar.parselet.NumberParselet;
 import edu.odu.cs.cs600.calculator.math.grammar.parselet.PrefixOperatorParselet;
 
 /**
- * Extends the generic Parser class with support for parsing the actual Bantam
+ * Extends the generic Parser class with support for parsing the actual Calculator
  * grammar.
  */
 public class SimpleCalculatorParser extends Parser {
@@ -33,9 +33,10 @@ public class SimpleCalculatorParser extends Parser {
 	
 	
 	/**
-	 * Registers a prefix unary operator parselet for the given token and precedence
-	 * @param token
-	 * @param precedence
+	 * Registers a new {@link PrefixOperatorParselet} (unary operator) having the passed
+	 * precedence for the passed {@link TokenType}
+	 * @param token The {@link TokenType} to register with the new {@link PrefixOperatorParselet}
+	 * @param precedence The integer precedence to assign to the new {@link PrefixOperatorParselet}
 	 */
 	public void prefix(TokenType token, int precedence) {
 		register(token, new PrefixOperatorParselet(precedence));
@@ -44,28 +45,33 @@ public class SimpleCalculatorParser extends Parser {
 	
 	
 	/**
-	 * Registers a left-associative binary operator parselet for the given token
-	 * and precedence
-	 * @param token
-	 * @param precedence
+	 * Registers a left-associative {@link BinaryOperatorParselet} having the passed
+	 * precedence for the passed {@link TokenType}
+	 * @param token The {@link TokenType} to register with the new {@link BinaryOperatorParselet}
+	 * @param precedence The integer precedence to assign to the new {@link BinaryOperatorParselet}
 	 */
 	public void infixLeft(TokenType token, int precedence) {
 		register(token, new BinaryOperatorParselet(precedence, false));
 	}
 
 	
-	
 	/**
-	 * Registers a right-associative binary operator parselet for the given token
-	 * and precedence
-	 * @param token
-	 * @param precedence
+	 * Registers a right-associative {@link BinaryOperatorParselet} having the passed
+	 * precedence for the passed {@link TokenType}
+	 * @param token The {@link TokenType} to register with the new {@link BinaryOperatorParselet}
+	 * @param precedence The integer precedence to assign to the new {@link BinaryOperatorParselet}
 	 */
 	public void infixRight(TokenType token, int precedence) {
 		register(token, new BinaryOperatorParselet(precedence, true));
 	}
 	
 	
+	/**
+	 * Evaluate the passed {@link Phrase} in its entirety, returning the ultimate,
+	 * calculated double value.
+	 * @param phrase The {@link Phrase} to evaluate
+	 * @return The calculated double value of the passed {@link Phrase} 
+	 */
 	public static double evaluatePhrase(Phrase phrase)
 	{
 		Parser parser = new SimpleCalculatorParser(new Lexer(phrase));

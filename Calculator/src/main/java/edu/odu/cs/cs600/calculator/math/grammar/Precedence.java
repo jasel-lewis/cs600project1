@@ -1,8 +1,9 @@
 package edu.odu.cs.cs600.calculator.math.grammar;
 
 /**
- * Precedence is part of the magic of Pratt parsers.  This class captures
- * the weighting of each operation.
+ * Precedence is part of the magic of Pratt parsers.  This class captures the
+ * weighting of each operation which determines the order in which expressions
+ * are evaluated.
  * 
  * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
  */
