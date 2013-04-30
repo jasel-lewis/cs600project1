@@ -1,7 +1,7 @@
 package edu.odu.cs.cs600.calculator.math.grammar;
 
 /**
- * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/TokenType.java
+ * Adapted from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/TokenType.java
  * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
  */
 public enum TokenType {
@@ -16,9 +16,9 @@ public enum TokenType {
 	EOF;
 	
 	/**
-	 * "Punctuators" are tokens that can split identifiers.  If the TokenType represents
-	 * a punctuator, this function will get its represented character.
-	 * @return The puncuator associated with this TokenType (if any)
+	 * "Punctuators" are tokens that can split identifiers.  If this TokenType represents
+	 * a punctuator, this method will get its represented character (wrapped as a {@link Character}).
+	 * @return The {@link Character} associated with this TokenType (if a punctuator)
 	 */
 	public Character getPunctuator() {
 		switch (this) {

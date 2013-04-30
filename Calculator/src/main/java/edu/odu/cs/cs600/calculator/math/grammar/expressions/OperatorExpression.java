@@ -8,6 +8,8 @@ import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
 import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
 
 /**
+ * Class to represent an OperatorExpression
+ * 
  * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/OperatorExpression.java
  */
 public class OperatorExpression implements Expression {
@@ -16,6 +18,13 @@ public class OperatorExpression implements Expression {
 	private final Expression right;
 	private final TokenType operator;
 	
+	
+	/**
+	 * Constructor
+	 * @param left The left-side {@link Expression}
+	 * @param operator The {@link TokenType} of the operation to perform on the left and right expression
+	 * @param right The right-side {@link Expression}
+	 */
 	public OperatorExpression(Expression left, TokenType operator, Expression right) {
 		this.left = left;
 		this.operator = operator;
@@ -23,7 +32,10 @@ public class OperatorExpression implements Expression {
 	}
 	
 	
-	
+	/**
+	 * @return Returns the left-side {@link Expression} operated on by the right {@link Expression}
+	 * evaluated as a double value
+	 */
 	@Override
 	public double getValue() {
 		double leftValue = left.getValue();

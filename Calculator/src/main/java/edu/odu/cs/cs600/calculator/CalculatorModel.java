@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
-import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangedListener;
+import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangeListener;
 
 /**
  * This class is the Model of the MVC framework employed for this project
@@ -16,8 +16,8 @@ public class CalculatorModel
 	private boolean errorState;
 	private boolean powerState;
 	
-	private List<PhraseChangedListener> activePhraseChangedListeners = new ArrayList<PhraseChangedListener>();
-	private List<PhraseChangedListener> lastPhraseChangedListeners = new ArrayList<PhraseChangedListener>();
+	private List<PhraseChangeListener> activePhraseChangedListeners = new ArrayList<PhraseChangeListener>();
+	private List<PhraseChangeListener> lastPhraseChangedListeners = new ArrayList<PhraseChangeListener>();
 	private List<ErrorStateChangedListener> errorStateChangedListeners = new ArrayList<ErrorStateChangedListener>();
 	private List<PowerStateChangedListener> powerStateChangedListeners = new ArrayList<PowerStateChangedListener>();
 	
@@ -41,14 +41,14 @@ public class CalculatorModel
 	public void setActivePhrase(Phrase phrase) {
 		phrase.clearChangeListeners();
 		this.activePhrase = phrase;
-		this.activePhrase.addChangeListener(new PhraseChangedListener() {
+		this.activePhrase.addChangeListener(new PhraseChangeListener() {
 			@Override
 			public void phraseChanged(Phrase phrase) {
-				for(PhraseChangedListener listener : activePhraseChangedListeners)
+				for(PhraseChangeListener listener : activePhraseChangedListeners)
 					listener.phraseChanged(phrase);
 			}
 		});
-		for(PhraseChangedListener listener : activePhraseChangedListeners)
+		for(PhraseChangeListener listener : activePhraseChangedListeners)
 			listener.phraseChanged(phrase);
 	} 
 	
@@ -69,14 +69,14 @@ public class CalculatorModel
 	public void setLastPhrase(Phrase phrase) {
 		phrase.clearChangeListeners();
 		this.lastPhrase = phrase;
-		this.lastPhrase.addChangeListener(new PhraseChangedListener(){
+		this.lastPhrase.addChangeListener(new PhraseChangeListener(){
 			@Override
 			public void phraseChanged(Phrase phrase) {
-				for(PhraseChangedListener listener : lastPhraseChangedListeners)
+				for(PhraseChangeListener listener : lastPhraseChangedListeners)
 					listener.phraseChanged(phrase);
 			}
 		});
-		for(PhraseChangedListener listener : lastPhraseChangedListeners)
+		for(PhraseChangeListener listener : lastPhraseChangedListeners)
 			listener.phraseChanged(phrase);
 	}
 	
@@ -96,7 +96,7 @@ public class CalculatorModel
 	 * the current (non-historical) {@link Phrase}
 	 * @param listener
 	 */
-	public void addActivePhraseChangedListener(PhraseChangedListener listener) {
+	public void addActivePhraseChangedListener(PhraseChangeListener listener) {
 		this.activePhraseChangedListeners.add(listener);
 	}
 	
@@ -106,7 +106,7 @@ public class CalculatorModel
 	 * {@link Phrase} for this CalculatorModel
 	 * @param listener
 	 */
-	public void removeActivePhraseChangedListener(PhraseChangedListener listener) {
+	public void removeActivePhraseChangedListener(PhraseChangeListener listener) {
 		this.activePhraseChangedListeners.remove(listener);
 	}
 	
@@ -116,7 +116,7 @@ public class CalculatorModel
 	 * the historical {@link Phrase}
 	 * @param listener
 	 */
-	public void addLastPhraseChangedListener(PhraseChangedListener listener) {
+	public void addLastPhraseChangedListener(PhraseChangeListener listener) {
 		this.lastPhraseChangedListeners.add(listener);
 	}
 	
@@ -126,7 +126,7 @@ public class CalculatorModel
 	 * for this CalculatorModel
 	 * @param listener
 	 */
-	public void removeLastPhraseChangedListener(PhraseChangedListener listener) {
+	public void removeLastPhraseChangedListener(PhraseChangeListener listener) {
 		this.lastPhraseChangedListeners.remove(listener);
 	}
 	

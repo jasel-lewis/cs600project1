@@ -9,12 +9,19 @@ package edu.odu.cs.cs600.calculator.math.grammar.expressions;
 public class NumberExpression implements Expression {
 	private final String number;
 	
+	
+	/**
+	 * Constructor
+	 * @param number The {@link String} representation of a number
+	 */
 	public NumberExpression(String number) {
 		this.number = number;
 	}
 	
 	
-	
+	/**
+	 * @return A double representation of this NumberExpression
+	 */
 	@Override
 	public double getValue() {
 		double result = Double.parseDouble(number);

@@ -10,19 +10,29 @@ public final class Token {
 	private final TokenType tokenType;
 	private final String lexeme;
 	
+	
+	/**
+	 * Constructor
+	 * @param tokenType The {@link TokenType} to attribute to this Token
+	 * @param lexeme The {@link String} value of the lexeme representing this Token
+	 */
 	public Token(TokenType tokenType, String lexeme) {
 		this.tokenType = tokenType;
 		this.lexeme = lexeme;
 	}
 	
 	
-	
+	/**
+	 * @return The {@link TokenType} of this Token
+	 */
 	public TokenType getTokenType() {
 		return tokenType;
 	}
 	
 	
-	
+	/**
+	 * @return The {@link String} value of the lexeme representing this Token
+	 */
 	public String getLexeme() {
 		return lexeme;
 	}

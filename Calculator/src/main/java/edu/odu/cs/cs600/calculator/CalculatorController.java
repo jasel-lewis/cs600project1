@@ -11,7 +11,7 @@ import edu.odu.cs.cs600.calculator.gui.button.CharacterInputButton;
 import edu.odu.cs.cs600.calculator.gui.button.CommandButton;
 import edu.odu.cs.cs600.calculator.math.MathUtil;
 import edu.odu.cs.cs600.calculator.math.grammar.Phrase;
-import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangedListener;
+import edu.odu.cs.cs600.calculator.math.grammar.PhraseChangeListener;
 import edu.odu.cs.cs600.calculator.math.grammar.SimpleCalculatorParser;
 
 /**
@@ -110,7 +110,7 @@ public class CalculatorController
 	 * (non-historical) {@link Phrase}.  Class is private to the scope of
 	 * {@link CalculatorController}.
 	 */
-	private class ModelActivePhraseChangeListener implements PhraseChangedListener {
+	private class ModelActivePhraseChangeListener implements PhraseChangeListener {
 		@Override
 		public void phraseChanged(Phrase phrase) {
 			view.setActiveDisplayText(String.format(phrase.toString(true),"%g"));
@@ -123,7 +123,7 @@ public class CalculatorController
 	 * representing the historical Phrase entries.  Class is private to the scope of
 	 * {@link CalculatorController}.
 	 */
-	private class ModelLastPhraseChangeListener implements PhraseChangedListener {
+	private class ModelLastPhraseChangeListener implements PhraseChangeListener {
 		@Override
 		public void phraseChanged(Phrase phrase) {
 			if(phrase.toString(false).equals("0"))
