@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import edu.odu.cs.cs600.calculator.CalculatorCharacter;
 
 /**
- * Class to support the internal characters representing the {@link Expression} to be
+ * Class to support the internal characters representing the {@link edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression} to be
  * parsed.  These characters are represented as an {@link ArrayList} of
  * {@link CalculatorCharacter}s.
  */

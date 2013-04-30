@@ -49,7 +49,7 @@ public class Parser {
 	
 	/**
 	 * Constructor
-	 * @param The {@link Iterator<Token>} for the Parser to parse 
+	 * @param tokenIterator The {@link Iterator}<{@link Token}> for the Parser to parse 
 	 */
 	public Parser(Iterator<Token> tokenIterator) {
 		this.tokenIterator = tokenIterator;
@@ -58,7 +58,7 @@ public class Parser {
 	
 	/**
 	 * Pair the passed {@link TokenType} with the passed {@link PrefixParselet}
-	 * internally within the {@link Map<TokenType, PrefixParselet}
+	 * internally within the {@link Map}<{@link TokenType},{@link InfixParselet}>
 	 * @param token The {@link TokenType} to pair
 	 * @param parselet The {@link PrefixParselet} to pair
 	 */
@@ -69,7 +69,7 @@ public class Parser {
 	
 	/**
 	 * Pair the passed {@link TokenType} with the passed {@link InfixParselet}
-	 * internally within the {@link Map<TokenType, InfixParslet}
+	 * internally within the {@link Map}<{@link TokenType},{@link InfixParselet}>
 	 * @param token The {@link TokenType} to pair
 	 * @param parselet The {@link InfixParselet} to pair
 	 */
