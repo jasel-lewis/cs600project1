@@ -31,8 +31,7 @@ public class FactorialEvaluator implements IUnaryEvaluator {
 		} else if (value == 1.0) {
 			return value;
 		} else {		
-			//return (MathUtil.multiply(value, compute(--value)));
-			return (value * compute(--value));
+			return (MathUtil.multiply(value, compute(--value)));
 		}
 	}
 }
