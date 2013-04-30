@@ -190,6 +190,7 @@ public class Phrase
 	 */
 	public static Phrase convertToPhrase(double value) {
 		DecimalFormat df = new DecimalFormat("#.##########");
+		// TODO: R. J. - look at DecimalFormat to see if we can utilize Scientific Notation for too-large output
 		return Phrase.convertToPhrase(df.format(value));
 	}
 	
