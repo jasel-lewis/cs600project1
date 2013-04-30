@@ -1,4 +1,4 @@
-				
+            
     Course:  CS600 - Data Structures and Algorithms
 Instructor:  Dr. Olariu
   Semester:  Spring  2013
@@ -25,23 +25,23 @@ various common mathematical expressions (including trivial tasks such as
 subtraction and division) were carefully implemented in the software.
 
 The calculator supports the follow (required) functions:
-	- On/Off
-	- Clear Last Entry / Clear All
-	- Addition
-	- Subtraction
-	- +/- (unary "minus")
-	- Multiplication
-	- Division
-	- Floor
-	- Ceiling
-	- Reciprocal
-	- Square Root
-	- Parenthesis
-	
+   - On/Off
+   - Clear Last Entry / Clear All
+   - Addition
+   - Subtraction
+   - +/- (unary "minus")
+   - Multiplication
+   - Division
+   - Floor
+   - Ceiling
+   - Reciprocal
+   - Square Root
+   - Parenthesis
+   
 The calculator also supports the following functions that 
 were not required by the project specification:
-	- Factorial
-	- Exponentiation (x^2, x^y)
+   - Factorial
+   - Exponentiation (x^2, x^y)
 
 The underlying architecture of the software follows an Model-View-Controller
 (MVC) design pattern.  The MVC design pattern is a mechanism that separates
@@ -64,7 +64,7 @@ a button is pressed, the view fires an event that the controller is listening
 to.  If the event fired was that of a button click, then type and attributes
 of the button are gleaned to determine how the calculator should react.  If
 the button were the "3" button, for example, the controller would append a 
-phenome representing the number 3 to the active expression (or phrase)
+morpheme representing the number 3 to the active expression (or phrase)
 that is held in the Model.  The model would then recognize that the active
 phrase had been updated and would throw an event.  Again, the controller is
 wired to listen to events thrown by the model, including updates to the active 
@@ -83,6 +83,58 @@ to the various methods.
   2. GETTING STARTED
 ----------------------------------------------------------------------------
 
+To run the application, a friendly batch/shell script has been provided for
+various operating environments.
+
+   A. [Windows]: At a command prompt, or from within Windows Explorer, execute 
+      the following batch script:
+      
+         %PROJECT_HOME%/bin/calculator.bat
+         
+   B. [UNIX/Linux using XTerm]: Execute the following shell script script:
+      
+         %PROJECT_HOME%/bin/calculator.bat
+         
+   C. [Command line]: From the root of the project, execute the following 
+      command:
+      
+         java -classpath "./lib/*:./dist/calculator.jar" \ 
+            edu.odu.cs.cs600.calculator.Application
+         
+To view the JAVADOCs for all of the code written, and the embedded API that
+has been developed, view the following file in your favorite browser:
+
+   %PROJECT_HOME%/docs/index.html
+
+
 ----------------------------------------------------------------------------
   3. DEVELOPER NOTES
 ----------------------------------------------------------------------------
+
+This project has been developed using Eclipse (as the project contains a 
+project file that can be used in eclipse), but can also be fully built 
+using Ant.
+
+The documentation below assumes that Ant has been installed on your machine
+and is available on your path.
+
+Various ANT targets are available in the build file, including
+
+TARGET: main (default)
+
+   Cleans all output directories, compiles the project, builds a jar file,
+   generated javadocs, compiles and executes all JUnit test cases, and 
+   executes the application
+   
+TARGET:  run
+
+   Runs the application (assumes project is already built)
+   
+TARGET: test
+
+   Executes all JUnit unit tests against the various evaluators
+   
+TARGET: docs
+
+   Generates all javadocs for the project
+

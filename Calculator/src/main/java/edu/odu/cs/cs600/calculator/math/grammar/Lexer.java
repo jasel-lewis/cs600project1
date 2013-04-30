@@ -16,7 +16,8 @@ import java.util.Map;
  * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
  * Adapted from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Lexer.java
  */
-public class Lexer implements Iterator<Token> {
+public class Lexer implements Iterator<Token> 
+{
 	private final Map<Character, TokenType> punctuatorsMap = new HashMap<Character, TokenType>();
 	private final String phrase;
 	private int index = 0;
