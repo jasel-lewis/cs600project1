@@ -1,8 +1,10 @@
 package edu.odu.cs.cs600.calculator.math.grammar;
 
 /**
- * Adapted from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/TokenType.java
- * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
+ * A class to contain the enumeration of possible {@link TokenType}s for this grammar.
+ * <br><br>
+ * Adapted from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/TokenType.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/TokenType.java</a><br>
+ * Write-up: <a href="http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/">http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/</a>
  */
 public enum TokenType {
 	LEFT_PARENTHESIS,

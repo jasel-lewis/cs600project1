@@ -6,7 +6,7 @@ import edu.odu.cs.cs600.calculator.math.grammar.parselet.NumberParselet;
 import edu.odu.cs.cs600.calculator.math.grammar.parselet.PrefixOperatorParselet;
 
 /**
- * Extends the generic Parser class with support for parsing the actual Calculator
+ * Extends the generic {@link Parser} class with support for parsing the actual Calculator
  * grammar.
  */
 public class SimpleCalculatorParser extends Parser {

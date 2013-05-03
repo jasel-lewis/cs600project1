@@ -16,8 +16,10 @@ import edu.odu.cs.cs600.calculator.math.grammar.parselet.PrefixParselet;
  * effectively owns the Token stream, handles the look ahead and provides the numerous,
  * small functions (one for each non-terminal) corresponding to the left side
  * non-terminal of the applied productions.
- * 
+ * <br><br>
  * The expression grammar:
+ * <pre>
+ * {@code
  * <phrase> ::= <term> {<addop> <term>}  
  * <term>   ::= <factor> {<mulop> <factor>}
  * <factor> ::= -<item> 
@@ -30,15 +32,22 @@ import edu.odu.cs.cs600.calculator.math.grammar.parselet.PrefixParselet;
  *            | -
  * <mulop>  ::= *
  *            | /
+ * }
+ * </pre>
  * 
- * Modified from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Parser.java
- * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
+ * Modified from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Parser.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Parser.java</a><br>
+ * Write-up: <a href="http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/">http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/</a><br>
+ * <br>
  * Modified using information from:
- *  - http://dragonbook.stanford.edu/lecture-notes/Stanford-CS143/07-Top-Down-Parsing.pdf
- *  - http://code.google.com/p/pegtl/
+ * <ul>
+ *   <li><a href="http://dragonbook.stanford.edu/lecture-notes/Stanford-CS143/07-Top-Down-Parsing.pdf">http://dragonbook.stanford.edu/lecture-notes/Stanford-CS143/07-Top-Down-Parsing.pdf</a></li>
+ *   <li><a href="http://code.google.com/p/pegtl/">http://code.google.com/p/pegtl/</a></li>
+ * </ul>
  * Further references:
- *  - https://www.dpmms.cam.ac.uk/~wtg10/grammar.pdf
- *  - http://en.wikipedia.org/wiki/Addition
+ * <ul>
+ *   <li><a href="https://www.dpmms.cam.ac.uk/~wtg10/grammar.pdf">https://www.dpmms.cam.ac.uk/~wtg10/grammar.pdf</a></li>
+ *   <li><a href="http://en.wikipedia.org/wiki/Addition">http://en.wikipedia.org/wiki/Addition</a></li>
+ * </ul>
  */
 public class Parser {
 	private final Iterator<Token> tokenIterator;

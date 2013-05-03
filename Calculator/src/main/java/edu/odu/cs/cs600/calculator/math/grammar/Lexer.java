@@ -12,9 +12,9 @@ import java.util.Map;
  * are mapped to enumerated values. Numbers are turned into NUMBER tokens. All other
  * characters are ignored (entry of such characters is impossible via the GUI
  * interface).
- * 
- * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
- * Adapted from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Lexer.java
+ * <br><br>
+ * Write-up: <a href="http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/">http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/</a><br>
+ * Adapted from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Lexer.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Lexer.java</a>
  */
 public class Lexer implements Iterator<Token> 
 {
