@@ -8,10 +8,10 @@ import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
 import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
 
 /**
- * Prefix (unary) {@link Expression}s.  For this project, the only legal, unary operators
- * are "+" and "-".
- * 
- * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/PrefixExpression.java
+ * An {@link Expression} to represent a prefix (unary) operation.  For this project, the only legal, unary operators
+ * within an {@link Expression} can be "+" and "-".
+ * <br><br>
+ * Adapted from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/PrefixExpression.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/PrefixExpression.java</a>
  */
 public class PrefixExpression implements Expression {
 	private static Logger logger = LogManager.getLogger(PrefixExpression.class);

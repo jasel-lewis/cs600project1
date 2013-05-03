@@ -8,9 +8,9 @@ import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
 import edu.odu.cs.cs600.calculator.math.grammar.exceptions.ParseException;
 
 /**
- * Class to represent an OperatorExpression
- * 
- * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/OperatorExpression.java
+ * An {@link Expression} to represent a binary operation
+ * <br><br>
+ * Adapted from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/OperatorExpression.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/expressions/OperatorExpression.java</a>
  */
 public class OperatorExpression implements Expression {
 	private static Logger logger = LogManager.getLogger(OperatorExpression.class);
