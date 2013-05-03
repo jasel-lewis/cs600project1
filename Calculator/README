@@ -138,8 +138,13 @@ described above.
          
    B. [XTerm connection to *nix]: Execute the following shell script:
       
-         From within %PROJECT_HOME%/bin/, run the command:
+         From within %PROJECT_HOME%/bin/, ensure calculator.sh has the
+         appropriate execution file permissions and run the command:
             ./calculator.sh
+         
+         XTerm connections will take a little longer for the GUI to
+         display.  Give it approximately 20 seconds and the calculator
+         GUI will appear.
          
    C. [Command line]: From the root of the project, execute the following 
       command:
