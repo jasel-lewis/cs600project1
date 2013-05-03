@@ -6,12 +6,14 @@ import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
 import edu.odu.cs.cs600.calculator.math.grammar.expressions.OperatorExpression;
 
 /**
- * Class to support an infix parselet for binary operators (+, -, *, /, ^).
- * The only difference when parsing the bianry operators is precedence and
- * associativity.  This allows us to use a single parselet class.
- * 
- * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/BinaryOperatorParselet.java
- * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
+ * A parselet to allow infix-expressed notation for binary operations (involving
+ * the operators: +, -, *, /, ^). The only difference when parsing different
+ * binary operators is precedence and associativity - allowing a single
+ * {@link BinaryOperatorParselet} class to handle every infix-expressed binary
+ * operation encountered.
+ * <br><br>
+ * Adapted from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/BinaryOperatorParselet.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/BinaryOperatorParselet.java</a><br>
+ * Write-up: <a href="http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/">http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/</a>
  */
 public class BinaryOperatorParselet implements InfixParselet {
 	private final int precedence;

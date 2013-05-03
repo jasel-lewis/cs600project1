@@ -35,7 +35,7 @@ import edu.odu.cs.cs600.calculator.math.grammar.parselet.PrefixParselet;
  * }
  * </pre>
  * 
- * Modified from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Parser.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Parser.java</a><br>
+ * Adapted from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Parser.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/Parser.java</a><br>
  * Write-up: <a href="http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/">http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/</a><br>
  * <br>
  * Modified using information from:

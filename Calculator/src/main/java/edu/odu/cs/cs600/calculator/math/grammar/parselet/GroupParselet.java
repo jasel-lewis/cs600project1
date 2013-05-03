@@ -6,9 +6,9 @@ import edu.odu.cs.cs600.calculator.math.grammar.TokenType;
 import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
 
 /**
- * Parses the parentheses used to group an {@link Expression}.
- * 
- * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/GroupParselet.java
+ * A parselet to encapsulate a parenthetically-grouped {@link Expression}.
+ * <br><br>
+ * Adapted from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/GroupParselet.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/GroupParselet.java</a>
  */
 public class GroupParselet implements PrefixParselet {
 	

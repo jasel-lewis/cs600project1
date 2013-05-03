@@ -6,8 +6,9 @@ import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
 import edu.odu.cs.cs600.calculator.math.grammar.expressions.NumberExpression;
 
 /**
- * Class to parse numbers.
- * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
+ * A pareslet to encapsulate a {@link NumberExpression}
+ * <br><br>
+ * Write-up: <a href="http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/">http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/</a>
  */
 public class NumberParselet implements PrefixParselet {
 	

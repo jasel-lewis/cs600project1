@@ -5,11 +5,10 @@ import edu.odu.cs.cs600.calculator.math.grammar.Token;
 import edu.odu.cs.cs600.calculator.math.grammar.expressions.Expression;
 
 /**
- * A PrefixParselet is associated with a token that appears at the beginning
- * of an {@link Expression}.
- * 
- * Write-up: http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
- * Taken from: https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/PrefixParselet.java
+ * Interface for a {@link PrefixParselet}
+ * <br><br>
+ * Write-up: <a href="http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/">http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/</a><br>
+ * Taken from: <a href="https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/PrefixParselet.java">https://github.com/munificent/bantam/blob/master/src/com/stuffwithstuff/bantam/parselets/PrefixParselet.java</a>
  */
 public interface PrefixParselet {
 	Expression parse(Parser parser, Token token);
