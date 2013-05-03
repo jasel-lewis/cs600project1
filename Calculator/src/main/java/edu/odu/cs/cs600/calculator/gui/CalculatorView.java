@@ -94,7 +94,7 @@ public class CalculatorView extends JFrame {
 	private void initDisplay() 
 	{	
 		activeDisplay = new JLabel();
-		activeDisplay.setFont(new Font("Courier New", Font.BOLD, 42));
+		activeDisplay.setFont(new Font("Courier New", Font.PLAIN, 42));
 		activeDisplay.setVerticalAlignment(SwingConstants.CENTER);
         activeDisplay.setBounds(28, 68, 312, 32);
         panel.add(activeDisplay);
