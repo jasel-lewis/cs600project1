@@ -43,7 +43,7 @@
 		<mkdir dir="${test.report.dir}" />
 	</target>
 
-	<!-- Compiles the java code (including the usage of library for JUnit -->
+	<!-- Compiles the java code (including the usage of library for JUnit) -->
 	<target name="compile" depends="clean, makedir">
 		<javac srcdir="${src.dir}:${test.dir}" destdir="${build.dir}">
 			<classpath>

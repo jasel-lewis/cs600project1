@@ -4,7 +4,7 @@ Instructor:  Dr. Olariu
   Semester:  Spring  2013
  
    Project:  Calculator Project
-  Students:  Robert J. Lewis III and Jared Shields
+  Students:  R. J. Lewis III and Jared Shields
   
 ----------------------------------------------------------------------------
                                   CONTENTS
@@ -77,7 +77,25 @@ calculator has been abstracted into it's own respective "Evaluator".  A facade
 of the various mathematical functions (MathUtil) is available for easy access 
 to the various methods.
 
-[TODO] RJ Discuss the parser here
+An implementation of Vaughan Pratt's technique is used to create our parser.
+The Pratt Parser is a recursive descent parser that employs the notion of
+operator precedence ("top-down") and allows us to associate parsing behavior,
+called "parselets," with the tokens instead of grammar rules.  Our parser is
+an LL1 parser and the Parser class is what owns the Token stream and handles
+the look-ahead.  The parselets encode specific prefix, infix and postfix
+behavior to include operation, associativity and precedence.  This is easily
+done by registering a parselet instance with a specific type of token.  Such
+abstraction allows us to easily incorporate new parselet/token-type pairings
+without having to re-write the Parser class.  As parselets are parsed, they
+are returned as new expressions which are passed back up as the recursive
+calls unwind.  The real magic of Pratt's technique lies in the ability to
+pass a precedence value to the expression parser to let it know which
+expressions it can parse.  The passed precedence is recursively carried
+through the calls and is what triggers a stop to the recursion when a lower-
+valued precedence is encountered (owned by an encountered expression).  Left
+associativity is handled by passing the same precedence to the expression
+parser and to get right associativity, precedence is decreased by one before
+passing it to the expression parser. 
 
 ----------------------------------------------------------------------------
   2. GETTING STARTED
@@ -112,7 +130,7 @@ has been developed, view the following file in your favorite browser:
 ----------------------------------------------------------------------------
 
 This project has been developed using Eclipse (as the project contains a 
-project file that can be used in eclipse), but can also be fully built 
+project file that can be used in Eclipse), but can also be fully built 
 using Ant.
 
 The project's source code repository is hosted in a private repository at

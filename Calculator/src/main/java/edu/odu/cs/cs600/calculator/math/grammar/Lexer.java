@@ -3,10 +3,6 @@ package edu.odu.cs.cs600.calculator.math.grammar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-// TODO: R. J. - go through and comment all grammar-related classes once Jared's done working on them
-// TODO: R. J. - update the PROJECT SUMMARY section of the README file with a summary of the parser implementation
-// TODO: Jared - Update the GETTING STARTED and DEVELOPER NOTES in the README
-// TODO: R. J. - Develop test cases for the rest of the evaluators
 /**
  * Takes a string and splits it into a series of Tokens. Operators and punctuation
  * are mapped to enumerated values. Numbers are turned into NUMBER tokens. All other
