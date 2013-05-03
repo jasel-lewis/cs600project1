@@ -101,17 +101,45 @@ passing it to the expression parser.
   2. GETTING STARTED
 ----------------------------------------------------------------------------
 
-To run the application, a friendly batch/shell script has been provided for
-various operating environments.
+The project, freshly unzipped, comes pre-compiled as a JAR with all Javadoc
+documentation built.  If you should wish to manually re-compile the code,
+re-compile the documentation or run the test suite, please use the Ant
+build tool.  The Ant build.xml file is located in the root of the project
+folder.  This is also the location the Ant command should be run from when
+at a terminal, shell or command window.
+
+We'll define %PROJECT_HOME% as the location of the "Calculator" folder
+created when you unzipped the project.
+
+To compile the application, ensure you have Ant installed for your
+operating system.  There are two related Ant tasks:
+  - compile
+  - jar
+The "compile" task is a dependency of the "jar" task, therefore, if your
+intent is to compile and then run the application, a call to the "jar" task
+will kill both birds with one stone.
+
+To run an Ant task, open a terminal, shell or command window and change the
+present working directory to %PROJECT_HOME%.  Simply execute the Ant task
+by typing "ant" followed by a space and the name of the task.  As an example,
+and to set us up to run the application, type "ant jar" to have Ant compile
+the code and then package it into a JAR file.
+
+To run the application, friendly batch and shell scripts have been provided
+for both the Windows and *nix operating systems.  Ensure the "calculator.jar"
+file exists in the "dist" directory before attempting to run the application.
+If the JAR file does not exist, make sure to run the Ant "jar" task as
+described above. 
 
    A. [Windows]: At a command prompt, or from within Windows Explorer, execute 
       the following batch script:
       
          %PROJECT_HOME%/bin/calculator.bat
          
-   B. [UNIX/Linux using XTerm]: Execute the following shell script script:
+   B. [UNIX/Linux using XTerm]: Execute the following shell script:
       
-         %PROJECT_HOME%/bin/calculator.bat
+         From within %PROJECT_HOME%/bin/, run the command:
+            ./calculator.sh
          
    C. [Command line]: From the root of the project, execute the following 
       command:

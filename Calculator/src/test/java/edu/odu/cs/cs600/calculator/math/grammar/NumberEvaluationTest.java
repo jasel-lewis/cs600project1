@@ -49,7 +49,6 @@ public class NumberEvaluationTest {
 	public static Collection<Object[]> testData() {
 		// { expression, expectedResult }
 		return Arrays.asList(new Object[][] {
-			{ "", 0.0 },					// Null phrase
 			{ "0", 0.0 },					// Evaluate integer 0
 			{ "1", 1.0 },					// Evaluate integer 1
 			{ "0000", 0.0 },				// Evaluate valid, though oddly-represented, integer
