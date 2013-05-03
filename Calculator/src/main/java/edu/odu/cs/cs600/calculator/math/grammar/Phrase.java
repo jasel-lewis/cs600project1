@@ -28,6 +28,15 @@ public class Phrase
 	
 	
 	/**
+	 * Private constructor accepting a {@list
+	 * @param characterList
+	 */
+	private Phrase(List<CalculatorCharacter> characterList) {
+		this.characterList = characterList;
+	}
+	
+	
+	/**
 	 * Adds the passed {@link PhraseChangeListener} to the current list of listeners
 	 * notified when this Phrase changes
 	 * @param listener The {@link PhraseChangeListener} to add
@@ -171,11 +180,7 @@ public class Phrase
 	 */
 	public static Phrase convertToPhrase(String phrase) {
 		List<CalculatorCharacter> charList = generateCharacterList(phrase);
-		Phrase p = new Phrase();
-		
-		for (CalculatorCharacter cc : charList) {
-			p.push(cc);
-		}
+		Phrase p = new Phrase(charList);
 		
 		return p;
 	}
