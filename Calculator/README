@@ -136,7 +136,7 @@ described above.
       
          %PROJECT_HOME%/bin/calculator.bat
          
-   B. [UNIX/Linux using XTerm]: Execute the following shell script:
+   B. [XTerm connection to *nix]: Execute the following shell script:
       
          From within %PROJECT_HOME%/bin/, run the command:
             ./calculator.sh
