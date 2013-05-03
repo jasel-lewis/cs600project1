@@ -28,7 +28,8 @@ public class Phrase
 	
 	
 	/**
-	 * Private constructor accepting a {@list
+	 * Private constructor accepting a {@link List}<CalclatorCharacter>
+	 * 
 	 * @param characterList
 	 */
 	private Phrase(List<CalculatorCharacter> characterList) {
